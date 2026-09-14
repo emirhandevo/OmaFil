@@ -131,13 +131,13 @@ function MarqueeRow({
         offset.current += speed * delta;
 
         // İçerik 2 kez basıldığı için toplam genişliğin yarısı = 1 tam tur
-        const half = inner.scrollWidth / 2;
+        const half = inner!.scrollWidth / 2;
         if (half > 0) {
           if (offset.current >= half) offset.current -= half;
           if (offset.current < 0) offset.current += half;
         }
 
-        inner.style.transform = `translateX(${-offset.current}px)`;
+        inner!.style.transform = `translateX(${-offset.current}px)`;
       }
 
       rafId = requestAnimationFrame(tick);
