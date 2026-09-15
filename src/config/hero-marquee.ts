@@ -23,7 +23,7 @@ export const yarnImages: MarqueeItem[] = [
   { src: "/images/hero/iplik/dty-n66.png", label: "DTY N66" },
   { src: "/images/hero/iplik/scy-pes-gipe.png", label: "PES SCY Gipe" },
   { src: "/images/hero/iplik/acy-n6.png", label: "ACY N6" },
-  { src: "/images/hero/iplik/ac-pes.png", label: "PES AC" },
+  { src: "/images/hero/iplik/ac-pes.png", label: "PES ACC" },
   { src: "/images/hero/iplik/acy-n66.png", label: "ACY N66" },
 ];
 
