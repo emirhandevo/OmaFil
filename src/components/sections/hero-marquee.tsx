@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -20,7 +20,11 @@ type GroupProps = {
   variant: "yarn" | "plant";
   /** Sürükleme bitince gelen tıklamayı yutar, karta gitmesin */
   skipClickRef: React.RefObject<boolean>;
+  /** Telefonda açık olan ürün. null ise hiçbiri açık değil */
+openSrc?: string | null;
+onYarnClick?: (event: React.MouseEvent<HTMLAnchorElement>, src: string) => void;
 };
+
 
 function ImageGroup({
   items,
@@ -29,6 +33,8 @@ function ImageGroup({
   overrideSrc = null,
   variant,
   skipClickRef,
+  openSrc= null,
+  onYarnClick,
 }: GroupProps) {
   return (
     <div
@@ -47,15 +53,24 @@ function ImageGroup({
               href={item.href ?? "/urunlerimiz"}
               tabIndex={duplicate ? -1 : undefined}
               draggable={false}
+              // dışarı tıklayınca bu kart mı diye bakıyorum
+              data-yarn-card={item.src}
               onClick={(e) => {
-                // Kaydırma hareketiyse linke gitme
+                // asıl karar MarqueeRow'da. yoksa kaydırmayı tıklama sanmayayım
+                if (onYarnClick) {
+                  onYarnClick(e, item.src);
+                  return;
+                }
                 if (skipClickRef.current) {
                   e.preventDefault();
                   skipClickRef.current = false;
                 }
               }}
-                  className="group flex w-72 shrink-0 flex-col sm:w-80"
->
+              // is-open: telefonda ilk dokunuş paneli açsın diye
+              className={`group flex w-72 shrink-0 flex-col sm:w-80 ${
+                openSrc === item.src ? "is-open" : ""
+              }`}
+            >
   {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
   <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none bg-white px-4 pt-3 shadow-sm">
     <div className="flex items-center justify-between gap-3 pb-3">
@@ -63,7 +78,8 @@ function ImageGroup({
       <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-zinc-900" />
     </div>
 
-    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr] motion-reduce:transition-none">
+    {/* hover masaüstü. is-open telefon/tablet. focus-within ilk dokunuşta sayfaya kaçırıyordu, çıkardım */}
+    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr] group-[.is-open]:grid-rows-[1fr] motion-reduce:transition-none">
       <div className="overflow-hidden">
         <p className="text-xs leading-5 text-zinc-600">{item.summary}</p>
         <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
@@ -141,6 +157,50 @@ function MarqueeRow({
   const dragStartOffset = useRef(0);
   // true ise bir sonraki tıklama navigasyon değildir
   const skipClickRef = useRef(false);
+  // tick state görmüyor. kart açıkken şerit dursun diye ref
+  const cardPausedRef = useRef(false);
+  const [openSrc, setOpenSrc] = useState<string | null>(null);
+
+  // paneli kapat, şerit kaldığı yerden aksın
+  function closeCard() {
+    cardPausedRef.current = false;
+    setOpenSrc(null);
+  }
+
+  function handleYarnClick(e: React.MouseEvent<HTMLAnchorElement>, src: string) {
+    // kaydırdıysam detaya gitmesin
+    if (skipClickRef.current) {
+      e.preventDefault();
+      skipClickRef.current = false;
+      return;
+    }
+
+    // 1024 altı telefon + tablet. masaüstünde tek tık yeter
+    const isCompact = window.matchMedia("(max-width: 1023px)").matches;
+    if (!isCompact) return;
+
+    // ilk dokunuş: aç, gitme. aynı karta ikinci dokunuşta bu if'e girmez, link gider
+    if (openSrc !== src) {
+      e.preventDefault();
+      cardPausedRef.current = true;
+      setOpenSrc(src);
+    }
+  }
+
+  // kartın dışına dokununca kapat
+  useEffect(() => {
+    if (!openSrc) return;
+
+    function onPointerDown(e: PointerEvent) {
+      const target = e.target as HTMLElement | null;
+      // başka bir ürün kartıysa ona bırak, kendi onClick'i açar
+      if (target?.closest("[data-yarn-card]")) return;
+      closeCard();
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [openSrc]);
 
   useEffect(() => {
     const inner = innerRef.current;
@@ -158,7 +218,8 @@ function MarqueeRow({
       const delta = (now - lastTime) / 1000;
       lastTime = now;
 
-      if (!isHovering.current && !isTransitioning.current && !isDragging.current && !prefersReducedMotion) {
+      // cardPausedRef: telefonda panel açıkken şerit dönmesin
+      if (!isHovering.current && !isTransitioning.current && !isDragging.current && !cardPausedRef.current && !prefersReducedMotion) {
         offset.current += speed * delta;
         const half = inner!.scrollWidth / 2;
         if (half > 0) {
@@ -260,6 +321,8 @@ function MarqueeRow({
             overrideSrc={overrideSrc}
             variant={variant}
             skipClickRef={skipClickRef}
+            openSrc={openSrc}
+            onYarnClick={handleYarnClick}
           />
           <ImageGroup
             items={items}
@@ -267,6 +330,8 @@ function MarqueeRow({
             overrideSrc={overrideSrc}
             variant={variant}
             skipClickRef={skipClickRef}
+            openSrc={openSrc}
+            onYarnClick={handleYarnClick}
             duplicate
           />
         </div>
