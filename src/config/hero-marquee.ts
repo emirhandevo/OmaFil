@@ -15,15 +15,15 @@ export type MarqueeItem = {
 export const yarnTestSrc: string | null = null;
 
 export const yarnImages: MarqueeItem[] = [
-  { src: "/images/hero/iplik/pes-dcy.png", label: "PES DCY Gipe" },
+  { src: "/images/hero/iplik/dcy-pes.png", label: "PES DCY Gipe" },
   { src: "/images/hero/iplik/poy-n6.png", label: "Naylon 6 POY" },
-  { src: "/images/hero/iplik/scy-n6-gipe.png", label: "SCY N6 Gipe" },
-  { src: "/images/hero/iplik/scy-n66-gipe.png", label: "SCY N66 Gipe" },
-  { src: "/images/hero/iplik/n6-fdy.png", label: "N6 FDY" },
+  { src: "/images/hero/iplik/scy-n6.png", label: "SCY N6 Gipe" },
+  { src: "/images/hero/iplik/scy-n66.png", label: "SCY N66 Gipe" },
+  { src: "/images/hero/iplik/fdy-n6.png", label: "N6 FDY" },
   { src: "/images/hero/iplik/dty-n66.png", label: "DTY N66" },
-  { src: "/images/hero/iplik/scy-pes-gipe.png", label: "PES SCY Gipe" },
+  { src: "/images/hero/iplik/scy-pes.png", label: "PES SCY Gipe" },
   { src: "/images/hero/iplik/acy-n6.png", label: "ACY N6" },
-  { src: "/images/hero/iplik/ac-pes.png", label: "PES ACC" },
+  { src: "/images/hero/iplik/acc-pes.png", label: "PES ACC" },
   { src: "/images/hero/iplik/acy-n66.png", label: "ACY N66" },
 ];
 

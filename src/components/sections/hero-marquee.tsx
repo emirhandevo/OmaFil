@@ -53,7 +53,7 @@ function ImageGroup({
               }`}
             />
 
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-4 pb-4 pt-10">
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-4 pb-4 pt-10">
               <div className="flex items-center justify-between gap-2">
                 <p className="text-sm font-semibold text-white">{item.label}</p>
 
