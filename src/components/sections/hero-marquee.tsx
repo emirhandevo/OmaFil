@@ -72,7 +72,8 @@ function ImageGroup({
               }`}
             >
   {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
-  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none bg-white px-4 pt-3 shadow-sm">
+  {/* bg-white/75: biraz cam. isim görselin üstünde durduğu için arkadan site zemini gözükür, foto değil */}
+  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none bg-white/75 px-4 pt-3 shadow-sm backdrop-blur-md">
     <div className="flex items-center justify-between gap-3 pb-3">
       <p className="text-sm font-semibold text-zinc-900">{item.label}</p>
       <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-zinc-900" />
