@@ -1,6 +1,8 @@
 /**
  * Hero şeritleri — tek kaynak.
- * label: kart altında görünen ürün/alan adı.
+ * label: beyaz panelde duran ürün adı.
+ * summary: hover/focus’ta açılan kısa bilgi.
+ * href: kartın ve "Detaylı Bilgi"nin gittiği sayfa.
  * yarnTestSrc:
  *   null   → her kart kendi görseli
  *   string → tüm üst şerit bu görseli gösterir (test modu)
@@ -9,23 +11,12 @@
 export type MarqueeItem = {
   src: string;
   label: string;
+  /** Üst şeritte zorunlu, tesis şeridinde yok */
+  summary?: string;
+  href?: string;
 };
 
-// Test modu: okeylendi mi? → null yap, her kart kendi görselini alır.
 export const yarnTestSrc: string | null = null;
-
-export const yarnImages: MarqueeItem[] = [
-  { src: "/images/hero/iplik/dcy-pes.webp", label: "PES DCY Gipe" },
-  { src: "/images/hero/iplik/poy-n6.webp", label: "Naylon 6 POY" },
-  { src: "/images/hero/iplik/scy-n6.webp", label: "SCY N6 Gipe" },
-  { src: "/images/hero/iplik/scy-n66.webp", label: "SCY N66 Gipe" },
-  { src: "/images/hero/iplik/fdy-n6.webp", label: "N6 FDY" },
-  { src: "/images/hero/iplik/dty-n66.webp", label: "DTY N66" },
-  { src: "/images/hero/iplik/scy-pes.webp", label: "PES SCY Gipe" },
-  { src: "/images/hero/iplik/acy-n6.webp", label: "ACY N6" },
-  { src: "/images/hero/iplik/acc-pes.webp", label: "PES ACC" },
-  { src: "/images/hero/iplik/acy-n66.webp", label: "ACY N66" },
-];
 
 export const plantImages: MarqueeItem[] = [
   { src: "/images/hero/tesis/01.webp", label: "Üretim Tesisi Giriş" },
@@ -37,3 +28,67 @@ export const plantImages: MarqueeItem[] = [
   { src: "/images/hero/tesis/07.webp", label: "Sarma Ünitesi" },
   { src: "/images/hero/tesis/08.webp", label: "Depo & Lojistik" },
 ];
+
+export const yarnImages: MarqueeItem[] = [
+  {
+    src: "/images/hero/iplik/dcy-pes.webp",
+    label: "PES DCY Gipe",
+    summary: "Çift kaplama polyester gipe iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/poy-n6.webp",
+    label: "Naylon 6 POY",
+    summary: "Naylon 6 kısmi oryante iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/scy-n6.webp",
+    label: "SCY N6 Gipe",
+    summary: "Naylon 6 tek kaplama gipe iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/scy-n66.webp",
+    label: "SCY N66 Gipe",
+    summary: "Naylon 66 tek kaplama gipe iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/fdy-n6.webp",
+    label: "N6 FDY",
+    summary: "Naylon 6 tam çekimli iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/dty-n66.webp",
+    label: "DTY N66",
+    summary: "Naylon 66 tekstüre iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/scy-pes.webp",
+    label: "PES SCY Gipe",
+    summary: "Polyester tek kaplama gipe iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/acy-n6.webp",
+    label: "ACY N6",
+    summary: "Naylon 6 hava jetli kaplama iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/acc-pes.webp",
+    label: "PES ACC",
+    summary: "Polyester hava jetli kompozit iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/acy-n66.webp",
+    label: "ACY N66",
+    summary: "Naylon 66 hava jetli kaplama iplik.",
+    href: "/urunlerimiz",
+  },
+];
+
