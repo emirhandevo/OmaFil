@@ -5,7 +5,7 @@ import { contact, navLinks, site, socialLinks } from "@/config/site";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-white/10 bg-zinc-900">
+    <footer className="mt-auto border-t border-border bg-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Marka - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
@@ -31,7 +31,7 @@ export function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={s.label}
-        className="flex size-9 items-center justify-center rounded-full border border-white/10 text-muted-foreground transition-colors hover:border-brand-orange hover:text-brand-orange"
+        className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand-orange hover:text-brand-orange"
       >
         <Icon aria-hidden="true" className="size-4" />
       </a>
@@ -43,7 +43,7 @@ export function Footer() {
 
         {/* Menü - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="text-center sm:text-left">
-          <p className="text-sm font-semibold text-white">Menü</p>
+          <p className="text-sm font-semibold text-foreground">Menü</p>
           <ul className="mt-4 space-y-3">
             {navLinks.map((item) => (
               <li key={item.href}>
@@ -60,7 +60,7 @@ export function Footer() {
 
         {/* İletişim, telefon ve mail - mobilde ortalı  */}
 <div className="flex flex-col items-center sm:items-start sm:text-left">
-  <p className="text-sm font-semibold text-white">İletişim</p>
+  <p className="text-sm font-semibold text-foreground">İletişim</p>
   <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
     {contact.phone.map((phone) => (
       <li key={phone} className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export function Footer() {
 
 {/* Adresler — ayrı kolon, her biri Maps'e link */}
 <div>
-  <p className="text-center text-sm font-semibold text-white">Adreslerimiz</p>
+  <p className="text-center text-sm font-semibold text-foreground">Adreslerimiz</p>
   <ul className="mt-4 space-y-4 text-sm text-muted-foreground">
     {contact.locations.map((loc) => (
       <li key={loc.label} className="flex items-start gap-2">
@@ -92,7 +92,7 @@ export function Footer() {
           rel="noopener noreferrer"
           className="hover:text-brand-orange"
         >
-          <span className="block font-medium text-white">{loc.label}</span>
+          <span className="block font-medium text-foreground">{loc.label}</span>
           {loc.address}
         </a>
       </li>
@@ -102,9 +102,9 @@ export function Footer() {
       </div>
 
       {/* Alt bar — telif hakkı */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {site.name}. Tüm hakları saklıdır.
+          © {new Date().getFullYear()} {site.legalName}. Tüm hakları saklıdır.
         </div>
       </div>
     </footer>

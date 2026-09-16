@@ -23,14 +23,20 @@ export const metadata: Metadata = {
   description: site.description,
 };
 
+// Kayıtlı tema yoksa site koyu açılır. Paket yok, sadece html class.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}})()`;
+
 export default function RootLayout({children}:LayoutProps<"/">) {
   return (
     <html
     lang="tr"
+    suppressHydrationWarning
     className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-[#171a1f] text-foreground">
-
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
         {children}
       </body>
     </html>

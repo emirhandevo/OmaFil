@@ -6,6 +6,8 @@ import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/icons/
 */
 export const site = {
     name: "OmaFil İplik - İplik Üretim Sanayi",
+    // SEO başlığında marka kalsın. Yasal unvan footer ve kurumsal metinde.
+    legalName: "OMA POLİMER A.Ş.",
     // canlı domain; metadata ve canonical bunun üstünden üretilir.
     url: "https://omafil.com",
     description:
