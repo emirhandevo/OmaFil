@@ -15,7 +15,7 @@ export default function KurumsalPage() {
     <CorporateFrame
       path="/kurumsal"
       title="Kurumsal"
-      description="Şirket yapımız dört başlıkta durur. Detay her sayfanın kendi adresindedir."
+      description="Kurumsal yapımızı dört başlıkta topladık."
     >
       <section className="mx-auto grid max-w-6xl gap-4 px-4 pb-20 sm:grid-cols-2">
         {corporateLinks.map((item) => (

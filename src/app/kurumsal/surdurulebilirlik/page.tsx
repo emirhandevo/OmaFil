@@ -44,11 +44,10 @@ export default function SurdurulebilirlikPage() {
       <section className="mx-auto grid max-w-6xl items-center gap-8 px-4 pb-16 lg:grid-cols-2">
         <div className="space-y-5 leading-7 text-muted-foreground">
           <p>
-            Sürdürülebilirlik burada kaynakları daha verimli kullanmak ve ürünü
-            buna göre geliştirmek demek. Genel tanımları tekrar etmiyoruz.
+           Bizim için sürdürülebilirlik, kaynağı verimli kullanmak ve ürünü buna göre geliştirmek demek.
           </p>
           <p>
-            Öne çıkan işler: çatı üstü güneş enerjisi, geri dönüştürülmüş iplik
+            Güneş panelleriyle elde edilen enerji, geri dönüştürülmüş iplik
             ve su tüketimini azaltan boyama.
           </p>
         </div>
