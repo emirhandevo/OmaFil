@@ -47,7 +47,13 @@ export function Hero() {
 
       <Link
         href="/kurumsal"
-        className={buttonVariants({ variant: "outline", size: "lg" })}
+            className={buttonVariants({
+              variant: "outline",
+              size: "lg",
+              // video üstünde. light modda beyaz zemin + beyaz yazı olmasın
+              className:
+                "border-white/80 bg-black/30 text-white hover:bg-white/20 hover:text-white",
+            })}
       >
         OmaFil’i Tanıyın
       </Link>

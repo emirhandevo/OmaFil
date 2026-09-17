@@ -73,7 +73,8 @@ function ImageGroup({
             >
   {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
   {/* bg-white/75: biraz cam. isim görselin üstünde durduğu için arkadan site zemini gözükür, foto değil */}
-  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none bg-white/75 px-4 pt-3 shadow-sm backdrop-blur-md">
+  {/* sağ sol üst çizgi: light modda beyaz panel kaybolmasın. alt görsele birleşiyor, çizgi yok */}
+  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-4 pt-3 shadow-sm backdrop-blur-md">
     <div className="flex items-center justify-between gap-3 pb-3">
       <p className="text-sm font-semibold text-zinc-900">{item.label}</p>
       <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-zinc-900" />
@@ -344,7 +345,7 @@ function MarqueeRow({
 export function HeroMarquee() {
   return (
     <div className="mt-10 w-full space-y-5">
-
+      {/* Üstte ürünler — sadece desktop’ta daha geniş */}
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
     <MarqueeRow
       items={yarnImages}
@@ -354,7 +355,7 @@ export function HeroMarquee() {
       variant="yarn"
     />
   </div>
-  {/* Üstte tesis — eski genişlik */}
+  {/* Altta laboratuvar — eski genişlik */}
   <div className="mx-auto w-full max-w-5xl px-4">
     <MarqueeRow
       items={plantImages}
@@ -363,9 +364,6 @@ export function HeroMarquee() {
       variant="plant"
     />
   </div>
-
-  {/* Altta ürünler — sadece desktop’ta daha geniş */}
-  
 </div>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { navLinks, site } from "@/config/site";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -44,15 +44,42 @@ export function Header() {
 
         {/* Masaüstü menü — mobilde gizli */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Ana menü">
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={buttonVariants({ variant: "ghost", size: "sm" })}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navLinks.map((item) =>
+            "children" in item ? (
+              <div key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  className={buttonVariants({ variant: "ghost", size: "sm" })}
+                >
+                  {item.label}
+                  <ChevronDown aria-hidden="true" className="size-4" />
+                </Link>
+                {/* Hover ve klavye odağında açılır. Boşluk payı menünün kapanmasını önler. */}
+                <div className="absolute left-0 top-full z-50 hidden pt-2 group-focus-within:block group-hover:block">
+                  <ul className="min-w-52 rounded-xl border border-border bg-background p-2 shadow-lg">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className="block rounded-md px-3 py-2 text-sm text-foreground hover:bg-foreground/5"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={buttonVariants({ variant: "ghost", size: "sm" })}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="flex items-center gap-1">
@@ -86,6 +113,21 @@ export function Header() {
                 >
                   {item.label}
                 </Link>
+                {"children" in item && (
+                  <ul className="pb-2">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setIsOpen(false)}
+                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

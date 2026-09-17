@@ -99,7 +99,7 @@ export function SustainabilitySection() {
             </div>
 
             <Link
-              href="/surdurulebilirlik"
+              href="/kurumsal/surdurulebilirlik"
               className={buttonVariants({
                 variant: "outline",
                 size: "lg",

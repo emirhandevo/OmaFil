@@ -17,11 +17,34 @@ export const site = {
     logo: "/images/omafil_logo.svg",
 } as const;
 
+// Kurumsal menüsündeki 4 link. Header, footer ve alt sayfalar buradan okur.
+export const corporateLinks = [
+    {
+        href: "/kurumsal/hakkimizda",
+        label: "Hakkımızda",
+        summary: "Kuruluş hikâyesi ve şirket yapısı.",
+    },
+    {
+        href: "/kurumsal/fabrikamiz",
+        label: "Fabrikamız",
+        summary: "Tokat–Erbaa gipe iplik üretim tesisi.",
+    },
+    {
+        href: "/kurumsal/surdurulebilirlik",
+        label: "Sürdürülebilirlik",
+        summary: "Enerji, geri dönüşüm ve sorumlu üretim.",
+    },
+    {
+        href: "/kurumsal/insan-kaynaklari",
+        label: "İnsan Kaynakları",
+        summary: "Çalışma anlayışı ve başvuru.",
+    },
+] as const;
+
 export const navLinks = [
     {href: "/", label: "Ana Sayfa"},
-    {href: "/kurumsal", label: "Kurumsal"},
+    {href: "/kurumsal", label: "Kurumsal", children: corporateLinks},
     {href: "/urunlerimiz", label: "Ürünlerimiz"},
-    {href: "/surdurulebilirlik", label: "Sürdürülebilirlik"},
     {href: "/iletisim", label: "İletişim"},
 ] as const;
 
