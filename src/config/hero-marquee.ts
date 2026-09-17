@@ -18,15 +18,25 @@ export type MarqueeItem = {
 
 export const yarnTestSrc: string | null = null;
 
+// export const plantImages: MarqueeItem[] = [
+//   { src: "/images/hero/tesis/denye1.png", label: "Üretim Tesisi Giriş" },
+//   { src: "/images/hero/tesis/iplik-bukum-chz.png", label: "Fabrika Kuş Bakışı" },
+//   { src: "/images/hero/tesis/03.webp", label: "Chips Makineleri" },
+//   { src: "/images/hero/tesis/04.webp", label: "Kalite Kontrol" },
+//   { src: "/images/hero/tesis/05.webp", label: "Fabrika / İç Kısım" },
+//   { src: "/images/hero/tesis/06.webp", label: "Fabrika / İç Kısım" },
+//   { src: "/images/hero/tesis/07.webp", label: "Sarma Ünitesi" },
+//   { src: "/images/hero/tesis/08.webp", label: "Depo & Lojistik" },
+// ];
 export const plantImages: MarqueeItem[] = [
-  { src: "/images/hero/tesis/01.webp", label: "Üretim Tesisi Giriş" },
-  { src: "/images/hero/tesis/02.webp", label: "Fabrika Kuş Bakışı" },
-  { src: "/images/hero/tesis/03.webp", label: "Chips Makineleri" },
-  { src: "/images/hero/tesis/04.webp", label: "Kalite Kontrol" },
-  { src: "/images/hero/tesis/05.webp", label: "Fabrika / İç Kısım" },
-  { src: "/images/hero/tesis/06.webp", label: "Fabrika / İç Kısım" },
-  { src: "/images/hero/tesis/07.webp", label: "Sarma Ünitesi" },
-  { src: "/images/hero/tesis/08.webp", label: "Depo & Lojistik" },
+  { src: "/images/hero/lab/denye.png", label: "" },
+  { src: "/images/hero/lab/duzgun.png", label: "" },
+  { src: "/images/hero/lab/iplik-bkm.png", label: "" },
+  { src: "/images/hero/lab/mukavvemet.png", label: "" },
+  { src: "/images/hero/lab/numune.png", label: "" },
+  { src: "/images/hero/lab/orgu-boya.png", label: "" },
+  { src: "/images/hero/lab/viskozite.png", label: "" },
+  { src: "/images/hero/lab/yag-test.png", label: "" },
 ];
 
 export const yarnImages: MarqueeItem[] = [

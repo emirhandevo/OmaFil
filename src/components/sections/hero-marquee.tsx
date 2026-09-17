@@ -344,6 +344,16 @@ function MarqueeRow({
 export function HeroMarquee() {
   return (
     <div className="mt-10 w-full space-y-5">
+
+      <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
+    <MarqueeRow
+      items={yarnImages}
+      altPrefix="İplik"
+      direction="right"
+      overrideSrc={yarnTestSrc}
+      variant="yarn"
+    />
+  </div>
   {/* Üstte tesis — eski genişlik */}
   <div className="mx-auto w-full max-w-5xl px-4">
     <MarqueeRow
@@ -355,15 +365,7 @@ export function HeroMarquee() {
   </div>
 
   {/* Altta ürünler — sadece desktop’ta daha geniş */}
-  <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
-    <MarqueeRow
-      items={yarnImages}
-      altPrefix="İplik"
-      direction="right"
-      overrideSrc={yarnTestSrc}
-      variant="yarn"
-    />
-  </div>
+  
 </div>
   );
 }

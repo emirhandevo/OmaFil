@@ -42,10 +42,10 @@ export function CorporatePage() {
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <div className="max-w-3xl space-y-5 leading-7 text-muted-foreground">
           <p>
-            Yıllarca İstanbul'da tekstil piyasasının kalbi olan Sultanhamam'da iplik satışıyla başlayan iş hayatımız, sürekli gelişim ilkemize dayanarak devam etti. 2000'li yıllarda değişen ticarete uyum sağlamak için OMA POLİMER A.Ş.'yi kurduk.
+            Yıllarca İstanbul’da tekstil piyasasının kalbi olan Sultanhamam’da iplik satışıyla başlayan iş hayatımız, sürekli gelişim ilkemize dayanarak devam etti. 2000’li yıllarda değişen ticarete uyum sağlamak için OMA POLİMER A.Ş.’yi kurduk.
           </p>
           <p>
-            İç ticarette olduğu kadar dış ticarette de güçlü olmak gerekir düşüncesiyle yurtdışı bağlantılarımızı sağlamlaştırdık. Bugün iplik ithalatı, üretimi ve ihracatını birlikte sürdürüyor, Avrupa ve Uzak Doğu'dan ithal ettiğimiz özel tip hammaddelerle müşterilerimize yeni ürünler sunuyoruz.
+            İç ticarette olduğu kadar dış ticarette de güçlü olmak gerekir düşüncesiyle yurtdışı bağlantılarımızı sağlamlaştırdık. Bugün iplik ithalatı, üretimi ve ihracatını birlikte sürdürüyor, Avrupa ve Uzak Doğu’dan ithal ettiğimiz özel tip hammaddelerle müşterilerimize yeni ürünler sunuyoruz.
           </p>
         </div>
       </section>
