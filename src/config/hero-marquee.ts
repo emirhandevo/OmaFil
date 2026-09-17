@@ -71,7 +71,7 @@ export const yarnImages: MarqueeItem[] = [
     href: "/urunlerimiz",
   },
   {
-    src: "/images/hero/iplik/dty-n66.webp",
+    src: "/images/hero/iplik/dty-n66.png",
     label: "DTY N66",
     summary: "Naylon 66 tekstüre iplik.",
     href: "/urunlerimiz",
