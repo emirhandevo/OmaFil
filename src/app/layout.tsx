@@ -45,11 +45,22 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.name,
     description: site.description,
+    // Sabit public yol — WhatsApp bazen app/ özel OG query’sini sevmiyor
+    images: [
+      {
+        url: "/images/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "OmaFil üretim tesisi",
+        type: "image/jpeg",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.description,
+    images: ["/images/og.jpg"],
   },
 };
 
