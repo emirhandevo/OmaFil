@@ -29,14 +29,14 @@ export const yarnTestSrc: string | null = null;
 //   { src: "/images/hero/tesis/08.webp", label: "Depo & Lojistik" },
 // ];
 export const plantImages: MarqueeItem[] = [
-  { src: "/images/hero/lab/denye.png", label: "" },
-  { src: "/images/hero/lab/duzgun.png", label: "" },
-  { src: "/images/hero/lab/iplik-bkm.png", label: "" },
-  { src: "/images/hero/lab/mukavvemet.png", label: "" },
-  { src: "/images/hero/lab/numune.png", label: "" },
-  { src: "/images/hero/lab/orgu-boya.png", label: "" },
-  { src: "/images/hero/lab/viskozite.png", label: "" },
-  { src: "/images/hero/lab/yag-test.png", label: "" },
+  { src: "/images/hero/lab/denye.webp", label: "" },
+  { src: "/images/hero/lab/duzgun.webp", label: "" },
+  { src: "/images/hero/lab/iplik-bkm.webp", label: "" },
+  { src: "/images/hero/lab/mukavvemet.webp", label: "" },
+  { src: "/images/hero/lab/numune.webp", label: "" },
+  { src: "/images/hero/lab/orgu-boya.webp", label: "" },
+  { src: "/images/hero/lab/viskozite.webp", label: "" },
+  { src: "/images/hero/lab/yag-test.webp", label: "" },
 ];
 
 export const yarnImages: MarqueeItem[] = [

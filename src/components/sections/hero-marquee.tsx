@@ -37,8 +37,9 @@ function ImageGroup({
   onYarnClick,
 }: GroupProps) {
   return (
-    <div
-      className="flex shrink-0 items-start gap-4 pr-5"
+    <div 
+    // Mobilde kart + gap küçük: ekranda ~1.5 kart görünsün 
+      className="flex shrink-0 items-start gap-3 pr-4 sm:gap-4 sm:pr-5"
       aria-hidden={duplicate || undefined}
     >
       {items.map((item, index) => {
@@ -67,17 +68,17 @@ function ImageGroup({
                 }
               }}
               // is-open: telefonda ilk dokunuş paneli açsın diye
-              className={`group flex w-72 shrink-0 flex-col sm:w-80 ${
+              className={`group flex w-60 shrink-0 flex-col sm:w-72 md:w-80 ${
                 openSrc === item.src ? "is-open" : ""
               }`}
             >
   {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
   {/* bg-white/75: biraz cam. isim görselin üstünde durduğu için arkadan site zemini gözükür, foto değil */}
   {/* sağ sol üst çizgi: light modda beyaz panel kaybolmasın. alt görsele birleşiyor, çizgi yok */}
-  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-4 pt-3 shadow-sm backdrop-blur-md">
-    <div className="flex items-center justify-between gap-3 pb-3">
-      <p className="text-sm font-semibold text-zinc-900">{item.label}</p>
-      <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-zinc-900" />
+  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3">
+    <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
+      <p className="text-xs font-semibold text-zinc-900 sm:text-sm">{item.label}</p>
+      <ArrowRight aria-hidden="true" className="size-3.5 shrink-0 text-zinc-900 sm:size-4" />
     </div>
 
     {/* hover masaüstü. is-open telefon/tablet. focus-within ilk dokunuşta sayfaya kaçırıyordu, çıkardım */}
@@ -93,12 +94,12 @@ function ImageGroup({
   </div>
 
   {/* Görselin kendi kutusu. Yükseklik sabit, panel bunu küçültemez. */}
-  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-b-2xl sm:h-52">
+  <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-b-2xl sm:h-44 md:h-52">
     <Image
       src={src}
       alt={alt}
       fill
-      sizes="(min-width: 640px) 320px, 288px"
+      sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
       quality={75}
       draggable={false}
       className="object-cover"
@@ -112,18 +113,18 @@ function ImageGroup({
         return (
           <div
             key={`${item.src}-${index}`}
-            className="group relative h-44 w-72 shrink-0 overflow-hidden rounded-2xl bg-[#171a1f] sm:h-52 sm:w-80"
+            className="group relative h-36 w-60 shrink-0 overflow-hidden rounded-2xl bg-[#171a1f] sm:h-44 sm:w-72 md:h-52 md:w-80"
           >
             <Image
               src={src}
               alt={alt}
               fill
-              sizes="(min-width: 640px) 320px, 288px"
+              sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
               quality={75}
               className="object-cover transition-transform duration-500 group-hover:-translate-y-3 group-hover:scale-105"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-4 pb-4 pt-10">
-              <p className="text-sm font-semibold text-white">{item.label}</p>
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-3 pb-3 pt-8 sm:px-4 sm:pb-4 sm:pt-10">
+              <p className="text-xs font-semibold text-white sm:text-sm">{item.label}</p>
             </div>
           </div>
         );
