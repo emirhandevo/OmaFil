@@ -37,10 +37,12 @@ function ImageGroup({
   onYarnClick,
 }: GroupProps) {
   return (
-    <div 
-    // Mobilde kart + gap küçük: ekranda ~1.5 kart görünsün 
+    <div
+      // Mobilde kart + gap küçük: ekranda ~1.5 kart görünsün
       className="flex shrink-0 items-start gap-3 pr-4 sm:gap-4 sm:pr-5"
+      // kopya şerit: ekran okuyucu + focus alma. inert odaklanmayı da keser
       aria-hidden={duplicate || undefined}
+      {...(duplicate ? { inert: true } : {})}
     >
       {items.map((item, index) => {
         const src = overrideSrc ?? item.src;
@@ -55,8 +57,13 @@ function ImageGroup({
               tabIndex={duplicate ? -1 : undefined}
               draggable={false}
               // dışarı tıklayınca bu kart mı diye bakıyorum
-              data-yarn-card={item.src}
+              data-yarn-card={duplicate ? undefined : item.src}
               onClick={(e) => {
+                // kopya şeritte tıklama yok
+                if (duplicate) {
+                  e.preventDefault();
+                  return;
+                }
                 // asıl karar MarqueeRow'da. yoksa kaydırmayı tıklama sanmayayım
                 if (onYarnClick) {
                   onYarnClick(e, item.src);
@@ -67,9 +74,9 @@ function ImageGroup({
                   skipClickRef.current = false;
                 }
               }}
-              // is-open: telefonda ilk dokunuş paneli açsın diye
+              // is-open sadece gerçek şeritte; kopyada aria-hidden uyarısı çıkmasın
               className={`group flex w-60 shrink-0 flex-col sm:w-72 md:w-80 ${
-                openSrc === item.src ? "is-open" : ""
+                !duplicate && openSrc === item.src ? "is-open" : ""
               }`}
             >
   {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
@@ -156,18 +163,34 @@ function MarqueeRow({
   const isHovering = useRef(false);
   const isTransitioning = useRef(false);
   const isDragging = useRef(false);
+  // pointerdown olmadan move sürükleme sayılmasın (hover kaydırma bug’ı)
+  const dragArmed = useRef(false);
   const dragStartX = useRef(0);
   const dragStartOffset = useRef(0);
   // true ise bir sonraki tıklama navigasyon değildir
   const skipClickRef = useRef(false);
-  // tick state görmüyor. kart açıkken şerit dursun diye ref
-  const cardPausedRef = useRef(false);
+  // tick state görmüyor. açık kart src'yi buradan okur
+  const openSrcRef = useRef<string | null>(null);
   const [openSrc, setOpenSrc] = useState<string | null>(null);
 
-  // paneli kapat, şerit kaldığı yerden aksın
-  function closeCard() {
-    cardPausedRef.current = false;
+  openSrcRef.current = openSrc;
+
+  // tüm pause bayraklarını temizle — şerit tekrar aksın
+  function resumeMarquee() {
+    isHovering.current = false;
+    isDragging.current = false;
+    dragArmed.current = false;
+    isTransitioning.current = false;
+    openSrcRef.current = null;
     setOpenSrc(null);
+    // aria-hidden uyarısı: panel kapanınca odaktaki link blur olsun
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  }
+
+  function closeCard() {
+    resumeMarquee();
   }
 
   function handleYarnClick(e: React.MouseEvent<HTMLAnchorElement>, src: string) {
@@ -185,10 +208,45 @@ function MarqueeRow({
     // ilk dokunuş: aç, gitme. aynı karta ikinci dokunuşta bu if'e girmez, link gider
     if (openSrc !== src) {
       e.preventDefault();
-      cardPausedRef.current = true;
       setOpenSrc(src);
+      return;
     }
+
+    // ikinci dokunuş: sayfaya gitmeden paneli ve pause bayraklarını kapat
+    resumeMarquee();
   }
+
+  // anasayfaya dönüş / sekme geri gelince şerit kilitli kalmasın
+  useEffect(() => {
+    function onPageResume() {
+      resumeMarquee();
+    }
+
+    // sadece sürükleme/hover kilidi — paneli kapatma
+    function clearPointerFlags() {
+      isDragging.current = false;
+      dragArmed.current = false;
+      isHovering.current = false;
+      isTransitioning.current = false;
+    }
+
+    onPageResume();
+    window.addEventListener("pageshow", onPageResume);
+    function onVisibility() {
+      if (document.visibilityState === "visible") onPageResume();
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+    // navigasyon ortasında pointerup gelmezse isDragging true kalmasın
+    window.addEventListener("pointerup", clearPointerFlags);
+    window.addEventListener("pointercancel", clearPointerFlags);
+
+    return () => {
+      window.removeEventListener("pageshow", onPageResume);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pointerup", clearPointerFlags);
+      window.removeEventListener("pointercancel", clearPointerFlags);
+    };
+  }, []);
 
   // kartın dışına dokununca kapat
   useEffect(() => {
@@ -206,30 +264,35 @@ function MarqueeRow({
   }, [openSrc]);
 
   useEffect(() => {
-    const inner = innerRef.current;
-    if (!inner) return;
-
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const speed = direction === "right" ? -40 : 40;
 
-    let rafId: number;
+    let rafId = 0;
     let lastTime = performance.now();
 
     function tick(now: number) {
       const delta = (now - lastTime) / 1000;
       lastTime = now;
+      const inner = innerRef.current;
 
-      // cardPausedRef: telefonda panel açıkken şerit dönmesin
-      if (!isHovering.current && !isTransitioning.current && !isDragging.current && !cardPausedRef.current && !prefersReducedMotion) {
+      // panel açıkken veya sürüklerken dur. bayraklar resumeMarquee ile temizlenir
+      const paused =
+        prefersReducedMotion ||
+        isHovering.current ||
+        isTransitioning.current ||
+        isDragging.current ||
+        openSrcRef.current !== null;
+
+      if (inner && !paused) {
         offset.current += speed * delta;
-        const half = inner!.scrollWidth / 2;
+        const half = inner.scrollWidth / 2;
         if (half > 0) {
           if (offset.current >= half) offset.current -= half;
           if (offset.current < 0) offset.current += half;
         }
-        inner!.style.transform = `translateX(${-offset.current}px)`;
+        inner.style.transform = `translateX(${-offset.current}px)`;
       }
 
       rafId = requestAnimationFrame(tick);
@@ -259,7 +322,9 @@ function MarqueeRow({
   }
 
   function handleDragStart(clientX: number) {
-    isDragging.current = true;
+    // basılı tutunca arm; 8px hareket sonrası gerçek sürükleme
+    dragArmed.current = true;
+    isDragging.current = false;
     dragStartX.current = clientX;
     dragStartOffset.current = offset.current;
     const inner = innerRef.current;
@@ -267,11 +332,18 @@ function MarqueeRow({
   }
 
   function handleDragMove(clientX: number) {
-    if (!isDragging.current) return;
+    // hover’da pointermove gelir; basılı değilse çık
+    if (!dragArmed.current) return;
+
+    const delta = clientX - dragStartX.current;
+    if (!isDragging.current) {
+      if (Math.abs(delta) <= 8) return;
+      isDragging.current = true;
+    }
+
     const inner = innerRef.current;
     if (!inner) return;
 
-    const delta = clientX - dragStartX.current;
     let next = dragStartOffset.current - delta;
     const half = inner.scrollWidth / 2;
     if (half > 0) next = ((next % half) + half) % half;
@@ -284,6 +356,18 @@ function MarqueeRow({
     // 8 px’den fazla kaydıysa bunu tıklama sayma
     skipClickRef.current = Math.abs(offset.current - dragStartOffset.current) > 8;
     isDragging.current = false;
+    dragArmed.current = false;
+  }
+
+  // sadece gerçek mouse’da hover ile dur; telefonda mouseenter kilitliyordu
+  function handleMouseEnter() {
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      isHovering.current = true;
+    }
+  }
+
+  function handleMouseLeave() {
+    isHovering.current = false;
   }
 
   return (
@@ -308,8 +392,8 @@ function MarqueeRow({
 
       <div
         ref={outerRef}
-        onMouseEnter={() => (isHovering.current = true)}
-        onMouseLeave={() => (isHovering.current = false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onPointerDown={(e) => handleDragStart(e.clientX)}
         onPointerMove={(e) => handleDragMove(e.clientX)}
         onPointerUp={handleDragEnd}
