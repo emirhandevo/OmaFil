@@ -32,7 +32,7 @@ export function Hero() {
           </p>
 
           <h1 className="mt-3 max-w-full text-2xl font-semibold tracking-tight text-balance sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl">
-            Endüstriyel İplik Üretiminde Güvenilir Çözüm Ortağınız
+           AVRUPA'NIN EN BÜYÜK TAM ENTEGRE GİPE İPLİK FABRİKASI
           </h1>
 
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-white/80 sm:mt-5 sm:text-base sm:leading-7 lg:text-lg">
