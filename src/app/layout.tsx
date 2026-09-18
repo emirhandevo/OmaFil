@@ -14,14 +14,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Vercel preview linkinde OG görseli doğru domainden gelsin
-const metadataBase = new URL(
-  process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : site.url),
-);
+// WhatsApp/Telegram: VERCEL_URL geçici deploy adresi; crawler açamayınca favicon’a düşer.
+// Production alias (omafil.vercel.app) kullan.
+function getMetadataBase() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return new URL(process.env.NEXT_PUBLIC_SITE_URL);
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`);
+  }
+  // Yerel geliştirme veya bilinmeyen ortam
+  if (process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  // Canlı Next henüz omafil.com’da değil; paylaşım için Vercel alias
+  return new URL("https://omafil.vercel.app");
+}
 
 export const metadata: Metadata = {
-  metadataBase,
+  metadataBase: getMetadataBase(),
   title: {
     default: site.name,
     template: `%s | ${site.name}`,
