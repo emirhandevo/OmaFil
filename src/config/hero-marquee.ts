@@ -53,6 +53,36 @@ export const yarnImages: MarqueeItem[] = [
     href: "/urunlerimiz",
   },
   {
+    src: "/images/hero/iplik/fdy-n6.webp",
+    label: "N6 FDY",
+    summary: "Naylon 6 tam çekimli iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/dty-n6.webp",
+    label: "DTY N6",
+    summary: "Naylon 6 tekstüre iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/dty-n66.webp",
+    label: "DTY N66",
+    summary: "Naylon 66 tekstüre iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/acy-n6.webp",
+    label: "ACY N6",
+    summary: "Naylon 6 hava jetli kaplama iplik.",
+    href: "/urunlerimiz",
+  },
+  {
+    src: "/images/hero/iplik/acy-n66.webp",
+    label: "ACY N66",
+    summary: "Naylon 66 hava jetli kaplama iplik.",
+    href: "/urunlerimiz",
+  },
+  {
     src: "/images/hero/iplik/scy-n6.webp",
     label: "SCY N6 Gipe",
     summary: "Naylon 6 tek kaplama gipe iplik.",
@@ -65,39 +95,15 @@ export const yarnImages: MarqueeItem[] = [
     href: "/urunlerimiz",
   },
   {
-    src: "/images/hero/iplik/fdy-n6.webp",
-    label: "N6 FDY",
-    summary: "Naylon 6 tam çekimli iplik.",
-    href: "/urunlerimiz",
-  },
-  {
-    src: "/images/hero/iplik/dty-n66.png",
-    label: "DTY N66",
-    summary: "Naylon 66 tekstüre iplik.",
-    href: "/urunlerimiz",
-  },
-  {
     src: "/images/hero/iplik/scy-pes.webp",
     label: "PES SCY Gipe",
     summary: "Polyester tek kaplama gipe iplik.",
     href: "/urunlerimiz",
   },
   {
-    src: "/images/hero/iplik/acy-n6.webp",
-    label: "ACY N6",
-    summary: "Naylon 6 hava jetli kaplama iplik.",
-    href: "/urunlerimiz",
-  },
-  {
     src: "/images/hero/iplik/acc-pes.webp",
     label: "PES ACC",
     summary: "Polyester hava jetli kompozit iplik.",
-    href: "/urunlerimiz",
-  },
-  {
-    src: "/images/hero/iplik/acy-n66.webp",
-    label: "ACY N66",
-    summary: "Naylon 66 hava jetli kaplama iplik.",
     href: "/urunlerimiz",
   },
 ];
