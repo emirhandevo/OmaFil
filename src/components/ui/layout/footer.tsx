@@ -15,7 +15,6 @@ export function Footer() {
             width={160}
             height={30}
             className="h-auto w-36"
-            style={{ width: "auto", height: "auto" }}
           />
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
             Endüstriyel iplik üretiminde güvenilir çözüm ortağınız.
