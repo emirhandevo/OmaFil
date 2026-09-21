@@ -52,7 +52,10 @@ export function Header() {
   }
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+    <header
+      ref={headerRef}
+      className="site-header sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+    >
       <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
           <Image

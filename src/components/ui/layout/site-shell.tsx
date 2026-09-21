@@ -1,16 +1,20 @@
 import type { ReactNode } from "react";
 import { Header } from "@/components/ui/layout/header";
 import { Footer } from "@/components/ui/layout/footer";
+import { SmoothNav } from "@/components/ui/layout/smooth-nav";
 
 /**
- * İç sayfaların ortak iskeleti.
- * Header ve Footer'ı her page.tsx'te tekrar yazmamak için.
+ * Tüm sitede tek Header/Footer.
+ * Sayfa geçişlerinde remount olmaz → VT ile sabit kalırlar.
  */
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <>
+      <SmoothNav />
       <Header />
-      <main>{children}</main>
+      <main id="main-content" className="flex-1">
+        {children}
+      </main>
       <Footer />
     </>
   );

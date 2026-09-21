@@ -61,6 +61,7 @@ function ImageGroup({
               tabIndex={duplicate ? -1 : undefined}
               draggable={false}
               data-yarn-card={item.src}
+              data-no-transition
               onMouseEnter={() => onHover(item.src)}
               onMouseLeave={() => onHover(null)}
               onClick={(e) => {
@@ -171,15 +172,22 @@ function MarqueeRow({
   }
 
   function handleYarnClick(e: React.MouseEvent<HTMLAnchorElement>, src: string) {
+    // Sürükleme sonrası sahte click — navigasyon yok
     if (skipClickRef.current) {
       e.preventDefault();
       skipClickRef.current = false;
       return;
     }
 
-    const isCompact = window.matchMedia("(max-width: 1023px)").matches;
-    if (!isCompact) return;
+    // Mobil / dokunmatik: iki tıklı akış. Masaüstü hover ile açılır, tık doğrudan gider.
+    const needsTapExpand =
+      window.matchMedia("(max-width: 1023px)").matches ||
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(pointer: coarse)").matches;
 
+    if (!needsTapExpand) return;
+
+    // 1. tık (farklı / kapalı kart): bilgiyi aç, marquee dursun
     if (openSrc !== src) {
       e.preventDefault();
       paused.current = true;
@@ -187,21 +195,25 @@ function MarqueeRow({
       return;
     }
 
+    // 2. tık (aynı kart): ürünler sayfasına git (preventDefault yok → Link)
     paused.current = false;
     setOpenSrc(null);
   }
 
   useEffect(() => {
     if (!openSrc) return;
+
+    // Kart dışı herhangi bir yere tık → paneli kapat, marquee devam
     function onPointerDown(e: PointerEvent) {
       const t = e.target as HTMLElement | null;
-      if (t?.closest("[data-yarn-card]")) return;
-      paused.current = hoveredSrc !== null;
+      if (t?.closest(`[data-yarn-card="${CSS.escape(openSrc)}"]`)) return;
+      paused.current = false;
       setOpenSrc(null);
     }
+
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [openSrc, hoveredSrc]);
+  }, [openSrc]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

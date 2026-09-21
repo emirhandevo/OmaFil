@@ -158,8 +158,7 @@ export function ContactPage() {
             Adreslerimiz
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Her konum Google Maps’te açılır. Bilgiler footer ile aynı kaynaktan
-            gelir.
+            Her konum Google Maps’te açılır.
           </p>
 
           <ul className="mt-10 grid gap-4 md:grid-cols-3">

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { SiteShell } from "@/components/ui/layout/site-shell";
-import { contact } from "@/config/site";
-import { yarnImages } from "@/config/hero-marquee";
+import { ProductsGrid } from "@/components/sections/products-grid";
 
 export const metadata: Metadata = {
   title: "Ürünlerimiz",
@@ -13,56 +10,34 @@ export const metadata: Metadata = {
 
 export default function UrunlerimizPage() {
   return (
-    <SiteShell>
-      <section className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20">
-        <p className="text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
+    <section className="relative isolate overflow-hidden">
+      {/* Atmosfer — glass’ın saydamlığı buraya karşı okunur */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/[0.04] via-background to-background dark:from-brand-blue/20 dark:via-background dark:to-background" />
+        <div className="absolute -top-24 -right-20 size-[28rem] rounded-full bg-brand-orange/15 blur-3xl dark:bg-brand-orange/20" />
+        <div className="absolute top-1/3 -left-24 size-[22rem] rounded-full bg-brand-blue/12 blur-3xl dark:bg-brand-blue/25" />
+        <div className="absolute right-1/4 bottom-0 size-[18rem] rounded-full bg-brand-navy/8 blur-3xl dark:bg-white/5" />
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
+        <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
           Ürünlerimiz
         </p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           İplik portföyümüz
         </h1>
-        <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
-          Naylon 6, Naylon 66 ve polyester gipe hatlarımız. Detaylı teknik
-          sayfalar sonra eklenecek; şimdilik ürün özeti burada.
+        <p className="text-body mt-5 max-w-2xl text-base leading-8">
+          Naylon 6, Naylon 66 ve polyester gipe hatlarımız. Teklif veya numune
+          için bizimle iletişime geçebilirsiniz.
         </p>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {yarnImages.map((item) => (
-            <li key={item.src}>
-              <article className="overflow-hidden rounded-2xl border border-border bg-card">
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={item.src}
-                    alt={item.label}
-                    fill
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="text-lg font-semibold">{item.label}</h2>
-                  {item.summary && (
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      {item.summary}
-                    </p>
-                  )}
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-10 text-sm text-muted-foreground">
-          Teklif veya numune için{" "}
-          <a
-            href={`mailto:${contact.email}`}
-            className="font-medium text-brand-orange hover:underline"
-          >
-            {contact.email}
-          </a>
-          .
-        </p>
-      </section>
-    </SiteShell>
+        <div className="mt-12">
+          <ProductsGrid />
+        </div>
+      </div>
+    </section>
   );
 }

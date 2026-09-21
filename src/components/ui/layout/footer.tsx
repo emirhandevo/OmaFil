@@ -5,7 +5,7 @@ import { contact, navLinks, site, socialLinks } from "@/config/site";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-border bg-background">
+    <footer className="site-footer mt-auto border-t border-border bg-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Marka - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">

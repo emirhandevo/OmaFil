@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, Leaf, Sun, TreePine } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { GesImpactStats } from "@/components/sections/ges-impact-stats";
-import { SiteShell } from "@/components/ui/layout/site-shell";
 import {
   gesGallery,
   gesIntro,
@@ -24,7 +23,7 @@ const pillarIcons = [Sun, TreePine, Leaf] as const;
 
 export default function GesPage() {
   return (
-    <SiteShell>
+    <>
       {/* Hero — marka + başlık + tek cümle + görsel düzlemi */}
       <section className="relative isolate min-h-[52vh] overflow-hidden sm:min-h-[60vh]">
         <Image
@@ -180,6 +179,6 @@ export default function GesPage() {
           </div>
         </div>
       </section>
-    </SiteShell>
+    </>
   );
 }

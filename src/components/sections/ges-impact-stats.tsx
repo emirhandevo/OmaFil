@@ -79,9 +79,6 @@ export function GesImpactStats() {
             <p className="text-body mt-5 max-w-xl text-base leading-8">
               {gesCapacity.text}
             </p>
-            <p className="mt-3 text-xs font-medium tracking-wide text-emerald-700/80 uppercase dark:text-emerald-400/80">
-              Canlı kümülatif veri · her an güncellenir
-            </p>
           </div>
 
           <div

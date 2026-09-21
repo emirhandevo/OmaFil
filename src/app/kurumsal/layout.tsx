@@ -1,6 +1,11 @@
-import { SiteShell } from "@/components/ui/layout/site-shell";
-
-// Header ve Footer alt sayfalarda bir kez sarılır.
-export default function KurumsalLayout({ children }: { children: React.ReactNode }) {
-  return <SiteShell>{children}</SiteShell>;
+/**
+ * Kurumsal alt sayfalar artık root SiteShell kullanır.
+ * Bu layout sadece segment gruplaması için kalır.
+ */
+export default function KurumsalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
 }

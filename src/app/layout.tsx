@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteShell } from "@/components/ui/layout/site-shell";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
-        {children}
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

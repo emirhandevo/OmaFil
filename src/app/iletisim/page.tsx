@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SiteShell } from "@/components/ui/layout/site-shell";
 import { ContactPage } from "@/components/sections/contact-page";
 
 export const metadata: Metadata = {
@@ -10,9 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function IletisimRoute() {
-  return (
-    <SiteShell>
-      <ContactPage />
-    </SiteShell>
-  );
+  return <ContactPage />;
 }

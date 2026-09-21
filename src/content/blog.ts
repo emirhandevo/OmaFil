@@ -1,8 +1,7 @@
 /**
  * Blog tek kaynak.
  * Yeni yazı: bu diziye bir nesne ekle. slug URL olur: /blog/slug
- * Revizyon notu eski sitedeki AI blogları kaldırmayı istiyordu.
- * Onları buraya kopyalamıyoruz. Onaylı metin gelince buraya girilir.
+ * Onaylı metin gelince buraya girilir — AI ile doldurulmaz.
  */
 export type BlogPost = {
   slug: string;

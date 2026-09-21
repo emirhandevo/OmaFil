@@ -29,7 +29,7 @@ export default function KurumsalPage() {
     <CorporateFrame
       path="/kurumsal"
       title="Kurumsal"
-      description="Kurumsal yapımızı dört başlıkta topladık."
+      description="Şirketimiz, tesisimiz, sürdürülebilirlik yaklaşımımız ve insan kaynakları."
     >
       <section className="mx-auto grid max-w-6xl gap-x-5 gap-y-12 px-4 pb-20 pt-4 sm:grid-cols-2">
         {corporateLinks.map((item) => {

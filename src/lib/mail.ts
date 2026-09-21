@@ -62,27 +62,28 @@ export function createResend(apiKey: string) {
   return new Resend(apiKey);
 }
 
-/** Resend hata metnini kullanıcıya anlaşılır hale getir */
+/** Resend hata metnini kullanıcıya anlaşılır hale getir (teknik detay yok) */
 export function friendlyResendError(error: {
   message?: string;
   name?: string;
 }): string {
   const raw = (error.message ?? "").toLowerCase();
 
+  // Teknik detay console’da kalsın; kullanıcıya sade mesaj
+  if (error.message) {
+    console.error("Resend:", error.message);
+  }
+
   if (
     raw.includes("verify a domain") ||
     raw.includes("only send testing emails") ||
     raw.includes("own email address")
   ) {
-    return "Mail henüz test modunda: CONTACT_EMAIL_TO adresini Resend hesap mailiniz yapın (it@omafil.com) veya omafil.com domain’ini Resend’de doğrulayın.";
+    return "Mesaj şu an iletilemedi. Lütfen doğrudan info@omafil.com adresine yazın veya bizi arayın.";
   }
 
   if (raw.includes("invalid") && raw.includes("api")) {
-    return "Resend API anahtarı geçersiz. RESEND_API_KEY değerini kontrol edin.";
-  }
-
-  if (error.message && process.env.NODE_ENV === "development") {
-    return error.message;
+    return "Mesaj şu an iletilemedi. Lütfen daha sonra tekrar deneyin veya bizi arayın.";
   }
 
   return "Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.";

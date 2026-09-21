@@ -61,13 +61,9 @@ export function SustainabilitySection() {
             </h2>
 
             <p className="text-body mt-6 max-w-2xl text-base leading-8">
-              OmaFil olarak, üretim süreçlerimizin merkezine sürdürülebilirliği ve inovasyonu yerleştiriyoruz. Gelecek nesillere daha yaşanabilir bir dünya bırakma sorumluluğumuzun bilinciyle, kaynaklarımızı en verimli şekilde kullanıyor ve çevresel etkimizi minimize edecek yenilikçi çözümler geliştiriyoruz. Modern Ar-Ge merkezimizde yürüttüğümüz çalışmalarla, sadece bugünün tekstil ihtiyaçlarını karşılamakla kalmıyor, aynı zamanda yarının çevre standartlarını belirleyen döngüsel ekonomi modellerini hayata geçiriyoruz. Sürdürülebilirlik bizim için bir tercih değil, kurumsal kimliğimizin ayrılmaz bir parçasıdır.
-            </p>
-
-            <p className="text-body mt-4 max-w-2xl leading-8">
-              Geniş fabrika çatımızdaki güneş enerjisi sistemiyle yenilenebilir
-              enerjiden yararlanıyor; teknoloji, kalite ve çevre bilincini aynı
-              üretim anlayışında buluşturuyoruz.
+              Üretimimizin merkezinde sürdürülebilirlik var: çatı üstü güneş
+              enerjisi, geri dönüştürülmüş iplik ve kaynak verimli süreçlerle
+              çevresel etkimizi azaltıyoruz.
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -76,11 +72,12 @@ export function SustainabilitySection() {
                   <Sun aria-hidden="true" className="size-5" />
                 </div>
 
-                <h3 className="mt-4 font-semibold text-foreground">Yenilenebilir Enerji</h3>
+                <h3 className="mt-4 font-semibold text-foreground">
+                  Yenilenebilir Enerji
+                </h3>
 
                 <p className="text-body mt-2 text-sm leading-7">
-                  Çatı üstü güneş panellerimizle enerji ihtiyacımızda
-                  yenilenebilir kaynaklardan faydalanıyoruz.
+                  Çatı üstü GES ile temiz enerji.
                 </p>
               </article>
 
@@ -89,11 +86,12 @@ export function SustainabilitySection() {
                   <Leaf aria-hidden="true" className="size-5" />
                 </div>
 
-                <h3 className="mt-4 font-semibold text-foreground">Sorumlu Üretim</h3>
+                <h3 className="mt-4 font-semibold text-foreground">
+                  Sorumlu Üretim
+                </h3>
 
                 <p className="text-body mt-2 text-sm leading-7">
-                  Kaynak verimliliği için üretim süreçlerimizi sürekli
-                  geliştiriyoruz.
+                  Kaynak verimli, çevreye duyarlı süreçler.
                 </p>
               </article>
             </div>

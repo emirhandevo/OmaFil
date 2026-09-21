@@ -31,8 +31,8 @@ export default function InsanKaynaklariPage() {
             çalışma, politikanın uygulanan tarafı.
           </p>
           <p>
-            Açık pozisyon listesi henüz bu sayfada yok. Aşağıdaki formdan CV’nizi
-            PDF olarak iletebilirsiniz.
+            Açık pozisyonlar için veya genel başvuru yapmak üzere CV’nizi PDF
+            olarak iletebilirsiniz.
           </p>
         </div>
 

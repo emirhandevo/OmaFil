@@ -46,6 +46,7 @@ export const navLinks = [
     {href: "/kurumsal", label: "Kurumsal", children: corporateLinks},
     {href: "/urunlerimiz", label: "Ürünlerimiz"},
     {href: "/ges", label: "GES"},
+    {href: "/blog", label: "Blog"},
     {href: "/iletisim", label: "İletişim"},
 ] as const;
 
