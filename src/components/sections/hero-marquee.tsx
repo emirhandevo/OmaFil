@@ -11,20 +11,20 @@ import {
   type MarqueeItem,
 } from "@/config/hero-marquee";
 
+const STEP_PX = 320;
+
 type GroupProps = {
   items: MarqueeItem[];
   altPrefix: string;
   duplicate?: boolean;
   overrideSrc?: string | null;
-  /** yarn: beyaz panel. plant: alttaki isim şeridi */
   variant: "yarn" | "plant";
-  /** Sürükleme bitince gelen tıklamayı yutar, karta gitmesin */
   skipClickRef: React.RefObject<boolean>;
-  /** Telefonda açık olan ürün. null ise hiçbiri açık değil */
-openSrc?: string | null;
-onYarnClick?: (event: React.MouseEvent<HTMLAnchorElement>, src: string) => void;
+  openSrc: string | null;
+  hoveredSrc: string | null;
+  onHover: (src: string | null) => void;
+  onYarnClick: (e: React.MouseEvent<HTMLAnchorElement>, src: string) => void;
 };
-
 
 function ImageGroup({
   items,
@@ -33,90 +33,86 @@ function ImageGroup({
   overrideSrc = null,
   variant,
   skipClickRef,
-  openSrc= null,
+  openSrc,
+  hoveredSrc,
+  onHover,
   onYarnClick,
 }: GroupProps) {
   return (
+    // Kopya grup görsel döngü için; aria-hidden + tabIndex=-1 yeter.
+    // pointer-events-none / inert KOYMA: offset yarım şeride gelince
+    // ekranda görünen kartlar kopya olur — tıklama/hover ölürdü.
     <div
-      // Mobilde kart + gap küçük: ekranda ~1.5 kart görünsün
       className="flex shrink-0 items-start gap-3 pr-4 sm:gap-4 sm:pr-5"
-      // kopya şerit: ekran okuyucu + focus alma. inert odaklanmayı da keser
       aria-hidden={duplicate || undefined}
-      {...(duplicate ? { inert: true } : {})}
     >
       {items.map((item, index) => {
         const src = overrideSrc ?? item.src;
         const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${item.label}`;
 
-        // Üst şerit: görsel tam kart, ad üstte beyaz panelde
         if (variant === "yarn") {
+          // Her iki kopyada da aynı src açık/hover olsun (görünen hangisiyse)
+          const open = openSrc === item.src || hoveredSrc === item.src;
+
           return (
             <Link
               key={`${item.src}-${index}`}
               href={item.href ?? "/urunlerimiz"}
               tabIndex={duplicate ? -1 : undefined}
               draggable={false}
-              // dışarı tıklayınca bu kart mı diye bakıyorum
-              data-yarn-card={duplicate ? undefined : item.src}
+              data-yarn-card={item.src}
+              onMouseEnter={() => onHover(item.src)}
+              onMouseLeave={() => onHover(null)}
               onClick={(e) => {
-                // kopya şeritte tıklama yok
-                if (duplicate) {
-                  e.preventDefault();
-                  return;
-                }
-                // asıl karar MarqueeRow'da. yoksa kaydırmayı tıklama sanmayayım
-                if (onYarnClick) {
-                  onYarnClick(e, item.src);
-                  return;
-                }
+                onYarnClick(e, item.src);
                 if (skipClickRef.current) {
                   e.preventDefault();
                   skipClickRef.current = false;
                 }
               }}
-              // is-open sadece gerçek şeritte; kopyada aria-hidden uyarısı çıkmasın
-              className={`group flex w-60 shrink-0 flex-col sm:w-72 md:w-80 ${
-                !duplicate && openSrc === item.src ? "is-open" : ""
-              }`}
+              className="flex w-60 shrink-0 flex-col sm:w-72 md:w-80"
             >
-  {/* İsim görselin dışında. Açılınca görsel kutusuna girmez, onu aşağı iter. */}
-  {/* bg-white/75: biraz cam. isim görselin üstünde durduğu için arkadan site zemini gözükür, foto değil */}
-  {/* sağ sol üst çizgi: light modda beyaz panel kaybolmasın. alt görsele birleşiyor, çizgi yok */}
-  <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3">
-    <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
-      <p className="text-xs font-semibold text-zinc-900 sm:text-sm">{item.label}</p>
-      <ArrowRight aria-hidden="true" className="size-3.5 shrink-0 text-zinc-900 sm:size-4" />
-    </div>
+              <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3">
+                <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
+                  <p className="text-xs font-semibold text-zinc-900 sm:text-sm">
+                    {item.label}
+                  </p>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="size-3.5 shrink-0 text-zinc-900 sm:size-4"
+                  />
+                </div>
 
-    {/* hover masaüstü. is-open telefon/tablet. focus-within ilk dokunuşta sayfaya kaçırıyordu, çıkardım */}
-    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr] group-[.is-open]:grid-rows-[1fr] motion-reduce:transition-none">
-      <div className="overflow-hidden">
-        <p className="text-xs leading-5 text-zinc-600">{item.summary}</p>
-        <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
-          Detaylı Bilgi
-          <ArrowRight aria-hidden="true" className="size-3.5" />
-        </p>
-      </div>
-    </div>
-  </div>
+                <div
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="text-xs leading-5 text-zinc-600">{item.summary}</p>
+                    <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
+                      Detaylı Bilgi
+                      <ArrowRight aria-hidden="true" className="size-3.5" />
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-  {/* Görselin kendi kutusu. Yükseklik sabit, panel bunu küçültemez. */}
-  <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-b-2xl sm:h-44 md:h-52">
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
-      quality={75}
-      draggable={false}
-      className="object-cover"
-    />
-  </div>
-</Link>
+              <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-b-2xl sm:h-44 md:h-52">
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
+                  quality={75}
+                  draggable={false}
+                  className="object-cover"
+                />
+              </div>
+            </Link>
           );
         }
 
-        // Alt şerit: tesis, isim altta kalır
         return (
           <div
             key={`${item.src}-${index}`}
@@ -140,289 +136,201 @@ function ImageGroup({
   );
 }
 
-type RowProps = {
-  items: MarqueeItem[];
-  altPrefix: string;
-  direction: "left" | "right";
-  overrideSrc?: string | null;
-  variant: "yarn" | "plant";
-};
-
-const STEP_PX = 320;
-
 function MarqueeRow({
   items,
   altPrefix,
   direction,
   overrideSrc,
   variant,
-}: RowProps) {
-  const outerRef = useRef<HTMLDivElement>(null);
+}: {
+  items: MarqueeItem[];
+  altPrefix: string;
+  direction: "left" | "right";
+  overrideSrc?: string | null;
+  variant: "yarn" | "plant";
+}) {
   const innerRef = useRef<HTMLDivElement>(null);
   const offset = useRef(0);
-  const isHovering = useRef(false);
-  const isTransitioning = useRef(false);
+  const paused = useRef(false);
   const isDragging = useRef(false);
-  // pointerdown olmadan move sürükleme sayılmasın (hover kaydırma bug’ı)
   const dragArmed = useRef(false);
   const dragStartX = useRef(0);
   const dragStartOffset = useRef(0);
-  // true ise bir sonraki tıklama navigasyon değildir
   const skipClickRef = useRef(false);
-  // tick state görmüyor. açık kart src'yi buradan okur
-  const openSrcRef = useRef<string | null>(null);
   const [openSrc, setOpenSrc] = useState<string | null>(null);
+  const [hoveredSrc, setHoveredSrc] = useState<string | null>(null);
 
-  openSrcRef.current = openSrc;
-
-  // tüm pause bayraklarını temizle — şerit tekrar aksın
-  function resumeMarquee() {
-    isHovering.current = false;
-    isDragging.current = false;
-    dragArmed.current = false;
-    isTransitioning.current = false;
-    openSrcRef.current = null;
-    setOpenSrc(null);
-    // aria-hidden uyarısı: panel kapanınca odaktaki link blur olsun
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+  // Kritik: ref’i setState’ten ÖNCE güncelle — yoksa rAF 1-2 kare daha kaydırır, kart kaçar
+  function handleHover(src: string | null) {
+    if (src) {
+      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+      paused.current = true;
     }
-  }
-
-  function closeCard() {
-    resumeMarquee();
+    // null’da pause’u kaldırma: satırdan çıkınca onMouseLeave halleder
+    setHoveredSrc(src);
   }
 
   function handleYarnClick(e: React.MouseEvent<HTMLAnchorElement>, src: string) {
-    // kaydırdıysam detaya gitmesin
     if (skipClickRef.current) {
       e.preventDefault();
       skipClickRef.current = false;
       return;
     }
 
-    // 1024 altı telefon + tablet. masaüstünde tek tık yeter
     const isCompact = window.matchMedia("(max-width: 1023px)").matches;
     if (!isCompact) return;
 
-    // ilk dokunuş: aç, gitme. aynı karta ikinci dokunuşta bu if'e girmez, link gider
     if (openSrc !== src) {
       e.preventDefault();
+      paused.current = true;
       setOpenSrc(src);
       return;
     }
 
-    // ikinci dokunuş: sayfaya gitmeden paneli ve pause bayraklarını kapat
-    resumeMarquee();
+    paused.current = false;
+    setOpenSrc(null);
   }
 
-  // anasayfaya dönüş / sekme geri gelince şerit kilitli kalmasın
-  useEffect(() => {
-    function onPageResume() {
-      resumeMarquee();
-    }
-
-    // sadece sürükleme/hover kilidi — paneli kapatma
-    function clearPointerFlags() {
-      isDragging.current = false;
-      dragArmed.current = false;
-      isHovering.current = false;
-      isTransitioning.current = false;
-    }
-
-    onPageResume();
-    window.addEventListener("pageshow", onPageResume);
-    function onVisibility() {
-      if (document.visibilityState === "visible") onPageResume();
-    }
-    document.addEventListener("visibilitychange", onVisibility);
-    // navigasyon ortasında pointerup gelmezse isDragging true kalmasın
-    window.addEventListener("pointerup", clearPointerFlags);
-    window.addEventListener("pointercancel", clearPointerFlags);
-
-    return () => {
-      window.removeEventListener("pageshow", onPageResume);
-      document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("pointerup", clearPointerFlags);
-      window.removeEventListener("pointercancel", clearPointerFlags);
-    };
-  }, []);
-
-  // kartın dışına dokununca kapat
   useEffect(() => {
     if (!openSrc) return;
-
     function onPointerDown(e: PointerEvent) {
-      const target = e.target as HTMLElement | null;
-      // başka bir ürün kartıysa ona bırak, kendi onClick'i açar
-      if (target?.closest("[data-yarn-card]")) return;
-      closeCard();
+      const t = e.target as HTMLElement | null;
+      if (t?.closest("[data-yarn-card]")) return;
+      paused.current = hoveredSrc !== null;
+      setOpenSrc(null);
     }
-
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [openSrc]);
+  }, [openSrc, hoveredSrc]);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const speed = direction === "right" ? -40 : 40;
-
-    let rafId = 0;
-    let lastTime = performance.now();
+    let raf = 0;
+    let last = performance.now();
 
     function tick(now: number) {
-      const delta = (now - lastTime) / 1000;
-      lastTime = now;
+      const dt = (now - last) / 1000;
+      last = now;
       const inner = innerRef.current;
 
-      // panel açıkken veya sürüklerken dur. bayraklar resumeMarquee ile temizlenir
-      const paused =
-        prefersReducedMotion ||
-        isHovering.current ||
-        isTransitioning.current ||
-        isDragging.current ||
-        openSrcRef.current !== null;
-
-      if (inner && !paused) {
-        offset.current += speed * delta;
+      if (inner && !paused.current && !isDragging.current && !reduce) {
         const half = inner.scrollWidth / 2;
         if (half > 0) {
+          offset.current += speed * dt;
           if (offset.current >= half) offset.current -= half;
           if (offset.current < 0) offset.current += half;
+          inner.style.transform = `translateX(${-offset.current}px)`;
         }
-        inner.style.transform = `translateX(${-offset.current}px)`;
       }
 
-      rafId = requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
     }
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [direction]);
 
   function scrollByStep(dir: "left" | "right") {
     const inner = innerRef.current;
     if (!inner) return;
-
     const half = inner.scrollWidth / 2;
     offset.current += dir === "left" ? -STEP_PX : STEP_PX;
     if (offset.current < 0) offset.current += half;
     if (offset.current >= half) offset.current -= half;
-
-    isTransitioning.current = true;
     inner.style.transition = "transform 0.4s ease";
     inner.style.transform = `translateX(${-offset.current}px)`;
-
     window.setTimeout(() => {
       if (inner) inner.style.transition = "";
-      isTransitioning.current = false;
     }, 400);
   }
 
-  function handleDragStart(clientX: number) {
-    // basılı tutunca arm; 8px hareket sonrası gerçek sürükleme
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "mouse") return;
     dragArmed.current = true;
     isDragging.current = false;
-    dragStartX.current = clientX;
+    dragStartX.current = e.clientX;
     dragStartOffset.current = offset.current;
-    const inner = innerRef.current;
-    if (inner) inner.style.transition = "";
   }
 
-  function handleDragMove(clientX: number) {
-    // hover’da pointermove gelir; basılı değilse çık
-    if (!dragArmed.current) return;
-
-    const delta = clientX - dragStartX.current;
+  function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "mouse" || !dragArmed.current) return;
+    const delta = e.clientX - dragStartX.current;
     if (!isDragging.current) {
       if (Math.abs(delta) <= 8) return;
       isDragging.current = true;
     }
-
     const inner = innerRef.current;
     if (!inner) return;
-
     let next = dragStartOffset.current - delta;
     const half = inner.scrollWidth / 2;
     if (half > 0) next = ((next % half) + half) % half;
-
     offset.current = next;
     inner.style.transform = `translateX(${-offset.current}px)`;
   }
 
-  function handleDragEnd() {
-    // 8 px’den fazla kaydıysa bunu tıklama sayma
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "mouse") return;
     skipClickRef.current = Math.abs(offset.current - dragStartOffset.current) > 8;
     isDragging.current = false;
     dragArmed.current = false;
   }
 
-  // sadece gerçek mouse’da hover ile dur; telefonda mouseenter kilitliyordu
-  function handleMouseEnter() {
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      isHovering.current = true;
-    }
-  }
-
-  function handleMouseLeave() {
-    isHovering.current = false;
-  }
+  const groupProps = {
+    items,
+    altPrefix,
+    overrideSrc,
+    variant,
+    skipClickRef,
+    openSrc,
+    hoveredSrc,
+    onHover: handleHover,
+    onYarnClick: handleYarnClick,
+  } as const;
 
   return (
-    <div className="group/row relative">
+    <div
+      className="group/row relative flex items-center gap-2"
+      onMouseEnter={() => {
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          paused.current = true;
+        }
+      }}
+      onMouseLeave={() => {
+        paused.current = openSrc !== null;
+        setHoveredSrc(null);
+      }}
+    >
       <button
         type="button"
         aria-label="Geriye kaydır"
         onClick={() => scrollByStep("left")}
-        className="absolute left-1 top-1/2 z-20 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity duration-300 hover:bg-black/80 group-hover/row:opacity-100"
+        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >
         <ChevronLeft className="size-5" aria-hidden="true" />
       </button>
+
+      <div
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        className="min-w-0 flex-1 cursor-pointer overflow-hidden touch-pan-y [@media(pointer:coarse)]:cursor-grab [@media(pointer:coarse)]:active:cursor-grabbing"
+      >
+        <div ref={innerRef} className="flex w-max will-change-transform">
+          <ImageGroup {...groupProps} />
+          <ImageGroup {...groupProps} duplicate />
+        </div>
+      </div>
 
       <button
         type="button"
         aria-label="İleriye kaydır"
         onClick={() => scrollByStep("right")}
-        className="absolute right-1 top-1/2 z-20 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity duration-300 hover:bg-black/80 group-hover/row:opacity-100"
+        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >
         <ChevronRight className="size-5" aria-hidden="true" />
       </button>
-
-      <div
-        ref={outerRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onPointerDown={(e) => handleDragStart(e.clientX)}
-        onPointerMove={(e) => handleDragMove(e.clientX)}
-        onPointerUp={handleDragEnd}
-        onPointerLeave={handleDragEnd}
-        onPointerCancel={handleDragEnd}
-        className="cursor-grab overflow-hidden touch-pan-y active:cursor-grabbing"
-      >
-        <div ref={innerRef} className="flex w-max">
-          <ImageGroup
-            items={items}
-            altPrefix={altPrefix}
-            overrideSrc={overrideSrc}
-            variant={variant}
-            skipClickRef={skipClickRef}
-            openSrc={openSrc}
-            onYarnClick={handleYarnClick}
-          />
-          <ImageGroup
-            items={items}
-            altPrefix={altPrefix}
-            overrideSrc={overrideSrc}
-            variant={variant}
-            skipClickRef={skipClickRef}
-            openSrc={openSrc}
-            onYarnClick={handleYarnClick}
-            duplicate
-          />
-        </div>
-      </div>
     </div>
   );
 }
@@ -430,25 +338,23 @@ function MarqueeRow({
 export function HeroMarquee() {
   return (
     <div className="mt-10 w-full space-y-5">
-      {/* Üstte ürünler — sadece desktop’ta daha geniş */}
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
-    <MarqueeRow
-      items={yarnImages}
-      altPrefix="İplik"
-      direction="right"
-      overrideSrc={yarnTestSrc}
-      variant="yarn"
-    />
-  </div>
-  {/* Altta laboratuvar — eski genişlik */}
-  <div className="mx-auto w-full max-w-5xl px-4">
-    <MarqueeRow
-      items={plantImages}
-      altPrefix="Tesis"
-      direction="left"
-      variant="plant"
-    />
-  </div>
-</div>
+        <MarqueeRow
+          items={yarnImages}
+          altPrefix="İplik"
+          direction="right"
+          overrideSrc={yarnTestSrc}
+          variant="yarn"
+        />
+      </div>
+      <div className="mx-auto w-full max-w-5xl px-4">
+        <MarqueeRow
+          items={plantImages}
+          altPrefix="Tesis"
+          direction="left"
+          variant="plant"
+        />
+      </div>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/kurumsal",
     "/urunlerimiz",
+    "/iletisim",
     "/blog",
     ...corporateLinks.map((item) => item.href),
   ];
