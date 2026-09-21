@@ -202,11 +202,13 @@ function MarqueeRow({
 
   useEffect(() => {
     if (!openSrc) return;
+    // Closure içinde string | null kalmasın diye sabitlenir
+    const activeSrc = openSrc;
 
     // Kart dışı herhangi bir yere tık → paneli kapat, marquee devam
     function onPointerDown(e: PointerEvent) {
       const t = e.target as HTMLElement | null;
-      if (t?.closest(`[data-yarn-card="${CSS.escape(openSrc)}"]`)) return;
+      if (t?.closest(`[data-yarn-card="${CSS.escape(activeSrc)}"]`)) return;
       paused.current = false;
       setOpenSrc(null);
     }
