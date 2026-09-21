@@ -31,7 +31,7 @@ export function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={s.label}
-        className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand-orange hover:text-brand-orange"
+        className="flex size-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
       >
         <Icon aria-hidden="true" className="size-4" />
       </a>
@@ -49,7 +49,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-brand-orange"
+                  className="text-sm text-muted-foreground transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
                 >
                   {item.label}
                 </Link>
@@ -65,14 +65,14 @@ export function Footer() {
     {contact.phone.map((phone) => (
       <li key={phone} className="flex items-center gap-2">
         <Phone aria-hidden="true" className="size-4 shrink-0 text-brand-orange" />
-        <a href={`tel:${phone}`} className="hover:text-brand-orange">
+        <a href={`tel:${phone}`} className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2">
           {phone}
         </a>
       </li>
     ))}
     <li className="flex items-center gap-2">
       <Mail aria-hidden="true" className="size-4 shrink-0 text-brand-orange" />
-      <a href={`mailto:${contact.email}`} className="hover:text-brand-orange">
+      <a href={`mailto:${contact.email}`} className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2">
         {contact.email}
       </a>
     </li>
@@ -90,7 +90,7 @@ export function Footer() {
           href={loc.mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-brand-orange"
+          className="text-foreground/75 transition-colors hover:text-brand-orange"
         >
           <span className="block font-medium text-foreground">{loc.label}</span>
           {loc.address}

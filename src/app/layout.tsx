@@ -64,8 +64,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Kayıtlı tema yoksa site koyu açılır. Paket yok, sadece html class.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){}})()`;
+// theme: light | dark | auto. Kayıt yoksa / auto → 07–19 light, gece dark.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");var dark;if(t==="light"){dark=false}else if(t==="dark"){dark=true}else{var h=new Date().getHours();dark=!(h>=7&&h<19)}document.documentElement.classList.toggle("dark",dark)}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

@@ -53,28 +53,36 @@
 }
 
 :root {
-  /* Marka renkleri — logodan; tek kaynak */
-  --brand-orange: #f19000;
-  --brand-amber: #e84e1c;
-  --brand-navy: #1e355d;
-  --brand-blue: #265291;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /*
+   * Light mode: uzun paragraf okuması için yüksek kontrast.
+   * Turuncu/mavi light’ta koyu (metin + hover okunaklı);
+   * dark’ta parlak marka halleri .dark bloğunda.
+   */
+  --brand-orange: #b35f00;
+  --brand-amber: #b53a0a;
+  --brand-navy: #12243c;
+  --brand-blue: #163a6d;
+
+  --background: oklch(0.985 0.004 95);
+  --foreground: oklch(0.16 0.015 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.16 0.015 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.16 0.015 260);
   --primary: var(--brand-orange);
   --primary-foreground: #ffffff;
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --secondary: oklch(0.93 0.01 260);
+  --secondary-foreground: oklch(0.20 0.015 260);
+  /* Bant / şerit zeminleri net ayrılsın */
+  --muted: oklch(0.935 0.01 260);
+  /* ~0.32 L → beyaz üzerinde ~10:1; gövde metni soluk görünmesin */
+  --muted-foreground: oklch(0.32 0.02 260);
+  --accent: oklch(0.93 0.025 75);
+  --accent-foreground: oklch(0.20 0.015 260);
+  --destructive: oklch(0.50 0.20 27);
+  /* Kart kenarları light’ta daha belirgin */
+  --border: oklch(0.74 0.014 260);
+  --input: oklch(0.72 0.014 260);
   --ring: var(--brand-orange);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -82,36 +90,40 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar: oklch(0.985 0.004 95);
+  --sidebar-foreground: oklch(0.16 0.015 260);
+  --sidebar-primary: oklch(0.20 0.015 260);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-accent: oklch(0.93 0.01 260);
+  --sidebar-accent-foreground: oklch(0.20 0.015 260);
+  --sidebar-border: oklch(0.74 0.014 260);
+  --sidebar-ring: var(--brand-orange);
 }
 
 .dark {
+  /* Dark: logodaki parlak marka renkleri */
+  --brand-orange: #f19000;
+  --brand-amber: #e84e1c;
+  --brand-navy: #1e355d;
+  --brand-blue: #265291;
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  /* Ana buton ve vurgu rengi, Omafil logosundaki turuncudan gelir. */
   --primary: var(--brand-orange);
   --primary-foreground: #ffffff;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(0.75 0.01 260);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  /* Klavye odak halkaları da marka rengiyle tutarlı kalır. */
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
   --ring: var(--brand-orange);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -124,8 +136,8 @@
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: var(--brand-orange);
 }
 
 @layer base {
@@ -137,6 +149,21 @@
   }
   html {
     @apply font-sans;
+  }
+  /* Light’ta seçim rengi daha net */
+  ::selection {
+    background: color-mix(in srgb, var(--brand-orange) 28%, transparent);
+    color: var(--foreground);
+  }
+}
+
+@layer utilities {
+  /*
+   * Uzun kurumsal paragraflar: muted’dan daha koyu, başlıktan bir tık soft.
+   * Light’ta okuma konforu; dark’ta aynı class çalışır.
+   */
+  .text-body {
+    color: color-mix(in oklab, var(--foreground) 82%, var(--muted-foreground));
   }
 }
 

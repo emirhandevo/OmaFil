@@ -39,13 +39,13 @@ export function CorporateFrame({ path, title, description, children }: Corporate
       />
 
       <section className="mx-auto max-w-6xl px-4 pt-16 pb-8 sm:pt-20">
-        <p className="text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
+        <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
           Kurumsal
         </p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{description}</p>
+        <p className="text-body mt-5 max-w-2xl text-lg leading-8">{description}</p>
 
         <nav aria-label="Kurumsal sayfalar" className="mt-8 flex flex-wrap gap-2">
           {corporateLinks.map((item) => {
@@ -57,8 +57,8 @@ export function CorporateFrame({ path, title, description, children }: Corporate
                 aria-current={active ? "page" : undefined}
                 className={
                   active
-                    ? "rounded-full bg-brand-orange px-4 py-2 text-sm font-medium text-white"
-                    : "rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground hover:border-brand-orange"
+                    ? "rounded-full bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm"
+                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:border-brand-orange hover:text-brand-orange"
                 }
               >
                 {item.label}

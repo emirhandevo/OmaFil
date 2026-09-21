@@ -1,31 +1,81 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, SunMoon } from "lucide-react";
+import {
+  applyResolvedTheme,
+  cycleThemePreference,
+  readThemePreference,
+  resolveTheme,
+  writeThemePreference,
+  type ThemePreference,
+} from "@/lib/theme";
 
-// html.dark class'ını açıp kapatır. Context yok, tüm ağacı yeniden çizmez.
+const labels: Record<ThemePreference, string> = {
+  light: "Açık tema (tıkla: koyu)",
+  dark: "Koyu tema (tıkla: saate göre)",
+  auto: "Saate göre tema (tıkla: açık)",
+};
+
+/**
+ * light → dark → auto → light
+ * auto: 07–19 açık, diğer saatler koyu
+ */
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const [preference, setPreference] = useState<ThemePreference>("auto");
+  const [resolved, setResolved] = useState<"light" | "dark">("dark");
 
+  // İlk mount + tercih değişince uygula
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    const pref = readThemePreference();
+    const next = resolveTheme(pref);
+    applyResolvedTheme(next);
+    setPreference(pref);
+    setResolved(next);
   }, []);
 
-  function toggle() {
-    const next = !document.documentElement.classList.contains("dark");
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    setIsDark(next);
+  // Auto modundayken saat sınırı geçince güncelle (sekme açık kalırsa)
+  useEffect(() => {
+    if (preference !== "auto") return;
+
+    function syncAuto() {
+      const next = resolveTheme("auto");
+      applyResolvedTheme(next);
+      setResolved(next);
+    }
+
+    const id = window.setInterval(syncAuto, 60_000);
+    document.addEventListener("visibilitychange", syncAuto);
+    return () => {
+      window.clearInterval(id);
+      document.removeEventListener("visibilitychange", syncAuto);
+    };
+  }, [preference]);
+
+  function cycle() {
+    const nextPref = cycleThemePreference(preference);
+    const nextResolved = resolveTheme(nextPref);
+    writeThemePreference(nextPref);
+    applyResolvedTheme(nextResolved);
+    setPreference(nextPref);
+    setResolved(nextResolved);
   }
 
   return (
     <button
       type="button"
-      onClick={toggle}
-      aria-label={isDark ? "Açık temaya geç" : "Koyu temaya geç"}
-      className="flex size-10 items-center justify-center rounded-md text-foreground"
+      onClick={cycle}
+      aria-label={labels[preference]}
+      title={labels[preference]}
+      className="flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
     >
-      {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+      {preference === "auto" ? (
+        <SunMoon className="size-5" aria-hidden="true" />
+      ) : resolved === "dark" ? (
+        <Moon className="size-5" aria-hidden="true" />
+      ) : (
+        <Sun className="size-5" aria-hidden="true" />
+      )}
     </button>
   );
 }

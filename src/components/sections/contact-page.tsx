@@ -64,7 +64,7 @@ export function ContactPage() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Mesaj gönderin</h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            Formu doldurun; mail uygulamanız hazır metinle açılır.
+            Formu doldurun; mesajınız doğrudan bize ulaşır.
           </p>
           <div className="mt-8 rounded-3xl border border-border bg-card/60 p-6 sm:p-8">
             <ContactForm />
@@ -84,7 +84,7 @@ export function ContactPage() {
               <li key={phone}>
                 <a
                   href={telHref(phone)}
-                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange"
+                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04]"
                 >
                   <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange transition-transform group-hover:scale-105">
                     <Phone aria-hidden="true" className="size-5" />
@@ -102,7 +102,7 @@ export function ContactPage() {
             <li>
               <a
                 href={`mailto:${contact.email}`}
-                className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange"
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04]"
               >
                 <span className="flex size-11 items-center justify-center rounded-xl bg-brand-blue/15 text-brand-blue transition-transform group-hover:scale-105">
                   <Mail aria-hidden="true" className="size-5" />
@@ -169,7 +169,7 @@ export function ContactPage() {
                   href={place.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1 hover:border-brand-orange"
+                  className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange hover:bg-brand-orange/[0.03] hover:shadow-sm"
                 >
                   <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange">
                     <MapPin aria-hidden="true" className="size-5" />

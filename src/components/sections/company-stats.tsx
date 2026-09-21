@@ -33,18 +33,18 @@ export function CompanyStats() {
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <p className="text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
+          <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
             Üretim Gücümüz
           </p>
 
           <h2
             id="company-stats-title"
-            className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
           >
             Rakamlarla OmaFil
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-muted-foreground">
+          <p className="text-body mx-auto mt-4 max-w-2xl text-base leading-8">
             Üretim kapasitemiz, modern tesislerimiz ve küresel ticaret
             ağımızla tekstil sektörüne değer katıyoruz.
           </p>
@@ -54,7 +54,7 @@ export function CompanyStats() {
           {companyStats.map((stat) => (
             <div
               key={stat.label}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-card to-brand-navy/20 px-4 py-8 text-center transition-transform duration-300 hover:-translate-y-1 sm:px-6 sm:py-10"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card px-4 py-8 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 dark:bg-gradient-to-b dark:from-card dark:to-brand-navy/20 sm:px-6 sm:py-10"
             >
               <div
                 aria-hidden="true"
@@ -71,7 +71,7 @@ export function CompanyStats() {
                 </dd>
               )}
 
-              <dt className="mt-3 text-sm text-muted-foreground">
+              <dt className="mt-3 text-sm font-medium text-foreground/80">
                 {stat.label}
               </dt>
             </div>

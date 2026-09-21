@@ -17,7 +17,7 @@ export const site = {
     logo: "/images/omafil_logo.svg",
 } as const;
 
-// Kurumsal menüsündeki 4 link. Header, footer ve alt sayfalar buradan okur.
+// Kurumsal menüsündeki linkler. Header, footer ve alt sayfalar buradan okur.
 export const corporateLinks = [
     {
         href: "/kurumsal/hakkimizda",
@@ -45,6 +45,7 @@ export const navLinks = [
     {href: "/", label: "Ana Sayfa"},
     {href: "/kurumsal", label: "Kurumsal", children: corporateLinks},
     {href: "/urunlerimiz", label: "Ürünlerimiz"},
+    {href: "/ges", label: "GES"},
     {href: "/iletisim", label: "İletişim"},
 ] as const;
 

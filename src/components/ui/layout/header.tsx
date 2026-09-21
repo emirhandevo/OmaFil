@@ -3,30 +3,53 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { navLinks, site } from "@/config/site";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
+/** Soft navigate sonrası focus-within dropdown’u açık tutmasın */
+function blurActive() {
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
+}
+
 export function Header() {
   // Mobil menü açık/kapalı durumu
   const [isOpen, setIsOpen] = useState(false);
+  // Masaüstü Kurumsal dropdown: tıklanınca hover/focus yüzünden açık kalmasın
+  const [corpForcedClosed, setCorpForcedClosed] = useState(false);
   // Headerın tamamını saran ref - dışına tıklamayı tespit etmek için
-  const headerRef = useRef<HTMLElement>(null)
+  const headerRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+
+  // Route değişince mobilde menüyü kapat + masaüstü dropdown odağını temizle
+  useEffect(() => {
+    setIsOpen(false);
+    setCorpForcedClosed(true);
+    blurActive();
+  }, [pathname]);
 
   useEffect(() => {
     // menü kapalıyken dinleyici eklemeye gerek yok
     if (!isOpen) return;
 
-    function handleClickOutside(e:MouseEvent) {
-        if (headerRef.current && !headerRef.current.contains(e.target as Node)){
-            setIsOpen(false);
-        }
+    function handleClickOutside(e: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
+
+  function closeCorpDropdown() {
+    setCorpForcedClosed(true);
+    blurActive();
+  }
 
   return (
     <header ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
@@ -46,22 +69,35 @@ export function Header() {
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Ana menü">
           {navLinks.map((item) =>
             "children" in item ? (
-              <div key={item.href} className="group relative">
+              <div
+                key={item.href}
+                className="group relative"
+                onMouseEnter={() => setCorpForcedClosed(false)}
+                onMouseLeave={() => setCorpForcedClosed(false)}
+              >
                 <Link
                   href={item.href}
+                  onClick={closeCorpDropdown}
                   className={buttonVariants({ variant: "ghost", size: "sm" })}
                 >
                   {item.label}
                   <ChevronDown aria-hidden="true" className="size-4" />
                 </Link>
-                {/* Hover ve klavye odağında açılır. Boşluk payı menünün kapanmasını önler. */}
-                <div className="absolute left-0 top-full z-50 hidden pt-2 group-focus-within:block group-hover:block">
+                {/* Hover ve klavye odağında açılır. Tıklanınca force-close. */}
+                <div
+                  className={
+                    corpForcedClosed
+                      ? "absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2"
+                      : "absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-focus-within:block group-hover:block"
+                  }
+                >
                   <ul className="min-w-52 rounded-xl border border-border bg-background p-2 shadow-lg">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <Link
                           href={child.href}
-                          className="block rounded-md px-3 py-2 text-sm text-foreground hover:bg-foreground/5"
+                          onClick={closeCorpDropdown}
+                          className="block rounded-md px-3 py-2 text-center text-sm text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
                         >
                           {child.label}
                         </Link>
@@ -109,7 +145,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
+                  className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
                 >
                   {item.label}
                 </Link>
@@ -120,7 +156,7 @@ export function Header() {
                         <Link
                           href={child.href}
                           onClick={() => setIsOpen(false)}
-                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
                         >
                           {child.label}
                         </Link>
