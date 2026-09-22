@@ -1,0 +1,103 @@
+{
+  "label": "Naylon 66 FDY",
+  "summary": "PA66 tam çekimli. Covering, hosiery, CK / WK, weaving.",
+  "family": "nylon66",
+  "polymer": "pa66",
+  "code": "FDY",
+  "imageSrc": "/images/hero/iplik/fdy-n6.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": false,
+  "details": {
+    "discriminant": "filament",
+    "value": {
+      "skus": [
+        {
+          "spec": "20/20",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Covering",
+            "Hosiery/Socks",
+            "CK",
+            "WK",
+            "Weaving"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "40/13",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Covering",
+            "Hosiery/Socks",
+            "CK",
+            "WK",
+            "Weaving"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "40/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Covering",
+            "Hosiery/Socks",
+            "CK",
+            "WK",
+            "Weaving"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Covering",
+            "Hosiery/Socks",
+            "CK",
+            "WK",
+            "Weaving"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/68",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Covering",
+            "Hosiery/Socks",
+            "CK",
+            "WK",
+            "Weaving"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        }
+      ]
+    }
+  }
+}

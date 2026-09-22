@@ -1,12 +1,9 @@
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../keystatic.config";
+import { reader } from "@/content/keystatic";
 
 /**
  * Blog — Keystatic reader.
  * Yazılar: content/blog/*.mdoc (panel: /keystatic)
  */
-
-const reader = createReader(process.cwd(), keystaticConfig);
 
 export type BlogPostListItem = {
   slug: string;
@@ -23,7 +20,6 @@ export async function getBlogPosts(): Promise<BlogPostListItem[]> {
       slug: post.slug,
       title: post.entry.title,
       excerpt: post.entry.excerpt,
-      // Keystatic date → ISO string
       date: post.entry.date ?? "",
     }))
     .sort((a, b) => b.date.localeCompare(a.date));

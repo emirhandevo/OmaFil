@@ -3,14 +3,20 @@ import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { FactoryMissionTabs } from "@/components/sections/factory-mission-tabs";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
-import { contact, site } from "@/config/site";
+import { getContact } from "@/content/cms";
+import { getCmsPage } from "@/content/pages";
+import { site } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Fabrikamız",
-  description:
-    "OmaFil gipe iplik üretim tesisi Tokat Erbaa’da. Avrupa’nın en büyük polimer / gipe üretim tesisi.",
-  alternates: { canonical: "/kurumsal/fabrikamiz" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getCmsPage("fabrikamiz");
+  return {
+    title: page?.title ?? "Fabrikamız",
+    description:
+      page?.description ??
+      "OmaFil gipe iplik üretim tesisi Tokat Erbaa’da. Avrupa’nın en büyük polimer / gipe üretim tesisi.",
+    alternates: { canonical: "/kurumsal/fabrikamiz" },
+  };
+}
 
 /** Üretim hattında çıkan ürün grupları (canlı site listesi) */
 const productLines = [
@@ -61,7 +67,11 @@ const productionBandGallery = Array.from({ length: 24 }, (_, i) => {
   };
 });
 
-export default function FabrikamizPage() {
+export default async function FabrikamizPage() {
+  const [page, contact] = await Promise.all([
+    getCmsPage("fabrikamiz"),
+    getContact(),
+  ]);
   const plant = contact.locations.find((place) =>
     place.label.startsWith("Fabrika /"),
   );
@@ -69,8 +79,11 @@ export default function FabrikamizPage() {
   return (
     <CorporateFrame
       path="/kurumsal/fabrikamiz"
-      title="Fabrikamız"
-      description="Avrupa’nın en büyük polimer / gipe iplik üretim tesisi Tokat–Erbaa’da."
+      title={page?.title ?? "Fabrikamız"}
+      description={
+        page?.description ??
+        "Avrupa’nın en büyük polimer / gipe iplik üretim tesisi Tokat–Erbaa’da."
+      }
     >
       {/* Giriş: metin + ürün listesi kartı */}
       <section className="mx-auto max-w-6xl px-4 pb-12">
@@ -80,34 +93,11 @@ export default function FabrikamizPage() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           <article className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-            <div className="text-body space-y-4 text-base leading-8">
-              <p>
-                Yıllık 5 bin tona yakın rekor üretimle yaklaşık 10 milyon
-                dolarlık bir ihracatı ekonomimize kazandıracak olan projemiz,
-                bu yetkinliğiyle Avrupa’nın en büyüğü olma özelliğini taşıyor.
-              </p>
-              <p>
-                Projemiz ilk etabı 15.000 m² kapalı olmak üzere; tam kapasiteye
-                ulaşmasıyla birlikte toplam 50.000 m² kapalı alana
-                ulaşacaktır. Büyük bir Ar-Ge merkezini de içerisinde
-                barındıracak olan tesisimiz, Tokat Erbaa Organize Sanayi
-                Bölgesi’nde ilk etapta 400 kişiye, ilerleyen dönemde ise 1.000
-                kişiye istihdam sağlayacaktır.
-              </p>
-              <p>
-                Sürdürülebilir enerji kaynaklarını kullanarak çevre
-                duyarlılığımızı artırmak ve gelecek nesillere daha yaşanabilir
-                bir dünya bırakmayı ilke edindik.
-              </p>
-              <p>
-                Bu ilkeyle fabrikamızın birçok alanına güneş enerji panelleri
-                inşa ederek karbon ayak izimizi azaltmayı hedeflemekteyiz.
-              </p>
-              <p>
-                Bu yatırım sayesinde ithalatın önüne geçecek, cari açığa önemli
-                etki sağlayacağız.
-              </p>
-            </div>
+            {page?.body ? (
+              <div className="prose-omafil text-body space-y-4 text-base leading-8 [&_p]:leading-8">
+                {page.body}
+              </div>
+            ) : null}
             <p className="mt-8 text-sm font-bold tracking-wide text-brand-navy uppercase dark:text-brand-orange">
               {site.legalName}
             </p>

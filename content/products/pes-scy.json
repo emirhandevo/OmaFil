@@ -1,0 +1,42 @@
+{
+  "label": "PES SCY Gipe",
+  "summary": "Polyester tek kaplama + elastan. Custom seçenekler.",
+  "family": "polyester",
+  "polymer": "pes",
+  "code": "SCY",
+  "imageSrc": "/images/hero/iplik/scy-pes.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": true,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 83,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 167,
+          "filament": 96,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 78,
+          "yarnDtex": 167,
+          "filament": 96,
+          "floor": "1",
+          "yarnType": "PES"
+        }
+      ]
+    }
+  }
+}

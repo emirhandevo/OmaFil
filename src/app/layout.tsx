@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConditionalShell } from "@/components/ui/layout/conditional-shell";
+import { getContact, getSiteSettings } from "@/content/cms";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -32,43 +33,50 @@ function getMetadataBase() {
   return new URL("https://omafil.vercel.app");
 }
 
-export const metadata: Metadata = {
-  metadataBase: getMetadataBase(),
-  title: {
-    default: site.name,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  // opengraph-image.jpg / twitter-image.jpg app/ altında otomatik bağlanır
-  openGraph: {
-    type: "website",
-    locale: site.locale,
-    siteName: site.name,
-    title: site.name,
-    description: site.description,
-    // Sabit public yol — WhatsApp bazen app/ özel OG query’sini sevmiyor
-    images: [
-      {
-        url: "/images/og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "OmaFil üretim tesisi",
-        type: "image/jpeg",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.name,
-    description: site.description,
-    images: ["/images/og.jpg"],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+
+  return {
+    metadataBase: getMetadataBase(),
+    title: {
+      default: site.name,
+      template: `%s | ${site.name}`,
+    },
+    description: settings.description,
+    openGraph: {
+      type: "website",
+      locale: site.locale,
+      siteName: site.name,
+      title: site.name,
+      description: settings.description,
+      images: [
+        {
+          url: "/images/og.jpg",
+          width: 1200,
+          height: 630,
+          alt: "OmaFil üretim tesisi",
+          type: "image/jpeg",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: site.name,
+      description: settings.description,
+      images: ["/images/og.jpg"],
+    },
+  };
+}
 
 // theme: light | dark | auto. Kayıt yoksa / auto → 07–19 light, gece dark.
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");var dark;if(t==="light"){dark=false}else if(t==="dark"){dark=true}else{var h=new Date().getHours();dark=!(h>=7&&h<19)}document.documentElement.classList.toggle("dark",dark)}catch(e){}})()`;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const [contact, settings] = await Promise.all([
+    getContact(),
+    getSiteSettings(),
+  ]);
+
   return (
     <html
       lang="tr"
@@ -79,7 +87,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
-        <ConditionalShell>{children}</ConditionalShell>
+        <ConditionalShell
+          contact={contact}
+          footerTagline={settings.footerTagline}
+        >
+          {children}
+        </ConditionalShell>
       </body>
     </html>
   );

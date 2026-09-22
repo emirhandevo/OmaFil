@@ -1,0 +1,137 @@
+{
+  "label": "Naylon 66 POY",
+  "summary": "PA66 POY; final DTY / ATY dönüşümü. Softel / Nicolite.",
+  "family": "nylon66",
+  "polymer": "pa66",
+  "code": "POY",
+  "imageSrc": "/images/hero/iplik/poy-n6.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": false,
+  "details": {
+    "discriminant": "filament",
+    "value": {
+      "skus": [
+        {
+          "spec": "26/17",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "20/17",
+          "finalAty": ""
+        },
+        {
+          "spec": "26/20",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "20/22",
+          "finalAty": ""
+        },
+        {
+          "spec": "40/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "30/34",
+          "finalAty": ""
+        },
+        {
+          "spec": "51/13",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "40/13",
+          "finalAty": ""
+        },
+        {
+          "spec": "51/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Nicolite"
+          ],
+          "finalDty": "40/34",
+          "finalAty": "90/68"
+        },
+        {
+          "spec": "88/24",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "70/24",
+          "finalAty": ""
+        },
+        {
+          "spec": "88/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Softel",
+            "Nicolate"
+          ],
+          "finalDty": "70/34",
+          "finalAty": "160/68"
+        },
+        {
+          "spec": "88/68",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Nicolite"
+          ],
+          "finalDty": "70/68",
+          "finalAty": "160/136"
+        },
+        {
+          "spec": "130/34",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "100/34",
+          "finalAty": ""
+        },
+        {
+          "spec": "130/68",
+          "lustre": [
+            "FD",
+            "SD"
+          ],
+          "colors": [],
+          "features": [
+            "Nicolite"
+          ],
+          "finalDty": "100/68",
+          "finalAty": "200/136"
+        }
+      ]
+    }
+  }
+}

@@ -102,9 +102,9 @@ export const yarnImages: MarqueeItem[] = [
   },
   {
     src: "/images/hero/iplik/acc-pes.webp",
-    label: "PES ACC",
-    summary: "Polyester hava jetli kompozit iplik.",
-    href: "/urunlerimiz",
+    label: "PES ACY",
+    summary: "Polyester hava jetli kaplama iplik.",
+    href: "/urunlerimiz/pes-acy",
   },
 ];
 

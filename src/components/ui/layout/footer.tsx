@@ -1,9 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { contact, navLinks, site, socialLinks } from "@/config/site";
+import { navLinks, site } from "@/config/site";
+import type { ContactData, SocialNetwork } from "@/content/cms";
+import {
+  InstagramIcon,
+  LinkedinIcon,
+  YoutubeIcon,
+} from "@/components/ui/icons/social-icons";
 
-export function Footer() {
+type FooterProps = {
+  contact: ContactData;
+  footerTagline: string;
+};
+
+const socialIcons: Record<
+  SocialNetwork,
+  typeof InstagramIcon
+> = {
+  instagram: InstagramIcon,
+  linkedin: LinkedinIcon,
+  youtube: YoutubeIcon,
+};
+
+export function Footer({ contact, footerTagline }: FooterProps) {
   return (
     <footer className="site-footer mt-auto border-t border-border bg-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -17,28 +37,27 @@ export function Footer() {
             className="h-auto w-36"
           />
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
-            Endüstriyel iplik üretiminde güvenilir çözüm ortağınız.
+            {footerTagline}
           </p>
 
           {/* Sosyal linkler — sadece ikon, isim ekran okuyucu için aria-label'da */}
-<div className="mt-5 flex gap-3">
-  {socialLinks.map((s) => {
-    const Icon = s.icon;
-    return (
-      <a
-        key={s.href}
-        href={s.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={s.label}
-        className="flex size-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
-      >
-        <Icon aria-hidden="true" className="size-4" />
-      </a>
-    );
-  })}
-</div>
-         
+          <div className="mt-5 flex gap-3">
+            {contact.socialLinks.map((s) => {
+              const Icon = socialIcons[s.network];
+              return (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="flex size-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
+                >
+                  <Icon aria-hidden="true" className="size-4" />
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         {/* Menü - mobilde ortalı, sm ve üstünde sola yaslı */}
@@ -59,46 +78,65 @@ export function Footer() {
         </div>
 
         {/* İletişim, telefon ve mail - mobilde ortalı  */}
-<div className="flex flex-col items-center sm:items-start sm:text-left">
-  <p className="text-sm font-semibold text-foreground">İletişim</p>
-  <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-    {contact.phone.map((phone) => (
-      <li key={phone} className="flex items-center gap-2">
-        <Phone aria-hidden="true" className="size-4 shrink-0 text-brand-orange" />
-        <a href={`tel:${phone}`} className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2">
-          {phone}
-        </a>
-      </li>
-    ))}
-    <li className="flex items-center gap-2">
-      <Mail aria-hidden="true" className="size-4 shrink-0 text-brand-orange" />
-      <a href={`mailto:${contact.email}`} className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2">
-        {contact.email}
-      </a>
-    </li>
-  </ul>
-</div>
+        <div className="flex flex-col items-center sm:items-start sm:text-left">
+          <p className="text-sm font-semibold text-foreground">İletişim</p>
+          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            {contact.phone.map((phone) => (
+              <li key={phone} className="flex items-center gap-2">
+                <Phone
+                  aria-hidden="true"
+                  className="size-4 shrink-0 text-brand-orange"
+                />
+                <a
+                  href={`tel:${phone}`}
+                  className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
+                >
+                  {phone}
+                </a>
+              </li>
+            ))}
+            <li className="flex items-center gap-2">
+              <Mail
+                aria-hidden="true"
+                className="size-4 shrink-0 text-brand-orange"
+              />
+              <a
+                href={`mailto:${contact.email}`}
+                className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
+              >
+                {contact.email}
+              </a>
+            </li>
+          </ul>
+        </div>
 
-{/* Adresler — ayrı kolon, her biri Maps'e link */}
-<div>
-  <p className="text-center text-sm font-semibold text-foreground">Adreslerimiz</p>
-  <ul className="mt-4 space-y-4 text-sm text-muted-foreground">
-    {contact.locations.map((loc) => (
-      <li key={loc.label} className="flex items-start gap-2">
-        <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-orange" />
-        <a
-          href={loc.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/75 transition-colors hover:text-brand-orange"
-        >
-          <span className="block font-medium text-foreground">{loc.label}</span>
-          {loc.address}
-        </a>
-      </li>
-    ))}
-  </ul>
-</div>
+        {/* Adresler — ayrı kolon, her biri Maps'e link */}
+        <div>
+          <p className="text-center text-sm font-semibold text-foreground">
+            Adreslerimiz
+          </p>
+          <ul className="mt-4 space-y-4 text-sm text-muted-foreground">
+            {contact.locations.map((loc) => (
+              <li key={loc.label} className="flex items-start gap-2">
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-brand-orange"
+                />
+                <a
+                  href={loc.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/75 transition-colors hover:text-brand-orange"
+                >
+                  <span className="block font-medium text-foreground">
+                    {loc.label}
+                  </span>
+                  {loc.address}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Alt bar — telif hakkı */}

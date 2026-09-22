@@ -11,14 +11,19 @@ import {
 } from "lucide-react";
 import { AboutHighlights } from "@/components/sections/about-highlights";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
-import { contact, site } from "@/config/site";
+import { getContact } from "@/content/cms";
+import { getCmsPage } from "@/content/pages";
 
-export const metadata: Metadata = {
-  title: "Hakkımızda",
-  description:
-    "OMA POLİMER A.Ş. kuruluş hikâyesi. Sultanhamam’dan iplik ithalatı, üretimi ve ihracatına.",
-  alternates: { canonical: "/kurumsal/hakkimizda" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getCmsPage("hakkimizda");
+  return {
+    title: page?.title ?? "Hakkımızda",
+    description:
+      page?.description ??
+      "OMA POLİMER A.Ş. kuruluş hikâyesi. Sultanhamam’dan iplik ithalatı, üretimi ve ihracatına.",
+    alternates: { canonical: "/kurumsal/hakkimizda" },
+  };
+}
 
 const milestones: {
   year: string;
@@ -64,27 +69,28 @@ const milestones: {
   },
 ];
 
-export default function HakkimizdaPage() {
+export default async function HakkimizdaPage() {
+  const [page, contact] = await Promise.all([
+    getCmsPage("hakkimizda"),
+    getContact(),
+  ]);
+
   return (
     <CorporateFrame
       path="/kurumsal/hakkimizda"
-      title="Hakkımızda"
-      description="İplik ticaretinden üretime uzanan yolculuk, sürekli gelişim ilkesiyle devam ediyor."
+      title={page?.title ?? "Hakkımızda"}
+      description={
+        page?.description ??
+        "İplik ticaretinden üretime uzanan yolculuk, sürekli gelişim ilkesiyle devam ediyor."
+      }
     >
       <section className="mx-auto max-w-6xl px-4 pb-4">
-        <div className="text-body max-w-3xl space-y-5 text-base leading-8">
-          <p>
-            Yıllarca İstanbul’da tekstil piyasasının kalbi olan Sultanhamam’da
-            iplik satışıyla başlayan iş hayatımız, sürekli gelişim ilkemizle
-            devam etti. 2000’li yıllarda değişen ticarete uyum sağlamak için{" "}
-            {site.legalName}’yi kurduk.
-          </p>
-          <p>
-            İç ticarette olduğu kadar dış ticarette de güçlü olmak gerekir
-            düşüncesiyle yurtdışı bağlantılarımızı sağlamlaştırdık. Bugün iplik
-            ithalatı, üretimi ve ihracatını birlikte sürdürüyoruz.
-          </p>
-        </div>
+        {/* Keystatic: Kurumsal sayfalar → hakkimizda */}
+        {page?.body ? (
+          <div className="prose-omafil text-body max-w-3xl space-y-5 text-base leading-8 [&_p]:leading-8">
+            {page.body}
+          </div>
+        ) : null}
 
         {/* Büyüme hikâyesi — canlı sitedeki yüzen ikonlu kartlar */}
         <div className="relative mt-16 overflow-hidden rounded-3xl border border-border bg-muted px-4 py-14 shadow-sm sm:px-8 sm:py-16">
@@ -133,7 +139,6 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
-      {/* Canlı sitedeki rakam + sürdürülebilirlik bloğu */}
       <div className="mt-12">
         <AboutHighlights />
       </div>

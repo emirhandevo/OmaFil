@@ -9,15 +9,20 @@ import {
   Sun,
   TreePine,
 } from "lucide-react";
-import { site } from "@/config/site";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
+import { getCmsPage } from "@/content/pages";
+import { site } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Sürdürülebilirlik",
-  description:
-    "OmaFil sürdürülebilirlik: GES, GRS belgeli recycle iplik, Eco-Biopa ve Free-Dyed susuz boyama.",
-  alternates: { canonical: "/kurumsal/surdurulebilirlik" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getCmsPage("surdurulebilirlik");
+  return {
+    title: page?.title ?? "Sürdürülebilirlik",
+    description:
+      page?.description ??
+      "OmaFil sürdürülebilirlik: GES, GRS belgeli recycle iplik, Eco-Biopa ve Free-Dyed susuz boyama.",
+    alternates: { canonical: "/kurumsal/surdurulebilirlik" },
+  };
+}
 
 const principles = [
   {
@@ -78,32 +83,27 @@ const gesHighlights = [
 
 const certificates = ["GRS", "ISO 9001", "OEKO-TEX"] as const;
 
-export default function SurdurulebilirlikPage() {
+export default async function SurdurulebilirlikPage() {
+  const page = await getCmsPage("surdurulebilirlik");
+
   return (
     <CorporateFrame
       path="/kurumsal/surdurulebilirlik"
-      title="Sürdürülebilirlik"
-      description={`${site.legalName}; tüm üretim süreçlerine sosyal ve çevresel sürdürülebilirliği dahil etmeye kararlıdır.`}
+      title={page?.title ?? "Sürdürülebilirlik"}
+      description={
+        page?.description ??
+        "Tüm üretim süreçlerine sosyal ve çevresel sürdürülebilirliği dahil etmeye kararlıyız."
+      }
     >
       {/* Giriş */}
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-14 lg:grid-cols-2 lg:gap-14">
-        <div className="text-body max-w-xl space-y-5 text-base leading-8">
-          <p>
-            Daha iyi bir dünya için {site.legalName}, tüm üretim süreçlerine
-            sosyal ve çevresel sürdürülebilirliği dahil etmeye kararlıdır.
-          </p>
-          <p>
-            Sürdürülebilirlik; üretim ve çeşitliliğin devamlılığı sağlanırken
-            insanlığın yaşamının daimi kılınabilmesidir. Kendi ihtiyaçlarımızı,
-            gelecek nesillerin ihtiyaçlarından ödün vermeden karşılayabilmektir.
-          </p>
-          <p>
-            Bizim için sürdürülebilirlik slogan değil; kaynağı verimli kullanmak
-            ve ürünü buna göre geliştirmek demektir. Güneş enerjisi, geri
-            dönüştürülmüş iplik ve su tüketimini azaltan boyama bu yaklaşımın
-            somut parçalarıdır.
-          </p>
-        </div>
+        {page?.body ? (
+          <div className="prose-omafil text-body max-w-xl space-y-5 text-base leading-8 [&_p]:leading-8">
+            {page.body}
+          </div>
+        ) : (
+          <div />
+        )}
         <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl border border-border bg-muted p-6 shadow-sm">
           <Image
             src="/images/sustainability/dunya.webp"

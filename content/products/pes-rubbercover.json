@@ -1,0 +1,32 @@
+{
+  "label": "PES Rubbercover",
+  "summary": "Latex / rubber cover polyester kaplama.",
+  "family": "polyester",
+  "polymer": "pesLatex",
+  "code": "RUBBERCOVER",
+  "imageSrc": "/images/hero/iplik/dcy-pes.webp",
+  "colors": [],
+  "recycled": false,
+  "featured": false,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "RUBBERCOVER",
+          "spandexDtex": 90,
+          "yarnDtex": 100,
+          "floor": "2",
+          "yarnType": "PESLATEX"
+        },
+        {
+          "productionType": "RUBBERCOVER",
+          "spandexDtex": 70,
+          "yarnDtex": 100,
+          "floor": "2",
+          "yarnType": "PESLATEX"
+        }
+      ]
+    }
+  }
+}

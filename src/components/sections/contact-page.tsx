@@ -1,16 +1,30 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import { contact, site, socialLinks } from "@/config/site";
+import { site } from "@/config/site";
+import { getContact, type SocialNetwork } from "@/content/cms";
 import { ContactForm } from "@/components/sections/contact-form";
+import {
+  InstagramIcon,
+  LinkedinIcon,
+  YoutubeIcon,
+} from "@/components/ui/icons/social-icons";
 
 function telHref(phone: string) {
   return `tel:${phone.replace(/\s+/g, "")}`;
 }
 
+const socialIcons: Record<SocialNetwork, typeof InstagramIcon> = {
+  instagram: InstagramIcon,
+  linkedin: LinkedinIcon,
+  youtube: YoutubeIcon,
+};
+
 /**
  * İletişim sayfası gövdesi.
- * Telefon, mail, adresler site.ts → contact’tan gelir.
+ * Telefon, mail, adresler Keystatic → İletişim singleton.
  */
-export function ContactPage() {
+export async function ContactPage() {
+  const contact = await getContact();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -62,7 +76,9 @@ export function ContactPage() {
       {/* Orta: form + hızlı kanallar */}
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-20">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight">Mesaj gönderin</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">
+            Mesaj gönderin
+          </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Formu doldurun; mesajınız doğrudan bize ulaşır.
           </p>
@@ -73,7 +89,9 @@ export function ContactPage() {
 
         <aside className="space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight">Hızlı iletişim</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Hızlı iletişim
+            </h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               Doğrudan arayın veya e-posta atın.
             </p>
@@ -111,7 +129,9 @@ export function ContactPage() {
                   <span className="block text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     E-posta
                   </span>
-                  <span className="mt-0.5 block font-semibold">{contact.email}</span>
+                  <span className="mt-0.5 block font-semibold">
+                    {contact.email}
+                  </span>
                 </span>
               </a>
             </li>
@@ -125,8 +145,8 @@ export function ContactPage() {
               Güncel üretim ve marka paylaşımları.
             </p>
             <div className="mt-5 flex gap-3">
-              {socialLinks.map((item) => {
-                const Icon = item.icon;
+              {contact.socialLinks.map((item) => {
+                const Icon = socialIcons[item.network];
                 return (
                   <a
                     key={item.href}

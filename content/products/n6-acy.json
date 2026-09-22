@@ -1,0 +1,94 @@
+{
+  "label": "Naylon 6 ACY",
+  "summary": "Hava jetli kaplama PA6 + elastan. Ecru / siyah / renkli.",
+  "family": "nylon6",
+  "polymer": "pa6",
+  "code": "ACY",
+  "imageSrc": "/images/hero/iplik/acy-n6.webp",
+  "colors": [
+    "ECRU",
+    "BLACK",
+    "COLORED"
+  ],
+  "recycled": true,
+  "featured": true,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "ACY",
+          "spandexDtex": 13,
+          "yarnDtex": 44,
+          "filament": 13,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 17,
+          "yarnDtex": 44,
+          "filament": 13,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 44,
+          "filament": 13,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 13,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 17,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "1",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        }
+      ]
+    }
+  }
+}

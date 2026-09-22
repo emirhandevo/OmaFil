@@ -1,0 +1,78 @@
+{
+  "label": "Naylon 6 DCY",
+  "summary": "Çift kaplama (double covered) PA6 + elastan.",
+  "family": "nylon6",
+  "polymer": "pa6",
+  "code": "DCY",
+  "imageSrc": "/images/hero/iplik/scy-n6.webp",
+  "colors": [
+    "ECRU",
+    "BLACK",
+    "COLORED"
+  ],
+  "recycled": true,
+  "featured": true,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "DC",
+          "spandexDtex": 130,
+          "yarnDtex": 44,
+          "filament": 13,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 156,
+          "yarnDtex": 44,
+          "filament": 13,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 130,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 156,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 620,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 940,
+          "yarnDtex": 78,
+          "filament": 24,
+          "floor": "2",
+          "yarnType": "PA6"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 156,
+          "yarnDtex": 83,
+          "filament": 36,
+          "floor": "2",
+          "yarnType": "PA6"
+        }
+      ]
+    }
+  }
+}

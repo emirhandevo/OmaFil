@@ -1,0 +1,222 @@
+{
+  "label": "Naylon 6 POY",
+  "summary": "Kısmi oryante PA6. SD / BR / FD ve net weight seçenekleri.",
+  "family": "nylon6",
+  "polymer": "pa6",
+  "code": "POY",
+  "imageSrc": "/images/hero/iplik/poy-n6.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": false,
+  "details": {
+    "discriminant": "filament",
+    "value": {
+      "skus": [
+        {
+          "spec": "12D/6F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "15D/6F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "18D/6F/7F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "22D/6F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "24D/24F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "32D/12F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "35D/10F/12F/16F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "36D/34F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "39D/10F/12F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "48D/48F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "50D/12F/14F/24F/34F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "60D/24F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "85D/24F/48F/72F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "86D/24F/48F/72F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "90D/24F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "120D/24F/36F/48F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "170D/96F",
+          "lustre": [
+            "SD",
+            "BR",
+            "FD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        }
+      ]
+    }
+  }
+}

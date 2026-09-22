@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { CareersApplicationForm } from "@/components/sections/careers-application-form";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
+import { getCmsPage } from "@/content/pages";
 
-export const metadata: Metadata = {
-  title: "İnsan Kaynakları",
-  description:
-    "OmaFil insan kaynakları. İş başvurusu formundan CV’nizi PDF olarak gönderin.",
-  alternates: { canonical: "/kurumsal/insan-kaynaklari" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getCmsPage("insan-kaynaklari");
+  return {
+    title: page?.title ?? "İnsan Kaynakları",
+    description:
+      page?.description ??
+      "OmaFil insan kaynakları. İş başvurusu formundan CV’nizi PDF olarak gönderin.",
+    alternates: { canonical: "/kurumsal/insan-kaynaklari" },
+  };
+}
 
 const principles = [
   "Adil ve şeffaf işe alım",
@@ -16,25 +21,24 @@ const principles = [
   "Eşitlik ve etik çalışma",
 ] as const;
 
-export default function InsanKaynaklariPage() {
+export default async function InsanKaynaklariPage() {
+  const page = await getCmsPage("insan-kaynaklari");
+
   return (
     <CorporateFrame
       path="/kurumsal/insan-kaynaklari"
-      title="İnsan Kaynakları"
-      description="Üretimin merkezi tesis. İnsan kaynağı da aynı ciddiyetle yönetilir."
+      title={page?.title ?? "İnsan Kaynakları"}
+      description={
+        page?.description ??
+        "Üretimin merkezi tesis. İnsan kaynağı da aynı ciddiyetle yönetilir."
+      }
     >
       <section className="mx-auto max-w-6xl px-4 pb-16">
-        <div className="text-body max-w-3xl space-y-5 text-base leading-8">
-          <p>
-            İşe alımdan günlük çalışmaya kadar fırsat eşitliği, güvenli ortam
-            ve gelişim esas. Departmanlar arası iş birliği ve tesis içi güvenli
-            çalışma, politikanın uygulanan tarafı.
-          </p>
-          <p>
-            Açık pozisyonlar için veya genel başvuru yapmak üzere CV’nizi PDF
-            olarak iletebilirsiniz.
-          </p>
-        </div>
+        {page?.body ? (
+          <div className="prose-omafil text-body max-w-3xl space-y-5 text-base leading-8 [&_p]:leading-8">
+            {page.body}
+          </div>
+        ) : null}
 
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {principles.map((item) => (

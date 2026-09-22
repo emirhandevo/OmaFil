@@ -1,0 +1,106 @@
+{
+  "label": "PES ACY",
+  "summary": "Polyester hava jetli kaplama + elastan.",
+  "family": "polyester",
+  "polymer": "pes",
+  "code": "ACY",
+  "imageSrc": "/images/hero/iplik/acc-pes.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": false,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 55,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 17,
+          "yarnDtex": 83,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 83,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 83,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 110,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 110,
+          "filament": 36,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 167,
+          "filament": 48,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 167,
+          "filament": 48,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 78,
+          "yarnDtex": 167,
+          "filament": 48,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 335,
+          "filament": 96,
+          "floor": "1",
+          "yarnType": "PES"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 78,
+          "yarnDtex": 335,
+          "filament": 96,
+          "floor": "1",
+          "yarnType": "PES"
+        }
+      ]
+    }
+  }
+}

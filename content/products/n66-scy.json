@@ -1,0 +1,106 @@
+{
+  "label": "Naylon 66 SCY",
+  "summary": "Tek kaplama PA66 + elastan. Flat seçenekler dahil.",
+  "family": "nylon66",
+  "polymer": "pa66",
+  "code": "SCY",
+  "imageSrc": "/images/hero/iplik/scy-n66.webp",
+  "colors": [],
+  "recycled": true,
+  "featured": true,
+  "details": {
+    "discriminant": "covered",
+    "value": {
+      "skus": [
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 11,
+          "filament": 5,
+          "floor": "1",
+          "yarnType": "PA66FLAT"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 22,
+          "filament": 7,
+          "floor": "1",
+          "yarnType": "PA66FLAT"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 22,
+          "filament": 7,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 22,
+          "filament": 20,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 22,
+          "filament": 20,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 44,
+          "filament": 34,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 44,
+          "filament": 34,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 78,
+          "yarnDtex": 44,
+          "filament": 34,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 22,
+          "yarnDtex": 78,
+          "filament": 68,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 78,
+          "filament": 68,
+          "floor": "1",
+          "yarnType": "PA66"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 78,
+          "filament": 68,
+          "floor": "2",
+          "yarnType": "PA66"
+        }
+      ]
+    }
+  }
+}

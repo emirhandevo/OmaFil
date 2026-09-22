@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ProductsGrid } from "@/components/sections/products-grid";
+import { getContact } from "@/content/cms";
+import { getProductLines } from "@/content/catalog";
 
 export const metadata: Metadata = {
   title: "Ürünlerimiz",
@@ -8,10 +10,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/urunlerimiz" },
 };
 
-export default function UrunlerimizPage() {
+export default async function UrunlerimizPage() {
+  const [lines, contact] = await Promise.all([
+    getProductLines(),
+    getContact(),
+  ]);
+
   return (
-    <section className="relative isolate overflow-hidden">
-      {/* Atmosfer — glass’ın saydamlığı buraya karşı okunur */}
+    <section className="relative isolate overflow-x-clip">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
@@ -30,12 +36,12 @@ export default function UrunlerimizPage() {
           İplik portföyümüz
         </h1>
         <p className="text-body mt-5 max-w-2xl text-base leading-8">
-          Naylon 6, Naylon 66 ve polyester gipe hatlarımız. Teklif veya numune
-          için bizimle iletişime geçebilirsiniz.
+          Naylon 6, Naylon 66 ve polyester filament + gipe hatları. Specs için
+          ürüne tıklayın; teklif veya numune için iletişime geçin.
         </p>
 
         <div className="mt-12">
-          <ProductsGrid />
+          <ProductsGrid lines={lines} contactEmail={contact.email} />
         </div>
       </div>
     </section>

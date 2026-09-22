@@ -1,0 +1,374 @@
+{
+  "label": "Naylon 6 DTY",
+  "summary": "Tekstüre PA6. Ecru, siyah ve renkli seçenekler.",
+  "family": "nylon6",
+  "polymer": "pa6",
+  "code": "DTY",
+  "imageSrc": "/images/hero/iplik/dty-n6.webp",
+  "colors": [
+    "ECRU",
+    "BLACK",
+    "COLORED"
+  ],
+  "recycled": true,
+  "featured": true,
+  "details": {
+    "discriminant": "filament",
+    "value": {
+      "skus": [
+        {
+          "spec": "12D/5F/6F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "15D/5F/6F/7F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "20D/6F/7F/24F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "22/24/1",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "22D/20F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "28D/12F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "30D/10F/12F/24F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "33D/24F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "40D/12F/24F/36F/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "44/12/1",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "44/12/2",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "44/34/1",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "44/34/2",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "44D/24F/36F/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "50D/24F/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "55D/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/24/1",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/24/2",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/24/3",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70/24/4",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [
+            "ECRU",
+            "BLACK",
+            "COLORED"
+          ],
+          "features": [
+            "featured"
+          ],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "70D/23F/24F/48F/54F/68F/72F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "78D/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "80D/24F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "100D/36F/48F/68F/96F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "110D/96F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "140D/48F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "145D/72F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "200D/48F/72F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "210D/96F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        },
+        {
+          "spec": "280D/96F",
+          "lustre": [
+            "SD"
+          ],
+          "colors": [],
+          "features": [],
+          "finalDty": "",
+          "finalAty": ""
+        }
+      ]
+    }
+  }
+}
