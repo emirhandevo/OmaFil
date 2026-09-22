@@ -1,98 +1,127 @@
 /**
- * GES sayfası içeriği.
- * Metin: canlı omafil.com/ges-gunes-enerji-sistemi
- * Yeşil metrik bandı: patron örnek yapısı (rakamlar doğrulanmalı).
+ * GES sayfası — metin + canlı sayaç (gerçek tesis verileri).
+ * Tesis listesi: @/content/ges-sites
  */
+
+import {
+  gesAverageDailyKwh,
+  gesElazigMonitorSnapshot,
+  gesPortfolioTotals,
+  gesSites,
+} from "@/content/ges-sites";
 
 export const gesIntro = {
   title: "Güneş Enerji Sistemimiz",
-  subtitle: "Geleceğe değer katıyoruz, OmaFil üretimini güneşten alıyoruz",
+  subtitle:
+    "Elazığ saha GES ve Erbaa çatı GES ile üretimi güneşten besliyoruz",
   paragraphs: [
-    "OmaFil olarak, sadece bugünün ihtiyaçlarını karşılayan kaliteli üretim yapmayı değil, yarınlara daha temiz bir dünya bırakmayı da sorumluluğumuz olarak görüyoruz. Bu vizyonla, üretim tesislerimizin çatılarını Güneş Enerji Sistemi (GES) ile donattık.",
-    "Artık fabrikamızda gerçekleştirdiğimiz her üretimin arkasında doğanın saf gücü, güneşin temiz enerjisi var.",
+    "OmaFil olarak yalnızca kaliteli iplik üretmiyoruz; enerjiyi de yenilenebilir kaynaklardan sağlıyoruz. Portföyümüzde Elazığ Kovancılar’da iki saha GES (OMA 1 Hacısam, OMA 2 Kavak) ve Tokat Erbaa üretim tesisimizde iki çatı GES bulunuyor.",
+    "Toplam kurulu gücümüz 6,76 MWp. Günlük üretimimiz sahalar ve çatı sistemleriyle birlikte onlarca megawatt-saat bandında; karbon ayak izimizi azaltarak yeşil sanayiye katkı sunuyoruz.",
   ],
 } as const;
 
 export const gesPillars = [
   {
-    title: "%100 temiz enerji",
-    text: "Üretim hatlarımızda kullanılan elektriğin büyük bir kısmını, doğrudan kendi çatımızdaki yüksek verimli güneş panellerinden elde ediyoruz.",
+    title: "Saha + çatı GES",
+    text: "Elazığ’da 5,2 MWp saha santrali; Erbaa fabrika çatısında 1,56 MWp. İki coğrafyada, aynı sürdürülebilirlik hedefi.",
   },
   {
     title: "Daha az karbon ayak izi",
-    text: "Fosil yakıtlara olan bağımlılığımızı azaltarak, her yıl binlerce ağacın doğaya sağladığı oksijene eşdeğer bir karbon tasarrufu sağlıyoruz.",
+    text: "Ürettiğimiz her kilowatt-saat, fosil kaynaklı emisyonu azaltır. Sayaçlarımız uygulama ve tesis verilerine dayanır.",
   },
   {
     title: "Yeşil sanayi öncülüğü",
-    text: "Sektörümüzde sürdürülebilir enerji dönüşümüne öncülük ederek, gelecek nesillere daha yaşanabilir bir dünya bırakmayı hedefliyoruz.",
+    text: "Kendi enerjimizi üreterek tekstil üretiminde temiz enerji dönüşümüne örnek olmayı hedefliyoruz.",
   },
 ] as const;
 
 export const gesRespectBlock = {
   title: "Doğaya saygılı, sürdürülebilir üretim",
-  text: "Teknolojiyi ve yenilikçi yatırımları işimizin merkezine koyarken, çevreye olan sorumluluğumuzu asla unutmuyoruz. Kendi enerjimizi kendimiz üreterek, karbon salınımımızı minimuma indiriyor ve ekolojik dengenin korunmasına aktif olarak katkı sağlıyoruz.",
+  text: "Teknolojiyi ve yenilikçi yatırımları işimizin merkezine koyarken çevre sorumluluğumuzu unutmuyoruz. Saha ve çatı GES yatırımlarımızla karbon salınımını azaltıyor, ekolojik dengeye katkı sağlıyoruz.",
 } as const;
 
-/** Patron örnek bandı — kapasite özeti */
 export const gesCapacity = {
   title: "Yeşil enerjimizle üretiyoruz",
-  text: "120.000 m² alan üzerine kurulu güneş enerji santralimiz ile yıllık 8 mW enerji üretiyoruz. Üretimimizde kullandığımız yenilenebilir enerji kaynaklarıyla gelecek nesillere yaşanabilir bir gelecek bırakmak için çalışıyoruz.",
+  text: `Toplam ${gesPortfolioTotals.all.capacityMwp.toLocaleString("tr-TR")} MWp kurulu gücümüzle (Elazığ ${gesPortfolioTotals.elazig.capacityMwp} MWp saha + Erbaa ${gesPortfolioTotals.erbaa.capacityMwp} MWp çatı) yıllık yaklaşık ${(gesPortfolioTotals.all.annualKwhMin / 1_000_000).toLocaleString("tr-TR")}–${(gesPortfolioTotals.all.annualKwhMax / 1_000_000).toLocaleString("tr-TR")} GWh üretim kapasitesine sahibiz.`,
 } as const;
 
 /**
+ * Erbaa kümülatif tahmini (OSB kabul tarihleri + günlük ortalama).
+ * Elazığ rakamları uygulama ekranından net; Erbaa için henüz SCADA yok.
+ */
+function estimateErbaaKwhAt(isoDate: string): number {
+  const at = Date.parse(isoDate);
+  const midDaily = (9000 + 10_000) / 2;
+  const ges1Share = 960 / 1560;
+  const ges2Share = 600 / 1560;
+  const dayMs = 86_400_000;
+
+  const ges1Days = Math.max(
+    0,
+    (at - Date.parse("2023-06-22T00:00:00+03:00")) / dayMs,
+  );
+  const ges2Days = Math.max(
+    0,
+    (at - Date.parse("2024-12-27T00:00:00+03:00")) / dayMs,
+  );
+
+  return ges1Days * midDaily * ges1Share + ges2Days * midDaily * ges2Share;
+}
+
+const MEASURED_AT = gesElazigMonitorSnapshot.measuredAt;
+const ELAZIG_KWH = gesElazigMonitorSnapshot.totalKwh;
+const ERBAA_KWH = estimateErbaaKwhAt(MEASURED_AT);
+const TOTAL_KWH = ELAZIG_KWH + ERBAA_KWH;
+
+/** CO₂ / ağaç oranları — Elazığ uygulama özetinden */
+const CO2_PER_KWH =
+  gesElazigMonitorSnapshot.co2Tons / gesElazigMonitorSnapshot.totalKwh;
+const TREES_PER_TON =
+  gesElazigMonitorSnapshot.trees / gesElazigMonitorSnapshot.co2Tons;
+
+/**
  * Canlı kümülatif sayaç.
- *
- * Gerçek SCADA/API yokken: ölçüm anındaki kWh + ortalama üretim hızı ile
- * zamanla artar (patron örneğindeki “sürekli değişen” rakamlar).
- *
- * Fabrikadan gerçek kümülatif gelince sadece measuredAt + energyKwhAtMeasure güncelle.
- * kwhPerSecond ≈ kurulu güç (kW) × kapasite faktörü / 3600
- *   örn. 8000 kW × 0.16 / 3600 ≈ 0.356 kWh/sn
+ * Ölçüm anı: Elazığ app (OMA 1+2) + Erbaa tahmini (kabul tarihi × günlük ort.).
+ * Tick: tüm tesislerin ortalama günlük üretimi / 86400.
  */
 export const gesLiveCounter = {
-  /** Bu anda aşağıdaki kWh değeri geçerliydi (Türkiye saati) */
-  measuredAt: "2026-09-21T12:00:00+03:00",
-  /** O andaki kümülatif üretim (kWh) — patron örnek başlangıç */
-  energyKwhAtMeasure: 19_729_964,
-  /** Ortalama üretim hızı (kWh / saniye) */
-  kwhPerSecond: 0.356,
-  /**
-   * Dönüşüm katsayıları (patron örnek oranları korunur).
-   * ton CO₂ / kWh  ve  ağaç / ton CO₂
-   */
-  tonsCo2PerKwh: 9_864.9824 / 19_729_964,
-  treesPerTonCo2: 24_070.55583 / 9_864.9824,
+  measuredAt: MEASURED_AT,
+  energyKwhAtMeasure: TOTAL_KWH,
+  /** Elazığ app kanıtlı kısım (referans) */
+  elazigKwhAtMeasure: ELAZIG_KWH,
+  erbaaKwhAtMeasure: ERBAA_KWH,
+  kwhPerSecond: gesAverageDailyKwh() / 86_400,
+  tonsCo2PerKwh: CO2_PER_KWH,
+  treesPerTonCo2: TREES_PER_TON,
 } as const;
 
-/** Metrik kartlarının etiket / görsel / format bilgisi (değerler canlı hesaplanır) */
 export const gesMetrics = [
   {
     id: "energy" as const,
-    label: "Ürettiğimiz güneş enerjisi (kW)",
-    decimals: 2,
+    label: "Ürettiğimiz güneş enerjisi (kWh)",
+    decimals: 0,
     suffix: "",
-    image: "/images/ges/01.webp",
-    imageAlt: "OmaFil tesisinde güneş panelleri",
+    image: "/images/ges/elazig-hacisam/01.jpg",
+    imageAlt: "Elazığ Hacısam GES — OMA 1",
   },
   {
     id: "carbon" as const,
     label: "Tasarruf edilen karbon emisyonu (ton)",
-    decimals: 4,
+    decimals: 2,
     suffix: "CO₂",
-    image: "/images/ges/05.webp",
-    imageAlt: "Güneş enerjisi üretimi",
+    image: "/images/ges/elazig-kavak/01.jpg",
+    imageAlt: "Elazığ Kavak GES — OMA 2",
   },
   {
     id: "trees" as const,
-    label: "Kurtarılan ağaç sayısı (ad)",
-    decimals: 5,
+    label: "Denk ağaç sayısı (ad)",
+    decimals: 0,
     suffix: "",
-    image: "/images/ges/10.webp",
-    imageAlt: "Doğal çevre ve sürdürülebilir üretim",
+    image: "/images/ges/erbaa-cati-1/01.jpg",
+    imageAlt: "Erbaa çatı GES — Oma Polimer tesisi",
   },
 ] as const;
 
-/** nowMs anındaki üç metrik değeri */
 export function computeGesMetrics(nowMs = Date.now()) {
   const epoch = Date.parse(gesLiveCounter.measuredAt);
   const elapsedSec = Math.max(0, (nowMs - epoch) / 1000);
@@ -109,15 +138,10 @@ export function computeGesMetrics(nowMs = Date.now()) {
   };
 }
 
-export const gesGallery = [
-  { src: "/images/ges/01.webp", alt: "GES panelleri — görünüm 1" },
-  { src: "/images/ges/02.webp", alt: "GES panelleri — görünüm 2" },
-  { src: "/images/ges/03.webp", alt: "GES panelleri — görünüm 3" },
-  { src: "/images/ges/04.webp", alt: "GES panelleri — görünüm 4" },
-  { src: "/images/ges/05.webp", alt: "GES panelleri — görünüm 5" },
-  { src: "/images/ges/06.webp", alt: "GES panelleri — görünüm 6" },
-  { src: "/images/ges/07.webp", alt: "GES panelleri — görünüm 7" },
-  { src: "/images/ges/08.webp", alt: "GES panelleri — görünüm 8" },
-  { src: "/images/ges/09.webp", alt: "GES panelleri — görünüm 9" },
-  { src: "/images/ges/10.webp", alt: "GES panelleri — görünüm 10" },
-] as const;
+/** Sayfa galerisi — tüm tesis görselleri */
+export const gesGallery = gesSites.flatMap((site) =>
+  site.images.map((src, i) => ({
+    src,
+    alt: `${site.shortName} — ${site.location} (${i + 1})`,
+  })),
+);

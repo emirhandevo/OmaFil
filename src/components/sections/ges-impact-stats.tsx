@@ -96,46 +96,44 @@ export function GesImpactStats() {
             </span>
           </div>
         </div>
-
-        <div className="mx-auto grid max-w-6xl gap-2 px-4 pb-6 md:grid-cols-3 md:gap-4">
-          {gesMetrics.map((m) => (
-            <p
-              key={m.id}
-              className="text-center text-[11px] font-bold tracking-[0.12em] text-emerald-800 uppercase dark:text-emerald-300 sm:text-xs"
-            >
-              {m.label}
-            </p>
-          ))}
-        </div>
       </div>
 
+      {/* Her kart: mobilde başlık üstte, desktop’ta görselin üst ortasında */}
       <div className="grid md:grid-cols-3">
         {gesMetrics.map((m) => (
-          <article
-            key={m.id}
-            className="relative min-h-[220px] overflow-hidden sm:min-h-[280px]"
-          >
-            <Image
-              src={m.image}
-              alt={m.imageAlt}
-              fill
-              sizes="(min-width: 768px) 33vw, 100vw"
-              quality={80}
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-brand-navy/55" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-              <p
-                className="text-2xl font-bold tracking-tight text-white tabular-nums sm:text-3xl lg:text-4xl"
-                aria-live="polite"
-              >
-                {formatTr(valueFor(m.id), m.decimals)}
-                {m.suffix ? (
-                  <span className="ml-1 text-base font-semibold sm:text-lg">
-                    {m.suffix}
-                  </span>
-                ) : null}
+          <article key={m.id} className="flex flex-col">
+            <p className="bg-emerald-50 px-4 py-3 text-center text-[11px] font-bold tracking-[0.12em] text-emerald-800 uppercase dark:bg-emerald-950/40 dark:text-emerald-300 sm:text-xs md:hidden">
+              {m.label}
+            </p>
+
+            <div className="relative min-h-[220px] overflow-hidden sm:min-h-[280px]">
+              <Image
+                src={m.image}
+                alt={m.imageAlt}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                quality={80}
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-brand-navy/55" />
+
+              <p className="absolute top-4 left-1/2 z-10 hidden w-[calc(100%-2rem)] -translate-x-1/2 text-center text-[11px] font-bold tracking-[0.12em] text-white uppercase drop-shadow sm:text-xs md:block">
+                {m.label}
               </p>
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-8 text-center md:pt-6">
+                <p
+                  className="text-2xl font-bold tracking-tight text-white tabular-nums sm:text-3xl lg:text-4xl"
+                  aria-live="polite"
+                >
+                  {formatTr(valueFor(m.id), m.decimals)}
+                  {m.suffix ? (
+                    <span className="ml-1 text-base font-semibold sm:text-lg">
+                      {m.suffix}
+                    </span>
+                  ) : null}
+                </p>
+              </div>
             </div>
           </article>
         ))}
