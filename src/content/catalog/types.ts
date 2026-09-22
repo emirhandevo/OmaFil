@@ -29,7 +29,8 @@ export type ProductLine = {
   polymer: Polymer;
   code: ProcessCode;
   kind: ProductKind;
-  src: string;
+  /** Yoksa grid/detayda placeholder — başka üründen görsel kopyalama */
+  src?: string;
   /** NEW PRODUCT LIST renkleri */
   colors?: string[];
   recycled?: boolean;

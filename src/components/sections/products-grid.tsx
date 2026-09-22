@@ -118,14 +118,28 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 href={`/urunlerimiz/${item.slug}`}
                 className="relative block aspect-[4/3] w-full shrink-0 overflow-hidden"
               >
-                <Image
-                  src={item.src}
-                  alt={item.label}
-                  fill
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#12243c]/70 via-transparent to-transparent opacity-90" />
+                {item.src ? (
+                  <>
+                    <Image
+                      src={item.src}
+                      alt={item.label}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#12243c]/70 via-transparent to-transparent opacity-90" />
+                  </>
+                ) : (
+                  /* Görsel yok — başka üründen kopya yok; nötr placeholder */
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[#12243c] px-4 text-center">
+                    <span className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
+                      Görsel yakında
+                    </span>
+                    <span className="text-sm font-semibold text-white/70">
+                      {item.code}
+                    </span>
+                  </div>
+                )}
                 <span className="absolute top-3 left-3 rounded-full border border-white/30 bg-black/35 px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] text-white uppercase backdrop-blur-md">
                   {item.code}
                 </span>

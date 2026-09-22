@@ -23,7 +23,8 @@ function mapLine(slug: string, entry: LineEntry): ProductLine {
     polymer: entry.polymer,
     code: entry.code,
     kind,
-    src: entry.imageSrc,
+    // Boş string = görsel yok (başka üründen kopya kullanma)
+    src: entry.imageSrc?.trim() ? entry.imageSrc.trim() : undefined,
     colors: entry.colors.length ? [...entry.colors] : undefined,
     recycled: entry.recycled || undefined,
     featured: entry.featured || undefined,

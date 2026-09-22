@@ -171,8 +171,8 @@ export default config({
         }),
         imageSrc: fields.text({
           label: "Görsel yolu",
-          description: "Örn. /images/hero/iplik/poy-n6.webp",
-          validation: { isRequired: true },
+          description:
+            "Örn. /images/hero/iplik/poy-n6.webp — yoksa boş bırak (placeholder).",
         }),
         colors: fields.array(fields.text({ label: "Renk" }), {
           label: "Renkler (kart rozeti)",

@@ -54,14 +54,29 @@ export default async function ProductLinePage({ params }: PageProps) {
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-card">
-          <Image
-            src={line.src}
-            alt={line.label}
-            fill
-            priority
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover"
-          />
+          {line.src ? (
+            <Image
+              src={line.src}
+              alt={line.label}
+              fill
+              priority
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-muted px-6 text-center">
+              <p className="text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase">
+                Görsel yakında
+              </p>
+              <p className="text-sm font-semibold text-foreground/80">
+                {line.label}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Üretim görseli eklenecek — placeholder değil, henüz fotoğraf
+                yok.
+              </p>
+            </div>
+          )}
         </div>
 
         <div>
