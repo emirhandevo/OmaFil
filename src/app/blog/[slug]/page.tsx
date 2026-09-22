@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import React from "react";
+import Markdoc from "@markdoc/markdoc";
 import { getBlogPost, getBlogPosts } from "@/content/blog";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getBlogPosts().map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) return { title: "Yazı bulunamadı" };
 
   return {
@@ -26,8 +29,16 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) notFound();
+
+  const { node } = await post.content();
+  const errors = Markdoc.validate(node);
+  if (errors.length) {
+    console.error(errors);
+    throw new Error("Blog içeriği geçersiz (Markdoc)");
+  }
+  const renderable = Markdoc.transform(node);
 
   return (
     <article className="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:pt-20">
@@ -40,23 +51,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <p className="mt-6 text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
         Blog
       </p>
-      <h1 className="mt-4 text-4xl font-semibold tracking-tight">
-        {post.title}
-      </h1>
-      <time
-        dateTime={post.date}
-        className="mt-4 block text-sm text-muted-foreground"
-      >
-        {new Date(post.date).toLocaleDateString("tr-TR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
-      </time>
-      <div className="mt-8 space-y-5 leading-7 text-muted-foreground">
-        {post.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+      <h1 className="mt-4 text-4xl font-semibold tracking-tight">{post.title}</h1>
+      {post.date ? (
+        <time
+          dateTime={post.date}
+          className="mt-4 block text-sm text-muted-foreground"
+        >
+          {new Date(post.date).toLocaleDateString("tr-TR", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </time>
+      ) : null}
+      <div className="prose-omafil mt-8 space-y-5 leading-7 text-muted-foreground [&_a]:text-brand-orange [&_a]:underline [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ml-5 [&_li]:list-disc [&_strong]:text-foreground">
+        {Markdoc.renderers.react(renderable, React)}
       </div>
     </article>
   );

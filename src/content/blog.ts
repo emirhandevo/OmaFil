@@ -1,24 +1,43 @@
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
+
 /**
- * Blog tek kaynak.
- * Yeni yazı: bu diziye bir nesne ekle. slug URL olur: /blog/slug
- * Onaylı metin gelince buraya girilir — AI ile doldurulmaz.
+ * Blog — Keystatic reader.
+ * Yazılar: content/blog/*.mdoc (panel: /keystatic)
  */
-export type BlogPost = {
+
+const reader = createReader(process.cwd(), keystaticConfig);
+
+export type BlogPostListItem = {
   slug: string;
   title: string;
   excerpt: string;
-  // ISO tarih. Liste bunu sıralar.
   date: string;
-  // Her eleman bir paragraf. Markdown kütüphanesi yok.
-  paragraphs: string[];
 };
 
-export const blogPosts: BlogPost[] = [];
+export async function getBlogPosts(): Promise<BlogPostListItem[]> {
+  const posts = await reader.collections.posts.all();
 
-export function getBlogPosts() {
-  return [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
+  return posts
+    .map((post) => ({
+      slug: post.slug,
+      title: post.entry.title,
+      excerpt: post.entry.excerpt,
+      // Keystatic date → ISO string
+      date: post.entry.date ?? "",
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export function getBlogPost(slug: string) {
-  return blogPosts.find((post) => post.slug === slug);
+export async function getBlogPost(slug: string) {
+  const post = await reader.collections.posts.read(slug);
+  if (!post) return null;
+
+  return {
+    slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    date: post.date ?? "",
+    content: post.content,
+  };
 }
