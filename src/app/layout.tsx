@@ -7,6 +7,7 @@ import { site } from "@/config/site";
 import { getLocale } from "@/i18n/get-locale";
 import { htmlLang, ogLocale } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
+import { buildThemeBootScript } from "@/lib/theme-calculator";
 import "./globals.css";
 
 // Türkçe karakterler için latin-ext
@@ -78,8 +79,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-// theme: light | dark | auto. Kayıt yoksa / auto → 07–19 light, gece dark.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");var dark;if(t==="light"){dark=false}else if(t==="dark"){dark=true}else{var h=new Date().getHours();dark=!(h>=7&&h<19)}document.documentElement.classList.toggle("dark",dark)}catch(e){}})()`;
+// React hydrate olmadan önce. Gündoğumu/günbatımı veya 3 saatlik önbellek.
+const themeScript = buildThemeBootScript();
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const [contact, settings, locale] = await Promise.all([
@@ -93,7 +94,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       lang={htmlLang(locale)}
       dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
