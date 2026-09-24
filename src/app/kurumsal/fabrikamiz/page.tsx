@@ -27,6 +27,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+/** Türkçe kart gövdesi. Markdoc ağacı yerine düz string: dil değişince de kaybolmasın. */
+const factoryIntroTr = [
+  "Tokat Erbaa Organize Sanayi Bölgesi'nde faaliyet gösteren tesisimiz, yıllık 13.000 ton üretim kapasitesiyle Avrupa'nın en büyük gipe iplik üretim tesisi unvanını taşıyor. Naylon 6, Naylon 66 ve polyester gipe iplik hatlarında ürettiğimiz yüksek katma değerli ürünlerle global tekstil endüstrisine hizmet veriyoruz.",
+  "Bünyesinde barındırdığı Ar-Ge merkeziyle sadece üretmekle kalmıyor, geleceğin iplik teknolojilerini de geliştiriyoruz. Tesisimiz bölgeye önemli bir istihdam kaynağı oluştururken, çatımıza kurduğumuz güneş enerjisi sistemiyle üretimimizin enerji ihtiyacının bir kısmını temiz kaynaklardan karşılıyoruz.",
+];
+
 /** Üretim hattında çıkan ürün grupları (canlı site listesi) */
 const productLines = [
   "PA6 POY",
@@ -114,17 +120,11 @@ export default async function FabrikamizPage() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           <article className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-            {t ? (
-              <div className="prose-omafil text-body space-y-4 text-base leading-8 [&_p]:leading-8">
-                {t.factory.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            ) : page?.body ? (
-              <div className="prose-omafil text-body space-y-4 text-base leading-8 [&_p]:leading-8">
-                {page.body}
-              </div>
-            ) : null}
+            <div className="text-body space-y-4 text-base leading-8">
+              {(t?.factory.paragraphs ?? factoryIntroTr).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
             <p className="mt-8 text-sm font-bold tracking-wide text-brand-navy uppercase dark:text-brand-orange">
               {site.legalName}
             </p>
