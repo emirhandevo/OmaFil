@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy } from "@/components/i18n/locale-provider";
@@ -144,7 +144,24 @@ export function Header() {
           onClick={() => setIsOpen((prev) => !prev)}
           className="flex size-10 items-center justify-center rounded-md text-foreground lg:hidden"
         >
-          {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          {/* Üç çizgi aynı yerde döner; ikon değişimi zıplamaz */}
+          <span className="relative block h-3.5 w-5" aria-hidden="true">
+            <span
+              className={`absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition duration-300 ease-in-out motion-reduce:transition-none ${
+                isOpen ? "translate-y-1.5 rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-1.5 h-0.5 w-5 rounded-full bg-current transition duration-300 ease-in-out motion-reduce:transition-none ${
+                isOpen ? "scale-x-0 opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 bottom-0 h-0.5 w-5 rounded-full bg-current transition duration-300 ease-in-out motion-reduce:transition-none ${
+                isOpen ? "-translate-y-1.5 -rotate-45" : ""
+              }`}
+            />
+          </span>
         </button>
         </div>
       </div>

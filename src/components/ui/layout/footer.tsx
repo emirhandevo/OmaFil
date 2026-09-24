@@ -150,7 +150,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
 
       {/* Alt bar — telif hakkı */}
       <div className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted-foreground">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted-foreground text-center">
           © {new Date().getFullYear()} {site.legalName}. {copy.footer.rights}
         </div>
       </div>
