@@ -18,7 +18,7 @@ const highlightStats: {
   icon: LucideIcon;
 }[] = [
   {
-    title: "50.000 m² Tesis Alanı",
+    title: "40.000 m² Üretim Alanı",
     subtitle: "Tokat–Erbaa üretim tesisi",
     icon: Factory,
   },

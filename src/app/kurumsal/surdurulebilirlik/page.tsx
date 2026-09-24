@@ -138,13 +138,13 @@ export default async function SurdurulebilirlikPage() {
         ) : (
           <div />
         )}
-        <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-3xl border border-border bg-muted p-6 shadow-sm">
+        <div className="relative mx-auto aspect-square w-full max-w-md">
           <Image
             src="/images/sustainability/dunya.webp"
             alt={t?.sustain.worldAlt ?? "Ormanla kaplı dünya görseli"}
             fill
             sizes="(min-width: 1024px) 40vw, 80vw"
-            className="object-contain p-4"
+            className="object-contain"
           />
         </div>
       </section>

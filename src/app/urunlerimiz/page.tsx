@@ -24,7 +24,7 @@ export default async function UrunlerimizPage() {
   ]);
 
   return (
-    <section className="relative isolate overflow-x-clip">
+    <section className="relative isolate overflow-x-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"

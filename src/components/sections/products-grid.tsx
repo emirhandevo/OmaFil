@@ -96,13 +96,14 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
 
       <ul
         key={family}
-        className={`mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 ${listClass}`}
+        className={`mt-10 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 ${listClass}`}
       >
         {visible.map((item) => (
-          <li key={item.slug} className="group h-full">
+          <li key={item.slug} className="group min-w-0">
+            {/* Görsel, başlık, özet ve link satırı sabit yükseklik: her kart aynı boy */}
             <article
               className="
-                relative flex h-full flex-col overflow-hidden rounded-3xl
+                relative flex w-full flex-col overflow-hidden rounded-3xl
                 border border-white/15 bg-[#1e355d]
                 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.35),0_20px_48px_-12px_rgba(0,0,0,0.55)]
                 ring-1 ring-white/10
@@ -148,16 +149,16 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 </span>
               </LocaleLink>
 
-              <div className="flex flex-1 flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
+              <div className="flex flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
                 <LocaleLink href={`/urunlerimiz/${item.slug}`}>
-                  <h2 className="text-lg font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000]">
+                  <h2 className="line-clamp-1 h-7 text-lg leading-7 font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000]">
                     {item.label}
                   </h2>
                 </LocaleLink>
-                <p className="mt-2 flex-1 text-sm leading-6 text-white/70">
+                <p className="mt-2 line-clamp-3 h-[4.5rem] text-sm leading-6 text-white/70">
                   {inner?.products[item.slug] ?? item.summary}
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="mt-5 flex h-6 shrink-0 flex-nowrap items-center gap-3">
                   <LocaleLink
                     href={`/urunlerimiz/${item.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white"
