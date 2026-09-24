@@ -11,7 +11,7 @@ const tabs = [
   {
     id: "tarihce",
     label: "Tarihçe",
-    body: "2000 yılında tekstil dünyasına adım atan grubumuz, geçen yıllar içinde teknolojiye ve insana yatırım yaparak istikrarlı bir şekilde büyüdü. OMA Tekstil bünyesinde edinilen derin bilgi birikimi, bugün OmaFil’in üretim gücüne dönüşüyor.",
+    body: "1999 yılında tekstil dünyasına adım atan grubumuz, geçen yıllar içinde teknolojiye ve insana yatırım yaparak istikrarlı bir şekilde büyüdü. OMA Tekstil bünyesinde edinilen derin bilgi birikimi, bugün OmaFil’in üretim gücüne dönüşüyor.",
   },
   {
     id: "vizyon",
@@ -23,14 +23,25 @@ const tabs = [
 type TabId = (typeof tabs)[number]["id"];
 
 /** Fabrikamız sayfası — Misyon / Tarihçe / Vizyon sekmeleri */
-export function FactoryMissionTabs() {
+export function FactoryMissionTabs({
+  labels,
+  aria = "Kurumsal yön",
+}: {
+  labels?: { label: string; body: string }[];
+  aria?: string;
+}) {
+  const rows = tabs.map((tab, i) => ({
+    ...tab,
+    label: labels?.[i]?.label ?? tab.label,
+    body: labels?.[i]?.body ?? tab.body,
+  }));
   const [active, setActive] = useState<TabId>("misyon");
-  const current = tabs.find((t) => t.id === active) ?? tabs[0];
+  const current = rows.find((t) => t.id === active) ?? rows[0];
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-      <div className="flex border-b border-border" role="tablist" aria-label="Kurumsal yön">
-        {tabs.map((tab) => {
+      <div className="flex border-b border-border" role="tablist" aria-label={aria}>
+        {rows.map((tab) => {
           const selected = tab.id === active;
           return (
             <button

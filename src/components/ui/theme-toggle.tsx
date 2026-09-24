@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun, SunMoon } from "lucide-react";
+import { useCopy } from "@/components/i18n/locale-provider";
 import {
   applyResolvedTheme,
   cycleThemePreference,
@@ -11,17 +12,17 @@ import {
   type ThemePreference,
 } from "@/lib/theme";
 
-const labels: Record<ThemePreference, string> = {
-  light: "Açık tema (tıkla: koyu)",
-  dark: "Koyu tema (tıkla: saate göre)",
-  auto: "Saate göre tema (tıkla: açık)",
-};
-
 /**
  * light → dark → auto → light
  * auto: 07–19 açık, diğer saatler koyu
  */
 export function ThemeToggle() {
+  const copy = useCopy();
+  const labels: Record<ThemePreference, string> = {
+    light: copy.chrome.themeLight,
+    dark: copy.chrome.themeDark,
+    auto: copy.chrome.themeAuto,
+  };
   const [preference, setPreference] = useState<ThemePreference>("auto");
   const [resolved, setResolved] = useState<"light" | "dark">("dark");
 

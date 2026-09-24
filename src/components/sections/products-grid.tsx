@@ -2,8 +2,9 @@
 
 import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
+import { useCopy, useInner } from "@/components/i18n/locale-provider";
 import { productFamilies } from "@/content/catalog/families";
 import type { ProductFamily, ProductLine } from "@/content/catalog/types";
 
@@ -19,6 +20,8 @@ type ProductsGridProps = {
  * Veri Keystatic’ten sunucu sayfasında gelir.
  */
 export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
+  const copy = useCopy();
+  const inner = useInner();
   const [family, setFamily] = useState<ProductFamily>("all");
   const [phase, setPhase] = useState<Phase>("idle");
   const lockRef = useRef(false);
@@ -67,7 +70,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
       <div
         className="flex flex-wrap gap-2"
         role="tablist"
-        aria-label="Ürün ailesi"
+        aria-label={copy.chrome.familyAria}
       >
         {productFamilies.map((f) => {
           const active = family === f.id;
@@ -85,7 +88,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                   : "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] disabled:opacity-60"
               }
             >
-              {f.label}
+              {f.id === "all" ? copy.products.all : f.label}
             </button>
           );
         })}
@@ -114,7 +117,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
               />
 
-              <Link
+              <LocaleLink
                 href={`/urunlerimiz/${item.slug}`}
                 className="relative block aspect-[4/3] w-full shrink-0 overflow-hidden"
               >
@@ -133,7 +136,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                   /* Görsel yok — başka üründen kopya yok; nötr placeholder */
                   <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[#12243c] px-4 text-center">
                     <span className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">
-                      Görsel yakında
+                      {copy.products.soon}
                     </span>
                     <span className="text-sm font-semibold text-white/70">
                       {item.code}
@@ -143,19 +146,19 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 <span className="absolute top-3 left-3 rounded-full border border-white/30 bg-black/35 px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] text-white uppercase backdrop-blur-md">
                   {item.code}
                 </span>
-              </Link>
+              </LocaleLink>
 
               <div className="flex flex-1 flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
-                <Link href={`/urunlerimiz/${item.slug}`}>
+                <LocaleLink href={`/urunlerimiz/${item.slug}`}>
                   <h2 className="text-lg font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000]">
                     {item.label}
                   </h2>
-                </Link>
+                </LocaleLink>
                 <p className="mt-2 flex-1 text-sm leading-6 text-white/70">
-                  {item.summary}
+                  {inner?.products[item.slug] ?? item.summary}
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <Link
+                  <LocaleLink
                     href={`/urunlerimiz/${item.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white"
                   >
@@ -164,14 +167,14 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                       aria-hidden="true"
                       className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     />
-                  </Link>
-                  <Link
+                  </LocaleLink>
+                  <LocaleLink
                     href="/iletisim"
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#f19000] transition-colors hover:text-[#e84e1c]"
                   >
-                    Teklif al
+                    {copy.products.quote}
                     <ArrowUpRight aria-hidden="true" className="size-4" />
-                  </Link>
+                  </LocaleLink>
                 </div>
               </div>
             </article>
@@ -180,7 +183,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
       </ul>
 
       <p className="text-body mt-12 text-sm">
-        Teklif veya numune için{" "}
+        {copy.products.quoteLine}{" "}
         <a
           href={`mailto:${contactEmail}`}
           className="font-semibold text-brand-orange hover:underline"

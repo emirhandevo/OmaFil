@@ -11,8 +11,10 @@ import {
   verifyTurnstile,
 } from "@/lib/mail";
 import { rateLimit } from "@/lib/rate-limit";
+import { getLocale } from "@/i18n/get-locale";
+import { getUi } from "@/i18n/ui";
 import {
-  contactFormSchema,
+  createContactFormSchema,
   type ContactFormValues,
   type ContactPayload,
 } from "@/lib/schemas/contact";
@@ -43,12 +45,14 @@ function toPayload(values: ContactFormValues): ContactPayload {
 export async function submitContact(
   raw: unknown,
 ): Promise<ContactActionResult> {
-  const parsed = contactFormSchema.safeParse(raw);
+  const locale = await getLocale();
+  const form = getUi(locale).form;
+  const parsed = createContactFormSchema(form).safeParse(raw);
 
   if (!parsed.success) {
     return {
       ok: false,
-      error: "Lütfen formdaki hataları düzeltin.",
+      error: form.fix,
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -63,7 +67,7 @@ export async function submitContact(
   if (!limited.ok) {
     return {
       ok: false,
-      error: `Çok fazla deneme. Lütfen ${limited.retryAfterSec} sn sonra tekrar deneyin.`,
+      error: form.rate(limited.retryAfterSec),
     };
   }
 
@@ -71,7 +75,7 @@ export async function submitContact(
   if (!turnstileOk) {
     return {
       ok: false,
-      error: "Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.",
+      error: form.captcha,
     };
   }
 
@@ -80,7 +84,7 @@ export async function submitContact(
     console.error("RESEND_API_KEY veya CONTACT_EMAIL_TO eksik");
     return {
       ok: false,
-      error: "Mail servisi yapılandırılmamış. Lütfen daha sonra tekrar deneyin.",
+      error: form.mailDown,
     };
   }
 
@@ -103,7 +107,7 @@ export async function submitContact(
 
     if (notify.error) {
       console.error("Resend notify error:", notify.error);
-      return { ok: false, error: friendlyResendError(notify.error) };
+      return { ok: false, error: friendlyResendError(notify.error, locale) };
     }
 
     const confirm = await resend.emails.send({
@@ -122,6 +126,6 @@ export async function submitContact(
     console.error("submitContact error:", err);
     const message =
       err instanceof Error ? err.message : "Beklenmeyen bir hata oluştu.";
-    return { ok: false, error: friendlyResendError({ message }) };
+    return { ok: false, error: friendlyResendError({ message }, locale) };
   }
 }

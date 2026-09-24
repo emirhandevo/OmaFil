@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import {
   getCoveredSkus,
   getFilamentSkus,
   getProductLine,
   getProductLines,
 } from "@/content/catalog";
+import { getCopy } from "@/i18n/get-copy";
+import { getInner } from "@/i18n/inner";
+import { pageAlternates } from "@/i18n/locales";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -23,11 +26,15 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const line = await getProductLine(slug);
+  const [line, { locale }] = await Promise.all([
+    getProductLine(slug),
+    getCopy(),
+  ]);
   if (!line) return { title: "Ürün bulunamadı" };
   return {
     title: line.label,
-    description: line.summary,
+    description: getInner(locale)?.products[line.slug] ?? line.summary,
+    alternates: pageAlternates(`/urunlerimiz/${slug}`, locale),
   };
 }
 
@@ -36,21 +43,23 @@ export default async function ProductLinePage({ params }: PageProps) {
   const line = await getProductLine(slug);
   if (!line) notFound();
 
-  const [filament, covered] = await Promise.all([
+  const [{ copy, locale }, filament, covered] = await Promise.all([
+    getCopy(),
     getFilamentSkus(slug),
     getCoveredSkus(slug),
   ]);
+  const summary = getInner(locale)?.products[line.slug] ?? line.summary;
   const hasSkus = filament.length > 0 || covered.length > 0;
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
-      <Link
+      <LocaleLink
         href="/urunlerimiz"
         className="inline-flex items-center gap-2 text-sm font-medium text-brand-orange hover:underline"
       >
         <ArrowLeft aria-hidden="true" className="size-4" />
-        Ürünlere dön
-      </Link>
+        {copy.chrome.backProducts}
+      </LocaleLink>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-card">
@@ -66,14 +75,13 @@ export default async function ProductLinePage({ params }: PageProps) {
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-muted px-6 text-center">
               <p className="text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase">
-                Görsel yakında
+                {copy.products.soon}
               </p>
               <p className="text-sm font-semibold text-foreground/80">
                 {line.label}
               </p>
               <p className="text-xs text-muted-foreground">
-                Üretim görseli eklenecek — placeholder değil, henüz fotoğraf
-                yok.
+                {copy.chrome.noPhoto}
               </p>
             </div>
           )}
@@ -87,7 +95,7 @@ export default async function ProductLinePage({ params }: PageProps) {
             {line.label}
           </h1>
           <p className="text-body mt-4 max-w-xl text-base leading-8">
-            {line.summary}
+            {summary}
           </p>
 
           <ul className="mt-5 flex flex-wrap gap-2">
@@ -101,38 +109,37 @@ export default async function ProductLinePage({ params }: PageProps) {
             ))}
             {line.recycled ? (
               <li className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
-                Recycled seçenek
+                {copy.chrome.recycled}
               </li>
             ) : null}
             {line.featured ? (
               <li className="rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-xs font-medium text-brand-orange">
-                Portföy öne çıkan
+                {copy.chrome.featured}
               </li>
             ) : null}
           </ul>
 
-          <Link
+          <LocaleLink
             href="/iletisim"
             className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-amber"
           >
-            Teklif / numune al
+            {copy.chrome.quoteSample}
             <ArrowUpRight aria-hidden="true" className="size-4" />
-          </Link>
+          </LocaleLink>
         </div>
       </div>
 
       <section className="mt-14">
         <h2 className="text-xl font-semibold tracking-tight">
-          Teknik spesifikasyonlar
+          {copy.chrome.specsTitle}
         </h2>
         <p className="text-body mt-2 text-sm leading-7">
-          Katalog satırları. Detay veya özel denier için iletişime geçin.
+          {copy.chrome.specsLead}
         </p>
 
         {!hasSkus ? (
           <p className="mt-6 rounded-2xl border border-border bg-card px-5 py-8 text-muted-foreground">
-            Bu hat için satır listesi yakında eklenecek. Custom üretim için
-            teklif alın.
+            {copy.chrome.specsEmpty}
           </p>
         ) : null}
 
@@ -230,7 +237,7 @@ export default async function ProductLinePage({ params }: PageProps) {
         covered.length === 0 &&
         (line.family === "nylon66" || line.code === "DCY") ? (
           <p className="text-body mt-4 text-sm">
-            Bu grupta custom üretim seçenekleri mevcuttur.
+            {copy.chrome.customNote}
           </p>
         ) : null}
       </section>

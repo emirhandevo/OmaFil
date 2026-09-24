@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
+import { useCopy, useLocale } from "@/components/i18n/locale-provider";
+import { getUi, placeLabel } from "@/i18n/ui";
 import { navLinks, site } from "@/config/site";
 import type { ContactData, SocialNetwork } from "@/content/cms";
+import { navLabel } from "@/i18n/labels";
 import {
   InstagramIcon,
   LinkedinIcon,
@@ -24,6 +29,10 @@ const socialIcons: Record<
 };
 
 export function Footer({ contact, footerTagline }: FooterProps) {
+  const copy = useCopy();
+  const locale = useLocale();
+  const ui = getUi(locale);
+
   return (
     <footer className="site-footer mt-auto border-t border-border bg-background">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -37,7 +46,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
             className="h-auto w-36"
           />
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
-            {footerTagline}
+            {locale === "tr" ? footerTagline : ui.tagline}
           </p>
 
           {/* Sosyal linkler — sadece ikon, isim ekran okuyucu için aria-label'da */}
@@ -62,16 +71,16 @@ export function Footer({ contact, footerTagline }: FooterProps) {
 
         {/* Menü - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="text-center sm:text-left">
-          <p className="text-sm font-semibold text-foreground">Menü</p>
+          <p className="text-sm font-semibold text-foreground">{copy.footer.menu}</p>
           <ul className="mt-4 space-y-3">
             {navLinks.map((item) => (
               <li key={item.href}>
-                <Link
+                <LocaleLink
                   href={item.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
                 >
-                  {item.label}
-                </Link>
+                  {navLabel(item.href, copy)}
+                </LocaleLink>
               </li>
             ))}
           </ul>
@@ -79,7 +88,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
 
         {/* İletişim, telefon ve mail - mobilde ortalı  */}
         <div className="flex flex-col items-center sm:items-start sm:text-left">
-          <p className="text-sm font-semibold text-foreground">İletişim</p>
+          <p className="text-sm font-semibold text-foreground">{copy.footer.contact}</p>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             {contact.phone.map((phone) => (
               <li key={phone} className="flex items-center gap-2">
@@ -113,7 +122,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
         {/* Adresler — ayrı kolon, her biri Maps'e link */}
         <div>
           <p className="text-center text-sm font-semibold text-foreground">
-            Adreslerimiz
+            {copy.footer.addresses}
           </p>
           <ul className="mt-4 space-y-4 text-sm text-muted-foreground">
             {contact.locations.map((loc) => (
@@ -129,7 +138,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
                   className="text-foreground/75 transition-colors hover:text-brand-orange"
                 >
                   <span className="block font-medium text-foreground">
-                    {loc.label}
+                    {placeLabel(loc.label, locale)}
                   </span>
                   {loc.address}
                 </a>
@@ -142,7 +151,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
       {/* Alt bar — telif hakkı */}
       <div className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {site.legalName}. Tüm hakları saklıdır.
+          © {new Date().getFullYear()} {site.legalName}. {copy.footer.rights}
         </div>
       </div>
     </footer>

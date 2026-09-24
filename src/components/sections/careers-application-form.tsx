@@ -9,12 +9,13 @@ import { submitCareerApplication } from "@/app/actions/careers";
 import { KvkkModal } from "@/components/sections/kvkk-modal";
 import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { kvkkCareersNotice } from "@/content/kvkk";
 import {
-  careersFormSchema,
+  createCareersFormSchema,
   CV_MAX_BYTES,
   type CareersFormValues,
 } from "@/lib/schemas/careers";
+import { useCopy, useLocale } from "@/components/i18n/locale-provider";
+import { getUi } from "@/i18n/ui";
 import { sanitizePhoneInput } from "@/lib/phone";
 
 function resolveTurnstileSiteKey(): string {
@@ -34,6 +35,8 @@ const fieldClass =
  * İK başvuru formu — PDF CV + Resend attachment.
  */
 export function CareersApplicationForm() {
+  const copy = useCopy();
+  const locale = useLocale();
   const turnstileRef = useRef<TurnstileInstance>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [pending, startTransition] = useTransition();
@@ -52,7 +55,7 @@ export function CareersApplicationForm() {
     reset,
     formState: { errors },
   } = useForm<CareersFormValues>({
-    resolver: zodResolver(careersFormSchema),
+    resolver: zodResolver(createCareersFormSchema(getUi(locale).form)),
     defaultValues: {
       name: "",
       email: "",
@@ -71,15 +74,15 @@ export function CareersApplicationForm() {
     setSuccess(false);
 
     if (!cvFile) {
-      setCvError("CV PDF yükleyin");
+      setCvError(copy.chrome.cvRequired);
       return;
     }
     if (!cvFile.name.toLowerCase().endsWith(".pdf")) {
-      setCvError("Yalnızca PDF kabul edilir");
+      setCvError(copy.chrome.cvPdfOnly);
       return;
     }
     if (cvFile.size > CV_MAX_BYTES) {
-      setCvError("Dosya en fazla 4 MB olabilir");
+      setCvError(copy.chrome.cvTooBig);
       return;
     }
 
@@ -155,12 +158,12 @@ export function CareersApplicationForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2 text-sm">
-          <span className="font-medium text-foreground">Ad Soyad</span>
+          <span className="font-medium text-foreground">{copy.form.name}</span>
           <Input
             required
             autoComplete="name"
             className="h-11 px-3"
-            placeholder="Adınız"
+            placeholder={copy.form.namePh}
             aria-invalid={!!errors.name}
             {...register("name")}
           />
@@ -172,7 +175,7 @@ export function CareersApplicationForm() {
         </label>
 
         <label className="block space-y-2 text-sm">
-          <span className="font-medium text-foreground">E-posta</span>
+          <span className="font-medium text-foreground">{copy.form.email}</span>
           <Input
             required
             type="email"
@@ -193,8 +196,8 @@ export function CareersApplicationForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2 text-sm">
           <span className="font-medium text-foreground">
-            Telefon{" "}
-            <span className="font-normal text-muted-foreground">(opsiyonel)</span>
+            {copy.form.phone}{" "}
+            <span className="font-normal text-muted-foreground">{copy.form.optional}</span>
           </span>
           <Input
             type="tel"
@@ -212,12 +215,12 @@ export function CareersApplicationForm() {
 
         <label className="block space-y-2 text-sm">
           <span className="font-medium text-foreground">
-            Pozisyon{" "}
-            <span className="font-normal text-muted-foreground">(opsiyonel)</span>
+            {copy.chrome.position}{" "}
+            <span className="font-normal text-muted-foreground">{copy.form.optional}</span>
           </span>
           <Input
             className="h-11 px-3"
-            placeholder="Örn. Üretim operatörü"
+            placeholder={copy.chrome.positionPh}
             {...register("position")}
           />
         </label>
@@ -225,19 +228,19 @@ export function CareersApplicationForm() {
 
       <label className="block space-y-2 text-sm">
         <span className="font-medium text-foreground">
-          Ön yazı / not{" "}
-          <span className="font-normal text-muted-foreground">(opsiyonel)</span>
+          {copy.chrome.coverNote}{" "}
+          <span className="font-normal text-muted-foreground">{copy.form.optional}</span>
         </span>
         <textarea
           rows={4}
-          placeholder="Kısa bir not ekleyebilirsiniz…"
+          placeholder={copy.chrome.coverNotePh}
           className={fieldClass}
           {...register("message")}
         />
       </label>
 
       <label className="block space-y-2 text-sm">
-        <span className="font-medium text-foreground">CV (PDF)</span>
+        <span className="font-medium text-foreground">{copy.chrome.cv}</span>
         <input
           ref={fileInputRef}
           type="file"
@@ -250,8 +253,8 @@ export function CareersApplicationForm() {
           }}
         />
         <span className="block text-xs text-muted-foreground">
-          En fazla 4 MB, yalnızca PDF.
-          {cvFile ? ` Seçilen: ${cvFile.name}` : ""}
+          {copy.chrome.cvHint}
+          {cvFile ? ` ${copy.chrome.cvSelected} ${cvFile.name}` : ""}
         </span>
         {cvError && (
           <span className="block text-xs text-destructive">{cvError}</span>
@@ -278,11 +281,10 @@ export function CareersApplicationForm() {
                 onClick={() => setKvkkOpen(true)}
                 className="font-medium text-foreground underline decoration-brand-orange/60 underline-offset-2 transition-colors hover:text-brand-orange hover:decoration-brand-orange"
               >
-                KVKK Aydınlatma Metni
+                {copy.chrome.kvkk}
               </button>
               <label htmlFor="kvkk-careers" className="cursor-pointer">
-                ’ni okudum; CV ve kişisel verilerimin işe alım sürecinde
-                işlenmesini kabul ediyorum.
+                {copy.chrome.careersKvkk}
               </label>
             </p>
           </div>
@@ -297,7 +299,7 @@ export function CareersApplicationForm() {
       <KvkkModal
         open={kvkkOpen}
         onClose={() => setKvkkOpen(false)}
-        notice={kvkkCareersNotice}
+        notice={getUi(locale).kvkkCareers}
       />
 
       {turnstileEnabled ? (
@@ -320,7 +322,7 @@ export function CareersApplicationForm() {
           role="status"
           className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-700 dark:text-emerald-300"
         >
-          Başvurunuz alındı. En kısa sürede değerlendireceğiz.
+          {copy.chrome.careersSent}
         </p>
       )}
 
@@ -343,12 +345,12 @@ export function CareersApplicationForm() {
       >
         {pending ? (
           <>
-            Gönderiliyor
+            {copy.form.sending}
             <Loader2 aria-hidden="true" className="size-4 animate-spin" />
           </>
         ) : (
           <>
-            Başvuruyu Gönder
+            {copy.chrome.careersSend}
             <ArrowRight aria-hidden="true" />
           </>
         )}

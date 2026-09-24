@@ -1,5 +1,7 @@
 import { headers } from "next/headers";
 import { Resend } from "resend";
+import { getUi } from "@/i18n/ui";
+import type { Locale } from "@/i18n/locales";
 
 /** İstek IP’si (rate limit için) */
 export async function getClientIp(): Promise<string> {
@@ -63,10 +65,14 @@ export function createResend(apiKey: string) {
 }
 
 /** Resend hata metnini kullanıcıya anlaşılır hale getir (teknik detay yok) */
-export function friendlyResendError(error: {
-  message?: string;
-  name?: string;
-}): string {
+export function friendlyResendError(
+  error: {
+    message?: string;
+    name?: string;
+  },
+  locale: Locale = "tr",
+): string {
+  const copy = getUi(locale).form;
   const raw = (error.message ?? "").toLowerCase();
 
   // Teknik detay console’da kalsın; kullanıcıya sade mesaj
@@ -79,12 +85,12 @@ export function friendlyResendError(error: {
     raw.includes("only send testing emails") ||
     raw.includes("own email address")
   ) {
-    return "Mesaj şu an iletilemedi. Lütfen doğrudan info@omafil.com adresine yazın veya bizi arayın.";
+    return copy.mailDomain;
   }
 
   if (raw.includes("invalid") && raw.includes("api")) {
-    return "Mesaj şu an iletilemedi. Lütfen daha sonra tekrar deneyin veya bizi arayın.";
+    return copy.mailFail;
   }
 
-  return "Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.";
+  return copy.mailFail;
 }

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
+import { useCopy, useInner, useLocale } from "@/components/i18n/locale-provider";
 import {
   yarnImages,
   yarnTestSrc,
@@ -38,6 +39,12 @@ function ImageGroup({
   onHover,
   onYarnClick,
 }: GroupProps) {
+  const copy = useCopy();
+  const inner = useInner();
+  const locale = useLocale();
+  // Şerit LTR kalır. Kart yazısı Arapçada kendi yönünde akar.
+  const textDir = locale === "ar" ? "rtl" : "ltr";
+
   return (
     // Kopya grup görsel döngü için; aria-hidden + tabIndex=-1 yeter.
     // pointer-events-none / inert KOYMA: offset yarım şeride gelince
@@ -55,7 +62,7 @@ function ImageGroup({
           const open = openSrc === item.src || hoveredSrc === item.src;
 
           return (
-            <Link
+            <LocaleLink
               key={`${item.src}-${index}`}
               href={item.href ?? "/urunlerimiz"}
               tabIndex={duplicate ? -1 : undefined}
@@ -73,7 +80,10 @@ function ImageGroup({
               }}
               className="flex w-60 shrink-0 flex-col sm:w-72 md:w-80"
             >
-              <div className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3">
+              <div
+                dir={textDir}
+                className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3"
+              >
                 <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
                   <p className="text-xs font-semibold text-zinc-900 sm:text-sm">
                     {item.label}
@@ -90,9 +100,11 @@ function ImageGroup({
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-xs leading-5 text-zinc-600">{item.summary}</p>
+                    <p className="text-xs leading-5 text-zinc-600">
+                      {(item.label && inner?.marquee[item.label]) || item.summary}
+                    </p>
                     <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
-                      Detaylı Bilgi
+                      {copy.hero.details}
                       <ArrowRight aria-hidden="true" className="size-3.5" />
                     </p>
                   </div>
@@ -110,7 +122,7 @@ function ImageGroup({
                   className="object-cover"
                 />
               </div>
-            </Link>
+            </LocaleLink>
           );
         }
 
@@ -127,7 +139,10 @@ function ImageGroup({
               quality={75}
               className="object-cover transition-transform duration-500 group-hover:-translate-y-3 group-hover:scale-105"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-3 pb-3 pt-8 sm:px-4 sm:pb-4 sm:pt-10">
+            <div
+              dir={textDir}
+              className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-3 pb-3 pt-8 sm:px-4 sm:pb-4 sm:pt-10"
+            >
               <p className="text-xs font-semibold text-white sm:text-sm">{item.label}</p>
             </div>
           </div>
@@ -150,6 +165,7 @@ function MarqueeRow({
   overrideSrc?: string | null;
   variant: "yarn" | "plant";
 }) {
+  const copy = useCopy();
   const innerRef = useRef<HTMLDivElement>(null);
   const offset = useRef(0);
   const paused = useRef(false);
@@ -304,6 +320,8 @@ function MarqueeRow({
 
   return (
     <div
+      // rtl sayfada flex sağdan başlar, translateX sola kaçırır; şerit boşalır.
+      dir="ltr"
       className="group/row relative flex items-center gap-2"
       onMouseEnter={() => {
         if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -317,7 +335,7 @@ function MarqueeRow({
     >
       <button
         type="button"
-        aria-label="Geriye kaydır"
+        aria-label={copy.chrome.scrollPrev}
         onClick={() => scrollByStep("left")}
         className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >
@@ -339,7 +357,7 @@ function MarqueeRow({
 
       <button
         type="button"
-        aria-label="İleriye kaydır"
+        aria-label={copy.chrome.scrollNext}
         onClick={() => scrollByStep("right")}
         className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >

@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/locale-link";
+import { getCopy } from "@/i18n/get-copy";
+import { getInner } from "@/i18n/inner";
 import {
   Award,
   Factory,
@@ -21,7 +23,7 @@ const highlightStats: {
     icon: Factory,
   },
   {
-    title: "5.000 Ton/Yıl Kapasite",
+    title: "13.000 Ton/Yıl Üretim",
     subtitle: "Naylon + Polyester Gipe",
     icon: Award,
   },
@@ -49,13 +51,28 @@ const certificates = ["GRS", "ISO 9001", "OEKO-TEX"] as const;
  * Hakkımızda — canlı sitedeki rakam şeridi + sürdürülebilirlik bloğu.
  * İthalat/Üretim/İhracat kartlarının yerine geçer.
  */
-export function AboutHighlights() {
+export async function AboutHighlights() {
+  const { locale } = await getCopy();
+  const t = getInner(locale);
+  const stats = highlightStats.map((stat, i) => ({
+    ...stat,
+    title: t?.about.stats[i]?.title ?? stat.title,
+    subtitle: t?.about.stats[i]?.subtitle ?? stat.subtitle,
+  }));
+  const focus = focusItems.map((item, i) => ({
+    ...item,
+    label: t?.about.focus[i] ?? item.label,
+  }));
+
   return (
     <>
       {/* Navy istatistik şeridi */}
-      <section className="bg-brand-navy py-12 sm:py-16" aria-label="OmaFil rakamları">
+      <section
+        className="bg-brand-navy py-12 sm:py-16"
+        aria-label={t?.about.statsAria ?? "OmaFil rakamları"}
+      >
         <div className="mx-auto grid max-w-6xl gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlightStats.map((stat) => {
+          {stats.map((stat) => {
             const Icon = stat.icon;
             return (
               <article
@@ -84,7 +101,7 @@ export function AboutHighlights() {
           <div className="flex flex-col justify-center">
             <p className="flex items-center gap-3 text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
               <span aria-hidden="true" className="h-px max-w-10 flex-1 bg-border" />
-              Sürdürülebilirlik
+              {t?.about.sustainKicker ?? "Sürdürülebilirlik"}
               <span aria-hidden="true" className="h-px max-w-10 flex-1 bg-border" />
             </p>
 
@@ -92,23 +109,31 @@ export function AboutHighlights() {
               id="about-sustainability-title"
               className="mt-5 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
             >
-              Geleceğe <span className="text-brand-orange">Sorumlu</span>{" "}
-              Yaklaşım
+              {t ? (
+                <>
+                  {t.about.sustainBefore}{" "}
+                  <span className="text-brand-orange">{t.about.sustainAccent}</span>{" "}
+                  {t.about.sustainAfter}
+                </>
+              ) : (
+                <>
+                  Geleceğe <span className="text-brand-orange">Sorumlu</span>{" "}
+                  Yaklaşım
+                </>
+              )}
             </h2>
 
             <p className="text-body mt-5 max-w-xl text-base leading-8">
-              Üretim süreçlerimizin merkezine sürdürülebilirliği koyuyoruz.
-              Çatı üstü güneş enerjisi yatırımlarımız ve GRS sertifikalı geri
-              dönüştürülmüş iplik çözümlerimizle çevresel etkimizi azaltmayı
-              hedefliyoruz.
+              {t?.about.sustainP1 ??
+                "Üretim süreçlerimizin merkezine sürdürülebilirliği koyuyoruz. Çatı üstü güneş enerjisi yatırımlarımız ve GRS sertifikalı geri dönüştürülmüş iplik çözümlerimizle çevresel etkimizi azaltmayı hedefliyoruz."}
             </p>
             <p className="text-body mt-3 max-w-xl text-base leading-8">
-              Kaynak verimliliği, sorumlu üretim ve döngüsel ekonomi ilkeleri;
-              OmaFil’in kurumsal kimliğinin ayrılmaz parçasıdır.
+              {t?.about.sustainP2 ??
+                "Kaynak verimliliği, sorumlu üretim ve döngüsel ekonomi ilkeleri; OmaFil’in kurumsal kimliğinin ayrılmaz parçasıdır."}
             </p>
 
             <ul className="mt-8 flex flex-col gap-3">
-              {focusItems.map((item) => {
+              {focus.map((item) => {
                 const Icon = item.icon;
                 return (
                   <li key={item.label}>
@@ -123,18 +148,18 @@ export function AboutHighlights() {
               })}
             </ul>
 
-            <Link
+            <LocaleLink
               href="/kurumsal/surdurulebilirlik"
               className="mt-6 inline-flex text-sm font-medium text-brand-orange hover:underline"
             >
-              Sürdürülebilirlik sayfasına git →
-            </Link>
-            <Link
+              {t?.about.sustainLink ?? "Sürdürülebilirlik sayfasına git"} →
+            </LocaleLink>
+            <LocaleLink
               href="/ges"
               className="mt-3 inline-flex text-sm font-medium text-brand-orange hover:underline"
             >
-              GES — güneş enerji sistemi →
-            </Link>
+              {t?.about.gesLink ?? "GES — güneş enerji sistemi"} →
+            </LocaleLink>
           </div>
 
           <article className="flex flex-col overflow-hidden rounded-3xl bg-emerald-50 text-zinc-900 shadow-sm dark:bg-emerald-950/40 dark:text-foreground">
@@ -143,22 +168,22 @@ export function AboutHighlights() {
                 <Recycle aria-hidden="true" className="size-8" strokeWidth={1.5} />
               </span>
               <h3 className="mt-6 text-2xl font-bold tracking-tight sm:text-3xl">
-                Recycled İplik
+                {t?.about.recycledTitle ?? "Recycled İplik"}
               </h3>
               <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-muted-foreground">
-                Geri dönüştürülmüş kaynaklardan geliştirilen iplik
-                çözümlerimizle döngüsel ekonomiyi üretimimize taşıyoruz. Kalite
-                standartlarımızdan ödün vermeden çevre dostu alternatifler
-                sunuyoruz.
+                {t?.about.recycledText ??
+                  "Geri dönüştürülmüş kaynaklardan geliştirilen iplik çözümlerimizle döngüsel ekonomiyi üretimimize taşıyoruz. Kalite standartlarımızdan ödün vermeden çevre dostu alternatifler sunuyoruz."}
               </p>
               <div className="mt-6 flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                 <Leaf aria-hidden="true" className="size-4" />
-                GRS uyumlu üretim
+                {t?.about.grs ?? "GRS uyumlu üretim"}
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3 bg-zinc-700 px-6 py-4 text-white dark:bg-zinc-800">
-              <span className="text-sm font-medium">Sertifikalar</span>
+              <span className="text-sm font-medium">
+                {t?.about.certs ?? "Sertifikalar"}
+              </span>
               <div className="flex flex-wrap gap-2">
                 {certificates.map((cert) => (
                   <span

@@ -1,8 +1,12 @@
+import { getCopy } from "@/i18n/get-copy";
+
 /**
  * Hero ile kurumsal alan arasındaki marka mesajı.
  * Görsel tasarım tek component üzerinden yönetilir.
  */
-export function BrandStatement() {
+export async function BrandStatement() {
+  const { copy } = await getCopy();
+
   return (
     <section
       className="mx-auto w-full max-w-6xl px-4 py-10 sm:py-18"
@@ -28,8 +32,8 @@ export function BrandStatement() {
             id="brand-statement-title"
             className="mx-auto mt-4 max-w-4xl text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
           >
-            Yüksek Kalite ve Yenilikçilikte{" "}
-            <span className="text-brand-orange">Dünyaya Dokunuyoruz</span>
+            {copy.brand.titleBefore}{" "}
+            <span className="text-brand-orange">{copy.brand.titleAccent}</span>
           </h2>
         </div>
 

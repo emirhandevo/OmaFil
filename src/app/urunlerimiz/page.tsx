@@ -2,18 +2,25 @@ import type { Metadata } from "next";
 import { ProductsGrid } from "@/components/sections/products-grid";
 import { getContact } from "@/content/cms";
 import { getProductLines } from "@/content/catalog";
+import { getCopy } from "@/i18n/get-copy";
+import { pageAlternates } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
 
-export const metadata: Metadata = {
-  title: "Ürünlerimiz",
-  description:
-    "OmaFil iplik ürünleri: Naylon 6, Naylon 66 ve polyester gipe, POY, FDY, DTY, ACY, SCY.",
-  alternates: { canonical: "/urunlerimiz" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getCopy();
+  const seo = getUi(locale).seo;
+  return {
+    title: seo.productsTitle,
+    description: seo.products,
+    alternates: pageAlternates("/urunlerimiz", locale),
+  };
+}
 
 export default async function UrunlerimizPage() {
-  const [lines, contact] = await Promise.all([
+  const [lines, contact, { copy }] = await Promise.all([
     getProductLines(),
     getContact(),
+    getCopy(),
   ]);
 
   return (
@@ -30,14 +37,13 @@ export default async function UrunlerimizPage() {
 
       <div className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
         <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-          Ürünlerimiz
+          {copy.products.kicker}
         </p>
         <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          İplik portföyümüz
+          {copy.products.title}
         </h1>
         <p className="text-body mt-5 max-w-2xl text-base leading-8">
-          Naylon 6, Naylon 66 ve polyester filament + gipe hatları. Specs için
-          ürüne tıklayın; teklif veya numune için iletişime geçin.
+          {copy.products.lead}
         </p>
 
         <div className="mt-12">

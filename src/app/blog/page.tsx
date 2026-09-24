@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import { getBlogPosts } from "@/content/blog";
+import { getCopy } from "@/i18n/get-copy";
+import { htmlLang, pageAlternates } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "OmaFil iplik üretimi, tesis ve sürdürülebilirlik yazıları.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getCopy();
+  const seo = getUi(locale).seo;
+  return {
+    title: seo.blogTitle,
+    description: seo.blog,
+    alternates: pageAlternates("/blog", locale),
+  };
+}
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const [posts, { copy, locale }] = await Promise.all([
+    getBlogPosts(),
+    getCopy(),
+  ]);
 
   return (
     <section className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20">
@@ -16,21 +27,21 @@ export default async function BlogPage() {
         Blog
       </p>
       <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-        Yazılar
+        {copy.blog.title}
       </h1>
       <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">
-        Tesis, ürün ve üretim üzerine yazılar.
+        {copy.blog.lead}
       </p>
 
       {posts.length === 0 ? (
         <p className="mt-12 rounded-2xl border border-border bg-card px-6 py-10 text-muted-foreground">
-          Yazılar yakında burada yayınlanacak.
+          {copy.blog.empty}
         </p>
       ) : (
         <ul className="mt-12 grid gap-4">
           {posts.map((post) => (
             <li key={post.slug}>
-              <Link
+              <LocaleLink
                 href={`/blog/${post.slug}`}
                 className="block rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand-orange"
               >
@@ -39,7 +50,7 @@ export default async function BlogPage() {
                     dateTime={post.date}
                     className="text-sm text-brand-orange"
                   >
-                    {new Date(post.date).toLocaleDateString("tr-TR", {
+                    {new Date(post.date).toLocaleDateString(htmlLang(locale), {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
@@ -50,7 +61,7 @@ export default async function BlogPage() {
                 <p className="mt-2 leading-7 text-muted-foreground">
                   {post.excerpt}
                 </p>
-              </Link>
+              </LocaleLink>
             </li>
           ))}
         </ul>

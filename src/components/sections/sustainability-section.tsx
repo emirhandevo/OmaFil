@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowRight,
   Droplets,
@@ -8,30 +7,23 @@ import {
   Sprout,
   Sun,
 } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
+import { getCopy } from "@/i18n/get-copy";
 
-const sustainableSolutions = [
+const solutionIcons = [
   {
     title: "Recycle İplikler",
-    subtitle: "UNIFI İş Birliği",
-    description:
-      "Geri dönüştürülmüş kaynaklardan geliştirilen çevre dostu iplik çözümleri.",
     icon: Recycle,
     iconClass: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
   },
   {
     title: "Eco-Biopa",
-    subtitle: "Bio-Bazlı Polyamid İplik",
-    description:
-      "Fosil kaynak kullanımını azaltmayı hedefleyen bio-bazlı polyamid iplik.",
     icon: Sprout,
     iconClass: "bg-lime-500/15 text-lime-800 dark:text-lime-400",
   },
   {
     title: "Free-Dyed",
-    subtitle: "Susuz Boyama Teknolojisi",
-    description:
-      "Su tüketimini azaltmaya odaklanan yenilikçi susuz boyama teknolojisi.",
     icon: Droplets,
     iconClass: "bg-sky-500/15 text-sky-800 dark:text-sky-400",
   },
@@ -39,8 +31,28 @@ const sustainableSolutions = [
 
 /**
  * OmaFil’in çevre, enerji ve sürdürülebilir iplik yaklaşımını anlatır.
+ * Ürün adları (Recycle İplikler, Eco-Biopa, Free-Dyed) değişmez.
  */
-export function SustainabilitySection() {
+export async function SustainabilitySection() {
+  const { copy } = await getCopy();
+  const cards = [
+    {
+      ...solutionIcons[0],
+      subtitle: copy.sustain.unifi,
+      description: copy.sustain.recycleText,
+    },
+    {
+      ...solutionIcons[1],
+      subtitle: copy.sustain.biobased,
+      description: copy.sustain.biobasedText,
+    },
+    {
+      ...solutionIcons[2],
+      subtitle: copy.sustain.waterless,
+      description: copy.sustain.waterlessText,
+    },
+  ];
+
   return (
     <section
       className="py-20 sm:py-28"
@@ -50,20 +62,18 @@ export function SustainabilitySection() {
         <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div className="flex flex-col justify-center">
             <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-              Geleceğe Karşı Sorumluluğumuz
+              {copy.sustain.kicker}
             </p>
 
             <h2
               id="sustainability-title"
               className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              Sürdürülebilir Endüstriyel İplik Üretimi
+              {copy.sustain.title}
             </h2>
 
             <p className="text-body mt-6 max-w-2xl text-base leading-8">
-              Üretimimizin merkezinde sürdürülebilirlik var: çatı üstü güneş
-              enerjisi, geri dönüştürülmüş iplik ve kaynak verimli süreçlerle
-              çevresel etkimizi azaltıyoruz.
+              {copy.sustain.lead}
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -73,11 +83,11 @@ export function SustainabilitySection() {
                 </div>
 
                 <h3 className="mt-4 font-semibold text-foreground">
-                  Yenilenebilir Enerji
+                  {copy.sustain.energyTitle}
                 </h3>
 
                 <p className="text-body mt-2 text-sm leading-7">
-                  Çatı üstü GES ile temiz enerji.
+                  {copy.sustain.energyText}
                 </p>
               </article>
 
@@ -87,16 +97,16 @@ export function SustainabilitySection() {
                 </div>
 
                 <h3 className="mt-4 font-semibold text-foreground">
-                  Sorumlu Üretim
+                  {copy.sustain.productionTitle}
                 </h3>
 
                 <p className="text-body mt-2 text-sm leading-7">
-                  Kaynak verimli, çevreye duyarlı süreçler.
+                  {copy.sustain.productionText}
                 </p>
               </article>
             </div>
 
-            <Link
+            <LocaleLink
               href="/kurumsal/surdurulebilirlik"
               className={buttonVariants({
                 variant: "outline",
@@ -104,15 +114,15 @@ export function SustainabilitySection() {
                 className: "mt-8 self-start",
               })}
             >
-              Sürdürülebilirlik Yaklaşımımız
+              {copy.sustain.cta}
               <ArrowRight aria-hidden="true" />
-            </Link>
+            </LocaleLink>
           </div>
 
           <div className="relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 lg:min-h-[540px]">
             <Image
               src="/images/sustainability/factory-solar.webp"
-              alt="Güneş panelleriyle kaplı OmaFil üretim tesisi"
+              alt={copy.chrome.sustainAlt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               quality={82}
@@ -123,11 +133,10 @@ export function SustainabilitySection() {
 
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
               <p className="text-xs font-semibold tracking-[0.2em] text-brand-orange uppercase">
-                OmaFil Üretim Tesisi
+                {copy.sustain.plant}
               </p>
               <p className="mt-2 max-w-sm text-lg font-medium text-white">
-                Üretimde kaliteyi yenilenebilir enerji yatırımlarıyla
-                destekliyoruz.
+                {copy.sustain.plantText}
               </p>
             </div>
           </div>
@@ -136,16 +145,16 @@ export function SustainabilitySection() {
         <div className="mt-14">
           <div className="text-center">
             <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-              Çevreci Teknolojiler
+              {copy.sustain.techKicker}
             </p>
 
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              Sürdürülebilir İplik Çözümlerimiz
+              {copy.sustain.techTitle}
             </h3>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {sustainableSolutions.map((solution) => {
+            {cards.map((solution) => {
               const Icon = solution.icon;
 
               return (

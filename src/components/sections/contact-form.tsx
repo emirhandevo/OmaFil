@@ -10,10 +10,12 @@ import { KvkkModal } from "@/components/sections/kvkk-modal";
 import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  contactFormSchema,
+  createContactFormSchema,
   productGroups,
   type ContactFormValues,
 } from "@/lib/schemas/contact";
+import { useCopy, useLocale } from "@/components/i18n/locale-provider";
+import { getUi } from "@/i18n/ui";
 import { sanitizePhoneInput } from "@/lib/phone";
 
 /** Gerçek Cloudflare key’i yoksa (boş / örnek placeholder) widget gösterme */
@@ -35,6 +37,8 @@ const fieldClass =
  * Turnstile + honeypot spam koruması.
  */
 export function ContactForm() {
+  const copy = useCopy();
+  const locale = useLocale();
   const turnstileRef = useRef<TurnstileInstance>(null);
   const [pending, startTransition] = useTransition();
   const [formError, setFormError] = useState<string | null>(null);
@@ -50,7 +54,7 @@ export function ContactForm() {
     reset,
     formState: { errors },
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(createContactFormSchema(getUi(locale).form)),
     defaultValues: {
       name: "",
       email: "",
@@ -124,12 +128,12 @@ export function ContactForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2 text-sm">
-          <span className="font-medium text-foreground">Ad Soyad</span>
+          <span className="font-medium text-foreground">{copy.form.name}</span>
           <Input
             required
             autoComplete="name"
             className="h-11 px-3"
-            placeholder="Adınız"
+            placeholder={copy.form.namePh}
             aria-invalid={!!errors.name}
             {...register("name")}
           />
@@ -139,7 +143,7 @@ export function ContactForm() {
         </label>
 
         <label className="block space-y-2 text-sm">
-          <span className="font-medium text-foreground">E-posta</span>
+          <span className="font-medium text-foreground">{copy.form.email}</span>
           <Input
             required
             type="email"
@@ -158,7 +162,8 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block space-y-2 text-sm">
           <span className="font-medium text-foreground">
-            Telefon <span className="font-normal text-muted-foreground">(opsiyonel)</span>
+            {copy.form.phone}{" "}
+            <span className="font-normal text-muted-foreground">{copy.form.optional}</span>
           </span>
           <Input
             type="tel"
@@ -180,12 +185,12 @@ export function ContactForm() {
 
         <label className="block space-y-2 text-sm">
           <span className="font-medium text-foreground">
-            Firma Adı <span className="font-normal text-muted-foreground">(opsiyonel)</span>
+            {copy.form.company} <span className="font-normal text-muted-foreground">{copy.form.optional}</span>
           </span>
           <Input
             autoComplete="organization"
             className="h-11 px-3"
-            placeholder="Firma adınız"
+            placeholder={copy.form.companyPh}
             aria-invalid={!!errors.company}
             {...register("company")}
           />
@@ -196,7 +201,7 @@ export function ContactForm() {
       </div>
 
       <label className="block space-y-2 text-sm">
-        <span className="font-medium text-foreground">Talep türü</span>
+        <span className="font-medium text-foreground">{copy.form.request}</span>
         <select
           className={`${fieldClass} h-11`}
           aria-invalid={!!errors.productGroup}
@@ -204,11 +209,11 @@ export function ContactForm() {
           {...register("productGroup")}
         >
           <option value="" disabled>
-            Seçiniz
+            {copy.chrome.formSelect}
           </option>
           {productGroups.map((group) => (
             <option key={group} value={group}>
-              {group}
+              {copy.form.groups[group]}
             </option>
           ))}
         </select>
@@ -220,11 +225,11 @@ export function ContactForm() {
       </label>
 
       <label className="block space-y-2 text-sm">
-        <span className="font-medium text-foreground">Mesajınız</span>
+        <span className="font-medium text-foreground">{copy.form.message}</span>
         <textarea
           required
           rows={5}
-          placeholder="Sipariş, numune veya genel soru…"
+          placeholder={copy.form.messagePh}
           className={fieldClass}
           aria-invalid={!!errors.message}
           {...register("message")}
@@ -254,11 +259,10 @@ export function ContactForm() {
                 onClick={() => setKvkkOpen(true)}
                 className="font-medium text-foreground underline decoration-brand-orange/60 underline-offset-2 transition-colors hover:text-brand-orange hover:decoration-brand-orange"
               >
-                KVKK Aydınlatma Metni
+                {copy.chrome.kvkk}
               </button>
               <label htmlFor="kvkk-consent" className="cursor-pointer">
-                ’ni okudum ve kişisel verilerimin iletişim talebim kapsamında
-                işlenmesini kabul ediyorum.
+                {copy.chrome.kvkkConsent}
               </label>
             </p>
           </div>
@@ -296,7 +300,7 @@ export function ContactForm() {
           role="status"
           className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-700 dark:text-emerald-300"
         >
-          Mesajınız alındı, en kısa sürede dönüş yapacağız.
+          {copy.form.sent}
         </p>
       )}
 
@@ -319,20 +323,19 @@ export function ContactForm() {
       >
         {pending ? (
           <>
-            Gönderiliyor
+            {copy.form.sending}
             <Loader2 aria-hidden="true" className="size-4 animate-spin" />
           </>
         ) : (
           <>
-            Mesajı Gönder
+            {copy.form.send}
             <ArrowRight aria-hidden="true" />
           </>
         )}
       </button>
 
       <p className="text-xs leading-5 text-muted-foreground">
-        Gönder’e basınca mesajınız doğrudan OmaFil’e iletilir; ayrıca size kısa
-        bir onay e-postası gider.
+        {copy.chrome.sentNote}
       </p>
     </form>
   );

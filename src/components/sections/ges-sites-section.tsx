@@ -3,21 +3,18 @@
 import { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, MapPin, X } from "lucide-react";
+import { useInner, useLocale } from "@/components/i18n/locale-provider";
 import { gesErbaaRoof, gesSites, type GesSite } from "@/content/ges-sites";
-
-function formatDateTr(iso: string) {
-  return new Date(iso).toLocaleDateString("tr-TR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
+import { htmlLang } from "@/i18n/locales";
 
 /**
  * Dört GES tesisi — Elazığ Saha + Erbaa Çatı.
  * Saha: alt thumb’lar + lightbox okları. Çatı: tek hero, thumb yok.
  */
 export function GesSitesSection() {
+  const locale = useLocale();
+  const t = useInner();
+  const num = htmlLang(locale);
   const saha = gesSites.filter((s) => s.kind === "saha");
   const cati = gesSites.filter((s) => s.kind === "cati");
 
@@ -30,15 +27,15 @@ export function GesSitesSection() {
         id="ges-sites-title"
         className="text-2xl font-semibold tracking-tight sm:text-3xl"
       >
-        Tesislerimiz
+        {t?.ges.sitesTitle ?? "Tesislerimiz"}
       </h2>
       <p className="text-body mt-3 max-w-2xl text-base leading-8">
-        Elazığ Kovancılar’da iki Saha GES; Tokat Erbaa fabrika çatısında iki
-        ayrı Çatı GES. Toplam kurulu güç 6,76 MWp.
+        {t?.ges.sitesLead ??
+          "Elazığ Kovancılar’da iki Saha GES; Tokat Erbaa fabrika çatısında iki ayrı Çatı GES. Toplam kurulu güç 6,76 MWp."}
       </p>
 
       <h3 className="mt-12 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        Elazığ — Saha GES
+        {t?.ges.fieldHeading ?? "Elazığ — Saha GES"}
       </h3>
       <ul className="mt-6 grid gap-8 lg:grid-cols-2">
         {saha.map((site) => (
@@ -47,15 +44,17 @@ export function GesSitesSection() {
       </ul>
 
       <h3 className="mt-14 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        Erbaa — Çatı GES
+        {t?.ges.roofHeading ?? "Erbaa — Çatı GES"}
       </h3>
       <p className="text-body mt-2 max-w-2xl text-sm leading-7">
-        Oma Polimer Çatı GES toplam{" "}
-        <strong>{gesErbaaRoof.capacityMwp} MWp</strong> ({gesErbaaRoof.capacityKw}{" "}
-        kW). Günlük ortalama{" "}
-        {gesErbaaRoof.dailyKwhMin.toLocaleString("tr-TR")}–
-        {gesErbaaRoof.dailyKwhMax.toLocaleString("tr-TR")} kWh. Aynı çatıda iki
-        ayrı sistem: GES 1 ve GES 2.
+        {t
+          ? t.ges.roofLead({
+              mwp: String(gesErbaaRoof.capacityMwp),
+              kw: gesErbaaRoof.capacityKw.toLocaleString(num),
+              min: gesErbaaRoof.dailyKwhMin.toLocaleString(num),
+              max: gesErbaaRoof.dailyKwhMax.toLocaleString(num),
+            })
+          : `Oma Polimer Çatı GES toplam ${gesErbaaRoof.capacityMwp} MWp (${gesErbaaRoof.capacityKw.toLocaleString("tr-TR")} kW). Günlük ortalama ${gesErbaaRoof.dailyKwhMin.toLocaleString("tr-TR")}–${gesErbaaRoof.dailyKwhMax.toLocaleString("tr-TR")} kWh. Aynı çatıda iki ayrı sistem: GES 1 ve GES 2.`}
       </p>
       <ul className="mt-6 grid gap-8 lg:grid-cols-2">
         {cati.map((site) => (
@@ -67,6 +66,9 @@ export function GesSitesSection() {
 }
 
 function SiteCard({ site }: { site: GesSite }) {
+  const locale = useLocale();
+  const t = useInner();
+  const num = htmlLang(locale);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const hero = site.images[0];
   // Çatı kartlarında alt satır yok; Saha’da 2–4. foto thumb
@@ -104,23 +106,29 @@ function SiteCard({ site }: { site: GesSite }) {
 
         <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
           <div className="rounded-xl bg-muted/60 px-3 py-2">
-            <dt className="text-xs text-muted-foreground">Kurulu güç</dt>
+            <dt className="text-xs text-muted-foreground">
+              {t?.ges.capacityLabel ?? "Kurulu güç"}
+            </dt>
             <dd className="mt-0.5 font-semibold tabular-nums">
-              {site.capacityMwp.toLocaleString("tr-TR")} MWp
+              {site.capacityMwp.toLocaleString(num)} MWp
             </dd>
           </div>
           <div className="rounded-xl bg-muted/60 px-3 py-2">
-            <dt className="text-xs text-muted-foreground">Panel</dt>
+            <dt className="text-xs text-muted-foreground">
+              {t?.ges.panelLabel ?? "Panel"}
+            </dt>
             <dd className="mt-0.5 font-semibold tabular-nums">
-              {site.panelCount.toLocaleString("tr-TR")}
+              {site.panelCount.toLocaleString(num)}
             </dd>
           </div>
           {site.dailyKwhMin != null && site.dailyKwhMax != null ? (
             <div className="col-span-2 rounded-xl bg-muted/60 px-3 py-2">
-              <dt className="text-xs text-muted-foreground">Günlük üretim</dt>
+              <dt className="text-xs text-muted-foreground">
+                {t?.ges.daily ?? "Günlük üretim"}
+              </dt>
               <dd className="mt-0.5 font-semibold tabular-nums">
-                {site.dailyKwhMin.toLocaleString("tr-TR")}–
-                {site.dailyKwhMax.toLocaleString("tr-TR")} kWh
+                {site.dailyKwhMin.toLocaleString(num)}–
+                {site.dailyKwhMax.toLocaleString(num)} kWh
               </dd>
             </div>
           ) : null}
@@ -128,11 +136,15 @@ function SiteCard({ site }: { site: GesSite }) {
             <div className="col-span-2 rounded-xl bg-muted/60 px-3 py-2">
               <dt className="text-xs text-muted-foreground">
                 {site.kind === "cati"
-                  ? "Geçici kabul / işletme"
-                  : "Üretime başlangıç"}
+                  ? (t?.ges.roofStatus ?? "Geçici kabul / işletme")
+                  : (t?.ges.fieldStatus ?? "Üretime başlangıç")}
               </dt>
               <dd className="mt-0.5 font-semibold">
-                {formatDateTr(site.productionStart)}
+                {new Date(site.productionStart).toLocaleDateString(num, {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </dd>
             </div>
           ) : null}
@@ -148,11 +160,11 @@ function SiteCard({ site }: { site: GesSite }) {
                   type="button"
                   onClick={() => setOpenIndex(fullIndex)}
                   className="relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl bg-muted ring-offset-background transition hover:ring-2 hover:ring-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:outline-none"
-                  aria-label={`${site.shortName} fotoğraf ${fullIndex + 1}`}
+                  aria-label={`${site.shortName} ${t?.ges.photo ?? "fotoğraf"} ${fullIndex + 1}`}
                 >
                   <Image
                     src={src}
-                    alt={`${site.name} — fotoğraf ${fullIndex + 1}`}
+                    alt={`${site.name} — ${t?.ges.photo ?? "fotoğraf"} ${fullIndex + 1}`}
                     fill
                     sizes="(min-width: 1024px) 200px, 33vw"
                     quality={92}
@@ -191,6 +203,7 @@ function GesLightbox({
   onClose: () => void;
   onIndexChange: (i: number) => void;
 }) {
+  const t = useInner();
   const titleId = useId();
   const src = images[index];
   const hasNav = images.length > 1;
@@ -231,13 +244,13 @@ function GesLightbox({
         type="button"
         onClick={onClose}
         className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
-        aria-label="Kapat"
+        aria-label={t?.ges.close ?? "Kapat"}
       >
         <X className="size-5" />
       </button>
 
       <p id={titleId} className="sr-only">
-        {title} — fotoğraf {index + 1} / {images.length}
+        {title} — {t?.ges.photo ?? "fotoğraf"} {index + 1} / {images.length}
       </p>
 
       {hasNav ? (
@@ -249,7 +262,7 @@ function GesLightbox({
               onIndexChange((index - 1 + images.length) % images.length);
             }}
             className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 sm:left-6"
-            aria-label="Önceki fotoğraf"
+            aria-label={t?.ges.prev ?? "Önceki fotoğraf"}
           >
             <ChevronLeft className="size-7" />
           </button>
@@ -260,7 +273,7 @@ function GesLightbox({
               onIndexChange((index + 1) % images.length);
             }}
             className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 sm:right-6"
-            aria-label="Sonraki fotoğraf"
+            aria-label={t?.ges.next ?? "Sonraki fotoğraf"}
           >
             <ChevronRight className="size-7" />
           </button>
@@ -273,7 +286,7 @@ function GesLightbox({
       >
         <Image
           src={src}
-          alt={`${title} — büyük fotoğraf ${index + 1}`}
+          alt={`${title} — ${t?.ges.photo ?? "fotoğraf"} ${index + 1}`}
           fill
           sizes="(min-width: 1024px) 1024px, 100vw"
           quality={95}
@@ -297,7 +310,7 @@ function GesLightbox({
                   ? "size-2.5 rounded-full bg-brand-orange"
                   : "size-2.5 rounded-full bg-white/40 hover:bg-white/70"
               }
-              aria-label={`Fotoğraf ${i + 1}`}
+              aria-label={`${t?.ges.photo ?? "Fotoğraf"} ${i + 1}`}
             />
           ))}
         </div>

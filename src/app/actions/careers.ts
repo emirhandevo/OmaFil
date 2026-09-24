@@ -11,8 +11,10 @@ import {
   verifyTurnstile,
 } from "@/lib/mail";
 import { rateLimit } from "@/lib/rate-limit";
+import { getLocale } from "@/i18n/get-locale";
+import { getUi } from "@/i18n/ui";
 import {
-  careersFormSchema,
+  createCareersFormSchema,
   CV_MAX_BYTES,
   type CareersPayload,
 } from "@/lib/schemas/careers";
@@ -56,11 +58,13 @@ export async function submitCareerApplication(
     turnstileToken: String(formData.get("turnstileToken") ?? ""),
   };
 
-  const parsed = careersFormSchema.safeParse(raw);
+  const locale = await getLocale();
+  const form = getUi(locale).form;
+  const parsed = createCareersFormSchema(form).safeParse(raw);
   if (!parsed.success) {
     return {
       ok: false,
-      error: "Lütfen formdaki hataları düzeltin.",
+      error: form.fix,
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -73,24 +77,24 @@ export async function submitCareerApplication(
   if (!(cv instanceof File) || cv.size === 0) {
     return {
       ok: false,
-      error: "CV dosyası (PDF) zorunludur.",
-      fieldErrors: { cv: ["CV PDF yükleyin"] },
+      error: form.cvRequired,
+      fieldErrors: { cv: [form.cvMissing] },
     };
   }
 
   if (!isPdfFile(cv)) {
     return {
       ok: false,
-      error: "Yalnızca PDF dosyası kabul edilir.",
-      fieldErrors: { cv: ["PDF seçin"] },
+      error: form.cvPdf,
+      fieldErrors: { cv: [form.cvPdf] },
     };
   }
 
   if (cv.size > CV_MAX_BYTES) {
     return {
       ok: false,
-      error: "CV en fazla 4 MB olabilir.",
-      fieldErrors: { cv: ["Dosya çok büyük (max 4 MB)"] },
+      error: form.cvSize,
+      fieldErrors: { cv: [form.cvSize] },
     };
   }
 
@@ -99,7 +103,7 @@ export async function submitCareerApplication(
   if (!limited.ok) {
     return {
       ok: false,
-      error: `Çok fazla deneme. Lütfen ${limited.retryAfterSec} sn sonra tekrar deneyin.`,
+      error: form.rate(limited.retryAfterSec),
     };
   }
 
@@ -107,7 +111,7 @@ export async function submitCareerApplication(
   if (!turnstileOk) {
     return {
       ok: false,
-      error: "Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.",
+      error: form.captcha,
     };
   }
 
@@ -115,7 +119,7 @@ export async function submitCareerApplication(
   if (!mail.ok) {
     return {
       ok: false,
-      error: "Mail servisi yapılandırılmamış. Lütfen daha sonra tekrar deneyin.",
+      error: form.mailDown,
     };
   }
 
@@ -161,7 +165,7 @@ export async function submitCareerApplication(
 
     if (notify.error) {
       console.error("Resend careers notify error:", notify.error);
-      return { ok: false, error: friendlyResendError(notify.error) };
+      return { ok: false, error: friendlyResendError(notify.error, locale) };
     }
 
     const confirm = await resend.emails.send({
@@ -180,6 +184,6 @@ export async function submitCareerApplication(
     console.error("submitCareerApplication error:", err);
     const message =
       err instanceof Error ? err.message : "Beklenmeyen bir hata oluştu.";
-    return { ok: false, error: friendlyResendError({ message }) };
+    return { ok: false, error: friendlyResendError({ message }, locale) };
   }
 }

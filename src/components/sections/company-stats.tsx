@@ -1,31 +1,18 @@
-const companyStats = [
-  {
-    value: "152.000+",
-    unit: "Ton/Yıl",
-    label: "Üretim Kapasitesi",
-  },
-  {
-    value: "40.000+",
-    unit: "m²",
-    label: "Kapalı Üretim Alanı",
-  },
-  {
-    value: "18.000+",
-    unit: "Mutlu",
-    label: "Müşteri",
-  },
-  {
-    value: "61+",
-    unit: "Ülkeye",
-    label: "İhracat",
-  },
-] as const;
+import { getCopy } from "@/i18n/get-copy";
 
 /**
  * OmaFil’in üretim gücünü ve küresel erişimini gösterir.
- * Veriler tek diziden yönetildiği için güncelleme yalnızca yukarıdan yapılır.
+ * Sayılar sabit. Birim ve etiket dile göre değişir.
  */
-export function CompanyStats() {
+export async function CompanyStats() {
+  const { copy } = await getCopy();
+  const companyStats = [
+    { value: "13.000", unit: copy.stats.perYear, label: copy.stats.production },
+    { value: "40.000+", unit: "m²", label: copy.stats.area },
+    { value: "1.000+", unit: copy.stats.happy, label: copy.stats.customers },
+    { value: "61+", unit: copy.stats.toCountries, label: copy.stats.exportLabel },
+  ];
+
   return (
     <section
       className="py-20 sm:py-10"
@@ -34,19 +21,18 @@ export function CompanyStats() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
           <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-            Üretim Gücümüz
+            {copy.stats.kicker}
           </p>
 
           <h2
             id="company-stats-title"
             className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
           >
-            Rakamlarla OmaFil
+            {copy.stats.title}
           </h2>
 
           <p className="text-body mx-auto mt-4 max-w-2xl text-base leading-8">
-            Üretim kapasitemiz, modern tesislerimiz ve küresel ticaret
-            ağımızla tekstil sektörüne değer katıyoruz.
+            {copy.stats.lead}
           </p>
         </div>
 

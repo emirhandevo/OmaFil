@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { ConditionalShell } from "@/components/ui/layout/conditional-shell";
 import { getContact, getSiteSettings } from "@/content/cms";
 import { site } from "@/config/site";
+import { getLocale } from "@/i18n/get-locale";
+import { htmlLang, ogLocale } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
 import "./globals.css";
 
 // Türkçe karakterler için latin-ext
@@ -34,7 +38,13 @@ function getMetadataBase() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
+  const [settings, locale] = await Promise.all([
+    getSiteSettings(),
+    getLocale(),
+  ]);
+  const ui = getUi(locale);
+  const description =
+    locale === "tr" ? settings.description : ui.homeDescription;
 
   return {
     metadataBase: getMetadataBase(),
@@ -42,19 +52,19 @@ export async function generateMetadata(): Promise<Metadata> {
       default: site.name,
       template: `%s | ${site.name}`,
     },
-    description: settings.description,
+    description,
     openGraph: {
       type: "website",
-      locale: site.locale,
+      locale: ogLocale(locale),
       siteName: site.name,
       title: site.name,
-      description: settings.description,
+      description,
       images: [
         {
           url: "/images/og.jpg",
           width: 1200,
           height: 630,
-          alt: "OmaFil üretim tesisi",
+          alt: ui.ogAlt,
           type: "image/jpeg",
         },
       ],
@@ -62,7 +72,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: site.name,
-      description: settings.description,
+      description,
       images: ["/images/og.jpg"],
     },
   };
@@ -72,14 +82,16 @@ export async function generateMetadata(): Promise<Metadata> {
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");var dark;if(t==="light"){dark=false}else if(t==="dark"){dark=true}else{var h=new Date().getHours();dark=!(h>=7&&h<19)}document.documentElement.classList.toggle("dark",dark)}catch(e){}})()`;
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [contact, settings] = await Promise.all([
+  const [contact, settings, locale] = await Promise.all([
     getContact(),
     getSiteSettings(),
+    getLocale(),
   ]);
 
   return (
     <html
-      lang="tr"
+      lang={htmlLang(locale)}
+      dir={locale === "ar" ? "rtl" : "ltr"}
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
@@ -87,12 +99,15 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
-        <ConditionalShell
-          contact={contact}
-          footerTagline={settings.footerTagline}
-        >
-          {children}
-        </ConditionalShell>
+        {/* Dil, proxy’nin x-locale başlığından gelir. tr kök URL’de kalır. */}
+        <LocaleProvider locale={locale}>
+          <ConditionalShell
+            contact={contact}
+            footerTagline={settings.footerTagline}
+          >
+            {children}
+          </ConditionalShell>
+        </LocaleProvider>
       </body>
     </html>
   );

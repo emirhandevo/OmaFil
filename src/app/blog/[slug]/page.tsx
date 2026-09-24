@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import Markdoc from "@markdoc/markdoc";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import { getBlogPost, getBlogPosts } from "@/content/blog";
+import { getCopy } from "@/i18n/get-copy";
+import { htmlLang, pageAlternates } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -18,12 +21,13 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
-  if (!post) return { title: "Yazı bulunamadı" };
+  const [post, { locale }] = await Promise.all([getBlogPost(slug), getCopy()]);
+  if (!post) return { title: getUi(locale).seo.postMissing };
 
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: pageAlternates(`/blog/${slug}`, locale),
   };
 }
 
@@ -31,6 +35,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
   if (!post) notFound();
+  const { copy, locale } = await getCopy();
 
   const { node } = await post.content();
   const errors = Markdoc.validate(node);
@@ -42,12 +47,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:pt-20">
-      <Link
+      <LocaleLink
         href="/blog"
         className="text-sm font-medium text-brand-orange hover:underline"
       >
-        Yazılara dön
-      </Link>
+        {copy.chrome.blogBack}
+      </LocaleLink>
       <p className="mt-6 text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
         Blog
       </p>
@@ -57,7 +62,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           dateTime={post.date}
           className="mt-4 block text-sm text-muted-foreground"
         >
-          {new Date(post.date).toLocaleDateString("tr-TR", {
+          {new Date(post.date).toLocaleDateString(htmlLang(locale), {
             day: "numeric",
             month: "long",
             year: "numeric",

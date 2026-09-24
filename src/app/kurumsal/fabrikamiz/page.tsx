@@ -6,15 +6,24 @@ import { CorporateFrame } from "@/components/sections/corporate/corporate-frame"
 import { getContact } from "@/content/cms";
 import { getCmsPage } from "@/content/pages";
 import { site } from "@/config/site";
+import { getCopy } from "@/i18n/get-copy";
+import { getInner } from "@/i18n/inner";
+import { pageAlternates } from "@/i18n/locales";
+import { placeLabel } from "@/i18n/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getCmsPage("fabrikamiz");
+  const [page, { locale }] = await Promise.all([
+    getCmsPage("fabrikamiz"),
+    getCopy(),
+  ]);
+  const t = getInner(locale);
   return {
-    title: page?.title ?? "Fabrikamız",
+    title: t?.factory.title ?? page?.title ?? "Fabrikamız",
     description:
+      t?.factory.description ??
       page?.description ??
       "OmaFil gipe iplik üretim tesisi Tokat Erbaa’da. Avrupa’nın en büyük polimer / gipe üretim tesisi.",
-    alternates: { canonical: "/kurumsal/fabrikamiz" },
+    alternates: pageAlternates("/kurumsal/fabrikamiz", locale),
   };
 }
 
@@ -68,19 +77,30 @@ const productionBandGallery = Array.from({ length: 24 }, (_, i) => {
 });
 
 export default async function FabrikamizPage() {
-  const [page, contact] = await Promise.all([
+  const [page, contact, { locale }] = await Promise.all([
     getCmsPage("fabrikamiz"),
     getContact(),
+    getCopy(),
   ]);
+  const t = getInner(locale);
   const plant = contact.locations.find((place) =>
     place.label.startsWith("Fabrika /"),
   );
+  const gallery = factoryGallery.map((photo, i) => ({
+    ...photo,
+    alt: t?.factory.alts[i] ?? photo.alt,
+  }));
+  const band = productionBandGallery.map((photo) => ({
+    ...photo,
+    alt: t ? `${t.factory.bandAlt} ${photo.alt.slice(-2)}` : photo.alt,
+  }));
 
   return (
     <CorporateFrame
       path="/kurumsal/fabrikamiz"
-      title={page?.title ?? "Fabrikamız"}
+      title={t?.factory.title ?? page?.title ?? "Fabrikamız"}
       description={
+        t?.factory.description ??
         page?.description ??
         "Avrupa’nın en büyük polimer / gipe iplik üretim tesisi Tokat–Erbaa’da."
       }
@@ -88,12 +108,19 @@ export default async function FabrikamizPage() {
       {/* Giriş: metin + ürün listesi kartı */}
       <section className="mx-auto max-w-6xl px-4 pb-12">
         <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-brand-navy dark:text-foreground sm:text-3xl">
-          Avrupa’nın En Büyük Polimer Üretim Tesisi Tokat Erbaa’da Açıldı
+          {t?.factory.headline ??
+            "Yıllık 13.000 Ton Kapasiteyle Avrupa'nın Zirvesinde"}
         </h2>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           <article className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-            {page?.body ? (
+            {t ? (
+              <div className="prose-omafil text-body space-y-4 text-base leading-8 [&_p]:leading-8">
+                {t.factory.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            ) : page?.body ? (
               <div className="prose-omafil text-body space-y-4 text-base leading-8 [&_p]:leading-8">
                 {page.body}
               </div>
@@ -133,20 +160,17 @@ export default async function FabrikamizPage() {
         <div className="mx-auto grid max-w-6xl items-start gap-10 px-4 lg:grid-cols-2 lg:gap-14">
           <div>
             <p className="text-6xl font-bold tracking-tight text-brand-blue/45 sm:text-7xl dark:text-brand-blue/50">
-              2000
+              1999
             </p>
             <h2 className="mt-2 text-xl font-bold tracking-tight text-brand-navy uppercase dark:text-foreground sm:text-2xl">
-              Yılından beri sektörde öncülük ediyoruz
+              {t?.factory.since ?? "Yılından beri sektörde öncülük ediyoruz"}
             </h2>
             <p className="text-body mt-5 text-base leading-8">
-              Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına
-              alan OmaFil, polimer üretiminde yenilikçi ve sürdürülebilir
-              çözümler sunarak sektörün geleceğini inşa ediyor. Modern
-              tesislerimizde, küresel standartlarda kalite ve süreklilik
-              sağlıyoruz.
+              {t?.factory.sinceBody ??
+                "Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına alan OmaFil, polimer üretiminde yenilikçi ve sürdürülebilir çözümler sunarak sektörün geleceğini inşa ediyor. Modern tesislerimizde, küresel standartlarda kalite ve süreklilik sağlıyoruz."}
             </p>
           </div>
-          <FactoryMissionTabs />
+          <FactoryMissionTabs labels={t?.factory.tabs} aria={t?.factory.tabsAria} />
         </div>
       </section>
 
@@ -156,16 +180,14 @@ export default async function FabrikamizPage() {
           id="factory-gallery-title"
           className="text-2xl font-semibold tracking-tight sm:text-3xl"
         >
-          Fabrikamız
+          {t?.factory.galleryTitle ?? "Fabrikamız"}
         </h2>
         <p className="text-body mt-4 max-w-3xl text-base leading-8">
-          Modern teknoloji ve global standartlarla inşa edilen tesisimiz,
-          yüksek üretim kapasitesiyle tekstil sektörünün güvenilir tedarik
-          noktasıdır. Geniş altyapımız ve çevre dostu enerji
-          politikalarımızla, sürdürülebilir büyümeyi destekliyoruz.
+          {t?.factory.galleryBody ??
+            "Modern teknoloji ve global standartlarla inşa edilen tesisimiz, yüksek üretim kapasitesiyle tekstil sektörünün güvenilir tedarik noktasıdır. Geniş altyapımız ve çevre dostu enerji politikalarımızla, sürdürülebilir büyümeyi destekliyoruz."}
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {factoryGallery.map((photo) => (
+          {gallery.map((photo) => (
             <div
               key={photo.src}
               className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted"
@@ -193,16 +215,14 @@ export default async function FabrikamizPage() {
             id="production-band-title"
             className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
           >
-            Üretim Bandı
+            {t?.factory.bandTitle ?? "Üretim Bandı"}
           </h2>
           <p className="text-body mt-4 max-w-3xl text-base leading-8">
-            Naylon 6 ve 66 iplik üretiminde son teknoloji makine parkurumuzla
-            hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas
-            kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun
-            ömürlü iplikler üretiyoruz.
+            {t?.factory.bandBody ??
+              "Naylon 6 ve 66 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz."}
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {productionBandGallery.map((photo) => (
+            {band.map((photo) => (
               <div
                 key={photo.src}
                 className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted"
@@ -231,7 +251,7 @@ export default async function FabrikamizPage() {
               </span>
               <div>
                 <h2 className="text-xl font-semibold tracking-tight">
-                  {plant.label}
+                  {placeLabel(plant.label, locale)}
                 </h2>
                 <p className="text-body mt-2 max-w-2xl text-base leading-8">
                   {plant.address}
@@ -242,7 +262,7 @@ export default async function FabrikamizPage() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline"
                 >
-                  Tesisi haritada aç →
+                  {t?.factory.map ?? "Tesisi haritada aç"} →
                 </a>
               </div>
             </div>

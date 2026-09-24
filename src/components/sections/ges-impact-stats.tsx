@@ -3,19 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { BatteryCharging, Leaf, Sun } from "lucide-react";
+import { useInner, useLocale } from "@/components/i18n/locale-provider";
 import {
   computeGesMetrics,
   gesCapacity,
   gesMetrics,
 } from "@/content/ges";
-
-/** TR sayı formatı: 19.729.964,00 */
-function formatTr(value: number, decimals: number): string {
-  return value.toLocaleString("tr-TR", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  });
-}
+import { gesPortfolioTotals } from "@/content/ges-sites";
+import { htmlLang } from "@/i18n/locales";
 
 type MetricId = (typeof gesMetrics)[number]["id"];
 
@@ -24,6 +19,8 @@ type MetricId = (typeof gesMetrics)[number]["id"];
  * Sayılar sabit değil — her ~200ms kümülatif üretim artışıyla güncellenir.
  */
 export function GesImpactStats() {
+  const locale = useLocale();
+  const t = useInner();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [values, setValues] = useState(() => computeGesMetrics());
@@ -74,10 +71,24 @@ export function GesImpactStats() {
               id="ges-impact-title"
               className="text-2xl font-bold tracking-tight text-emerald-800 dark:text-emerald-300 sm:text-3xl"
             >
-              {gesCapacity.title}
+              {t?.ges.capacityTitle ?? gesCapacity.title}
             </h2>
             <p className="text-body mt-5 max-w-xl text-base leading-8">
-              {gesCapacity.text}
+              {t
+                ? t.ges.capacity({
+                    total: gesPortfolioTotals.all.capacityMwp.toLocaleString(
+                      htmlLang(locale),
+                    ),
+                    elazig: String(gesPortfolioTotals.elazig.capacityMwp),
+                    erbaa: String(gesPortfolioTotals.erbaa.capacityMwp),
+                    min: (gesPortfolioTotals.all.annualKwhMin / 1_000_000).toLocaleString(
+                      htmlLang(locale),
+                    ),
+                    max: (gesPortfolioTotals.all.annualKwhMax / 1_000_000).toLocaleString(
+                      htmlLang(locale),
+                    ),
+                  })
+                : gesCapacity.text}
             </p>
           </div>
 
@@ -100,16 +111,16 @@ export function GesImpactStats() {
 
       {/* Her kart: mobilde başlık üstte, desktop’ta görselin üst ortasında */}
       <div className="grid md:grid-cols-3">
-        {gesMetrics.map((m) => (
+        {gesMetrics.map((m, i) => (
           <article key={m.id} className="flex flex-col">
             <p className="bg-emerald-50 px-4 py-3 text-center text-[11px] font-bold tracking-[0.12em] text-emerald-800 uppercase dark:bg-emerald-950/40 dark:text-emerald-300 sm:text-xs md:hidden">
-              {m.label}
+              {t?.ges.metrics[i] ?? m.label}
             </p>
 
             <div className="relative min-h-[220px] overflow-hidden sm:min-h-[280px]">
               <Image
                 src={m.image}
-                alt={m.imageAlt}
+                alt={t?.ges.metricAlts[i] ?? m.imageAlt}
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"
                 quality={80}
@@ -118,7 +129,7 @@ export function GesImpactStats() {
               <div className="absolute inset-0 bg-brand-navy/55" />
 
               <p className="absolute top-4 left-1/2 z-10 hidden w-[calc(100%-2rem)] -translate-x-1/2 text-center text-[11px] font-bold tracking-[0.12em] text-white uppercase drop-shadow sm:text-xs md:block">
-                {m.label}
+                {t?.ges.metrics[i] ?? m.label}
               </p>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-8 text-center md:pt-6">
@@ -126,7 +137,10 @@ export function GesImpactStats() {
                   className="text-2xl font-bold tracking-tight text-white tabular-nums sm:text-3xl lg:text-4xl"
                   aria-live="polite"
                 >
-                  {formatTr(valueFor(m.id), m.decimals)}
+                  {valueFor(m.id).toLocaleString(htmlLang(locale), {
+                    minimumFractionDigits: m.decimals,
+                    maximumFractionDigits: m.decimals,
+                  })}
                   {m.suffix ? (
                     <span className="ml-1 text-base font-semibold sm:text-lg">
                       {m.suffix}

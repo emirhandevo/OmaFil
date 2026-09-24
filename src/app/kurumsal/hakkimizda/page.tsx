@@ -13,15 +13,24 @@ import { AboutHighlights } from "@/components/sections/about-highlights";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
 import { getContact } from "@/content/cms";
 import { getCmsPage } from "@/content/pages";
+import { getCopy } from "@/i18n/get-copy";
+import { getInner } from "@/i18n/inner";
+import { pageAlternates } from "@/i18n/locales";
+import { placeLabel } from "@/i18n/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getCmsPage("hakkimizda");
+  const [page, { locale }] = await Promise.all([
+    getCmsPage("hakkimizda"),
+    getCopy(),
+  ]);
+  const t = getInner(locale);
   return {
-    title: page?.title ?? "Hakkımızda",
+    title: t?.about.title ?? page?.title ?? "Hakkımızda",
     description:
+      t?.about.description ??
       page?.description ??
       "OMA POLİMER A.Ş. kuruluş hikâyesi. Sultanhamam’dan iplik ithalatı, üretimi ve ihracatına.",
-    alternates: { canonical: "/kurumsal/hakkimizda" },
+    alternates: pageAlternates("/kurumsal/hakkimizda", locale),
   };
 }
 
@@ -70,23 +79,38 @@ const milestones: {
 ];
 
 export default async function HakkimizdaPage() {
-  const [page, contact] = await Promise.all([
+  const [page, contact, { locale }] = await Promise.all([
     getCmsPage("hakkimizda"),
     getContact(),
+    getCopy(),
   ]);
+  // tr: Keystatic metni. Diğer diller: inner sözlük.
+  const t = getInner(locale);
+  const story = milestones.map((item, i) => ({
+    ...item,
+    title: t?.about.milestones[i]?.title ?? item.title,
+    text: t?.about.milestones[i]?.text ?? item.text,
+  }));
 
   return (
     <CorporateFrame
       path="/kurumsal/hakkimizda"
-      title={page?.title ?? "Hakkımızda"}
+      title={t?.about.title ?? page?.title ?? "Hakkımızda"}
       description={
+        t?.about.description ??
         page?.description ??
         "İplik ticaretinden üretime uzanan yolculuk, sürekli gelişim ilkesiyle devam ediyor."
       }
     >
       <section className="mx-auto max-w-6xl px-4 pb-4">
         {/* Keystatic: Kurumsal sayfalar → hakkimizda */}
-        {page?.body ? (
+        {t ? (
+          <div className="prose-omafil text-body max-w-3xl space-y-5 text-base leading-8 [&_p]:leading-8">
+            {t.about.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        ) : page?.body ? (
           <div className="prose-omafil text-body max-w-3xl space-y-5 text-base leading-8 [&_p]:leading-8">
             {page.body}
           </div>
@@ -106,11 +130,14 @@ export default async function HakkimizdaPage() {
           />
 
           <h2 className="relative text-center text-3xl font-semibold tracking-tight sm:text-4xl">
-            Büyüme <span className="text-brand-orange">Hikayemiz</span>
+            {t ? t.about.growthBefore : "Büyüme"}{" "}
+            <span className="text-brand-orange">
+              {t ? t.about.growthAccent : "Hikayemiz"}
+            </span>
           </h2>
 
           <ol className="relative mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-            {milestones.map((item) => {
+            {story.map((item) => {
               const Icon = item.icon;
               return (
                 <li key={item.year} className="relative pt-8">
@@ -151,7 +178,7 @@ export default async function HakkimizdaPage() {
           id="offices-title"
           className="text-2xl font-semibold tracking-tight"
         >
-          İletişim noktalarımız
+          {t?.about.offices ?? "İletişim noktalarımız"}
         </h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {contact.locations.map((place) => (
@@ -160,7 +187,9 @@ export default async function HakkimizdaPage() {
               className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-brand-orange"
             >
               <MapPin aria-hidden="true" className="size-5 text-brand-orange" />
-              <h3 className="mt-4 font-semibold">{place.label}</h3>
+              <h3 className="mt-4 font-semibold">
+                {placeLabel(place.label, locale)}
+              </h3>
               <p className="text-body mt-2 text-sm leading-7">
                 {place.address}
               </p>
@@ -170,7 +199,7 @@ export default async function HakkimizdaPage() {
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline"
               >
-                Haritada aç
+                {t?.about.map ?? "Haritada aç"}
               </a>
             </article>
           ))}

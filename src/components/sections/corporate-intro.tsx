@@ -1,13 +1,16 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
+import { getCopy } from "@/i18n/get-copy";
 
 /**
  * Anasayfadaki kısa kurumsal tanıtım bölümü.
  * Ziyaretçiyi detaylı Kurumsal sayfasına yönlendirir.
  */
-export function CorporateIntro() {
+export async function CorporateIntro() {
+  const { copy } = await getCopy();
+
   return (
     <section className="py-20 sm:py-18">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 lg:grid-cols-2 lg:gap-16">
@@ -26,7 +29,7 @@ export function CorporateIntro() {
 >
   <Image
     src="/images/corporate/factory.webp"
-    alt="OmaFil üretim tesisi"
+    alt={copy.chrome.introAlt}
     fill
     sizes="(min-width: 1024px) 50vw, 100vw"
     quality={80}
@@ -36,22 +39,22 @@ export function CorporateIntro() {
 
         <div>
           <p className="text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
-            Kurumsal
+            {copy.intro.kicker}
           </p>
 
           <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-            Türkiye’den Dünyaya, İpliğin Geleceği
-            </h2>
+            {copy.intro.title}
+          </h2>
 
           <p className="mt-6 leading-7 text-muted-foreground">
-            Tekstilde 1999’dan bu yana biriken deneyimimizi, ileri teknoloji ve güçlü üretim altyapımızla geleceğin iplik çözümlerine dönüştürüyoruz. Avrupa’nın en büyük gipe iplik üretim tesisimizle, global tekstil endüstrisinin ihtiyaçlarına yüksek kalite ve güvenilirlikle cevap veriyoruz.
+            {copy.intro.p1}
           </p>
 
           <p className="mt-4 leading-7 text-muted-foreground">
-            OmaFil olarak, üretimde sürekliliği, teknik uzmanlığı ve sürdürülebilirliği bir araya getirerek Türkiye’den dünyaya uzanan bir üretim gücü oluşturuyoruz.
+            {copy.intro.p2}
           </p>
 
-          <Link
+          <LocaleLink
             href="/kurumsal"
             className={buttonVariants({
               variant: "outline",
@@ -59,9 +62,9 @@ export function CorporateIntro() {
               className: "mt-8",
             })}
           >
-            Kurumsal Yapımız
+            {copy.intro.cta}
             <ArrowRight aria-hidden="true" />
-          </Link>
+          </LocaleLink>
         </div>
       </div>
     </section>

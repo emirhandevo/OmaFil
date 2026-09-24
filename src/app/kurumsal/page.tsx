@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   Building2,
   Factory,
@@ -7,15 +6,23 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { LocaleLink } from "@/components/i18n/locale-link";
 import { corporateLinks } from "@/config/site";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
+import { getCopy } from "@/i18n/get-copy";
+import { navLabel } from "@/i18n/labels";
+import { pageAlternates } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
 
-export const metadata: Metadata = {
-  title: "Kurumsal",
-  description:
-    "OmaFil kurumsal sayfaları: hakkımızda, fabrikamız, sürdürülebilirlik ve insan kaynakları.",
-  alternates: { canonical: "/kurumsal" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale } = await getCopy();
+  const seo = getUi(locale).seo;
+  return {
+    title: seo.corporateTitle,
+    description: seo.corporate,
+    alternates: pageAlternates("/kurumsal", locale),
+  };
+}
 
 const iconsByHref: Record<string, LucideIcon> = {
   "/kurumsal/hakkimizda": Building2,
@@ -24,18 +31,26 @@ const iconsByHref: Record<string, LucideIcon> = {
   "/kurumsal/insan-kaynaklari": Users,
 };
 
-export default function KurumsalPage() {
+export default async function KurumsalPage() {
+  const { copy } = await getCopy();
+  const summaries: Record<string, string> = {
+    "/kurumsal/hakkimizda": copy.chrome.aboutSummary,
+    "/kurumsal/fabrikamiz": copy.chrome.factorySummary,
+    "/kurumsal/surdurulebilirlik": copy.chrome.sustainSummary,
+    "/kurumsal/insan-kaynaklari": copy.chrome.careersSummary,
+  };
+
   return (
     <CorporateFrame
       path="/kurumsal"
-      title="Kurumsal"
-      description="Şirketimiz, tesisimiz, sürdürülebilirlik yaklaşımımız ve insan kaynakları."
+      title={copy.corporate.hubTitle}
+      description={copy.corporate.hubLead}
     >
       <section className="mx-auto grid max-w-6xl gap-x-5 gap-y-12 px-4 pb-20 pt-4 sm:grid-cols-2">
         {corporateLinks.map((item) => {
           const Icon = iconsByHref[item.href] ?? Building2;
           return (
-            <Link
+            <LocaleLink
               key={item.href}
               href={item.href}
               className="group relative pt-8"
@@ -45,16 +60,16 @@ export default function KurumsalPage() {
                   <Icon aria-hidden="true" className="size-7" strokeWidth={1.75} />
                 </span>
                 <h2 className="text-xl font-semibold tracking-tight">
-                  {item.label}
+                  {navLabel(item.href, copy)}
                 </h2>
                 <p className="text-body mt-3 text-sm leading-7">
-                  {item.summary}
+                  {summaries[item.href]}
                 </p>
                 <span className="mt-5 text-sm font-medium text-brand-orange">
-                  İncele →
+                  {copy.chrome.view} →
                 </span>
               </article>
-            </Link>
+            </LocaleLink>
           );
         })}
       </section>

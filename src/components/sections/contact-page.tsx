@@ -1,5 +1,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { site } from "@/config/site";
+import { getCopy } from "@/i18n/get-copy";
+import { placeLabel } from "@/i18n/ui";
 import { getContact, type SocialNetwork } from "@/content/cms";
 import { ContactForm } from "@/components/sections/contact-form";
 import {
@@ -23,7 +25,10 @@ const socialIcons: Record<SocialNetwork, typeof InstagramIcon> = {
  * Telefon, mail, adresler Keystatic → İletişim singleton.
  */
 export async function ContactPage() {
-  const contact = await getContact();
+  const [contact, { copy, locale }] = await Promise.all([
+    getContact(),
+    getCopy(),
+  ]);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -35,7 +40,7 @@ export async function ContactPage() {
     url: site.url,
     address: contact.locations.map((place) => ({
       "@type": "PostalAddress",
-      name: place.label,
+      name: placeLabel(place.label, locale),
       streetAddress: place.address,
       addressCountry: "TR",
     })),
@@ -61,14 +66,13 @@ export async function ContactPage() {
 
         <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-12 sm:pt-20 sm:pb-16">
           <p className="text-xs font-semibold tracking-[0.22em] text-brand-orange uppercase">
-            İletişim
+            {copy.contact.kicker}
           </p>
           <h1 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-            Bize ulaşın
+            {copy.contact.title}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
-            Numune, teklif veya genel sorularınız için mail atabilir ya da bizi
-            arayabilirsiniz.
+            {copy.contact.lead}
           </p>
         </div>
       </section>
@@ -77,10 +81,10 @@ export async function ContactPage() {
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-20">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">
-            Mesaj gönderin
+            {copy.contact.formTitle}
           </h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            Formu doldurun; mesajınız doğrudan bize ulaşır.
+            {copy.contact.formLead}
           </p>
           <div className="mt-8 rounded-3xl border border-border bg-card/60 p-6 sm:p-8">
             <ContactForm />
@@ -90,10 +94,10 @@ export async function ContactPage() {
         <aside className="space-y-6">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">
-              Hızlı iletişim
+              {copy.contact.quick}
             </h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Doğrudan arayın veya e-posta atın.
+              {copy.contact.quickLead}
             </p>
           </div>
 
@@ -109,7 +113,7 @@ export async function ContactPage() {
                   </span>
                   <span>
                     <span className="block text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                      Telefon
+                      {copy.contact.phone}
                     </span>
                     <span className="mt-0.5 block font-semibold">{phone}</span>
                   </span>
@@ -127,7 +131,7 @@ export async function ContactPage() {
                 </span>
                 <span>
                   <span className="block text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                    E-posta
+                    {copy.contact.email}
                   </span>
                   <span className="mt-0.5 block font-semibold">
                     {contact.email}
@@ -139,10 +143,10 @@ export async function ContactPage() {
 
           <div className="rounded-2xl border border-border bg-brand-navy px-5 py-6 text-white">
             <p className="text-xs font-semibold tracking-[0.2em] text-brand-orange uppercase">
-              Sosyal
+              {copy.contact.social}
             </p>
             <p className="mt-2 text-sm text-white/75">
-              Güncel üretim ve marka paylaşımları.
+              {copy.contact.socialLead}
             </p>
             <div className="mt-5 flex gap-3">
               {contact.socialLinks.map((item) => {
@@ -175,10 +179,10 @@ export async function ContactPage() {
             id="locations-heading"
             className="text-2xl font-semibold tracking-tight sm:text-3xl"
           >
-            Adreslerimiz
+            {copy.contact.addresses}
           </h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Her konum Google Maps’te açılır.
+            {copy.contact.mapsNote}
           </p>
 
           <ul className="mt-10 grid gap-4 md:grid-cols-3">
@@ -193,12 +197,14 @@ export async function ContactPage() {
                   <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange">
                     <MapPin aria-hidden="true" className="size-5" />
                   </span>
-                  <h3 className="mt-5 text-lg font-semibold">{place.label}</h3>
+                  <h3 className="mt-5 text-lg font-semibold">
+                    {placeLabel(place.label, locale)}
+                  </h3>
                   <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">
                     {place.address}
                   </p>
                   <span className="mt-5 text-sm font-medium text-brand-orange">
-                    Haritada aç →
+                    {copy.contact.openMap} →
                   </span>
                 </a>
               </li>
