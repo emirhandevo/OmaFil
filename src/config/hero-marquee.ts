@@ -1,110 +1,161 @@
 /**
  * Hero şeritleri — tek kaynak.
- * label: beyaz panelde duran ürün adı.
- * summary: hover/focus’ta açılan kısa bilgi.
- * href: kartın ve "Detaylı Bilgi"nin gittiği sayfa.
+ * 17 ürün hattı ikiye bölünür: üst 9, alt 8.
+ * Kart yazısı katalogdaki label. Hover metni ürün özetinden gelir (çeviriler inner.products).
+ * src yoksa başka ürünün görseli konmaz; kartta yer tutucu kalır.
  * yarnTestSrc:
  *   null   → her kart kendi görseli
  *   string → tüm üst şerit bu görseli gösterir (test modu)
  */
 
 export type MarqueeItem = {
-  src: string;
+  slug: string;
   label: string;
-  /** Üst şeritte zorunlu, tesis şeridinde yok */
-  summary?: string;
-  href?: string;
+  summary: string;
+  href: string;
+  /** Görsel yoksa boş bırakılır */
+  src?: string;
+  code: string;
 };
 
 export const yarnTestSrc: string | null = null;
 
-// export const plantImages: MarqueeItem[] = [
-//   { src: "/images/hero/tesis/denye1.png", label: "Üretim Tesisi Giriş" },
-//   { src: "/images/hero/tesis/iplik-bukum-chz.png", label: "Fabrika Kuş Bakışı" },
-//   { src: "/images/hero/tesis/03.webp", label: "Chips Makineleri" },
-//   { src: "/images/hero/tesis/04.webp", label: "Kalite Kontrol" },
-//   { src: "/images/hero/tesis/05.webp", label: "Fabrika / İç Kısım" },
-//   { src: "/images/hero/tesis/06.webp", label: "Fabrika / İç Kısım" },
-//   { src: "/images/hero/tesis/07.webp", label: "Sarma Ünitesi" },
-//   { src: "/images/hero/tesis/08.webp", label: "Depo & Lojistik" },
-// ];
-export const plantImages: MarqueeItem[] = [
-  { src: "/images/hero/lab/denye.webp", label: "" },
-  { src: "/images/hero/lab/duzgun.webp", label: "" },
-  { src: "/images/hero/lab/iplik-bkm.webp", label: "" },
-  { src: "/images/hero/lab/mukavvemet.webp", label: "" },
-  { src: "/images/hero/lab/numune.webp", label: "" },
-  { src: "/images/hero/lab/orgu-boya.webp", label: "" },
-  { src: "/images/hero/lab/viskozite.webp", label: "" },
-  { src: "/images/hero/lab/yag-test.webp", label: "" },
-];
-
-export const yarnImages: MarqueeItem[] = [
+/** Katalog sırası: Naylon 6, Naylon 66, polyester. */
+const allProducts: MarqueeItem[] = [
   {
-    src: "/images/hero/iplik/dcy-pes.webp",
-    label: "PES DCY Gipe",
-    summary: "Çift kaplama polyester gipe iplik.",
-    href: "/urunlerimiz",
-  },
-  {
-    src: "/images/hero/iplik/poy-n6.webp",
+    slug: "n6-poy",
     label: "Naylon 6 POY",
-    summary: "Naylon 6 kısmi oryante iplik.",
-    href: "/urunlerimiz",
+    summary: "Kısmi oryante PA6. SD / BR / FD ve net weight seçenekleri.",
+    href: "/urunlerimiz/n6-poy",
+    src: "/images/hero/iplik/poy-n6.webp",
+    code: "POY",
   },
   {
+    slug: "n6-fdy",
+    label: "Naylon 6 FDY",
+    summary: "Tam çekimli PA6. Geniş denier / filament aralığı.",
+    href: "/urunlerimiz/n6-fdy",
     src: "/images/hero/iplik/fdy-n6.webp",
-    label: "N6 FDY",
-    summary: "Naylon 6 tam çekimli iplik.",
-    href: "/urunlerimiz",
+    code: "FDY",
   },
   {
+    slug: "n6-dty",
+    label: "Naylon 6 DTY",
+    summary: "Tekstüre PA6. Ecru, siyah ve renkli seçenekler.",
+    href: "/urunlerimiz/n6-dty",
     src: "/images/hero/iplik/dty-n6.webp",
-    label: "DTY N6",
-    summary: "Naylon 6 tekstüre iplik.",
-    href: "/urunlerimiz",
+    code: "DTY",
   },
   {
-    src: "/images/hero/iplik/dty-n66.webp",
-    label: "DTY N66",
-    summary: "Naylon 66 tekstüre iplik.",
-    href: "/urunlerimiz",
-  },
-  {
+    slug: "n6-acy",
+    label: "Naylon 6 ACY",
+    summary: "Hava jetli kaplama PA6 + elastan. Ecru / siyah / renkli.",
+    href: "/urunlerimiz/n6-acy",
     src: "/images/hero/iplik/acy-n6.webp",
-    label: "ACY N6",
-    summary: "Naylon 6 hava jetli kaplama iplik.",
-    href: "/urunlerimiz",
+    code: "ACY",
   },
   {
-    src: "/images/hero/iplik/acy-n66.webp",
-    label: "ACY N66",
-    summary: "Naylon 66 hava jetli kaplama iplik.",
-    href: "/urunlerimiz",
-  },
-  {
+    slug: "n6-scy",
+    label: "Naylon 6 SCY",
+    summary: "Tek kaplama (single covered) PA6 + elastan.",
+    href: "/urunlerimiz/n6-scy",
     src: "/images/hero/iplik/scy-n6.webp",
-    label: "SCY N6 Gipe",
-    summary: "Naylon 6 tek kaplama gipe iplik.",
-    href: "/urunlerimiz",
+    code: "SCY",
   },
   {
+    slug: "n6-dcy",
+    label: "Naylon 6 DCY",
+    summary: "Çift kaplama (double covered) PA6 + elastan.",
+    href: "/urunlerimiz/n6-dcy",
+    code: "DCY",
+  },
+  {
+    slug: "n66-poy",
+    label: "Naylon 66 POY",
+    summary: "PA66 POY; final DTY / ATY dönüşümü. Softel / Nicolite.",
+    href: "/urunlerimiz/n66-poy",
+    code: "POY",
+  },
+  {
+    slug: "n66-fdy",
+    label: "Naylon 66 FDY",
+    summary: "PA66 tam çekimli. Covering, hosiery, CK / WK, weaving.",
+    href: "/urunlerimiz/n66-fdy",
+    code: "FDY",
+  },
+  {
+    slug: "n66-dty",
+    label: "Naylon 66 DTY",
+    summary: "PA66 tekstüre. Seamless, hosiery ve dokuma uygulamaları.",
+    href: "/urunlerimiz/n66-dty",
+    src: "/images/hero/iplik/dty-n66.webp",
+    code: "DTY",
+  },
+  {
+    slug: "n66-aty",
+    label: "Naylon 66 ATY",
+    summary: "PA66 air textured. Hosiery / socks ve dokuma.",
+    href: "/urunlerimiz/n66-aty",
+    code: "ATY",
+  },
+  {
+    slug: "n66-acy",
+    label: "Naylon 66 ACY",
+    summary: "Hava jetli kaplama PA66 + elastan. Custom üretim.",
+    href: "/urunlerimiz/n66-acy",
+    src: "/images/hero/iplik/acy-n66.webp",
+    code: "ACY",
+  },
+  {
+    slug: "n66-scy",
+    label: "Naylon 66 SCY",
+    summary: "Tek kaplama PA66 + elastan. Flat seçenekler dahil.",
+    href: "/urunlerimiz/n66-scy",
     src: "/images/hero/iplik/scy-n66.webp",
-    label: "SCY N66 Gipe",
-    summary: "Naylon 66 tek kaplama gipe iplik.",
-    href: "/urunlerimiz",
+    code: "SCY",
   },
   {
-    src: "/images/hero/iplik/scy-pes.webp",
-    label: "PES SCY Gipe",
-    summary: "Polyester tek kaplama gipe iplik.",
-    href: "/urunlerimiz",
+    slug: "n66-dcy",
+    label: "Naylon 66 DCY",
+    summary: "Çift kaplama PA66 + elastan. Custom üretim.",
+    href: "/urunlerimiz/n66-dcy",
+    code: "DCY",
   },
   {
-    src: "/images/hero/iplik/acc-pes.webp",
+    slug: "pes-acy",
     label: "PES ACY",
-    summary: "Polyester hava jetli kaplama iplik.",
+    summary: "Polyester hava jetli kaplama + elastan.",
     href: "/urunlerimiz/pes-acy",
+    src: "/images/hero/iplik/acc-pes.webp",
+    code: "ACY",
+  },
+  {
+    slug: "pes-scy",
+    label: "PES SCY Gipe",
+    summary: "Polyester tek kaplama + elastan. Custom seçenekler.",
+    href: "/urunlerimiz/pes-scy",
+    src: "/images/hero/iplik/scy-pes.webp",
+    code: "SCY",
+  },
+  {
+    slug: "pes-dcy",
+    label: "PES DCY Gipe",
+    summary: "Polyester çift kaplama + elastan.",
+    href: "/urunlerimiz/pes-dcy",
+    src: "/images/hero/iplik/dcy-pes.webp",
+    code: "DCY",
+  },
+  {
+    slug: "pes-rubbercover",
+    label: "PES Rubbercover",
+    summary: "Latex / rubber cover polyester kaplama.",
+    href: "/urunlerimiz/pes-rubbercover",
+    code: "RUBBERCOVER",
   },
 ];
 
+/** 17 tek sayı; üst şerit bir kart fazla alır. */
+const half = Math.ceil(allProducts.length / 2);
+
+export const yarnImages = allProducts.slice(0, half);
+export const yarnImagesBottom = allProducts.slice(half);

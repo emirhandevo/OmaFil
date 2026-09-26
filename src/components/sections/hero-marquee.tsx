@@ -7,8 +7,8 @@ import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useInner, useLocale } from "@/components/i18n/locale-provider";
 import {
   yarnImages,
+  yarnImagesBottom,
   yarnTestSrc,
-  plantImages,
   type MarqueeItem,
 } from "@/config/hero-marquee";
 
@@ -19,7 +19,6 @@ type GroupProps = {
   altPrefix: string;
   duplicate?: boolean;
   overrideSrc?: string | null;
-  variant: "yarn" | "plant";
   skipClickRef: React.RefObject<boolean>;
   openSrc: string | null;
   hoveredSrc: string | null;
@@ -32,7 +31,6 @@ function ImageGroup({
   altPrefix,
   duplicate = false,
   overrideSrc = null,
-  variant,
   skipClickRef,
   openSrc,
   hoveredSrc,
@@ -54,64 +52,69 @@ function ImageGroup({
       aria-hidden={duplicate || undefined}
     >
       {items.map((item, index) => {
+        // Test görseli varsa onu bas; yoksa kartın kendi dosyası. İkisi de yoksa yer tutucu.
         const src = overrideSrc ?? item.src;
         const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${item.label}`;
+        // İki kopyada da aynı slug açık kalsın (ekranda görünen hangisiyse)
+        const open = openSrc === item.slug || hoveredSrc === item.slug;
 
-        if (variant === "yarn") {
-          // Her iki kopyada da aynı src açık/hover olsun (görünen hangisiyse)
-          const open = openSrc === item.src || hoveredSrc === item.src;
-
-          return (
-            <LocaleLink
-              key={`${item.src}-${index}`}
-              href={item.href ?? "/urunlerimiz"}
-              tabIndex={duplicate ? -1 : undefined}
-              draggable={false}
-              data-yarn-card={item.src}
-              data-no-transition
-              onMouseEnter={() => onHover(item.src)}
-              onMouseLeave={() => onHover(null)}
-              onClick={(e) => {
-                onYarnClick(e, item.src);
-                if (skipClickRef.current) {
-                  e.preventDefault();
-                  skipClickRef.current = false;
-                }
-              }}
-              className="flex w-60 shrink-0 flex-col sm:w-72 md:w-80"
+        return (
+          <LocaleLink
+            key={`${item.slug}-${index}`}
+            href={item.href}
+            tabIndex={duplicate ? -1 : undefined}
+            draggable={false}
+            data-yarn-card={item.slug}
+            data-no-transition
+            onMouseEnter={() => onHover(item.slug)}
+            onMouseLeave={() => onHover(null)}
+            onClick={(e) => {
+              onYarnClick(e, item.slug);
+              if (skipClickRef.current) {
+                e.preventDefault();
+                skipClickRef.current = false;
+              }
+            }}
+            className={`flex w-60 shrink-0 flex-col overflow-hidden rounded-2xl border transition-colors sm:w-72 md:w-80 ${
+              // Logodaki Oma mavisi. Hover ve açık kart: Fil turuncusu.
+              open
+                ? "border-[#f19000]"
+                : "border-[#265291] hover:border-[#f19000]"
+            }`}
+          >
+            <div
+              dir={textDir}
+              className="z-10 shrink-0 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3"
             >
-              <div
-                dir={textDir}
-                className="z-10 shrink-0 rounded-t-2xl rounded-b-none border-x border-t border-foreground/25 bg-white/75 px-3 pt-2.5 shadow-sm backdrop-blur-md sm:px-4 sm:pt-3"
-              >
-                <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
-                  <p className="text-xs font-semibold text-zinc-900 sm:text-sm">
-                    {item.label}
-                  </p>
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="size-3.5 shrink-0 text-zinc-900 sm:size-4"
-                  />
-                </div>
-
-                <div
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
-                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="text-xs leading-5 text-zinc-600">
-                      {(item.label && inner?.marquee[item.label]) || item.summary}
-                    </p>
-                    <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
-                      {copy.hero.details}
-                      <ArrowRight aria-hidden="true" className="size-3.5" />
-                    </p>
-                  </div>
-                </div>
+              <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
+                <p className="text-xs font-semibold text-zinc-900 sm:text-sm">
+                  {item.label}
+                </p>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="size-3.5 shrink-0 text-zinc-900 sm:size-4"
+                />
               </div>
 
-              <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-b-2xl sm:h-44 md:h-52">
+              <div
+                className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                  open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="text-xs leading-5 text-zinc-600">
+                    {inner?.products[item.slug] || item.summary}
+                  </p>
+                  <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
+                    {copy.hero.details}
+                    <ArrowRight aria-hidden="true" className="size-3.5" />
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-b-2xl bg-zinc-900 sm:h-44 md:h-52">
+              {src ? (
                 <Image
                   src={src}
                   alt={alt}
@@ -121,31 +124,16 @@ function ImageGroup({
                   draggable={false}
                   className="object-cover"
                 />
-              </div>
-            </LocaleLink>
-          );
-        }
-
-        return (
-          <div
-            key={`${item.src}-${index}`}
-            className="group relative h-36 w-60 shrink-0 overflow-hidden rounded-2xl bg-[#171a1f] sm:h-44 sm:w-72 md:h-52 md:w-80"
-          >
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
-              quality={75}
-              className="object-cover transition-transform duration-500 group-hover:-translate-y-3 group-hover:scale-105"
-            />
-            <div
-              dir={textDir}
-              className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/30 to-transparent px-3 pb-3 pt-8 sm:px-4 sm:pb-4 sm:pt-10"
-            >
-              <p className="text-xs font-semibold text-white sm:text-sm">{item.label}</p>
+              ) : (
+                <div className="flex size-full flex-col items-center justify-center gap-1 px-3 text-center">
+                  <span className="text-[10px] font-bold tracking-[0.16em] text-white/45 uppercase">
+                    {copy.products.soon}
+                  </span>
+                  <span className="text-sm font-semibold text-white/80">{item.code}</span>
+                </div>
+              )}
             </div>
-          </div>
+          </LocaleLink>
         );
       })}
     </div>
@@ -157,13 +145,11 @@ function MarqueeRow({
   altPrefix,
   direction,
   overrideSrc,
-  variant,
 }: {
   items: MarqueeItem[];
   altPrefix: string;
   direction: "left" | "right";
   overrideSrc?: string | null;
-  variant: "yarn" | "plant";
 }) {
   const copy = useCopy();
   const innerRef = useRef<HTMLDivElement>(null);
@@ -310,7 +296,6 @@ function MarqueeRow({
     items,
     altPrefix,
     overrideSrc,
-    variant,
     skipClickRef,
     openSrc,
     hoveredSrc,
@@ -376,15 +361,13 @@ export function HeroMarquee() {
           altPrefix="İplik"
           direction="right"
           overrideSrc={yarnTestSrc}
-          variant="yarn"
         />
       </div>
-      <div className="mx-auto w-full max-w-5xl px-4">
+      <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
         <MarqueeRow
-          items={plantImages}
-          altPrefix="Tesis"
+          items={yarnImagesBottom}
+          altPrefix="İplik"
           direction="left"
-          variant="plant"
         />
       </div>
     </div>
