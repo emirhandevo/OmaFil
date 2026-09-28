@@ -61,7 +61,7 @@ export function ThemeToggle() {
       {mode === "auto" ? (
         <span
           role="tooltip"
-          className="pointer-events-none absolute top-full right-0 z-50 mt-2 hidden w-max max-w-72 rounded-lg bg-brand-navy px-2.5 py-1.5 text-left text-xs leading-5 font-medium text-white shadow-lg group-hover:block group-focus-visible:block"
+          className="pointer-events-none absolute top-full right-0 z-50 mt-2 hidden w-max max-w-sm rounded-lg bg-brand-navy px-2.5 py-1.5 text-left text-xs leading-5 font-medium text-white shadow-lg group-hover:block group-focus-visible:block"
         >
           {labels.auto}
         </span>
