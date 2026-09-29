@@ -13,22 +13,20 @@ export async function getClientIp(): Promise<string> {
   return headerList.get("x-real-ip") ?? "unknown";
 }
 
-function isPlaceholderSecret(secret: string): boolean {
+function isPlaceHolderSecret(secret: string): boolean {
   return /secret_key|AAAAAAA|xxxxxxxx|your_/i.test(secret);
 }
 
 /** Cloudflare Turnstile siteverify */
 export async function verifyTurnstile(
-  token: string,
+  token:string,
   ip: string,
 ): Promise<boolean> {
   const secret = (process.env.TURNSTILE_SECRET_KEY ?? "").trim();
 
-  if (!secret || isPlaceholderSecret(secret)) {
-    if (process.env.NODE_ENV === "development" || token === "dev-bypass") {
-      return true;
-    }
-    return false;
+  // Anahtar yoksa yalnızca yerel geliştirmede geç. Canlıda asla
+  if (!secret || isPlaceHolderSecret(secret)) {
+    return process.env.NODE_ENV === "development";
   }
 
   if (token === "dev-bypass") return false;
@@ -40,11 +38,11 @@ export async function verifyTurnstile(
 
   const res = await fetch(
     "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-    { method: "POST", body },
+    {method: "POST", body},
   );
 
   if (!res.ok) return false;
-  const data = (await res.json()) as { success?: boolean };
+  const data = (await res.json()) as {success?: boolean};
   return data.success === true;
 }
 
