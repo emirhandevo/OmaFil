@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains",
           },
+          {
+            // başka site bu sayfayı iframe içerisine alamaz. 
+            key: "X-Frame-Options",
+            value: "DENY"
+          }
         ],
       },
     ];
