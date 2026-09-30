@@ -1,6 +1,7 @@
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { getCopy } from "@/i18n/get-copy";
 import { HeroMarquee } from "@/components/sections/hero-marquee";
+import {HeroVideo} from "@/components/sections/hero-video"
 import { buttonVariants } from "@/components/ui/button";
 
 /**
@@ -16,7 +17,7 @@ export async function Hero() {
         Yükseklik yazıya göre büyür. Video absolute cover ile doldurur.
         aspect-video mobilde 219px kalıyordu; butonlar taşıyordu.
       */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden bg-black">
         {/*
           Tabela karesinde sol çit (~122px) sağ çitten (~65px) geniş.
           lg: sağ kenara sabit scale, soldan ~57px kırpar; iki şerit eşitlenir.
@@ -24,14 +25,7 @@ export async function Hero() {
           object-position 65% o noktayı 393px kutunun ortasına çeker.
           Başlık ayrı katmanda, ortası bozulmaz.
         */}
-        <video
-          className="pointer-events-none absolute inset-0 size-full object-cover object-[60%_center] lg:origin-right lg:scale-[1.047] lg:object-center"
-          src="/videos/hero-web.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
+        <HeroVideo/>
         {/* Yazı okunsun diye videoyu karartıyorum */}
         <div className="absolute inset-0 bg-black/50" />
 
