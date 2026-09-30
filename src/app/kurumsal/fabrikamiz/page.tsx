@@ -190,7 +190,7 @@ export default async function FabrikamizPage() {
           {gallery.map((photo) => (
             <div
               key={photo.src}
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted"
+              className="relative aspect-4/3 overflow-hidden rounded-2xl border border-border bg-muted"
             >
               <Image
                 src={photo.src}
@@ -225,7 +225,7 @@ export default async function FabrikamizPage() {
             {band.map((photo) => (
               <div
                 key={photo.src}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted"
+                className="relative aspect-4/3 overflow-hidden rounded-2xl border border-border bg-muted"
               >
                 <Image
                   src={photo.src}

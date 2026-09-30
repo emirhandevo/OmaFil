@@ -62,7 +62,7 @@ export default async function ProductLinePage({ params }: PageProps) {
       </LocaleLink>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-card">
+        <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border bg-card">
           {line.src ? (
             <Image
               src={line.src}

@@ -120,7 +120,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
 
               <LocaleLink
                 href={`/urunlerimiz/${item.slug}`}
-                className="relative block aspect-[4/3] w-full shrink-0 overflow-hidden"
+                className="relative block aspect-4/3 w-full shrink-0 overflow-hidden"
               >
                 {item.src ? (
                   <>

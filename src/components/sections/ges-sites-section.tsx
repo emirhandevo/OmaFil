@@ -80,7 +80,7 @@ function SiteCard({ site }: { site: GesSite }) {
         <button
           type="button"
           onClick={() => setOpenIndex(0)}
-          className="relative block aspect-[16/10] w-full cursor-zoom-in bg-muted text-left"
+          className="relative block aspect-16/10 w-full cursor-zoom-in bg-muted text-left"
           aria-label={`${site.name} — büyük görsel`}
         >
           <Image
@@ -159,7 +159,7 @@ function SiteCard({ site }: { site: GesSite }) {
                   key={src}
                   type="button"
                   onClick={() => setOpenIndex(fullIndex)}
-                  className="relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-xl bg-muted ring-offset-background transition hover:ring-2 hover:ring-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:outline-none"
+                  className="relative aspect-4/3 cursor-zoom-in overflow-hidden rounded-xl bg-muted ring-offset-background transition hover:ring-2 hover:ring-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:outline-none"
                   aria-label={`${site.shortName} ${t?.ges.photo ?? "fotoğraf"} ${fullIndex + 1}`}
                 >
                   <Image

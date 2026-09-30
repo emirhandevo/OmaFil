@@ -15,7 +15,7 @@ export async function CorporateIntro() {
     <section className="py-20 sm:py-18">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 lg:grid-cols-2 lg:gap-16">
        <div
-  className="relative aspect-[4/3] w-full"
+  className="relative aspect-4/3 w-full"
   style={{
     maskImage: 'url("/masks/brush-mask.png")',
     WebkitMaskImage: 'url("/masks/brush-mask.png")',
