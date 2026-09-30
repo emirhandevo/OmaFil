@@ -3,9 +3,6 @@
  * 17 ürün hattı ikiye bölünür: üst 9, alt 8.
  * Kart yazısı katalogdaki label. Hover metni ürün özetinden gelir (çeviriler inner.products).
  * src yoksa başka ürünün görseli konmaz; kartta yer tutucu kalır.
- * yarnTestSrc:
- *   null   → her kart kendi görseli
- *   string → tüm üst şerit bu görseli gösterir (test modu)
  */
 
 export type MarqueeItem = {
@@ -17,8 +14,6 @@ export type MarqueeItem = {
   src?: string;
   code: string;
 };
-
-export const yarnTestSrc: string | null = null;
 
 /** Katalog sırası: Naylon 6, Naylon 66, polyester. */
 const allProducts: MarqueeItem[] = [

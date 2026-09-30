@@ -3,7 +3,7 @@
 import {useEffect, useRef, useState} from "react";
 
 /**
- * MP4 sayfa yüklenince bağlanır. İlk an siyah kalır; poster dosyası yok.
+ * MP4 sayfa yüklenince bağlanır. İlk kare siyah poster.
  * autoPlay baştan açık olursa tarayıcı 1.3 MB'ı hemen indirir.
  */
 export function HeroVideo() {
@@ -40,6 +40,7 @@ export function HeroVideo() {
         loop
         playsInline
         preload="none"
+        poster="/images/hero-lcp-black.webp"
         />
     );
 }

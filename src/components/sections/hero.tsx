@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { getCopy } from "@/i18n/get-copy";
 import { HeroMarquee } from "@/components/sections/hero-marquee";
 import {HeroVideo} from "@/components/sections/hero-video"
-import { buttonVariants } from "@/components/ui/button";
 
 /**
  * Anasayfanın ilk ekranı.
@@ -18,6 +18,20 @@ export async function Hero() {
         aspect-video mobilde 219px kalıyordu; butonlar taşıyordu.
       */}
       <div className="relative w-full overflow-hidden bg-black">
+        {/*
+          LCP bu siyah kare. HTML'de hemen durur, fetchpriority=high,
+          loading=lazy yok. Video 400ms sonra üstüne biner.
+        */}
+        <Image
+          src="/images/hero-lcp-black.webp"
+          alt=""
+          fill
+          preload
+          fetchPriority="high"
+          unoptimized
+          sizes="100vw"
+          className="pointer-events-none object-cover"
+        />
         {/*
           Tabela karesinde sol çit (~122px) sağ çitten (~65px) geniş.
           lg: sağ kenara sabit scale, soldan ~57px kırpar; iki şerit eşitlenir.
@@ -46,27 +60,15 @@ export async function Hero() {
           {/* Ziyaretçiyi ürünlere ve kurumsal hikâyeye yönlendiren CTA alanı */}
           <div className="mt-6 flex w-full max-w-sm flex-col items-stretch gap-2 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-3">
             <LocaleLink
-              href="/urunlerimiz"
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-                // whitespace-nowrap butonu yatayda taşıyordu
-                className:
-                  "h-auto min-h-10 w-full whitespace-normal px-4 py-2.5 text-sm sm:w-auto sm:whitespace-nowrap sm:px-6 sm:text-base",
-              })}
+            href="/urunlerimiz"
+            className="inline-flex items-center justify-center rounded-lg border border-white bg-[#f19000]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#f19000]  hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0"
             >
               {copy.hero.productsCta}
             </LocaleLink>
 
             <LocaleLink
               href="/kurumsal"
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-                // video üstünde. light modda beyaz zemin + beyaz yazı olmasın
-                className:
-                  "h-auto min-h-10 w-full whitespace-normal border-white/80 bg-black/30 px-4 py-2.5 text-sm text-white hover:bg-white/20 hover:text-white sm:w-auto sm:whitespace-nowrap sm:px-6 sm:text-base",
-              })}
+              className="inline-flex items-center justify-center rounded-lg border border-white bg-[#265291]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#265291] hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0"
             >
               {copy.hero.aboutCta}
             </LocaleLink>

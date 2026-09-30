@@ -17,7 +17,6 @@ export {
   getFilamentSkus,
   getProductLine,
   getProductLines,
-  getProductLinesByFamily,
 } from "./lines";
 
 export { productFamilies } from "./families";

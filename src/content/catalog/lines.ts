@@ -2,7 +2,6 @@ import { reader } from "@/content/keystatic";
 import type {
   CoveredSku,
   FilamentSku,
-  ProductFamily,
   ProductLine,
 } from "./types";
 
@@ -69,14 +68,6 @@ export async function getProductLine(
   const entry = await reader.collections.productLines.read(slug);
   if (!entry) return null;
   return mapLine(slug, entry);
-}
-
-export async function getProductLinesByFamily(
-  family: ProductFamily,
-): Promise<ProductLine[]> {
-  const lines = await getProductLines();
-  if (family === "all") return lines;
-  return lines.filter((line) => line.family === family);
 }
 
 export async function getFilamentSkus(lineSlug: string): Promise<FilamentSku[]> {

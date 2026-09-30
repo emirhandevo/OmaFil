@@ -8,7 +8,6 @@ import { useCopy, useInner, useLocale } from "@/components/i18n/locale-provider"
 import {
   yarnImages,
   yarnImagesBottom,
-  yarnTestSrc,
   type MarqueeItem,
 } from "@/config/hero-marquee";
 
@@ -18,7 +17,6 @@ type GroupProps = {
   items: MarqueeItem[];
   altPrefix: string;
   duplicate?: boolean;
-  overrideSrc?: string | null;
   skipClickRef: React.RefObject<boolean>;
   openSrc: string | null;
   hoveredSrc: string | null;
@@ -30,7 +28,6 @@ function ImageGroup({
   items,
   altPrefix,
   duplicate = false,
-  overrideSrc = null,
   skipClickRef,
   openSrc,
   hoveredSrc,
@@ -53,7 +50,7 @@ function ImageGroup({
     >
       {items.map((item, index) => {
         // Test görseli varsa onu bas; yoksa kartın kendi dosyası. İkisi de yoksa yer tutucu.
-        const src = overrideSrc ?? item.src;
+        const src = item.src;
         const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${item.label}`;
         // İki kopyada da aynı slug açık kalsın (ekranda görünen hangisiyse)
         const open = openSrc === item.slug || hoveredSrc === item.slug;
@@ -144,12 +141,10 @@ function MarqueeRow({
   items,
   altPrefix,
   direction,
-  overrideSrc,
 }: {
   items: MarqueeItem[];
   altPrefix: string;
   direction: "left" | "right";
-  overrideSrc?: string | null;
 }) {
   const copy = useCopy();
   const innerRef = useRef<HTMLDivElement>(null);
@@ -295,7 +290,6 @@ function MarqueeRow({
   const groupProps = {
     items,
     altPrefix,
-    overrideSrc,
     skipClickRef,
     openSrc,
     hoveredSrc,
@@ -360,7 +354,6 @@ export function HeroMarquee() {
           items={yarnImages}
           altPrefix="İplik"
           direction="right"
-          overrideSrc={yarnTestSrc}
         />
       </div>
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">

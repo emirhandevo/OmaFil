@@ -11,6 +11,21 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/*": ["./content/**/*"],
   },
+  // Tarayıcı bu hostu 2 yıl yalnızca HTTPS açar. Alt alan adları da dahil.
+  // preload yok: tarayıcı listesine girmek geri alınması zor.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
