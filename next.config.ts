@@ -26,7 +26,12 @@ const nextConfig: NextConfig = {
             // başka site bu sayfayı iframe içerisine alamaz. 
             key: "X-Frame-Options",
             value: "DENY"
-          }
+          },
+          {
+            // Tarayıcı dosya türünü tahmin etmesin. sunucunun yazdığı türe uysun. 
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
         ],
       },
     ];
