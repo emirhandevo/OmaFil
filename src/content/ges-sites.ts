@@ -57,10 +57,10 @@ export const gesSites: GesSite[] = [
       treesEquivalent: 1750,
     },
     images: [
-      "/images/ges/elazig-hacisam/01.jpg",
-      "/images/ges/elazig-hacisam/02.jpg",
-      "/images/ges/elazig-hacisam/03.jpg",
-      "/images/ges/elazig-hacisam/04.jpg",
+      "/images/ges/elazig-hacisam/01.webp",
+      "/images/ges/elazig-hacisam/02.webp",
+      "/images/ges/elazig-hacisam/03.webp",
+      "/images/ges/elazig-hacisam/04.webp",
     ],
   },
   {
@@ -87,10 +87,10 @@ export const gesSites: GesSite[] = [
       treesEquivalent: 1050,
     },
     images: [
-      "/images/ges/elazig-kavak/01.jpg",
-      "/images/ges/elazig-kavak/02.jpg",
-      "/images/ges/elazig-kavak/03.jpg",
-      "/images/ges/elazig-kavak/04.jpg",
+      "/images/ges/elazig-kavak/01.webp",
+      "/images/ges/elazig-kavak/02.webp",
+      "/images/ges/elazig-kavak/03.webp",
+      "/images/ges/elazig-kavak/04.webp",
     ],
   },
   {
@@ -108,7 +108,7 @@ export const gesSites: GesSite[] = [
     annualKwhMax: 1_728_000,
     sharePercent: 14,
     productionStart: "2023-06-22",
-    images: ["/images/ges/erbaa-cati-1/01.jpg"],
+    images: ["/images/ges/erbaa-cati-1/01.webp"],
   },
   {
     id: "erbaa-cati-2",
@@ -124,7 +124,7 @@ export const gesSites: GesSite[] = [
     annualKwhMax: 1_080_000,
     sharePercent: 9,
     productionStart: "2024-12-27",
-    images: ["/images/ges/erbaa-cati-1/02.jpg"],
+    images: ["/images/ges/erbaa-cati-1/02.webp"],
   },
 ];
 

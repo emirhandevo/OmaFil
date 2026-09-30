@@ -101,7 +101,7 @@ export const gesMetrics = [
     label: "Ürettiğimiz güneş enerjisi (kWh)",
     decimals: 0,
     suffix: "",
-    image: "/images/ges/elazig-hacisam/01.jpg",
+    image: "/images/ges/elazig-hacisam/01.webp",
     imageAlt: "Elazığ Hacısam GES — OMA 1",
   },
   {
@@ -109,7 +109,7 @@ export const gesMetrics = [
     label: "Tasarruf edilen karbon emisyonu (ton)",
     decimals: 2,
     suffix: "CO₂",
-    image: "/images/ges/elazig-kavak/01.jpg",
+    image: "/images/ges/elazig-kavak/01.webp",
     imageAlt: "Elazığ Kavak GES — OMA 2",
   },
   {
@@ -117,7 +117,7 @@ export const gesMetrics = [
     label: "Denk ağaç sayısı (ad)",
     decimals: 0,
     suffix: "",
-    image: "/images/ges/erbaa-cati-1/01.jpg",
+    image: "/images/ges/erbaa-cati-1/01.webp",
     imageAlt: "Erbaa çatı GES — Oma Polimer tesisi",
   },
 ] as const;

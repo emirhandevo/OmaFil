@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   },
   // Keystatic reader / route handler Node API
   serverExternalPackages: ["@keystatic/core", "@keystatic/next"],
+  // keystatic jsonları vercel fonksiyonuna girsin. yoksa ürün listesi boş kalır
+  outputFileTracingIncludes: {
+    "/*": ["./content/**/*"],
+  },
 };
 
 export default nextConfig;

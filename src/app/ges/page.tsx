@@ -45,7 +45,7 @@ export default async function GesPage() {
     <>
       <section className="relative isolate min-h-[52vh] overflow-hidden sm:min-h-[60vh]">
         <Image
-          src="/images/ges/elazig-hacisam/01.jpg"
+          src="/images/ges/elazig-hacisam/01.webp"
           alt=""
           fill
           priority
@@ -84,7 +84,7 @@ export default async function GesPage() {
         </div>
         <div className="relative min-h-[280px] overflow-hidden rounded-3xl border border-border shadow-sm sm:min-h-[380px]">
           <Image
-            src="/images/ges/erbaa-cati-1/01.jpg"
+            src="/images/ges/erbaa-cati-1/01.webp"
             alt={t?.ges.imageAlt ?? "OmaFil Erbaa çatı GES — Oma Polimer tesisi"}
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
