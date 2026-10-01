@@ -20,14 +20,14 @@ export type ProductGroup = (typeof productGroups)[number];
  */
 export function createContactFormSchema(m: Ui["form"]) {
   return z.object({
-  name: z.string().trim().min(2, m.name),
+  name: z.string().trim().min(2, m.name).max(80, m.name),
   email: z.string().trim().email(m.email),
   phone: z.string().trim().regex(phonePattern, m.phone),
   company: z.string().trim(),
   productGroup: z.enum(productGroups, {
     message: m.group,
   }),
-  message: z.string().trim().min(10, m.message),
+  message: z.string().trim().min(10, m.message).max(1000, m.message),
   kvkk: z.boolean().refine((value) => value === true, {
     message: m.kvkk,
   }),

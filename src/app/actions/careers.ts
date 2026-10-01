@@ -32,30 +32,44 @@ function sanitizeFileName(name: string): string {
   return base.length > 0 ? base.slice(0, 120) : "cv.pdf";
 }
 
-function isPdfFile(file: File): boolean {
-  const typeOk =
-    file.type === "application/pdf" ||
-    file.type === "application/x-pdf" ||
-    file.type === "";
-  const nameOk = file.name.toLowerCase().endsWith(".pdf");
-  return nameOk && (typeOk || file.type === "");
-}
 
 /**
- * İK başvurusu — FormData (PDF ekli) → Resend attachment.
+ * gerçek pdf imzası: %PDF-
+ * dosya adı ve MIME tarayıcıdan gelir. notepad.exe cv.pdf diye gelebilir
+ * üreticiler imzadan önce kısa bir önsöz koyabildiği için ilk 1024 bayta bakılır
  */
-export async function submitCareerApplication(
-  formData: FormData,
-): Promise<CareersActionResult> {
-  const raw = {
-    name: String(formData.get("name") ?? ""),
-    email: String(formData.get("email") ?? ""),
-    phone: String(formData.get("phone") ?? ""),
-    position: String(formData.get("position") ?? ""),
-    message: String(formData.get("message") ?? ""),
-    kvkk: formData.get("kvkk") === "true",
-    website: String(formData.get("website") ?? ""),
-    turnstileToken: String(formData.get("turnstileToken") ?? ""),
+
+async function hasPdfSignature(file:File): Promise<boolean> {
+  const head = new Uint8Array(await file.slice(0, 1024).arrayBuffer());
+  const marker = [0x25, 0x50, 0x44, 0x46, 0x2d];
+  for (let i = 0; i<= head.length - marker.length; i++) {
+    let found = true;
+    for (let j = 0; j <marker.length; j++) {
+      if(head[i + j] !== marker[j]) {
+        found = false;
+        break;
+    }
+  }
+  if (found) return true;
+  }
+  return false;
+  }
+
+  /**
+   * İK başvurusu - FormData (PDF ekli) -> resend attachment 
+   */
+  export async function submitCareerApplication(formData:FormData,
+
+  ): Promise<CareersActionResult> {
+    const raw = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      position: String(formData.get("position") ?? ""), 
+      message: String(formData.get("message") ?? ""),
+      kvkk: formData.get("kvkk") === "true",
+      website: String(formData.get("website") ?? ""),
+      turnstileToken: String(formData.get("turnstileToken") ?? ""),
   };
 
   const locale = await getLocale();
@@ -70,31 +84,31 @@ export async function submitCareerApplication(
   }
 
   if (parsed.data.website.length > 0) {
-    return { ok: true };
+    return {ok: true};
   }
-
   const cv = formData.get("cv");
   if (!(cv instanceof File) || cv.size === 0) {
     return {
       ok: false,
       error: form.cvRequired,
-      fieldErrors: { cv: [form.cvMissing] },
+      fieldErrors: {cv: [form.cvMissing]},
     };
   }
 
-  if (!isPdfFile(cv)) {
-    return {
-      ok: false,
-      error: form.cvPdf,
-      fieldErrors: { cv: [form.cvPdf] },
-    };
-  }
-
+  // boyutu imzadan önce kes. sınırı aşan dosyanın başını okuma. 
   if (cv.size > CV_MAX_BYTES) {
     return {
       ok: false,
       error: form.cvSize,
-      fieldErrors: { cv: [form.cvSize] },
+      fieldErrors: {cv: [form.cvSize]},
+    };
+  }
+
+  if (!(await hasPdfSignature(cv))) {
+    return {
+      ok: false,
+      error: form.cvPdf,
+      fieldErrors: {cv: [form.cvPdf]},
     };
   }
 
