@@ -5,7 +5,7 @@
 
 export type ProductFamily = "all" | "nylon6" | "nylon66" | "polyester";
 
-export type Polymer = "pa6" | "pa66" | "pes" | "pesLatex";
+export type Polymer = "pa6" | "pa66" | "pes";
 
 /** Proses / hat kodu */
 export type ProcessCode =
@@ -15,8 +15,7 @@ export type ProcessCode =
   | "ATY"
   | "ACY"
   | "SCY"
-  | "DCY"
-  | "RUBBERCOVER";
+  | "DCY";
 
 export type ProductKind = "filament" | "covered";
 
@@ -52,10 +51,10 @@ export type FilamentSku = {
   finalAty?: string;
 };
 
-/** Kaplama / gipe satırı (ACY / SCY / DCY / Rubbercover) */
+/** Kaplama / gipe satırı (ACY / SCY / DCY) */
 export type CoveredSku = {
   line: string;
-  /** Katalogdaki üretim tipi: ACY, SC, DC, RUBBERCOVER */
+  /** Katalogdaki üretim tipi: ACY, SC, DC */
   productionType: string;
   spandexDtex: number;
   yarnDtex: number;

@@ -1,6 +1,6 @@
 /**
  * Hero şeritleri — tek kaynak.
- * 17 ürün hattı ikiye bölünür: üst 9, alt 8.
+ * 16 ürün hattı ikiye bölünür: üst 8, alt 8.
  * Kart yazısı katalogdaki label. Hover metni ürün özetinden gelir (çeviriler inner.products).
  * src yoksa başka ürünün görseli konmaz; kartta yer tutucu kalır.
  */
@@ -62,6 +62,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 6 DCY",
     summary: "Çift kaplama (double covered) PA6 + elastan.",
     href: "/urunlerimiz/n6-dcy",
+    src: "/images/hero/iplik/dcy-n6.webp",
     code: "DCY",
   },
   {
@@ -69,6 +70,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 66 POY",
     summary: "PA66 POY; final DTY / ATY dönüşümü. Softel / Nicolite.",
     href: "/urunlerimiz/n66-poy",
+    src: "/images/hero/iplik/poy-n66.webp",
     code: "POY",
   },
   {
@@ -76,6 +78,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 66 FDY",
     summary: "PA66 tam çekimli. Covering, hosiery, CK / WK, weaving.",
     href: "/urunlerimiz/n66-fdy",
+    src: "/images/hero/iplik/fdy-n66.webp",
     code: "FDY",
   },
   {
@@ -91,6 +94,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 66 ATY",
     summary: "PA66 air textured. Hosiery / socks ve dokuma.",
     href: "/urunlerimiz/n66-aty",
+    src: "/images/hero/iplik/aty-n66.webp",
     code: "ATY",
   },
   {
@@ -114,6 +118,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 66 DCY",
     summary: "Çift kaplama PA66 + elastan. Custom üretim.",
     href: "/urunlerimiz/n66-dcy",
+    src: "/images/hero/iplik/dcy-n66.webp",
     code: "DCY",
   },
   {
@@ -140,16 +145,9 @@ const allProducts: MarqueeItem[] = [
     src: "/images/hero/iplik/dcy-pes.webp",
     code: "DCY",
   },
-  {
-    slug: "pes-rubbercover",
-    label: "PES Rubbercover",
-    summary: "Latex / rubber cover polyester kaplama.",
-    href: "/urunlerimiz/pes-rubbercover",
-    code: "RUBBERCOVER",
-  },
 ];
 
-/** 17 tek sayı; üst şerit bir kart fazla alır. */
+/** 16 ürün; üst ve alt şerit 8’er kart. */
 const half = Math.ceil(allProducts.length / 2);
 
 export const yarnImages = allProducts.slice(0, half);

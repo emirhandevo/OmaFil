@@ -135,7 +135,6 @@ const productsEn: Inner["products"] = {
   "pes-acy": "Polyester air-jet cover + elastane.",
   "pes-scy": "Polyester single cover + elastane. Custom options.",
   "pes-dcy": "Polyester double cover + elastane.",
-  "pes-rubbercover": "Latex / rubber cover on polyester.",
 };
 
 const marqueeEn: Inner["marquee"] = {
@@ -643,7 +642,6 @@ const de: Inner = page({
     "pes-acy": "Polyester-Luftumhüllung + Elastan.",
     "pes-scy": "Polyester einfach umhüllt + Elastan. Custom-Optionen.",
     "pes-dcy": "Polyester doppelt umhüllt + Elastan.",
-    "pes-rubbercover": "Latex- / Rubber-Cover auf Polyester.",
   },
   marquee: {
     "PES DCY Gipe": "Doppelt umhülltes Polyester-Gipe-Garn.",
@@ -902,7 +900,6 @@ const fr: Inner = page({
     "pes-acy": "Polyester guipé air-jet + élasthanne.",
     "pes-scy": "Polyester simple couverture + élasthanne. Options custom.",
     "pes-dcy": "Polyester double couverture + élasthanne.",
-    "pes-rubbercover": "Cover latex / caoutchouc sur polyester.",
   },
   marquee: {
     "PES DCY Gipe": "Fil gipe polyester double couverture.",
@@ -997,7 +994,6 @@ const zh: Inner = page({
     "pes-acy": "涤纶空气包覆 + 氨纶。",
     "pes-scy": "涤纶单包 + 氨纶。定制选项。",
     "pes-dcy": "涤纶双包 + 氨纶。",
-    "pes-rubbercover": "涤纶乳胶 / 橡胶包覆。",
   },
   marquee: {
     "PES DCY Gipe": "双包涤纶 gipe 纱。",
@@ -1144,7 +1140,6 @@ Object.assign(es.products, {
   "pes-acy": "Poliéster recubierto por aire + elastano.",
   "pes-scy": "Poliéster de cubierta simple + elastano. Opciones custom.",
   "pes-dcy": "Poliéster de doble cubierta + elastano.",
-  "pes-rubbercover": "Cover de látex / caucho sobre poliéster.",
 });
 Object.assign(es.marquee, {
   "PES DCY Gipe": "Hilo gipe de poliéster de doble cubierta.",
@@ -1176,7 +1171,6 @@ Object.assign(it.products, {
   "pes-acy": "Poliestere ricoperto ad aria + elastan.",
   "pes-scy": "Poliestere a copertura singola + elastan. Opzioni custom.",
   "pes-dcy": "Poliestere a doppia copertura + elastan.",
-  "pes-rubbercover": "Cover in lattice / gomma su poliestere.",
 });
 Object.assign(it.marquee, {
   "PES DCY Gipe": "Filato gipe poliestere a doppia copertura.",
@@ -1208,7 +1202,6 @@ Object.assign(pt.products, {
   "pes-acy": "Poliéster revestido a ar + elastano.",
   "pes-scy": "Poliéster de cobertura simples + elastano. Opções custom.",
   "pes-dcy": "Poliéster de cobertura dupla + elastano.",
-  "pes-rubbercover": "Cover de látex / borracha sobre poliéster.",
 });
 Object.assign(pt.marquee, {
   "PES DCY Gipe": "Fio gipe de poliéster de cobertura dupla.",
@@ -1240,7 +1233,6 @@ Object.assign(nl.products, {
   "pes-acy": "Polyester luchtomhuld + elastaan.",
   "pes-scy": "Polyester enkel omhuld + elastaan. Custom opties.",
   "pes-dcy": "Polyester dubbel omhuld + elastaan.",
-  "pes-rubbercover": "Latex- / rubbercover op polyester.",
 });
 Object.assign(nl.marquee, {
   "PES DCY Gipe": "Dubbel omhuld polyester gipe-garen.",
@@ -1272,7 +1264,6 @@ Object.assign(ru.products, {
   "pes-acy": "Полиэстер воздушного покрытия + эластан.",
   "pes-scy": "Полиэстер одинарного покрытия + эластан. Custom.",
   "pes-dcy": "Полиэстер двойного покрытия + эластан.",
-  "pes-rubbercover": "Латекс / rubber cover на полиэстере.",
 });
 Object.assign(ru.marquee, {
   "PES DCY Gipe": "Двойное покрытие, полиэстер gipe.",
@@ -1304,7 +1295,6 @@ Object.assign(ar.products, {
   "pes-acy": "بوليستر تغطية هوائية + إيلاستان.",
   "pes-scy": "بوليستر تغطية مفردة + إيلاستان. خيارات custom.",
   "pes-dcy": "بوليستر تغطية مزدوجة + إيلاستان.",
-  "pes-rubbercover": "تغطية لاتكس / مطاط على البوليستر.",
 });
 Object.assign(ar.marquee, {
   "PES DCY Gipe": "خيط gipe بوليستر بتغطية مزدوجة.",

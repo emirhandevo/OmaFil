@@ -11,7 +11,6 @@ const polymerOptions = [
   { label: "PA6", value: "pa6" },
   { label: "PA66", value: "pa66" },
   { label: "PES", value: "pes" },
-  { label: "PES + Latex", value: "pesLatex" },
 ] as const;
 
 const codeOptions = [
@@ -22,7 +21,6 @@ const codeOptions = [
   { label: "ACY", value: "ACY" },
   { label: "SCY", value: "SCY" },
   { label: "DCY", value: "DCY" },
-  { label: "RUBBERCOVER", value: "RUBBERCOVER" },
 ] as const;
 
 const filamentSkuFields = fields.object({
@@ -50,7 +48,7 @@ const filamentSkuFields = fields.object({
 const coveredSkuFields = fields.object({
   productionType: fields.text({
     label: "Üretim tipi",
-    description: "ACY, SC, DC, RUBBERCOVER…",
+    description: "ACY, SC, DC…",
     validation: { isRequired: true },
   }),
   spandexDtex: fields.integer({
