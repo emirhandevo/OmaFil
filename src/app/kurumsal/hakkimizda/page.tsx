@@ -184,7 +184,7 @@ export default async function HakkimizdaPage() {
           {contact.locations.map((place) => (
             <article
               key={place.label}
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-brand-orange"
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-brand-orange active:border-brand-orange"
             >
               <MapPin aria-hidden="true" className="size-5 text-brand-orange" />
               <h3 className="mt-4 font-semibold">
@@ -197,7 +197,7 @@ export default async function HakkimizdaPage() {
                 href={place.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline"
+                className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
               >
                 {t?.about.map ?? "Haritada aç"}
               </a>

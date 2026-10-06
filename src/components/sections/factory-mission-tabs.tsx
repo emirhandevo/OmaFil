@@ -53,7 +53,7 @@ export function FactoryMissionTabs({
               className={`flex-1 px-3 py-3.5 text-sm font-semibold transition-colors sm:px-4 ${
                 selected
                   ? "border-t-2 border-t-brand-orange bg-background text-foreground"
-                  : "border-t-2 border-t-transparent bg-muted/40 text-muted-foreground hover:text-foreground"
+                  : "border-t-2 border-t-transparent bg-muted/40 text-muted-foreground hover:text-foreground active:text-foreground"
               }`}
             >
               {tab.label}

@@ -20,7 +20,7 @@ export function PasswordField() {
             <button
             type="button"
             onClick={()=> setVisible((open) => !open)}
-            className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 opacity-70 hover:opacity-100"
+            className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 opacity-70 hover:opacity-100 active:opacity-100"
             aria-label={visible ? "Şifreyi gizle" : "Şifreyi göster"}
             >
                 {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}

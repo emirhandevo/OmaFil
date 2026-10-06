@@ -150,13 +150,13 @@ export async function AboutHighlights() {
 
             <LocaleLink
               href="/kurumsal/surdurulebilirlik"
-              className="mt-6 inline-flex text-sm font-medium text-brand-orange hover:underline"
+              className="mt-6 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
             >
               {t?.about.sustainLink ?? "Sürdürülebilirlik sayfasına git"} →
             </LocaleLink>
             <LocaleLink
               href="/ges"
-              className="mt-3 inline-flex text-sm font-medium text-brand-orange hover:underline"
+              className="mt-3 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
             >
               {t?.about.gesLink ?? "GES — güneş enerji sistemi"} →
             </LocaleLink>

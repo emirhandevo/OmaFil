@@ -141,7 +141,7 @@ export default async function GesPage() {
               className={buttonVariants({
                 variant: "default",
                 size: "lg",
-                className: "bg-brand-orange hover:bg-brand-orange/90",
+                className: "bg-brand-orange hover:bg-brand-orange/90 active:bg-brand-orange/90",
               })}
             >
               {t?.ges.sustainCta ?? "Sürdürülebilirlik"}
@@ -153,7 +153,7 @@ export default async function GesPage() {
                 variant: "outline",
                 size: "lg",
                 className:
-                  "border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white",
+                  "border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white active:bg-white/10 active:text-white",
               })}
             >
               {t?.ges.contactCta ?? "İletişim"}

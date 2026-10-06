@@ -106,7 +106,7 @@ export function KvkkModal({ open, onClose, notice }: Props) {
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand-orange hover:text-brand-orange"
+            className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-brand-orange hover:text-brand-orange active:border-brand-orange active:text-brand-orange"
             aria-label={closeLabel[locale]}
           >
             <X className="size-4" aria-hidden="true" />
@@ -126,7 +126,7 @@ export function KvkkModal({ open, onClose, notice }: Props) {
           <button
             type="button"
             onClick={onClose}
-            className="h-10 w-full rounded-lg bg-brand-orange text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            className="h-10 w-full rounded-lg bg-brand-orange text-sm font-semibold text-white transition-opacity hover:opacity-90 active:opacity-90"
           >
             {okLabel[locale]}
           </button>

@@ -48,7 +48,7 @@ export function ThemeToggle() {
       type="button"
       onClick={cycle}
       aria-label={labels[mode]}
-      className="group relative flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
+      className="group relative flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
     >
       {mode === "auto" ? (
         <SunriseIcon />

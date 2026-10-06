@@ -43,7 +43,7 @@ export default async function BlogPage() {
             <li key={post.slug}>
               <LocaleLink
                 href={`/blog/${post.slug}`}
-                className="block rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand-orange"
+                className="block rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand-orange active:border-brand-orange"
               >
                 {post.date ? (
                   <time

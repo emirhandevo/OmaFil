@@ -279,7 +279,7 @@ export function CareersApplicationForm() {
               <button
                 type="button"
                 onClick={() => setKvkkOpen(true)}
-                className="font-medium text-foreground underline decoration-brand-orange/60 underline-offset-2 transition-colors hover:text-brand-orange hover:decoration-brand-orange"
+                className="font-medium text-foreground underline decoration-brand-orange/60 underline-offset-2 transition-colors hover:text-brand-orange hover:decoration-brand-orange active:text-brand-orange active:decoration-brand-orange"
               >
                 {copy.chrome.kvkk}
               </button>

@@ -81,7 +81,7 @@ export function LanguageSwitcher() {
         className={
           open
             ? "relative flex size-12 shrink-0 items-center justify-center rounded-full text-brand-orange transition-colors"
-            : "relative flex size-12 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
+            : "relative flex size-12 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
         }
       >
         <GlobeFrame />
@@ -114,7 +114,7 @@ export function LanguageSwitcher() {
                   className={
                     active
                       ? "flex items-center gap-2 rounded-md bg-brand-orange/10 px-3 py-2 text-sm font-semibold text-brand-orange"
-                      : "flex items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground hover:bg-brand-orange/10 hover:text-brand-orange"
+                      : "flex items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                   }
                   onClick={(event) => {
                     // Aynı dil: menüyü kapat. Başka dil: tam sayfa yükle.

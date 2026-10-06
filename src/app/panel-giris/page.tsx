@@ -28,11 +28,11 @@ export default async function PanelGirisPage({searchParams}: Props) {
                 />
                 </label>
                 <PasswordField />
-                <button type="submit" className="rounded-md bg-neutral-900 px-3 py-2 text-white">Giriş</button>
+                <button type="submit" className="rounded-md bg-neutral-900 px-3 py-2 text-white transition-opacity active:opacity-80">Giriş</button>
               </form>
 
               <form action={signOutKeystatic} className="mt-6">
-                <button type="submit" className="text-sm underline">Çıkış</button>
+                <button type="submit" className="text-sm underline active:text-brand-orange">Çıkış</button>
               </form>
         </main>
     );

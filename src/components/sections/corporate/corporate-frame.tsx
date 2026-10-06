@@ -61,7 +61,7 @@ export async function CorporateFrame({ path, title, description, children }: Cor
                 className={
                   active
                     ? "rounded-full bg-brand-orange px-4 py-2 text-sm font-semibold text-white shadow-sm"
-                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:border-brand-orange hover:text-brand-orange"
+                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:border-brand-orange hover:text-brand-orange active:border-brand-orange active:text-brand-orange"
                 }
               >
                 {navLabel(item.href, copy)}

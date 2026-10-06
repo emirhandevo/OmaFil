@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <article className="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:pt-20">
       <LocaleLink
         href="/blog"
-        className="text-sm font-medium text-brand-orange hover:underline"
+        className="text-sm font-medium text-brand-orange hover:underline active:underline"
       >
         {copy.chrome.blogBack}
       </LocaleLink>

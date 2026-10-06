@@ -300,7 +300,7 @@ export default async function SurdurulebilirlikPage() {
 
             <LocaleLink
               href="/ges"
-              className="mt-8 inline-flex text-sm font-medium text-[#f19000] hover:underline"
+              className="mt-8 inline-flex text-sm font-medium text-[#f19000] hover:underline active:underline"
             >
               {t?.sustain.gesLink ?? "GES sayfasını incele"} →
             </LocaleLink>

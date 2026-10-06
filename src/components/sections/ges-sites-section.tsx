@@ -80,7 +80,7 @@ function SiteCard({ site }: { site: GesSite }) {
         <button
           type="button"
           onClick={() => setOpenIndex(0)}
-          className="relative block aspect-16/10 w-full cursor-zoom-in bg-muted text-left"
+          className="relative block aspect-16/10 w-full cursor-zoom-in bg-muted text-left transition active:ring-2 active:ring-brand-orange"
           aria-label={`${site.name} — büyük görsel`}
         >
           <Image
@@ -159,7 +159,7 @@ function SiteCard({ site }: { site: GesSite }) {
                   key={src}
                   type="button"
                   onClick={() => setOpenIndex(fullIndex)}
-                  className="relative aspect-4/3 cursor-zoom-in overflow-hidden rounded-xl bg-muted ring-offset-background transition hover:ring-2 hover:ring-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:outline-none"
+                  className="relative aspect-4/3 cursor-zoom-in overflow-hidden rounded-xl bg-muted ring-offset-background transition hover:ring-2 hover:ring-brand-orange active:ring-2 active:ring-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:outline-none"
                   aria-label={`${site.shortName} ${t?.ges.photo ?? "fotoğraf"} ${fullIndex + 1}`}
                 >
                   <Image
@@ -243,7 +243,7 @@ function GesLightbox({
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+        className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 active:bg-white/20"
         aria-label={t?.ges.close ?? "Kapat"}
       >
         <X className="size-5" />
@@ -261,7 +261,7 @@ function GesLightbox({
               e.stopPropagation();
               onIndexChange((index - 1 + images.length) % images.length);
             }}
-            className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 sm:left-6"
+            className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 active:bg-white/30 sm:left-6"
             aria-label={t?.ges.prev ?? "Önceki fotoğraf"}
           >
             <ChevronLeft className="size-7" />
@@ -272,7 +272,7 @@ function GesLightbox({
               e.stopPropagation();
               onIndexChange((index + 1) % images.length);
             }}
-            className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 sm:right-6"
+            className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 active:bg-white/30 sm:right-6"
             aria-label={t?.ges.next ?? "Sonraki fotoğraf"}
           >
             <ChevronRight className="size-7" />
@@ -308,7 +308,7 @@ function GesLightbox({
               className={
                 i === index
                   ? "size-2.5 rounded-full bg-brand-orange"
-                  : "size-2.5 rounded-full bg-white/40 hover:bg-white/70"
+                  : "size-2.5 rounded-full bg-white/40 hover:bg-white/70 active:bg-white/70"
               }
               aria-label={`${t?.ges.photo ?? "Fotoğraf"} ${i + 1}`}
             />

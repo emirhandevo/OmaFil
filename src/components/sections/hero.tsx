@@ -61,14 +61,14 @@ export async function Hero() {
           <div className="mt-6 flex w-full max-w-sm flex-col items-stretch gap-2 sm:mt-8 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-3">
             <LocaleLink
             href="/urunlerimiz"
-            className="inline-flex items-center justify-center rounded-lg border border-white bg-[#f19000]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#f19000]  hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0"
+            className="inline-flex items-center justify-center rounded-lg border border-white bg-[#f19000]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#f19000] hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0 active:border-[#f19000] active:bg-neutral-500/60"
             >
               {copy.hero.productsCta}
             </LocaleLink>
 
             <LocaleLink
               href="/kurumsal"
-              className="inline-flex items-center justify-center rounded-lg border border-white bg-[#265291]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#265291] hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0"
+              className="inline-flex items-center justify-center rounded-lg border border-white bg-[#265291]/80 px-4 py-2.5 text-sm text-white transition-all duration-300 hover:-translate-y-[0.2rem] hover:border-[#265291] hover:bg-neutral-500/60 sm:px-6 sm:text-base active:translate-y-0 active:border-[#265291] active:bg-neutral-500/60"
             >
               {copy.hero.aboutCta}
             </LocaleLink>

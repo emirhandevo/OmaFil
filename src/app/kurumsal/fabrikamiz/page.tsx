@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { FactoryMissionTabs } from "@/components/sections/factory-mission-tabs";
+import { ProductionBandGallery } from "@/components/sections/production-band-gallery";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
 import { getContact } from "@/content/cms";
+import { getProductLines } from "@/content/catalog";
+import type { ProcessCode, ProductLine } from "@/content/catalog";
 import { getCmsPage } from "@/content/pages";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
@@ -33,22 +36,34 @@ const factoryIntroTr = [
   "Bünyesinde barındırdığı Ar-Ge merkeziyle sadece üretmekle kalmıyor, geleceğin iplik teknolojilerini de geliştiriyoruz. Tesisimiz bölgeye önemli bir istihdam kaynağı oluştururken, çatımıza kurduğumuz güneş enerjisi sistemiyle üretimimizin enerji ihtiyacının bir kısmını temiz kaynaklardan karşılıyoruz.",
 ];
 
-/** Üretim hattında çıkan ürün grupları (canlı site listesi) */
-const productLines = [
-  "PA6 POY",
-  "PA6 FDY",
-  "PA6 DTY",
-  "PA6 AIR COVERED YARNS",
-  "PA6 SINGLE COVERED YARNS",
-  "PA6 DOUBLE COVERED YARNS",
-  "PA66 DTY",
-  "PA66 AIR COVERED YARNS",
-  "PA66 SINGLE COVERED YARNS",
-  "PA66 DOUBLE COVERED YARNS",
-  "PES AIR COVERED YARNS",
-  "PES SINGLE COVERED YARNS",
-  "PES DOUBLE COVERED YARNS",
-] as const;
+/** Karttaki kısa ad. Kaplama kodları ürünler sayfasındaki ACY / SCY / DCY ile aynı hat. */
+const processName: Record<ProcessCode, string> = {
+  POY: "POY",
+  FDY: "FDY",
+  DTY: "DTY",
+  ATY: "ATY",
+  ACY: "AIR COVERED YARNS",
+  SCY: "SINGLE COVERED YARNS",
+  DCY: "DOUBLE COVERED YARNS",
+};
+
+const familyRank = { nylon6: 0, nylon66: 1, polyester: 2 } as const;
+const codeRank: Record<ProcessCode, number> = {
+  POY: 0,
+  FDY: 1,
+  DTY: 2,
+  ATY: 3,
+  ACY: 4,
+  SCY: 5,
+  DCY: 6,
+};
+
+/** Ürünler sayfasındaki hatlar, karttaki PA6 / PA66 / PES yazımıyla. */
+function factoryProductLabel(line: ProductLine) {
+  const polymer =
+    line.polymer === "pa6" ? "PA6" : line.polymer === "pa66" ? "PA66" : "PES";
+  return `${polymer} ${processName[line.code]}`;
+}
 
 /**
  * Fabrika galerisi — 01 güneş panelli havadan çekim;
@@ -83,11 +98,18 @@ const productionBandGallery = Array.from({ length: 24 }, (_, i) => {
 });
 
 export default async function FabrikamizPage() {
-  const [page, contact, { locale }] = await Promise.all([
+  const [page, contact, lines, { locale }] = await Promise.all([
     getCmsPage("fabrikamiz"),
     getContact(),
+    getProductLines(),
     getCopy(),
   ]);
+  // Ürünler sayfasıyla aynı aile sırası: Naylon 6, Naylon 66, polyester.
+  const productLines = [...lines].sort(
+    (a, b) =>
+      familyRank[a.family] - familyRank[b.family] ||
+      codeRank[a.code] - codeRank[b.code],
+  );
   const t = getInner(locale);
   const plant = contact.locations.find((place) =>
     place.label.startsWith("Fabrika /"),
@@ -142,12 +164,12 @@ export default async function FabrikamizPage() {
             <div className="absolute inset-0 bg-card/75 dark:bg-background/80" />
             <ul className="relative z-10 grid gap-2 px-6 py-7 text-sm font-semibold text-brand-navy dark:text-foreground sm:py-8">
               {productLines.map((line) => (
-                <li key={line} className="flex items-center gap-2.5">
+                <li key={line.slug} className="flex items-center gap-2.5">
                   <span
                     aria-hidden="true"
                     className="size-1.5 shrink-0 rounded-full bg-brand-orange"
                   />
-                  {line}
+                  {factoryProductLabel(line)}
                 </li>
               ))}
             </ul>
@@ -205,7 +227,7 @@ export default async function FabrikamizPage() {
         </div>
       </section>
 
-      {/* Üretim bandı — görselleri sen ekleyeceksin */}
+      {/* Üretim bandı — ilk 4 açık, gerisi butonla yüklenir */}
       <section
         className="border-y border-border bg-muted py-14 sm:py-16"
         aria-labelledby="production-band-title"
@@ -221,24 +243,10 @@ export default async function FabrikamizPage() {
             {t?.factory.bandBody ??
               "Naylon 6 ve 66 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz."}
           </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {band.map((photo) => (
-              <div
-                key={photo.src}
-                className="relative aspect-4/3 overflow-hidden rounded-2xl border border-border bg-muted"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  quality={80}
-                  loading="lazy"
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
+          <ProductionBandGallery
+            photos={band}
+            moreLabel={t?.factory.bandMore ?? "Daha fazlasını göster"}
+          />
         </div>
       </section>
 
@@ -260,7 +268,7 @@ export default async function FabrikamizPage() {
                   href={plant.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline"
+                  className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
                 >
                   {t?.factory.map ?? "Tesisi haritada aç"} →
                 </a>

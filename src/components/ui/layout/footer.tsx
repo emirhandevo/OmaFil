@@ -60,7 +60,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="flex size-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
+                  className="flex size-9 items-center justify-center rounded-full border border-border text-foreground/70 transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange active:border-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                 >
                   <Icon aria-hidden="true" className="size-4" />
                 </a>
@@ -77,7 +77,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
               <li key={item.href}>
                 <LocaleLink
                   href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
+                  className="text-sm text-muted-foreground transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
                 >
                   {navLabel(item.href, copy)}
                 </LocaleLink>
@@ -98,7 +98,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
                 />
                 <a
                   href={`tel:${phone}`}
-                  className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
+                  className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
                 >
                   {phone}
                 </a>
@@ -111,7 +111,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
               />
               <a
                 href={`mailto:${contact.email}`}
-                className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2"
+                className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
               >
                 {contact.email}
               </a>
@@ -135,7 +135,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
                   href={loc.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground/75 transition-colors hover:text-brand-orange"
+                  className="text-foreground/75 transition-colors hover:text-brand-orange active:text-brand-orange"
                 >
                   <span className="block font-medium text-foreground">
                     {placeLabel(loc.label, locale)}

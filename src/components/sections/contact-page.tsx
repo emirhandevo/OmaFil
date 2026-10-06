@@ -106,9 +106,9 @@ export async function ContactPage() {
               <li key={phone}>
                 <a
                   href={telHref(phone)}
-                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04]"
+                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04] active:border-brand-orange active:bg-brand-orange/[0.04]"
                 >
-                  <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange transition-transform group-hover:scale-105">
+                  <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange transition-transform group-hover:scale-105 group-active:scale-105">
                     <Phone aria-hidden="true" className="size-5" />
                   </span>
                   <span>
@@ -124,9 +124,9 @@ export async function ContactPage() {
             <li>
               <a
                 href={`mailto:${contact.email}`}
-                className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04]"
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04] active:border-brand-orange active:bg-brand-orange/[0.04]"
               >
-                <span className="flex size-11 items-center justify-center rounded-xl bg-brand-blue/15 text-brand-blue transition-transform group-hover:scale-105">
+                <span className="flex size-11 items-center justify-center rounded-xl bg-brand-blue/15 text-brand-blue transition-transform group-hover:scale-105 group-active:scale-105">
                   <Mail aria-hidden="true" className="size-5" />
                 </span>
                 <span>
@@ -158,7 +158,7 @@ export async function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="flex size-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-brand-orange hover:text-brand-orange"
+                    className="flex size-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-brand-orange hover:text-brand-orange active:border-brand-orange active:text-brand-orange"
                   >
                     <Icon aria-hidden="true" className="size-4" />
                   </a>
@@ -192,7 +192,7 @@ export async function ContactPage() {
                   href={place.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange hover:bg-brand-orange/[0.03] hover:shadow-sm"
+                  className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange hover:bg-brand-orange/[0.03] hover:shadow-sm active:-translate-y-1 active:border-brand-orange active:bg-brand-orange/[0.03] active:shadow-sm"
                 >
                   <span className="flex size-11 items-center justify-center rounded-xl bg-brand-orange/15 text-brand-orange">
                     <MapPin aria-hidden="true" className="size-5" />

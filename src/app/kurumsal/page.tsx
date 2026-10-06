@@ -55,8 +55,8 @@ export default async function KurumsalPage() {
               href={item.href}
               className="group relative pt-8"
             >
-              <article className="relative flex h-full flex-col items-center rounded-2xl border border-border/80 bg-card px-6 pb-8 pt-12 text-center shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-brand-orange group-hover:shadow-md">
-                <span className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-md ring-4 ring-background transition-transform group-hover:scale-105">
+              <article className="relative flex h-full flex-col items-center rounded-2xl border border-border/80 bg-card px-6 pb-8 pt-12 text-center shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-brand-orange group-hover:shadow-md group-active:-translate-y-1 group-active:border-brand-orange group-active:shadow-md">
+                <span className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-md ring-4 ring-background transition-transform group-hover:scale-105 group-active:scale-105">
                   <Icon aria-hidden="true" className="size-7" strokeWidth={1.75} />
                 </span>
                 <h2 className="text-xl font-semibold tracking-tight">

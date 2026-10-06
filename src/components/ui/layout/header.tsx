@@ -37,6 +37,16 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
+    // Menü açıkken sayfa kaymasın; kaydırma nav kutusunda kalsın.
+    if (!isOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     // menü kapalıyken dinleyici eklemeye gerek yok
     if (!isOpen) return;
 
@@ -108,7 +118,7 @@ export function Header() {
                         <LocaleLink
                           href={child.href}
                           onClick={closeCorpDropdown}
-                          className="block rounded-md px-3 py-2 text-center text-sm text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
+                          className="block rounded-md px-3 py-2 text-center text-sm text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                         >
                           {navLabel(child.href, copy)}
                         </LocaleLink>
@@ -142,7 +152,7 @@ export function Header() {
           aria-label={isOpen ? copy.nav.closeMenu : copy.nav.openMenu}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex size-10 items-center justify-center rounded-md text-foreground lg:hidden"
+          className="flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange lg:hidden"
         >
           {/* Üç çizgi aynı yerde döner; ikon değişimi zıplamaz */}
           <span className="relative block h-3.5 w-5" aria-hidden="true">
@@ -170,7 +180,7 @@ export function Header() {
       {isOpen && (
         <nav
           aria-label={copy.nav.mobile}
-          className="border-t border-border bg-background px-4 py-4 lg:hidden"
+          className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-y-contain border-t border-border bg-background px-4 py-4 lg:hidden"
         >
           <ul className="flex flex-col gap-1">
             {navLinks.map((item) => (
@@ -178,7 +188,7 @@ export function Header() {
                 <LocaleLink
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
+                  className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                 >
                   {navLabel(item.href, copy)}
                 </LocaleLink>
@@ -189,7 +199,7 @@ export function Header() {
                         <LocaleLink
                           href={child.href}
                           onClick={() => setIsOpen(false)}
-                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange"
+                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                         >
                           {navLabel(child.href, copy)}
                         </LocaleLink>

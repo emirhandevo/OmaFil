@@ -85,7 +85,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
               className={
                 active
                   ? "rounded-full bg-[#f19000] px-4 py-2 text-sm font-semibold text-white shadow-md shadow-[#f19000]/30 transition-all duration-300"
-                  : "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] disabled:opacity-60"
+                  : "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] active:border-[#f19000]/50 active:bg-[#1e355d] disabled:opacity-60"
               }
             >
               {f.id === "all" ? copy.products.all : f.label}
@@ -111,6 +111,9 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 hover:border-[#f19000]/55
                 hover:bg-[#243f6e]
                 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.4),0_32px_64px_-16px_rgba(0,0,0,0.65)]
+                active:border-[#f19000]/55
+                active:bg-[#243f6e]
+                active:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.4),0_32px_64px_-16px_rgba(0,0,0,0.65)]
               "
             >
               <div
@@ -129,7 +132,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                       alt={item.label}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] group-active:scale-[1.04]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#12243c]/70 via-transparent to-transparent opacity-90" />
                   </>
@@ -151,7 +154,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
 
               <div className="flex flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
                 <LocaleLink href={`/urunlerimiz/${item.slug}`}>
-                  <h2 className="line-clamp-1 h-7 text-lg leading-7 font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000]">
+                  <h2 className="line-clamp-1 h-7 text-lg leading-7 font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000] group-active:text-[#f19000]">
                     {item.label}
                   </h2>
                 </LocaleLink>
@@ -161,17 +164,17 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 <div className="mt-5 flex h-6 shrink-0 flex-nowrap items-center gap-3">
                   <LocaleLink
                     href={`/urunlerimiz/${item.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white active:text-white"
                   >
                     Specs
                     <ArrowUpRight
                       aria-hidden="true"
-                      className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0.5 group-active:-translate-y-0.5"
                     />
                   </LocaleLink>
                   <LocaleLink
                     href="/iletisim"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#f19000] transition-colors hover:text-[#e84e1c]"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#f19000] transition-colors hover:text-[#e84e1c] active:text-[#e84e1c]"
                   >
                     {copy.products.quote}
                     <ArrowUpRight aria-hidden="true" className="size-4" />
@@ -187,7 +190,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
         {copy.products.quoteLine}{" "}
         <a
           href={`mailto:${contactEmail}`}
-          className="font-semibold text-brand-orange hover:underline"
+          className="font-semibold text-brand-orange hover:underline active:underline"
         >
           {contactEmail}
         </a>

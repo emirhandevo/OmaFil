@@ -76,7 +76,7 @@ function ImageGroup({
               // Logodaki Oma mavisi. Hover ve açık kart: Fil turuncusu.
               open
                 ? "border-[#f19000]"
-                : "border-[#265291] hover:border-[#f19000]"
+                : "border-[#265291] hover:border-[#f19000] active:border-[#f19000]"
             }`}
           >
             <div
@@ -316,7 +316,7 @@ function MarqueeRow({
         type="button"
         aria-label={copy.chrome.scrollPrev}
         onClick={() => scrollByStep("left")}
-        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
+        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 active:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >
         <ChevronLeft className="size-5" aria-hidden="true" />
       </button>
@@ -338,7 +338,7 @@ function MarqueeRow({
         type="button"
         aria-label={copy.chrome.scrollNext}
         onClick={() => scrollByStep("right")}
-        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 group-hover/row:opacity-100 sm:flex"
+        className="z-20 hidden size-9 shrink-0 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity hover:bg-black/80 active:bg-black/80 group-hover/row:opacity-100 sm:flex"
       >
         <ChevronRight className="size-5" aria-hidden="true" />
       </button>

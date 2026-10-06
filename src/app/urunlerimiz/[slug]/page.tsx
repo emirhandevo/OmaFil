@@ -55,7 +55,7 @@ export default async function ProductLinePage({ params }: PageProps) {
     <article className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
       <LocaleLink
         href="/urunlerimiz"
-        className="inline-flex items-center gap-2 text-sm font-medium text-brand-orange hover:underline"
+        className="inline-flex items-center gap-2 text-sm font-medium text-brand-orange hover:underline active:underline"
       >
         <ArrowLeft aria-hidden="true" className="size-4" />
         {copy.chrome.backProducts}
@@ -121,7 +121,7 @@ export default async function ProductLinePage({ params }: PageProps) {
 
           <LocaleLink
             href="/iletisim"
-            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-amber"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-amber active:bg-brand-amber"
           >
             {copy.chrome.quoteSample}
             <ArrowUpRight aria-hidden="true" className="size-4" />
