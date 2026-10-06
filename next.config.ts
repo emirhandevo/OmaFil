@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Server action varsayılanı 1 MB. CV 4 MB; form alanları da eklenince gövde 1 MB'ı aşar.
+  // 4.5 MB: 4 MB'lık PDF içeri girer, daha büyüğü careers.ts içindeki kontrolde kalır.
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "4.5mb",
+    },
+  },
   // Image quality={80|82} uyarılarını keser; 75 varsayılan kalsın
   images: {
     qualities: [75, 80, 82, 90, 92, 95],
