@@ -96,8 +96,8 @@ export function GesImpactStats() {
             aria-hidden="true"
             className="relative mx-auto flex h-44 w-full max-w-sm items-center justify-center gap-3"
           >
-            <span className="flex size-20 items-center justify-center rounded-2xl bg-white shadow-md dark:bg-card">
-              <Sun className="size-10 text-amber-500" strokeWidth={1.5} />
+            <span className="flex size-16 items-center justify-center rounded-2xl bg-white shadow-md dark:bg-card">
+              <Sun className="size-8 text-amber-500" strokeWidth={1.5} />
             </span>
             <span className="flex size-16 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md">
               <BatteryCharging className="size-8" strokeWidth={1.5} />

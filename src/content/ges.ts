@@ -7,7 +7,6 @@ import {
   gesAverageDailyKwh,
   gesElazigMonitorSnapshot,
   gesPortfolioTotals,
-  gesSites,
 } from "@/content/ges-sites";
 
 export const gesIntro = {
@@ -137,11 +136,3 @@ export function computeGesMetrics(nowMs = Date.now()) {
     trees,
   };
 }
-
-/** Sayfa galerisi — tüm tesis görselleri */
-export const gesGallery = gesSites.flatMap((site) =>
-  site.images.map((src, i) => ({
-    src,
-    alt: `${site.shortName} — ${site.location} (${i + 1})`,
-  })),
-);
