@@ -28,3 +28,19 @@ export function rateLimit(
   store.set(key, bucket);
   return { ok: true };
 }
+
+type Cap = { count: number };
+
+/** Sohbet: süre yok. Bu süreç ayaktayken IP başına en fazla limit kadar istek. */
+const caps = new Map<string, Cap>();
+
+export function messageCap(
+  key: string,
+  limit: number,
+): { ok: true } | { ok: false } {
+  const cap = caps.get(key) ?? { count: 0 };
+  if (cap.count >= limit) return { ok: false };
+  cap.count += 1;
+  caps.set(key, cap);
+  return { ok: true };
+}
