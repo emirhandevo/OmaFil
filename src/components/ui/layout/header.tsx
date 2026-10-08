@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy } from "@/components/i18n/locale-provider";
-import { navLinks, site } from "@/config/site";
+import { navLinks } from "@/config/site";
+import { SiteLogo } from "@/components/ui/layout/site-logo";
 import { navLabel } from "@/i18n/labels";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -72,13 +72,9 @@ export function Header() {
     >
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-3 px-4">
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
-          <Image
-            src={site.logo}
-            alt={site.name}
-            width={270}
-            height={50}
-            className="h-auto w-36 lg:w-44 xl:w-56"
+          <SiteLogo
             priority
+            className="h-auto w-36 lg:w-44 xl:w-56"
           />
         </LocaleLink>
 

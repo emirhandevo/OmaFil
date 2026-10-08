@@ -13,8 +13,10 @@ export const site = {
     description:
     "Endüstriyel iplik üretimi. Kurumsal katalog ve ürün portföyü.",
     locale: "tr_TR",
-    // public/ klasörüne göre yol; Header buradan okur
+    // public/ klasörüne göre yol. Header ve footer buradan okur.
     logo: "/images/omafil_logo.svg",
+    // Dark temada aynı yerler bu dosyayı basar. Açık tema logo'da kalır.
+    logoDark: "/images/omafil_logo_dark.svg",
 } as const;
 
 // Kurumsal menüsündeki linkler. Header, footer ve alt sayfalar buradan okur.

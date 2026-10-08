@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useLocale } from "@/components/i18n/locale-provider";
 import { getUi, placeLabel } from "@/i18n/ui";
 import { navLinks, site } from "@/config/site";
+import { SiteLogo } from "@/components/ui/layout/site-logo";
 import type { ContactData, SocialNetwork } from "@/content/cms";
 import { navLabel } from "@/i18n/labels";
 import {
@@ -38,13 +38,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Marka - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-          <Image
-            src={site.logo}
-            alt={site.name}
-            width={160}
-            height={30}
-            className="h-auto w-36"
-          />
+          <SiteLogo className="h-auto w-36" />
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
             {locale === "tr" ? footerTagline : ui.tagline}
           </p>
