@@ -88,12 +88,29 @@ const factoryGallery = [
   },
 ] as const;
 
-/** Üretim bandı — canlı siteden optimize WebP (01–24) */
-const productionBandGallery = Array.from({ length: 24 }, (_, i) => {
-  const n = String(i + 1).padStart(2, "0");
+/**
+ * Üretim bandı dosya sırası. İlk 4 kart seçilen kareler.
+ * Eski ilk 4 (01–04), bu karelerin eski yerine gider. Aynı dosya iki kez yok.
+ * 21 salon, 24 renkli bobin, 14 turkuaz hat, 25 mor UV.
+ */
+const bandOrder = [
+  "21", "24", "14", "25",
+  "05", "06", "07", "08", "09", "10", "11", "12", "13",
+  "03",
+  "15", "16", "17", "18", "19", "20",
+  "01",
+  "22", "23",
+  "02",
+  "04",
+  "26", "27", "28",
+] as const;
+
+const productionBandGallery = bandOrder.map((file, index) => {
+  // Alt metindeki numara ekrandaki sıra. Dosya adı değil.
+  const label = String(index + 1).padStart(2, "0");
   return {
-    src: `/images/factory/band/${n}.webp`,
-    alt: `OmaFil üretim bandı ${n}`,
+    src: `/images/factory/band/${file}.webp`,
+    alt: `OmaFil üretim bandı ${label}`,
   };
 });
 
@@ -247,6 +264,40 @@ export default async function FabrikamizPage() {
             photos={band}
             moreLabel={t?.factory.bandMore ?? "Daha fazlasını göster"}
           />
+        </div>
+      </section>
+
+      {/* Laboratuvar videosu ve metin. Diğer diller onaydan sonra çevrilecek. */}
+      <section
+        className="mx-auto max-w-6xl px-4 py-14 sm:py-16"
+        aria-labelledby="lab-tests-title"
+      >
+        <h2
+          id="lab-tests-title"
+          className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+        >
+          Kalitenin Ölçüldüğü Yer: Laboratuvarımız
+        </h2>
+        <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-center">
+          <video
+            className="aspect-video w-1/2 shrink-0 rounded-2xl border border-border bg-black"
+            controls
+            playsInline
+            preload="none"
+            poster="/images/factory/fab-lab-poster.webp"
+          >
+            <source src="/videos/fab-lab.mp4" type="video/mp4" />
+          </video>
+          <p className="text-body text-base leading-8">
+            Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş ipliğe
+            kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm, mukavemet ve
+            uzama değerlerini kontrol ediyor, filament düzgünlüğünü analiz
+            ediyoruz. Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik
+            üzerindeki finish oranını takip ediyoruz. Numuneleri boyama
+            testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki
+            performansları açısından sınıyoruz. Sonuç: her partide aynı kalite,
+            her bobinde aynı performans.
+          </p>
         </div>
       </section>
 
