@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { FactoryMissionTabs } from "@/components/sections/factory-mission-tabs";
+import { LabVideo } from "@/components/sections/lab-video";
 import { ProductionBandGallery } from "@/components/sections/production-band-gallery";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
 import { getContact } from "@/content/cms";
@@ -279,15 +280,7 @@ export default async function FabrikamizPage() {
           Kalitenin Ölçüldüğü Yer: Laboratuvarımız
         </h2>
         <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-center">
-          <video
-            className="aspect-video w-1/2 shrink-0 rounded-2xl border border-border bg-black"
-            controls
-            playsInline
-            preload="none"
-            poster="/images/factory/fab-lab-poster.webp"
-          >
-            <source src="/videos/fab-lab.mp4" type="video/mp4" />
-          </video>
+          <LabVideo />
           <p className="text-body text-base leading-8">
             Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş ipliğe
             kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm, mukavemet ve

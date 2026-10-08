@@ -192,9 +192,12 @@ export function YarnChat() {
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Pencere açılınca yazı kutusuna geç. Yeni mesaj gelince alta kay.
+  // Masaüstünde pencere açılınca yazı kutusuna geç.
+  // Telefonda focus klavyeyi hemen açar; ziyaretçi inputa kendisi tıklasın.
   useEffect(() => {
-    if (open) inputRef.current?.focus();
+    if (!open) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    inputRef.current?.focus();
   }, [open]);
 
   useEffect(() => {
@@ -290,13 +293,14 @@ export function YarnChat() {
               </p>
             ) : null}
             <div className="flex gap-2">
+              {/* text-base = 16px. iOS, daha küçük inputa tıklayınca sayfayı yakınlaştırır. */}
               <input
                 ref={inputRef}
                 value={input}
                 maxLength={500}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder={ui.placeholder}
-                className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-base"
               />
               <button
                 type="submit"
