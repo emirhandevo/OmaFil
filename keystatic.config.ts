@@ -76,13 +76,16 @@ const coveredSkuFields = fields.object({
 });
 
 /**
- * Keystatic Git CMS — panel: /keystatic
- * local: dosyaya yazar | canlıda sonra github storage
+ * Yerelde dosyaya yazar. Canlıda omafil/omafil deposuna commit atar.
+ * Site o commit’i bir sonraki yayında okur. VPS de aynı dosyayı git pull ile alır.
  */
+const storage =
+  process.env.NODE_ENV === "development"
+    ? { kind: "local" as const }
+    : { kind: "github" as const, repo: "omafil/omafil" };
+
 export default config({
-  storage: {
-    kind: "local",
-  },
+  storage,
   collections: {
     posts: collection({
       label: "Blog yazıları",
