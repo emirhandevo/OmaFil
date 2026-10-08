@@ -11,16 +11,7 @@
   "details": {
     "discriminant": "covered",
     "value": {
-      "skus": [
-        {
-          "productionType": "TEST",
-          "spandexDtex": 130,
-          "yarnDtex": 44,
-          "filament": 24,
-          "floor": "2",
-          "yarnType": "DENEME"
-        }
-      ]
+      "skus": []
     }
   }
 }
