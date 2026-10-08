@@ -76,16 +76,15 @@ const coveredSkuFields = fields.object({
 });
 
 /**
- * Yerelde dosyaya yazar. Canlıda omafil/omafil deposuna commit atar.
- * Site o commit’i bir sonraki yayında okur. VPS de aynı dosyayı git pull ile alır.
+ * Canlı panel omafil/omafil deposuna yazar.
+ * Yerelde anahtar yokken /keystatic kurulum ekranını açar ve .env dosyasına üç değeri yazar.
+ * O üç değer Vercel’de yoksa production build düşer.
  */
-const storage =
-  process.env.NODE_ENV === "development"
-    ? { kind: "local" as const }
-    : { kind: "github" as const, repo: "omafil/omafil" };
-
 export default config({
-  storage,
+  storage: {
+    kind: "github",
+    repo: { owner: "omafil", name: "omafil" },
+  },
   collections: {
     posts: collection({
       label: "Blog yazıları",

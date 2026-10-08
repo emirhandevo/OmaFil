@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    allowedDevOrigins: ["127.0.0.1"],
   // Server action varsayılanı 1 MB. CV 4 MB; form alanları da eklenince gövde 1 MB'ı aşar.
   // 4.5 MB: 4 MB'lık PDF içeri girer, daha büyüğü careers.ts içindeki kontrolde kalır.
   experimental: {
@@ -34,16 +35,17 @@ const nextConfig: NextConfig = {
     const csp = [
       "default-src 'self'",
       `script-src ${scriptSrc}`,
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob:",
-      "font-src 'self'",
-      "media-src 'self'",
-      "connect-src 'self' https://challenges.cloudflare.com",
-      "frame-src https://challenges.cloudflare.com",
-      "worker-src 'self' blob:",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
+   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+"img-src 'self' data: blob: https://avatars.githubusercontent.com",
+"font-src 'self' https://fonts.gstatic.com",
+"media-src 'self'",
+// Panel, GitHub uygulamasını bu forma POST ederek kurar.
+"connect-src 'self' https://challenges.cloudflare.com https://api.github.com",
+"frame-src https://challenges.cloudflare.com",
+"worker-src 'self' blob:",
+"object-src 'none'",
+"base-uri 'self'",
+"form-action 'self' https://github.com",
       "frame-ancestors 'none'",
     ].join("; ");
 
