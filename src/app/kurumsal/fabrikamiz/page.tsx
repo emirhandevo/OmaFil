@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { MapPin } from "lucide-react";
+import { FlaskConical, Leaf, MapPin, Shield } from "lucide-react";
 import { FactoryMissionTabs } from "@/components/sections/factory-mission-tabs";
 import { LabVideo } from "@/components/sections/lab-video";
 import { ProductionBandGallery } from "@/components/sections/production-band-gallery";
@@ -114,6 +114,13 @@ const productionBandGallery = bandOrder.map((file, index) => {
     alt: `OmaFil üretim bandı ${label}`,
   };
 });
+
+/** Laboratuvar kartının altındaki üç işaret. Metin sonra çevrilecek. */
+const labMarks = [
+  { icon: Shield, title: "Hassas", text: "Analiz" },
+  { icon: FlaskConical, title: "Modern", text: "Laboratuvar" },
+  { icon: Leaf, title: "Sürekli", text: "Kalite" },
+] as const;
 
 export default async function FabrikamizPage() {
   const [page, contact, lines, { locale }] = await Promise.all([
@@ -269,29 +276,90 @@ export default async function FabrikamizPage() {
         </div>
       </section>
 
-      {/* Laboratuvar videosu ve metin. Diğer diller onaydan sonra çevrilecek. */}
+      {/* Laboratuvar kartı. Diğer diller onaydan sonra çevrilecek. */}
       <section
         className="mx-auto max-w-6xl px-4 py-14 sm:py-16"
         aria-labelledby="lab-tests-title"
       >
-        <h2
-          id="lab-tests-title"
-          className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
-        >
-          Kalitenin Ölçüldüğü Yer: Laboratuvarımız
-        </h2>
-        <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-center">
-          <LabVideo />
-          <p className="text-body text-base leading-8">
-            Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş ipliğe
-            kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm, mukavemet ve
-            uzama değerlerini kontrol ediyor, filament düzgünlüğünü analiz
-            ediyoruz. Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik
-            üzerindeki finish oranını takip ediyoruz. Numuneleri boyama
-            testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki
-            performansları açısından sınıyoruz. Sonuç: her partide aynı kalite,
-            her bobinde aynı performans.
-          </p>
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
+          {/* Sağ alt balon. Kart kenarı yayı keser, köşede kavis kalır. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-16 -end-14 aspect-square w-64 rounded-full border border-brand-orange/45 shadow-[0_0_28px_rgba(241,144,0,0.2)]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-6 -end-4 size-32 rounded-full bg-brand-orange/20 blur-3xl"
+          />
+          {/* Başlık kartın solundan (videonun üstü) sağa (paragrafın üstü) uzanır. Video alt satırda kalır. */}
+          <div className="relative z-10">
+            <p className="inline-flex rounded-full border border-brand-orange/70 px-3 py-1 text-xs font-medium tracking-wide text-brand-orange">
+              Kalite Kontrol
+            </p>
+            <h2
+              id="lab-tests-title"
+              className="mt-3 whitespace-nowrap text-sm font-semibold tracking-tight text-foreground min-[420px]:text-base sm:text-2xl lg:text-3xl xl:text-4xl"
+            >
+              Kalitenin Ölçüldüğü Yer:{" "}
+              <span className="text-brand-orange">Laboratuvarımız</span>
+            </h2>
+          </div>
+          <div className="relative mt-6 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+            <div className="relative">
+              {/* Balon videonun hemen arkasında. Yay sadece sol üst ve sol alt köşeden taşar. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -start-5 top-1/2 aspect-square h-[116%] -translate-y-1/2 rounded-full border border-brand-orange/55 shadow-[0_0_28px_rgba(241,144,0,0.35)]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-3 -start-3 size-28 rounded-full bg-brand-orange/40 blur-2xl"
+              />
+              <div className="relative z-10">
+                <LabVideo />
+              </div>
+            </div>
+            <div className="text-body space-y-4 text-sm leading-7 sm:text-base">
+              <p>
+                Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş
+                ipliğe kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm,
+                mukavemet ve uzama değerlerini kontrol ediyor, filament
+                düzgünlüğünü analiz ediyoruz.
+              </p>
+              <p>
+                Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik
+                üzerindeki finish oranını takip ediyoruz. Numuneleri boyama
+                testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki
+                performansları açısından sınıyoruz.
+              </p>
+              <p>Sonuç: her partide aynı kalite, her bobinde aynı performans.</p>
+            </div>
+          </div>
+          {/* Üç işaret kartın ortasında. Daire mavi, içindeki ikon turuncu. Hover’da yer değiştirir. */}
+          <ul className="relative mt-10 flex justify-center">
+            {labMarks.map((mark, index) => (
+              <li
+                key={mark.title}
+                className={
+                  index > 0
+                    ? "group flex w-28 flex-col items-center gap-2 border-s border-border px-2 text-center sm:w-36"
+                    : "group flex w-28 flex-col items-center gap-2 px-2 text-center sm:w-36"
+                }
+              >
+                <span className="flex size-11 items-center justify-center rounded-full border border-brand-blue transition-colors duration-500 ease-in-out group-hover:border-brand-orange">
+                  <mark.icon
+                    aria-hidden="true"
+                    className="size-5 text-brand-orange transition-colors duration-500 ease-in-out group-hover:text-brand-blue"
+                  />
+                </span>
+                <span className="text-xs leading-4 text-muted-foreground">
+                  {mark.title}
+                  <br />
+                  {mark.text}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
