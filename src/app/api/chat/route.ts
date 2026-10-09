@@ -391,8 +391,8 @@ export async function POST(request: Request) {
         return logged(scrubPrice(offListReply(last, hint, email, phones), email, phones));
     }
 
-    const asked = visitorWantsContact(last);
-    const spoken = hideContact(reply, asked, email, phones);
-    const priced = scrubPrice(spoken, email, phones);
-    return Response.json({reply: ensureContact(priced, last, hint, email, phones)});
+   const asked = visitorWantsContact(last);
+const spoken = hideContact(reply, asked, email, phones);
+const priced = scrubPrice(spoken, email, phones);
+return logged(ensureContact(priced, last, hint, email, phones));
 }
