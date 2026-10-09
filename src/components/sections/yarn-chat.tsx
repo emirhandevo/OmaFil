@@ -245,13 +245,14 @@ export function YarnChat() {
     }
   }
 
+  // Mobilde kutu ortaya. Buton sağ altta kalır. md'de ikisi de sağa yaslanır.
   return (
-    <div className="fixed end-4 bottom-4 z-[60] print:hidden">
+    <div className="fixed inset-x-0 bottom-4 z-[60] flex w-full flex-col items-center px-4 print:hidden md:inset-x-auto md:end-4 md:w-[22rem] md:items-stretch md:px-0">
       {open ? (
         <section
           role="dialog"
           aria-label={ui.title}
-          className="mb-3 flex h-[min(32rem,70dvh)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-lg"
+          className="mb-3 flex h-[min(32rem,70dvh)] w-full max-w-[22rem] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-lg"
         >
           <header className="flex items-center justify-between border-b border-border px-4 py-3">
             <p className="text-sm font-semibold">{ui.title}</p>
@@ -318,7 +319,7 @@ export function YarnChat() {
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
-        className="ms-auto flex items-center gap-2 rounded-full bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-brand-orange/90 active:bg-brand-orange/90"
+        className="flex items-center gap-2 self-end rounded-full bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-brand-orange/90 active:bg-brand-orange/90"
       >
         <MessageCircle className="size-5" aria-hidden="true" />
         {open ? ui.close : ui.open}

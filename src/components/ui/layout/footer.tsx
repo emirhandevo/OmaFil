@@ -38,7 +38,10 @@ export function Footer({ contact, footerTagline }: FooterProps) {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Marka - mobilde ortalı, sm ve üstünde sola yaslı */}
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-          <SiteLogo className="h-auto w-36" />
+          {/* Header ile aynı: logo ana sayfaya gider. Dil öneki LocaleLink'te eklenir. */}
+          <LocaleLink href="/" className="inline-flex">
+            <SiteLogo className="h-auto w-36" />
+          </LocaleLink>
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
             {locale === "tr" ? footerTagline : ui.tagline}
           </p>

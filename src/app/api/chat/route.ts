@@ -45,9 +45,12 @@ function readLocale(body: unknown): Locale {
     return typeof value === "string" && isLocale(value) ? value : defaultLocale;
 }
 
-/** Fiyat, teklif, numune veya iletişim sorulunca adres kalır. Diğer cümlelerde silinir. */
+/**
+ * Fiyat, teklif, numune, link veya iletişim sorulunca mail ve telefon kalır.
+ * "hani link nerde" de buraya girer. Sadece selam ve katalog cevabında silinir.
+ */
 function visitorWantsContact(text: string): boolean {
-    return /(fiyat|teklif|iskonto|numune|price|quote|sample|iletişim|iletisim|telefon|e-?posta|\bmail\b|kaç\s*para|kac\s*para)/i.test(
+    return /(fiyat|teklif|iskonto|numune|price|quote|sample|iletişim|iletisim|telefon|e-?posta|\bmail\b|link|url|adres|numara|ulaş|ulas|kaç\s*para|kac\s*para)/i.test(
         text,
     );
 }
@@ -83,7 +86,10 @@ function offListUse(text: string): boolean {
         return true;
     }
     if (listedUse(text)) return false;
-    return /(için|icin).{0,80}(iplik|ipilik|yarn)|(iplik|ipilik|yarn).{0,40}(için|icin)/i.test(text);
+    // iplik + -iniz = ipliğiniz. k harfi ğ olur, "iplik" alt dizgi olarak durmaz.
+    return /(için|icin).{0,80}(ipli[kğ]|ipili[kğ]|yarn)|(ipli[kğ]|ipili[kğ]|yarn).{0,40}(için|icin)/i.test(
+        text,
+    );
 }
 
 /** Model yine “listede yok” derse bu cümle silinir, iletişim konur. */
@@ -155,13 +161,22 @@ function offListReply(text: string, hint: Locale, email: string, phones: string[
     ].join("\n");
 }
 
-/** Ziyaretçi adres istemediyse bilinen mail ve telefonu cevaptan çıkar. */
+/**
+ * Selam ve katalog cevabına yapışan maili siler.
+ * Değer gidince "E-posta: ," kalmasın diye ardı boş olan etiketi de siler.
+ * İletişim sorulduysa fonksiyon hiç dokunmaz.
+ */
 function hideContact(reply: string, asked: boolean, email: string, phones: string[]): string {
     if (asked) return reply;
     let next = reply.split(email).join("");
     for (const phone of phones) next = next.split(phone).join("");
     next = next
-        .replace(/^(e-?posta|telefon|email|phone|tel)\s*:\s*$/gim, "")
+        .replace(
+            /(?:^|[\s,])(?:e-?posta|e-mail|email|telefon|phone|tel)\s*:\s*(?=[,.\s]|$)/gim,
+            " ",
+        )
+        // "E-posta: ," silinince kalan ,, . yığınını da al. 13.000 gibi rakama dokunma.
+        .replace(/(?<!\d)[,.]+(?:\s*[,.]+)+(?!\d)/g, "")
         .replace(/[ \t]{2,}/g, " ")
         .replace(/\n{2,}/g, "\n")
         .trim();

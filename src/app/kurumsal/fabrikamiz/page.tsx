@@ -264,6 +264,7 @@ export default async function FabrikamizPage() {
           <ProductionBandGallery
             photos={band}
             moreLabel={t?.factory.bandMore ?? "Daha fazlasını göster"}
+            lessLabel={t?.factory.bandLess ?? "Daha az göster"}
           />
         </div>
       </section>
