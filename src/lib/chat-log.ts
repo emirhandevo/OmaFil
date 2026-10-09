@@ -6,19 +6,35 @@ function db() {
     return neon(url);
 }
 
-/** Her soru-cevap bir satır. 2 günden eski satırlar silinir. Kayıt düşerse sohbet yine cevap verir. */
+/** Aynı session_id tek satır. Yeni tur o satırın altına eklenir. Kayıt düşerse sohbet yine cevap verir. */
 export async function saveChatLog(row:{
     ip: string;
     locale: string;
     question: string;
     answer: string;
+    // Aynı sekmenin kodu. Aynı kod = aynı sohbet.
+    sessionId: string;
 }) {
+    // Soru, hemen altında cevabı. Sonraki turdan önce bir boş satır.
+    const block = `Soru: ${row.question}\nCevap: ${row.answer}`;
     try {
         const sql = db();
-        await sql`
-        insert into chat_logs (ip, locale, question, answer)
-        values (${row.ip}, ${row.locale}, ${row.question}, ${row.answer})
-        `;
+        if (row.sessionId) {
+            await sql`
+            insert into chat_logs (ip, locale, question, answer, session_id)
+            values (${row.ip}, ${row.locale}, ${row.question}, ${block}, ${row.sessionId})
+            on conflict (session_id) where session_id is not null and session_id <> ''
+            do update set
+              question = chat_logs.question || ${"\n"} || excluded.question,
+              answer = chat_logs.answer || ${"\n\n"} || excluded.answer
+            `;
+        } else {
+            // Kod yoksa turu tek başına yaz. Boş kodlar birbirine karışmasın.
+            await sql`
+            insert into chat_logs (ip, locale, question, answer, session_id)
+            values (${row.ip}, ${row.locale}, ${row.question}, ${block}, ${row.sessionId})
+            `;
+        }
         await sql`
         delete from chat_logs
         where created_at < now() - interval '2 days'
@@ -31,7 +47,7 @@ export async function saveChatLog(row:{
 /** Panel listesi. Son 2 gün, en yeni kayıt üstte. */
 export async function listChatLogs() {
     return db()`
-    select id, created_at, ip, locale, question, answer
+    select id, created_at, session_id, ip, locale, question, answer
     from chat_logs
     where created_at > now() - interval '2 days'
     order by created_at desc

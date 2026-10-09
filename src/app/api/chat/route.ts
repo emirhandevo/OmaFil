@@ -40,6 +40,15 @@ function parseTurn(body:unknown): Turn[] | null {
     return turns;
 }
 
+/** Sekme kodu. 8 karakter hex. Bozuksa boş döner; satır yine yazılır. */
+function readChatId(body: unknown): string {
+    if (!body || typeof body !== "object") return "";
+    const value = (body as {chatId?: unknown}).chatId;
+    if (typeof value !== "string") return "";
+    const clean = value.trim().toLowerCase();
+    return /^[a-f0-9]{8}$/.test(clean) ? clean : "";
+}
+
 /** Sayfa dili ipucu. Cümlenin dili, ziyaretçinin yazdığı metinden seçilir. */
 function readLocale(body: unknown): Locale {
     if (!body || typeof body !== "object") return defaultLocale;
@@ -306,6 +315,7 @@ export async function POST(request: Request) {
     }
 
     const hint = readLocale(body);
+    const sessionId = readChatId(body);
     const last = turns[turns.length - 1]?.text ?? "";
     // cevap ziyaretçiye gitmeden önce bir satır yazar
     async function logged(reply:string) {
@@ -314,6 +324,7 @@ export async function POST(request: Request) {
             locale: hint,
             question: last,
             answer: reply,
+            sessionId,
         });
         return Response.json({reply});
     }

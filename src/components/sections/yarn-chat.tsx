@@ -191,6 +191,15 @@ export function YarnChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  // Sayfa açıkken tek kod. Yenileme yeni sohbet açar. IP aynı ofisteki kişileri ayıramaz.
+  const chatIdRef = useRef("");
+
+  function currentChatId() {
+    if (chatIdRef.current) return chatIdRef.current;
+    const raw = crypto.randomUUID().replace(/-/g, "").slice(0, 8);
+    chatIdRef.current = raw;
+    return raw;
+  }
 
   // Masaüstünde pencere açılınca yazı kutusuna geç.
   // Telefonda focus klavyeyi hemen açar; ziyaretçi inputa kendisi tıklasın.
@@ -230,7 +239,7 @@ export function YarnChat() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next, locale }),
+        body: JSON.stringify({ messages: next, locale, chatId: currentChatId() }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         reply?: string;
