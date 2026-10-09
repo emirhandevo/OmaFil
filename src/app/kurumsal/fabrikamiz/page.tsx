@@ -233,11 +233,12 @@ export default async function FabrikamizPage() {
           {t?.factory.galleryBody ??
             "Modern teknoloji ve global standartlarla inşa edilen tesisimiz, yüksek üretim kapasitesiyle tekstil sektörünün güvenilir tedarik noktasıdır. Geniş altyapımız ve çevre dostu enerji politikalarımızla, sürdürülebilir büyümeyi destekliyoruz."}
         </p>
+        {/* 16/9. 4/3 kartlar sayfayı fazla uzatıyordu. */}
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {gallery.map((photo) => (
             <div
               key={photo.src}
-              className="relative aspect-4/3 overflow-hidden rounded-2xl border border-border bg-muted"
+              className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-muted"
             >
               <Image
                 src={photo.src}

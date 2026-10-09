@@ -200,6 +200,17 @@ export function YarnChat() {
     inputRef.current?.focus();
   }, [open]);
 
+  // Bot açıkken Esc pencereyi kapatır. Kapalıyken dinleyici yok.
+  useEffect(() => {
+    if (!open) return;
+    function onKey(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
   }, [messages, pending]);

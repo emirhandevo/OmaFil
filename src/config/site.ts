@@ -57,7 +57,7 @@ export const navLinks = [
 // Footer / iletişim sayfası için tek kaynak
 // birden telefon numarası footer hepsini alt alta listeler
 export const contact = {
-  phone: ["+90 212 438 72 20", "+90 356 502 60 61"],
+  phone: ["+90 212 438 72 20", "+90 549 177 50 10"],
   email: "info@omafil.com",
   // her adres: başlık + görünen metin + google maps linki
   locations: [

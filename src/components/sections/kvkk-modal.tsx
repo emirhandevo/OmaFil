@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { useLocale } from "@/components/i18n/locale-provider";
 import { site } from "@/config/site";
@@ -76,10 +77,12 @@ export function KvkkModal({ open, onClose, notice }: Props) {
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center">
+  // main üzerinde view-transition-name var. fixed orada kalır, footerın üstüne çıkamaz.
+  // body'ye basınca masaüstünde footerın üstünü kapatır. Bu kasıtlı.
+  return createPortal(
+    <div className="fixed inset-0 z-[80] flex items-end justify-center p-4 sm:items-center">
       <button
         type="button"
         aria-label={closeLabel[locale]}
@@ -91,7 +94,7 @@ export function KvkkModal({ open, onClose, notice }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-30 flex max-h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl mt-20"
+        className="relative z-30 flex max-h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl"
       >
         <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4 sm:px-6 max-sm:mt-4">
           <div>
@@ -132,6 +135,7 @@ export function KvkkModal({ open, onClose, notice }: Props) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

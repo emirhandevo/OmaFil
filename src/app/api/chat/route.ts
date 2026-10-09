@@ -3,6 +3,8 @@ import {defaultLocale, isLocale, localizePath, type Locale} from "@/i18n/locales
 import {getClientIp} from "@/lib/mail";
 import {messageCap} from "@/lib/rate-limit";
 import {buildYarnChatPrompt} from "@/lib/yarn-chat";
+import { saveChatLog  } from "@/lib/chat-log";
+import { subscribe } from "diagnostics_channel";
 
 // AQ. anahtar native generateContent'te x-goog-api-key ile gider. Doğrulanan model:
 const MODEL = "gemini-3.5-flash-lite";
@@ -62,9 +64,60 @@ function listedUse(text: string): boolean {
 
 /** Selam ve teşekkür. Bu cümlelerde iletişim yok. */
 function smallTalk(text: string): boolean {
-    return /^(merhaba|selam|selamlar|hello|hi|hey|hallo|bonjour|hola|ciao|ol[aá]|goedendag|привет|مرحبا|您好|nasılsın|nasilsin|teşekkürler|tesekkurler|thanks|thank you|günaydın|gunaydin)[\s!.?,]*$/i.test(
+    return /^(merhaba|selamlar|selam|slm|hello|hi|hey|hallo|bonjour|hola|ciao|ol[aá]|goedendag|привет|مرحبا|您好|nasılsın|nasilsin|teşekkürler|tesekkurler|thanks|thank you|günaydın|gunaydin|selam[uü]n?\s*aleyk[uü]m|aleyk[uü]m\s*selam)[\s!.?,]*$/i.test(
         text.trim(),
     );
+}
+
+/** Saf selam modele gitmez. "Aleyküm selam" kurmasın diye sabit cümle. */
+const helloReply: Record<Locale, string> = {
+    tr: "Merhaba. OmaFil olarak size nasıl yardımcı olabiliriz?",
+    en: "Hello. How can OmaFil help you?",
+    de: "Guten Tag. Wie kann OmaFil Ihnen helfen?",
+    fr: "Bonjour. Comment OmaFil peut-il vous aider ?",
+    es: "Hola. ¿En qué puede ayudarle OmaFil?",
+    it: "Buongiorno. Come può aiutarla OmaFil?",
+    pt: "Olá. Em que pode a OmaFil ajudar?",
+    nl: "Goedendag. Hoe kan OmaFil u helpen?",
+    ru: "Здравствуйте. Чем OmaFil может вам помочь?",
+    ar: "مرحباً. كيف يمكن لـ OmaFil مساعدتكم؟",
+    zh: "您好。OmaFil 可以如何协助您？",
+};
+
+const thanksReply: Record<Locale, string> = {
+    tr: "Rica ederiz. Başka bir sorunuz olursa yazabilirsiniz.",
+    en: "You're welcome. Please write if you have another question.",
+    de: "Gern geschehen. Schreiben Sie uns, wenn Sie eine weitere Frage haben.",
+    fr: "Je vous en prie. Écrivez-nous si vous avez une autre question.",
+    es: "De nada. Escríbanos si tiene otra consulta.",
+    it: "Prego. Scriveteci se avete un’altra domanda.",
+    pt: "De nada. Escreva-nos se tiver outra questão.",
+    nl: "Graag gedaan. Schrijf ons als u nog een vraag heeft.",
+    ru: "Пожалуйста. Напишите, если появится ещё вопрос.",
+    ar: "على الرحب والسعة. راسلونا إن كان لديكم سؤال آخر.",
+    zh: "不客气。如有其他问题，请继续留言。",
+};
+
+const howReply: Record<Locale, string> = {
+    tr: "Teşekkür ederiz, iyiyiz. Size nasıl yardımcı olabiliriz?",
+    en: "Thank you, we are well. How can we help you?",
+    de: "Danke, uns geht es gut. Wie können wir Ihnen helfen?",
+    fr: "Merci, nous allons bien. Comment pouvons-nous vous aider ?",
+    es: "Gracias, estamos bien. ¿En qué podemos ayudarle?",
+    it: "Grazie, stiamo bene. Come possiamo aiutarla?",
+    pt: "Obrigado, estamos bem. Em que podemos ajudar?",
+    nl: "Dank u, het gaat goed. Hoe kunnen wij u helpen?",
+    ru: "Спасибо, у нас всё хорошо. Чем мы можем помочь?",
+    ar: "شكراً، نحن بخير. كيف يمكننا مساعدتكم؟",
+    zh: "谢谢，我们很好。请问需要什么帮助？",
+};
+
+function greetingReply(text: string, hint: Locale): string {
+    const locale = languageOf(text, hint);
+    // Teşekkür ve hal hatır, selamdan ayrı cümle ister.
+    if (/teşekkür|tesekkur|thanks|thank you/i.test(text)) return thanksReply[locale];
+    if (/nasılsın|nasilsin/i.test(text)) return howReply[locale];
+    return helloReply[locale];
 }
 
 /** “Hangi iplikleriniz var” katalog sorusudur. İletişime atılmaz. */
@@ -148,17 +201,50 @@ const redirectLabels: Record<Locale, {page: string; email: string; phone: string
     zh: {page: "联系页面", email: "邮箱", phone: "电话"},
 };
 
-/** Özeti olmayan iş için sabit cevap: uygun modeller var, sonra iletişim. */
-function offListReply(text: string, hint: Locale, email: string, phones: string[]): string {
-    const locale = languageOf(text, hint);
+/** Link, e-posta ve telefonlar. Numaralar virgülle yan yana değil, alt alta. */
+function contactBlock(locale: Locale, email: string, phones: string[]): string {
     const labels = redirectLabels[locale];
     const page = `${site.url}${localizePath("/iletisim", locale)}`;
     return [
-        redirectLead[locale],
         `${labels.page}: ${page}`,
         `${labels.email}: ${email}`,
-        `${labels.phone}: ${phones.join(", ")}`,
+        `${labels.phone}:`,
+        ...phones,
     ].join("\n");
+}
+
+/** Özeti olmayan iş için sabit cevap: uygun modeller var, sonra iletişim. */
+function offListReply(text: string, hint: Locale, email: string, phones: string[]): string {
+    const locale = languageOf(text, hint);
+    return [redirectLead[locale], contactBlock(locale, email, phones)].join("\n");
+}
+
+/**
+ * İletişim sorulduysa link ve bütün numaralar cevabın sonunda durur.
+ * Model numarayı virgülle yazsa da burada alt alta kurulur.
+ */
+function ensureContact(reply: string, text: string, hint: Locale, email: string, phones: string[]): string {
+    if (!visitorWantsContact(text)) return reply;
+    const locale = languageOf(text, hint);
+    const page = `${site.url}${localizePath("/iletisim", locale)}`;
+    let next = reply.split(email).join("").split(page).join("");
+    for (const phone of phones) next = next.split(phone).join("");
+    next = next
+        .split("\n")
+        .map((line) => line.replace(/\s{2,}/g, " ").replace(/[,;]\s*$/, "").trim())
+        .filter((line) => {
+            // İ harfi düz "i" süzgecine takılmaz. Türkçe küçültme bunu düzeltir.
+            const folded = line.toLocaleLowerCase("tr");
+            return (
+                folded.length > 0 &&
+                !/^(?:e-?posta|e-mail|email|telefon|phone|tel|iletişim sayfası|contact page)\s*:?\s*$/i.test(
+                    folded,
+                )
+            );
+        })
+        .join("\n")
+        .trim();
+    return `${next}\n${contactBlock(locale, email, phones)}`.trim();
 }
 
 /**
@@ -190,7 +276,13 @@ function scrubPrice(reply:string, email: string, phones: string[]) {
       reply,
     );
     if (!hasPrice) return reply;
-    return `Fiyat ve teklif için: ${email} - ${phones.join(", ")}. For a quote, use the same contacts.`;
+    return [
+        "Fiyat ve teklif için bizimle iletişime geçiniz.",
+        `İletişim sayfası: ${site.url}/iletisim`,
+        `E-posta: ${email}`,
+        "Telefon:",
+        ...phones,
+    ].join("\n");
 }
 
 export async function POST(request: Request) {
@@ -215,13 +307,26 @@ export async function POST(request: Request) {
 
     const hint = readLocale(body);
     const last = turns[turns.length - 1]?.text ?? "";
+    // cevap ziyaretçiye gitmeden önce bir satır yazar
+    async function logged(reply:string) {
+        await saveChatLog({
+            ip,
+            locale: hint,
+            question: last,
+            answer: reply,
+        });
+        return Response.json({reply});
+    }
+    // Saf selam katalog beklemez. Model aleyküm selam kurmasın.
+    if (smallTalk(last)) {
+        return logged(greetingReply(last, hint));
+
+    }
     const {system, email, phones} = await buildYarnChatPrompt();
 
     // Özeti olmayan iş modeli beklemez. “Yok” cümlesi burada hiç kurulmaz.
     if (offListUse(last)) {
-        return Response.json({
-            reply: scrubPrice(offListReply(last, hint, email, phones), email, phones),
-        });
+        return logged(scrubPrice(offListReply(last, hint, email, phones), email, phones));
     }
 
     const apiKey = process.env.GEMINI_API_KEY?.trim();
@@ -283,12 +388,11 @@ export async function POST(request: Request) {
 
     // Model yine “listede yok” derse o cümle düşer, iletişim kalır.
     if (!listedUse(last) && !smallTalk(last) && isRefusal(reply)) {
-        return Response.json({
-            reply: scrubPrice(offListReply(last, hint, email, phones), email, phones),
-        });
+        return logged(scrubPrice(offListReply(last, hint, email, phones), email, phones));
     }
 
     const asked = visitorWantsContact(last);
     const spoken = hideContact(reply, asked, email, phones);
-    return Response.json({reply: scrubPrice(spoken, email, phones)});
+    const priced = scrubPrice(spoken, email, phones);
+    return Response.json({reply: ensureContact(priced, last, hint, email, phones)});
 }
