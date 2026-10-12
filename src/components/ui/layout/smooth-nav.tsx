@@ -57,9 +57,13 @@ export function SmoothNav() {
       event.preventDefault();
       event.stopPropagation();
 
-      document.startViewTransition(() => {
-        router.push(next);
-      });
+      // Geçiş başlayamazsa tıklama boşa gitmesin.
+      const go = () => router.push(next);
+      try {
+        document.startViewTransition(() => go());
+      } catch {
+        window.location.assign(url.href);
+      }
     }
 
     document.addEventListener("click", onClick, true);

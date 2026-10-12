@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { defaultLocale, isLocale } from "@/i18n/locales";
+import { defaultLocale, isLocale, stripLocale } from "@/i18n/locales";
 import {KEYSTATIC_COOKIE, panelAllows} from "@/lib/keystatic-gate";
 
 /** panel arayüzü ve içerik yazma adresi. ikisi de aynı kilit */
@@ -13,6 +13,11 @@ function isKeystaticPath(pathname:string): boolean {
   );
 }
 
+/** Sohbet kayıtları. Dil öneki de aynı kilit. Ziyaretçi menüsünde yok. */
+function isChatLogsPath(pathname: string): boolean {
+  return stripLocale(pathname) === "/sohbet-kayitlari";
+}
+
 /**
  * önce panel kilidi, sonra dil yönlendirmesi
  * /en/urunlerimiz gibi önekli URL’yi mevcut Türkçe rotaya rewrite eder.
@@ -22,7 +27,7 @@ function isKeystaticPath(pathname:string): boolean {
 export function proxy(request:NextRequest) {
   const {pathname} = request.nextUrl;
   
-  if (isKeystaticPath(pathname)) {
+  if (isKeystaticPath(pathname) || isChatLogsPath(pathname)) {
     const token = request.cookies.get(KEYSTATIC_COOKIE)?.value;
     if(!panelAllows(token)) {
       if (pathname.startsWith("/api/")) {

@@ -37,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productLines.map((line) => `/urunlerimiz/${line.slug}`),
     "/ges",
     "/iletisim",
+    "/kvkk",
     "/blog",
     ...corporateLinks.map((item) => item.href),
   ];

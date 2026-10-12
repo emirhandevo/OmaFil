@@ -7,6 +7,7 @@ import { getUi, placeLabel } from "@/i18n/ui";
 import { navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
 import type { ContactData, SocialNetwork } from "@/content/cms";
+import { localizePath } from "@/i18n/locales";
 import { navLabel } from "@/i18n/labels";
 import {
   InstagramIcon,
@@ -80,6 +81,16 @@ export function Footer({ contact, footerTagline }: FooterProps) {
                 </LocaleLink>
               </li>
             ))}
+            <li>
+              {/* Düz <a>: sayfa geçişi bu tıklamayı yutmasın, /kvkk tam açılsın. */}
+              <a
+                href={localizePath("/kvkk", locale)}
+                data-no-transition=""
+                className="block py-1 text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-brand-orange active:text-brand-orange"
+              >
+                {copy.chrome.kvkk}
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -147,7 +158,7 @@ export function Footer({ contact, footerTagline }: FooterProps) {
 
       {/* Alt bar — telif hakkı */}
       <div className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted-foreground text-center">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} {site.legalName}. {copy.footer.rights}
         </div>
       </div>

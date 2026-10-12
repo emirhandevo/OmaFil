@@ -21,7 +21,13 @@ export function ConditionalShell({
   footerTagline,
 }: ConditionalShellProps) {
   const pathname = usePathname();
-  if (pathname?.startsWith("/keystatic")) {
+  // Panel ve sohbet kayıtları site kabuğunun dışında. Dil öneki de aynı.
+  const path = pathname ?? "";
+  if (
+    path.startsWith("/keystatic") ||
+    path === "/sohbet-kayitlari" ||
+    path.endsWith("/sohbet-kayitlari")
+  ) {
     return <>{children}</>;
   }
   return (

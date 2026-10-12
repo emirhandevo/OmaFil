@@ -31,6 +31,15 @@ export default async function PanelGirisPage({searchParams}: Props) {
                 <button type="submit" className="rounded-md bg-neutral-900 px-3 py-2 text-white transition-opacity active:opacity-80">Giriş</button>
               </form>
 
+              <p className="mt-6 text-sm">
+                <a
+                  href="/sohbet-kayitlari"
+                  className="underline underline-offset-2 hover:text-brand-orange"
+                >
+                  Sohbet kayıtları
+                </a>
+              </p>
+
               <form action={signOutKeystatic} className="mt-6">
                 <button type="submit" className="text-sm underline active:text-brand-orange">Çıkış</button>
               </form>
