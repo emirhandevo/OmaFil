@@ -1,11 +1,15 @@
 {
   "label": "Naylon 66 POY",
-  "summary": "PA66 POY; final DTY / ATY dönüşümü. Softel / Nicolite.",
+  "summary": "PA66 POY; final DTY dönüşümü. Softel / Nicolite.",
   "family": "nylon66",
   "polymer": "pa66",
   "code": "POY",
   "imageSrc": "/images/hero/iplik/poy-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": false,
   "details": {
@@ -14,122 +18,152 @@
       "skus": [
         {
           "spec": "26/17",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "20/17",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "26/20",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "20/22",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "30/34",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "51/13",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "40/13",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "51/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Nicolite"
           ],
-          "finalDty": "40/34",
-          "finalAty": "90/68"
+          "kesit": "—"
         },
         {
           "spec": "88/24",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "70/24",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "88/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Softel",
             "Nicolate"
           ],
-          "finalDty": "70/34",
-          "finalAty": "160/68"
+          "kesit": "—"
         },
         {
           "spec": "88/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Nicolite"
           ],
-          "finalDty": "70/68",
-          "finalAty": "160/136"
+          "kesit": "—"
         },
         {
           "spec": "130/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "100/34",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "130/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Nicolite"
           ],
-          "finalDty": "100/68",
-          "finalAty": "200/136"
+          "kesit": "—"
         }
       ]
     }

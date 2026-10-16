@@ -5,7 +5,11 @@
   "polymer": "pes",
   "code": "ACY",
   "imageSrc": "/images/hero/iplik/acc-pes.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": false,
   "details": {
@@ -18,7 +22,8 @@
           "yarnDtex": 55,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -26,7 +31,8 @@
           "yarnDtex": 83,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -34,7 +40,8 @@
           "yarnDtex": 83,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -42,7 +49,8 @@
           "yarnDtex": 83,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -50,7 +58,8 @@
           "yarnDtex": 110,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -58,7 +67,8 @@
           "yarnDtex": 110,
           "filament": 36,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -66,7 +76,8 @@
           "yarnDtex": 167,
           "filament": 48,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -74,7 +85,8 @@
           "yarnDtex": 167,
           "filament": 48,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -82,7 +94,8 @@
           "yarnDtex": 167,
           "filament": 48,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -90,7 +103,8 @@
           "yarnDtex": 335,
           "filament": 96,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -98,7 +112,8 @@
           "yarnDtex": 335,
           "filament": 96,
           "floor": "1",
-          "yarnType": "PES"
+          "yarnType": "PES",
+          "kesit": "—"
         }
       ]
     }

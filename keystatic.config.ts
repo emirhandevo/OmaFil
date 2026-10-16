@@ -17,7 +17,6 @@ const codeOptions = [
   { label: "POY", value: "POY" },
   { label: "FDY", value: "FDY" },
   { label: "DTY", value: "DTY" },
-  { label: "ATY", value: "ATY" },
   { label: "ACY", value: "ACY" },
   { label: "SCY", value: "SCY" },
   { label: "DCY", value: "DCY" },
@@ -29,8 +28,8 @@ const filamentSkuFields = fields.object({
     description: "Örn. 44/12 veya 44D/12F",
     validation: { isRequired: true },
   }),
-  lustre: fields.array(fields.text({ label: "Lustre" }), {
-    label: "Lustre",
+  luster: fields.array(fields.text({ label: "Luster" }), {
+    label: "Luster",
     itemLabel: (props) => props.value || "—",
   }),
   colors: fields.array(fields.text({ label: "Renk" }), {
@@ -41,8 +40,9 @@ const filamentSkuFields = fields.object({
     label: "Özellikler / kullanım",
     itemLabel: (props) => props.value || "—",
   }),
-  finalDty: fields.text({ label: "Final DTY (opsiyonel)" }),
-  finalAty: fields.text({ label: "Final ATY (opsiyonel)" }),
+  kesit: fields.text({
+    label: "Kesit",
+  }),
 });
 
 const coveredSkuFields = fields.object({
@@ -72,6 +72,9 @@ const coveredSkuFields = fields.object({
     label: "İplik tipi",
     description: "PA6, PA66, PES…",
     validation: { isRequired: true },
+  }),
+  kesit: fields.text({
+    label: "Kesit",
   }),
 });
 
@@ -191,7 +194,7 @@ export default config({
           fields.select({
             label: "Ürün tipi",
             options: [
-              { label: "Filament (POY / FDY / DTY / ATY)", value: "filament" },
+              { label: "Filament (POY / FDY / DTY)", value: "filament" },
               { label: "Covered / Gipe (ACY / SCY / DCY…)", value: "covered" },
             ],
             defaultValue: "filament",

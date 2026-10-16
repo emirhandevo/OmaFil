@@ -5,7 +5,11 @@
   "polymer": "pa66",
   "code": "FDY",
   "imageSrc": "/images/hero/iplik/fdy-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": false,
   "details": {
@@ -14,11 +18,15 @@
       "skus": [
         {
           "spec": "20/20",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Covering",
             "Hosiery/Socks",
@@ -26,16 +34,19 @@
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40/13",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Covering",
             "Hosiery/Socks",
@@ -43,16 +54,19 @@
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Covering",
             "Hosiery/Socks",
@@ -60,16 +74,19 @@
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Covering",
             "Hosiery/Socks",
@@ -77,16 +94,19 @@
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Covering",
             "Hosiery/Socks",
@@ -94,8 +114,7 @@
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         }
       ]
     }

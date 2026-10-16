@@ -5,7 +5,11 @@
   "polymer": "pa66",
   "code": "DTY",
   "imageSrc": "/images/hero/iplik/dty-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": true,
   "details": {
@@ -14,327 +18,393 @@
       "skus": [
         {
           "spec": "20/7",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "20/10",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "20/20",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "22/24/1",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "30/10",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "CK"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "30/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40/13",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/34/1",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/34/2",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "50/24",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "50/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "60/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/24",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "78/68/1",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "78/68/2",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "78/92",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "100/34",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "100/68",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "Seamless",
             "CK",
             "WK",
             "Weaving"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "100/92",
-          "lustre": [
+          "luster": [
             "FD",
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [
             "CK"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         }
       ]
     }

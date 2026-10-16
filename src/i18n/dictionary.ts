@@ -141,7 +141,7 @@ const tr: Dictionary = {
   hero: {
     eyebrow: "Türkiye’den Dünyaya Endüstriyel İplik",
     title: "AVRUPA'NIN EN BÜYÜK TAM ENTEGRE GİPE İPLİK FABRİKASI",
-    body: "Naylon 6 ve Naylon 66 POY, FDY, DTY, ATY ile özel tip iplik çözümlerini yüksek kalite standartlarında üretiyor ve dünya pazarlarına sunuyoruz.",
+    body: "Naylon 6 ve Naylon 66 POY, FDY, DTY, ACY, SCY, DCY ile özel tip iplik çözümlerini yüksek kalite standartlarında üretiyor ve dünya pazarlarına sunuyoruz.",
     productsCta: "İplik Ürünlerimizi İnceleyin",
     aboutCta: "OmaFil’i Tanıyın",
     details: "Detaylı Bilgi",
@@ -153,7 +153,7 @@ const tr: Dictionary = {
   intro: {
     kicker: "Kurumsal",
     title: "Global Tekstile Poliamid İplik",
-    p1: "Poliamid (Naylon 6 ve Naylon 66), yüksek mukavemeti, esnekliği ve aşınma dayanımıyla tekstilin en kritik hammaddelerinden biridir. 1999’dan bu yana biriken deneyimimizi ileri teknolojiyle birleştirerek POY, FDY, DTY ve ATY formlarında poliamid iplik üretiyor; çorap, iç giyim, spor giyim, halı ve teknik tekstil sektörlerine yüksek performanslı çözümler sunuyoruz.",
+    p1: "Poliamid (Naylon 6 ve Naylon 66), yüksek mukavemeti, esnekliği ve aşınma dayanımıyla tekstilin en kritik hammaddelerinden biridir. 1999’dan bu yana biriken deneyimimizi ileri teknolojiyle birleştirerek POY, FDY, DTY, ACY, SCY ve DCY formlarında poliamid iplik üretiyor; çorap, iç giyim, spor giyim, halı ve teknik tekstil sektörlerine yüksek performanslı çözümler sunuyoruz.",
     p2: "Avrupa’nın en büyük gipe iplik tesisiyle, global tekstil endüstrisinin ihtiyaçlarına kalite ve güvenilirlikle cevap veriyoruz.",
     cta: "Kurumsal Yapımız",
   },
@@ -274,7 +274,7 @@ const en: Dictionary = {
   hero: {
     eyebrow: "Industrial yarn from Türkiye to the world",
     title: "EUROPE’S LARGEST FULLY INTEGRATED GIPE YARN FACTORY",
-    body: "We produce Naylon 6 and Naylon 66 POY, FDY, DTY, ATY and specialty yarn solutions to high quality standards and supply them to world markets.",
+    body: "We produce Naylon 6 and Naylon 66 POY, FDY, DTY, ACY, SCY, DCY and specialty yarn solutions to high quality standards and supply them to world markets.",
     productsCta: "View our yarn products",
     aboutCta: "Discover OmaFil",
     details: "More details",
@@ -286,7 +286,7 @@ const en: Dictionary = {
   intro: {
     kicker: "Company",
     title: "Polyamide Yarn for Global Textile",
-    p1: "Polyamide (Naylon 6 and Naylon 66) is one of textile’s most critical raw materials, thanks to its strength, elasticity and abrasion resistance. Combining experience since 1999 with advanced technology, we produce polyamide yarn as POY, FDY, DTY and ATY, and supply high-performance solutions for hosiery, underwear, sportswear, carpet and technical textile.",
+    p1: "Polyamide (Naylon 6 and Naylon 66) is one of textile’s most critical raw materials, thanks to its strength, elasticity and abrasion resistance. Combining experience since 1999 with advanced technology, we produce polyamide yarn as POY, FDY, DTY, ACY, SCY and DCY, and supply high-performance solutions for hosiery, underwear, sportswear, carpet and technical textile.",
     p2: "With Europe’s largest gipe yarn plant, we meet the global textile industry’s needs with quality and reliability.",
     cta: "Our company",
   },
@@ -406,7 +406,7 @@ const de: Dictionary = {
   hero: {
     eyebrow: "Industriegarne aus der Türkei in die Welt",
     title: "EUROPAS GRÖSSTE VOLLINTEGRIERTE GIPE-GARNFABRIK",
-    body: "Wir produzieren Naylon 6 und Naylon 66 als POY, FDY, DTY, ATY sowie Spezialgarne nach hohen Qualitätsstandards und liefern sie an die Weltmärkte.",
+    body: "Wir produzieren Naylon 6 und Naylon 66 als POY, FDY, DTY, ACY, SCY, DCY sowie Spezialgarne nach hohen Qualitätsstandards und liefern sie an die Weltmärkte.",
     productsCta: "Unsere Garne ansehen",
     aboutCta: "OmaFil kennenlernen",
     details: "Mehr erfahren",
@@ -418,7 +418,7 @@ const de: Dictionary = {
   intro: {
     kicker: "Unternehmen",
     title: "Polyamidgarn für die globale Textilindustrie",
-    p1: "Polyamid (Naylon 6 und Naylon 66) gehört wegen Festigkeit, Elastizität und Abriebfestigkeit zu den wichtigsten textilen Rohstoffen. Erfahrung seit 1999 verbinden wir mit moderner Technik und produzieren Polyamidgarn als POY, FDY, DTY und ATY für Strümpfe, Unterwäsche, Sportbekleidung, Teppiche und technische Textilien.",
+    p1: "Polyamid (Naylon 6 und Naylon 66) gehört wegen Festigkeit, Elastizität und Abriebfestigkeit zu den wichtigsten textilen Rohstoffen. Erfahrung seit 1999 verbinden wir mit moderner Technik und produzieren Polyamidgarn als POY, FDY, DTY, ACY, SCY und DCY für Strümpfe, Unterwäsche, Sportbekleidung, Teppiche und technische Textilien.",
     p2: "Mit Europas größtem Gipe-Garnwerk beantworten wir die Anforderungen der globalen Textilindustrie mit Qualität und Verlässlichkeit.",
     cta: "Unser Unternehmen",
   },
@@ -539,7 +539,7 @@ const fr: Dictionary = {
   hero: {
     eyebrow: "Fil industriel de la Turquie vers le monde",
     title: "LA PLUS GRANDE USINE DE FIL GIPE ENTIÈREMENT INTÉGRÉE D’EUROPE",
-    body: "Nous produisons le Naylon 6 et le Naylon 66 en POY, FDY, DTY, ATY ainsi que des fils spéciaux, selon des standards de qualité élevés, pour les marchés mondiaux.",
+    body: "Nous produisons le Naylon 6 et le Naylon 66 en POY, FDY, DTY, ACY, SCY, DCY ainsi que des fils spéciaux, selon des standards de qualité élevés, pour les marchés mondiaux.",
     productsCta: "Voir nos fils",
     aboutCta: "Découvrir OmaFil",
     details: "En savoir plus",
@@ -551,7 +551,7 @@ const fr: Dictionary = {
   intro: {
     kicker: "Entreprise",
     title: "Fil polyamide pour le textile mondial",
-    p1: "Le polyamide (Naylon 6 et Naylon 66) est l’une des matières premières les plus critiques du textile, pour sa résistance, son élasticité et sa tenue à l’abrasion. Depuis 1999, nous associons cette expérience à une technologie avancée et produisons du fil polyamide en POY, FDY, DTY et ATY pour la chaussette, la lingerie, le sport, le tapis et le textile technique.",
+    p1: "Le polyamide (Naylon 6 et Naylon 66) est l’une des matières premières les plus critiques du textile, pour sa résistance, son élasticité et sa tenue à l’abrasion. Depuis 1999, nous associons cette expérience à une technologie avancée et produisons du fil polyamide en POY, FDY, DTY, ACY, SCY et DCY pour la chaussette, la lingerie, le sport, le tapis et le textile technique.",
     p2: "Avec la plus grande usine de fil gipe d’Europe, nous répondons aux besoins de l’industrie textile mondiale par la qualité et la fiabilité.",
     cta: "Notre entreprise",
   },
@@ -651,7 +651,7 @@ const es: Dictionary = {
   hero: {
     eyebrow: "Hilo industrial de Turquía al mundo",
     title: "LA MAYOR FÁBRICA DE HILO GIPE TOTALMENTE INTEGRADA DE EUROPA",
-    body: "Producimos Naylon 6 y Naylon 66 en POY, FDY, DTY, ATY y soluciones de hilo especial con altos estándares de calidad para los mercados mundiales.",
+    body: "Producimos Naylon 6 y Naylon 66 en POY, FDY, DTY, ACY, SCY, DCY y soluciones de hilo especial con altos estándares de calidad para los mercados mundiales.",
     productsCta: "Ver nuestros hilos",
     aboutCta: "Conocer OmaFil",
     details: "Más información",
@@ -663,7 +663,7 @@ const es: Dictionary = {
   intro: {
     kicker: "Empresa",
     title: "Hilo de poliamida para el textil global",
-    p1: "La poliamida (Naylon 6 y Naylon 66) es una de las materias primas más críticas del textil por su resistencia, elasticidad y resistencia a la abrasión. Desde 1999 unimos esa experiencia con tecnología avanzada y producimos hilo de poliamida en POY, FDY, DTY y ATY para calcetería, ropa interior, deporte, alfombra y textil técnico.",
+    p1: "La poliamida (Naylon 6 y Naylon 66) es una de las materias primas más críticas del textil por su resistencia, elasticidad y resistencia a la abrasión. Desde 1999 unimos esa experiencia con tecnología avanzada y producimos hilo de poliamida en POY, FDY, DTY, ACY, SCY y DCY para calcetería, ropa interior, deporte, alfombra y textil técnico.",
     p2: "Con la mayor planta de hilo gipe de Europa respondemos a la industria textil global con calidad y fiabilidad.",
     cta: "Nuestra empresa",
   },
@@ -763,7 +763,7 @@ const it: Dictionary = {
   hero: {
     eyebrow: "Filo industriale dalla Turchia al mondo",
     title: "IL PIÙ GRANDE STABILIMENTO DI FILATO GIPE COMPLETAMENTE INTEGRATO D’EUROPA",
-    body: "Produciamo Naylon 6 e Naylon 66 in POY, FDY, DTY, ATY e filati speciali con elevati standard qualitativi per i mercati mondiali.",
+    body: "Produciamo Naylon 6 e Naylon 66 in POY, FDY, DTY, ACY, SCY, DCY e filati speciali con elevati standard qualitativi per i mercati mondiali.",
     productsCta: "Vedi i nostri filati",
     aboutCta: "Scopri OmaFil",
     details: "Dettagli",
@@ -775,7 +775,7 @@ const it: Dictionary = {
   intro: {
     kicker: "Azienda",
     title: "Filato di poliammide per il tessile globale",
-    p1: "La poliammide (Naylon 6 e Naylon 66) è una delle materie prime più critiche del tessile per resistenza, elasticità e resistenza all’abrasione. Dal 1999 uniamo questa esperienza alla tecnologia e produciamo filato di poliammide in POY, FDY, DTY e ATY per calzetteria, intimo, sport, tappeti e tessile tecnico.",
+    p1: "La poliammide (Naylon 6 e Naylon 66) è una delle materie prime più critiche del tessile per resistenza, elasticità e resistenza all’abrasione. Dal 1999 uniamo questa esperienza alla tecnologia e produciamo filato di poliammide in POY, FDY, DTY, ACY, SCY e DCY per calzetteria, intimo, sport, tappeti e tessile tecnico.",
     p2: "Con il più grande stabilimento di filato gipe d’Europa rispondiamo all’industria tessile globale con qualità e affidabilità.",
     cta: "La nostra azienda",
   },
@@ -875,7 +875,7 @@ const pt: Dictionary = {
   hero: {
     eyebrow: "Fio industrial da Turquia para o mundo",
     title: "A MAIOR FÁBRICA DE FIO GIPE TOTALMENTE INTEGRADA DA EUROPA",
-    body: "Produzimos Naylon 6 e Naylon 66 em POY, FDY, DTY, ATY e fios especiais com elevados padrões de qualidade para os mercados mundiais.",
+    body: "Produzimos Naylon 6 e Naylon 66 em POY, FDY, DTY, ACY, SCY, DCY e fios especiais com elevados padrões de qualidade para os mercados mundiais.",
     productsCta: "Ver os nossos fios",
     aboutCta: "Conhecer a OmaFil",
     details: "Mais informação",
@@ -887,7 +887,7 @@ const pt: Dictionary = {
   intro: {
     kicker: "Empresa",
     title: "Fio de poliamida para o têxtil global",
-    p1: "A poliamida (Naylon 6 e Naylon 66) é uma das matérias-primas mais críticas do têxtil pela resistência, elasticidade e resistência à abrasão. Desde 1999 juntamos essa experiência à tecnologia e produzimos fio de poliamida em POY, FDY, DTY e ATY para meias, lingerie, desporto, alcatifa e têxtil técnico.",
+    p1: "A poliamida (Naylon 6 e Naylon 66) é uma das matérias-primas mais críticas do têxtil pela resistência, elasticidade e resistência à abrasão. Desde 1999 juntamos essa experiência à tecnologia e produzimos fio de poliamida em POY, FDY, DTY, ACY, SCY e DCY para meias, lingerie, desporto, alcatifa e têxtil técnico.",
     p2: "Com a maior unidade de fio gipe da Europa respondemos à indústria têxtil global com qualidade e fiabilidade.",
     cta: "A nossa empresa",
   },
@@ -987,7 +987,7 @@ const nl: Dictionary = {
   hero: {
     eyebrow: "Industrieel garen van Turkije naar de wereld",
     title: "EUROPA’S GROOTSTE VOLLEDIG GEÏNTEGREERDE GIPE-GARENFABRIEK",
-    body: "Wij produceren Naylon 6 en Naylon 66 als POY, FDY, DTY, ATY en speciale garens volgens hoge kwaliteitsnormen voor de wereldmarkt.",
+    body: "Wij produceren Naylon 6 en Naylon 66 als POY, FDY, DTY, ACY, SCY, DCY en speciale garens volgens hoge kwaliteitsnormen voor de wereldmarkt.",
     productsCta: "Bekijk onze garens",
     aboutCta: "Ontdek OmaFil",
     details: "Meer info",
@@ -999,7 +999,7 @@ const nl: Dictionary = {
   intro: {
     kicker: "Bedrijf",
     title: "Polyamidegaren voor de wereldwijde textielindustrie",
-    p1: "Polyamide (Naylon 6 en Naylon 66) is door sterkte, elasticiteit en slijtvastheid een van de belangrijkste textielgrondstoffen. Sinds 1999 combineren we die ervaring met technologie en produceren we polyamidegaren als POY, FDY, DTY en ATY voor kousen, ondergoed, sport, tapijt en technisch textiel.",
+    p1: "Polyamide (Naylon 6 en Naylon 66) is door sterkte, elasticiteit en slijtvastheid een van de belangrijkste textielgrondstoffen. Sinds 1999 combineren we die ervaring met technologie en produceren we polyamidegaren als POY, FDY, DTY, ACY, SCY en DCY voor kousen, ondergoed, sport, tapijt en technisch textiel.",
     p2: "Met de grootste gipe-garenfabriek van Europa beantwoorden we de wereldwijde textielindustrie met kwaliteit en betrouwbaarheid.",
     cta: "Ons bedrijf",
   },
@@ -1099,7 +1099,7 @@ const ru: Dictionary = {
   hero: {
     eyebrow: "Промышленная пряжа из Турции в мир",
     title: "КРУПНЕЙШАЯ В ЕВРОПЕ ПОЛНОСТЬЮ ИНТЕГРИРОВАННАЯ ФАБРИКА ПРЯЖИ GIPE",
-    body: "Мы производим Naylon 6 и Naylon 66 в формах POY, FDY, DTY, ATY и специальные пряжи по высоким стандартам качества для мировых рынков.",
+    body: "Мы производим Naylon 6 и Naylon 66 в формах POY, FDY, DTY, ACY, SCY, DCY и специальные пряжи по высоким стандартам качества для мировых рынков.",
     productsCta: "Смотреть пряжу",
     aboutCta: "Узнать OmaFil",
     details: "Подробнее",
@@ -1111,7 +1111,7 @@ const ru: Dictionary = {
   intro: {
     kicker: "Компания",
     title: "Полиамидная пряжа для мирового текстиля",
-    p1: "Полиамид (Naylon 6 и Naylon 66) — одно из ключевых сырьевых материалов текстиля благодаря прочности, эластичности и стойкости к истиранию. С 1999 года мы соединяем этот опыт с технологиями и производим полиамидную пряжу POY, FDY, DTY и ATY для чулочно-носочных изделий, белья, спорта, ковров и технического текстиля.",
+    p1: "Полиамид (Naylon 6 и Naylon 66) — одно из ключевых сырьевых материалов текстиля благодаря прочности, эластичности и стойкости к истиранию. С 1999 года мы соединяем этот опыт с технологиями и производим полиамидную пряжу POY, FDY, DTY, ACY, SCY и DCY для чулочно-носочных изделий, белья, спорта, ковров и технического текстиля.",
     p2: "Крупнейший в Европе завод gipe-пряжи отвечает потребностям мировой текстильной индустрии качеством и надежностью.",
     cta: "Наша компания",
   },
@@ -1211,7 +1211,7 @@ const ar: Dictionary = {
   hero: {
     eyebrow: "خيوط صناعية من تركيا إلى العالم",
     title: "أكبر مصنع خيوط gipe متكامل بالكامل في أوروبا",
-    body: "ننتج Naylon 6 وNaylon 66 بصيغ POY وFDY وDTY وATY وحلولاً خاصة بمعايير جودة عالية للأسواق العالمية.",
+    body: "ننتج Naylon 6 وNaylon 66 بصيغ POY وFDY وDTY وACY وSCY وDCY وحلولاً خاصة بمعايير جودة عالية للأسواق العالمية.",
     productsCta: "اطلع على خيوطنا",
     aboutCta: "تعرّف على OmaFil",
     details: "مزيد من التفاصيل",
@@ -1223,7 +1223,7 @@ const ar: Dictionary = {
   intro: {
     kicker: "الشركة",
     title: "خيط بولي أميد للنسيج العالمي",
-    p1: "البولي أميد (Naylon 6 وNaylon 66) من أهم خامات النسيج لقوته ومرونته ومقاومته للتآكل. منذ 1999 نجمع هذه الخبرة مع التقنية وننتج خيط بولي أميد بصيغ POY وFDY وDTY وATY للجوارب والملابس الداخلية والرياضة والسجاد والنسيج التقني.",
+    p1: "البولي أميد (Naylon 6 وNaylon 66) من أهم خامات النسيج لقوته ومرونته ومقاومته للتآكل. منذ 1999 نجمع هذه الخبرة مع التقنية وننتج خيط بولي أميد بصيغ POY وFDY وDTY وACY وSCY وDCY للجوارب والملابس الداخلية والرياضة والسجاد والنسيج التقني.",
     p2: "بأكبر مصنع خيوط gipe في أوروبا نلبي حاجة صناعة النسيج العالمية بالجودة والموثوقية.",
     cta: "شركتنا",
   },
@@ -1323,7 +1323,7 @@ const zh: Dictionary = {
   hero: {
     eyebrow: "从土耳其走向世界的工业纱线",
     title: "欧洲最大的全整合 gipe 纱线工厂",
-    body: "我们按高标准生产 Naylon 6 与 Naylon 66 的 POY、FDY、DTY、ATY 及特种纱线，供应全球市场。",
+    body: "我们按高标准生产 Naylon 6 与 Naylon 66 的 POY、FDY、DTY、ACY、SCY、DCY 及特种纱线，供应全球市场。",
     productsCta: "查看纱线产品",
     aboutCta: "了解 OmaFil",
     details: "了解更多",
@@ -1335,7 +1335,7 @@ const zh: Dictionary = {
   intro: {
     kicker: "公司",
     title: "面向全球纺织的聚酰胺纱线",
-    p1: "聚酰胺（Naylon 6 与 Naylon 66）凭借强度、弹性和耐磨性，是纺织业最关键的原料之一。自 1999 年以来，我们把经验与先进技术结合，以 POY、FDY、DTY 和 ATY 形式生产聚酰胺纱线，服务于袜类、内衣、运动、地毯和技术纺织。",
+    p1: "聚酰胺（Naylon 6 与 Naylon 66）凭借强度、弹性和耐磨性，是纺织业最关键的原料之一。自 1999 年以来，我们把经验与先进技术结合，以 POY、FDY、DTY、ACY、SCY 和 DCY 形式生产聚酰胺纱线，服务于袜类、内衣、运动、地毯和技术纺织。",
     p2: "凭借欧洲最大的 gipe 纱线工厂，我们以品质和可靠性满足全球纺织业的需求。",
     cta: "我们的公司",
   },

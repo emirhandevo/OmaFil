@@ -5,7 +5,11 @@
   "polymer": "pa66",
   "code": "ACY",
   "imageSrc": "/images/hero/iplik/acy-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": true,
   "details": {
@@ -18,7 +22,8 @@
           "yarnDtex": 22,
           "filament": 20,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -26,7 +31,8 @@
           "yarnDtex": 22,
           "filament": 20,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -34,7 +40,8 @@
           "yarnDtex": 22,
           "filament": 20,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -42,7 +49,8 @@
           "yarnDtex": 44,
           "filament": 34,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "ACY",
@@ -50,7 +58,8 @@
           "yarnDtex": 44,
           "filament": 34,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         }
       ]
     }

@@ -5,7 +5,11 @@
   "polymer": "pes",
   "code": "DCY",
   "imageSrc": "/images/hero/iplik/dcy-pes.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": true,
   "details": {

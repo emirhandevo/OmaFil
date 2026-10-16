@@ -6,9 +6,9 @@
   "code": "SCY",
   "imageSrc": "/images/hero/iplik/scy-n6.webp",
   "colors": [
-    "ECRU",
-    "BLACK",
-    "COLORED"
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
   ],
   "recycled": true,
   "featured": true,
@@ -22,7 +22,8 @@
           "yarnDtex": 22,
           "filament": 7,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -30,7 +31,8 @@
           "yarnDtex": 22,
           "filament": 13,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -38,7 +40,8 @@
           "yarnDtex": 44,
           "filament": 13,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -46,7 +49,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -54,7 +58,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -62,7 +67,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -70,7 +76,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "1",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         }
       ]
     }

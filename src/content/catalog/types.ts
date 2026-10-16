@@ -12,7 +12,6 @@ export type ProcessCode =
   | "POY"
   | "FDY"
   | "DTY"
-  | "ATY"
   | "ACY"
   | "SCY"
   | "DCY";
@@ -37,18 +36,17 @@ export type ProductLine = {
   featured?: boolean;
 };
 
-/** Filament satırı (POY / FDY / DTY / ATY) */
+/** Filament satırı (POY / FDY / DTY) */
 export type FilamentSku = {
   line: string;
   /** Örn. 44/12 veya 44D/12F */
   spec: string;
-  lustre?: string[];
+  luster?: string[];
   colors?: string[];
   /** Softel, Nicolite, kullanım alanları vb. */
   features?: string[];
-  /** N66 POY → final DTY / ATY */
-  finalDty?: string;
-  finalAty?: string;
+  /** Kesit. Boşsa tabloda - */
+  kesit?: string;
 };
 
 /** Kaplama / gipe satırı (ACY / SCY / DCY) */
@@ -61,4 +59,5 @@ export type CoveredSku = {
   filament?: number;
   floor: 1 | 2;
   yarnType: string;
+  kesit?: string;
 };

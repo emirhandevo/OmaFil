@@ -6,9 +6,9 @@
   "code": "DCY",
   "imageSrc": "/images/hero/iplik/dcy-n6.webp",
   "colors": [
-    "ECRU",
-    "BLACK",
-    "COLORED"
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
   ],
   "recycled": true,
   "featured": true,
@@ -22,7 +22,8 @@
           "yarnDtex": 44,
           "filament": 13,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -30,7 +31,8 @@
           "yarnDtex": 44,
           "filament": 13,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -38,7 +40,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -46,7 +49,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -54,7 +58,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -62,7 +67,8 @@
           "yarnDtex": 78,
           "filament": 24,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         },
         {
           "productionType": "DC",
@@ -70,7 +76,8 @@
           "yarnDtex": 83,
           "filament": 36,
           "floor": "2",
-          "yarnType": "PA6"
+          "yarnType": "PA6",
+          "kesit": "—"
         }
       ]
     }

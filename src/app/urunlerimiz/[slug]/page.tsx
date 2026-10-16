@@ -149,10 +149,9 @@ export default async function ProductLinePage({ params }: PageProps) {
               <thead className="bg-muted/50 text-xs tracking-wide uppercase">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Spec</th>
-                  <th className="px-4 py-3 font-semibold">Lustre</th>
+                  <th className="px-4 py-3 font-semibold">Luster</th>
                   <th className="px-4 py-3 font-semibold">Renk</th>
-                  <th className="px-4 py-3 font-semibold">Final DTY</th>
-                  <th className="px-4 py-3 font-semibold">Final ATY</th>
+                  <th className="px-4 py-3 font-semibold">Kesit</th>
                   <th className="px-4 py-3 font-semibold">Özellik</th>
                 </tr>
               </thead>
@@ -166,16 +165,13 @@ export default async function ProductLinePage({ params }: PageProps) {
                       {sku.spec}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
-                      {sku.lustre?.join(", ") ?? "—"}
+                      {sku.luster?.join(", ") ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.colors?.join(" · ") ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
-                      {sku.finalDty ?? "—"}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {sku.finalAty ?? "—"}
+                      {sku.kesit || "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.features
@@ -200,6 +196,7 @@ export default async function ProductLinePage({ params }: PageProps) {
                   <th className="px-4 py-3 font-semibold">Filament</th>
                   <th className="px-4 py-3 font-semibold">Floor</th>
                   <th className="px-4 py-3 font-semibold">Yarn type</th>
+                  <th className="px-4 py-3 font-semibold">Kesit</th>
                 </tr>
               </thead>
               <tbody>
@@ -225,6 +222,9 @@ export default async function ProductLinePage({ params }: PageProps) {
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.yarnType}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {sku.kesit || "—"}
                     </td>
                   </tr>
                 ))}

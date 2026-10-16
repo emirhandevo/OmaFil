@@ -66,7 +66,7 @@ const tr: Chrome = {
   featured: "Portföy öne çıkan",
   quoteSample: "Teklif / numune al",
   specsTitle: "Teknik spesifikasyonlar",
-  specsLead: "Katalog satırları. Detay veya özel denier için iletişime geçin.",
+  specsLead: "Detay ve denye için iletişime geçin.",
   specsEmpty:
     "Bu hat için satır listesi yakında eklenecek. Custom üretim için teklif alın.",
   customNote: "Bu grupta custom üretim seçenekleri mevcuttur.",
@@ -122,7 +122,7 @@ const en: Chrome = {
   featured: "Featured",
   quoteSample: "Request a quote / sample",
   specsTitle: "Technical specifications",
-  specsLead: "Catalogue rows. Contact us for details or a special denier.",
+  specsLead: "Contact us for details and denier.",
   specsEmpty:
     "The row list for this line will be added soon. Request a quote for custom production.",
   customNote: "Custom production options are available in this group.",
@@ -179,7 +179,7 @@ const de: Chrome = {
   featured: "Hervorgehoben",
   quoteSample: "Angebot / Muster anfragen",
   specsTitle: "Technische Spezifikationen",
-  specsLead: "Katalogzeilen. Für Details oder einen besonderen Denier schreiben Sie uns.",
+  specsLead: "Für Details und Denier schreiben Sie uns.",
   specsEmpty:
     "Die Zeilenliste dieser Linie folgt in Kürze. Für Custom-Produktion ein Angebot anfragen.",
   customNote: "In dieser Gruppe gibt es Custom-Produktionsoptionen.",
@@ -236,7 +236,7 @@ const fr: Chrome = {
   featured: "En avant",
   quoteSample: "Demander un devis / un échantillon",
   specsTitle: "Spécifications techniques",
-  specsLead: "Lignes du catalogue. Contactez-nous pour un détail ou un denier particulier.",
+  specsLead: "Contactez-nous pour le détail et le denier.",
   specsEmpty:
     "La liste de cette ligne sera ajoutée bientôt. Demandez un devis pour une production custom.",
   customNote: "Des options de production custom existent dans ce groupe.",
@@ -293,7 +293,7 @@ const es: Chrome = {
   featured: "Destacado",
   quoteSample: "Pedir oferta / muestra",
   specsTitle: "Especificaciones técnicas",
-  specsLead: "Filas del catálogo. Contáctenos para un detalle o un denier especial.",
+  specsLead: "Contáctenos para el detalle y el denier.",
   specsEmpty:
     "La lista de esta línea se añadirá pronto. Pida una oferta para producción custom.",
   customNote: "En este grupo hay opciones de producción custom.",
@@ -350,7 +350,7 @@ const it: Chrome = {
   featured: "In evidenza",
   quoteSample: "Richiedi offerta / campione",
   specsTitle: "Specifiche tecniche",
-  specsLead: "Righe di catalogo. Contattaci per un dettaglio o un denier particolare.",
+  specsLead: "Contattaci per il dettaglio e il denier.",
   specsEmpty:
     "L’elenco di questa linea sarà aggiunto a breve. Richiedi un’offerta per la produzione custom.",
   customNote: "In questo gruppo sono disponibili opzioni di produzione custom.",
@@ -407,7 +407,7 @@ const pt: Chrome = {
   featured: "Em destaque",
   quoteSample: "Pedir orçamento / amostra",
   specsTitle: "Especificações técnicas",
-  specsLead: "Linhas do catálogo. Contacte-nos para um detalhe ou um denier especial.",
+  specsLead: "Contacte-nos para o detalhe e o denier.",
   specsEmpty:
     "A lista desta linha será adicionada em breve. Peça um orçamento para produção custom.",
   customNote: "Neste grupo há opções de produção custom.",
@@ -464,7 +464,7 @@ const nl: Chrome = {
   featured: "Uitgelicht",
   quoteSample: "Offerte / monster aanvragen",
   specsTitle: "Technische specificaties",
-  specsLead: "Catalogusregels. Neem contact op voor een detail of een speciale denier.",
+  specsLead: "Neem contact op voor details en denier.",
   specsEmpty:
     "De regellijst van deze lijn volgt binnenkort. Vraag een offerte voor custom productie.",
   customNote: "In deze groep zijn custom productieopties beschikbaar.",
@@ -521,7 +521,7 @@ const ru: Chrome = {
   featured: "Избранное",
   quoteSample: "Запросить предложение / образец",
   specsTitle: "Технические спецификации",
-  specsLead: "Строки каталога. Напишите нам для деталей или особого denier.",
+  specsLead: "Напишите нам для деталей и denier.",
   specsEmpty:
     "Список строк этой линии скоро появится. Запросите предложение для custom-производства.",
   customNote: "В этой группе есть варианты custom-производства.",
@@ -577,7 +577,7 @@ const ar: Chrome = {
   featured: "مميز",
   quoteSample: "اطلب عرضاً / عينة",
   specsTitle: "المواصفات الفنية",
-  specsLead: "صفوف الكتالوج. تواصل معنا لتفاصيل أو denier خاص.",
+  specsLead: "تواصل معنا للتفاصيل والـ denier.",
   specsEmpty: "ستُضاف قائمة هذا الخط قريباً. اطلب عرضاً للإنتاج المخصص.",
   customNote: "تتوفر في هذه المجموعة خيارات إنتاج مخصص.",
   blogBack: "العودة إلى المقالات",
@@ -630,7 +630,7 @@ const zh: Chrome = {
   featured: "精选",
   quoteSample: "索取报价 / 样品",
   specsTitle: "技术规格",
-  specsLead: "目录行。如需细节或特殊 denier，请联系我们。",
+  specsLead: "如需细节和 denier，请联系我们。",
   specsEmpty: "该系列的行清单即将添加。定制生产请索取报价。",
   customNote: "本组提供定制生产选项。",
   blogBack: "返回文章",

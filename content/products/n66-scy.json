@@ -5,7 +5,11 @@
   "polymer": "pa66",
   "code": "SCY",
   "imageSrc": "/images/hero/iplik/scy-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": true,
   "details": {
@@ -18,7 +22,8 @@
           "yarnDtex": 11,
           "filament": 5,
           "floor": "1",
-          "yarnType": "PA66FLAT"
+          "yarnType": "PA66FLAT",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -26,7 +31,8 @@
           "yarnDtex": 22,
           "filament": 7,
           "floor": "1",
-          "yarnType": "PA66FLAT"
+          "yarnType": "PA66FLAT",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -34,7 +40,8 @@
           "yarnDtex": 22,
           "filament": 7,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -42,7 +49,8 @@
           "yarnDtex": 22,
           "filament": 20,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -50,7 +58,8 @@
           "yarnDtex": 22,
           "filament": 20,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -58,7 +67,8 @@
           "yarnDtex": 44,
           "filament": 34,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -66,7 +76,8 @@
           "yarnDtex": 44,
           "filament": 34,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -74,7 +85,8 @@
           "yarnDtex": 44,
           "filament": 34,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -82,7 +94,8 @@
           "yarnDtex": 78,
           "filament": 68,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -90,7 +103,8 @@
           "yarnDtex": 78,
           "filament": 68,
           "floor": "1",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         },
         {
           "productionType": "SC",
@@ -98,7 +112,8 @@
           "yarnDtex": 78,
           "filament": 68,
           "floor": "2",
-          "yarnType": "PA66"
+          "yarnType": "PA66",
+          "kesit": "—"
         }
       ]
     }

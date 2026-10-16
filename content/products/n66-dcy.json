@@ -5,7 +5,11 @@
   "polymer": "pa66",
   "code": "DCY",
   "imageSrc": "/images/hero/iplik/dcy-n66.webp",
-  "colors": [],
+  "colors": [
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
+  ],
   "recycled": true,
   "featured": true,
   "details": {

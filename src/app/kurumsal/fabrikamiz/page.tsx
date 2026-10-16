@@ -42,7 +42,6 @@ const processName: Record<ProcessCode, string> = {
   POY: "POY",
   FDY: "FDY",
   DTY: "DTY",
-  ATY: "ATY",
   ACY: "AIR COVERED YARNS",
   SCY: "SINGLE COVERED YARNS",
   DCY: "DOUBLE COVERED YARNS",
@@ -53,10 +52,9 @@ const codeRank: Record<ProcessCode, number> = {
   POY: 0,
   FDY: 1,
   DTY: 2,
-  ATY: 3,
-  ACY: 4,
-  SCY: 5,
-  DCY: 6,
+  ACY: 3,
+  SCY: 4,
+  DCY: 5,
 };
 
 /** Ürünler sayfasındaki hatlar, karttaki PA6 / PA66 / PES yazımıyla. */

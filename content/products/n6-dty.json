@@ -6,9 +6,9 @@
   "code": "DTY",
   "imageSrc": "/images/hero/iplik/dty-n6.webp",
   "colors": [
-    "ECRU",
-    "BLACK",
-    "COLORED"
+    "Ekru",
+    "Siyah",
+    "Dope Dyed"
   ],
   "recycled": true,
   "featured": true,
@@ -18,355 +18,411 @@
       "skus": [
         {
           "spec": "12D/5F/6F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "15D/5F/6F/7F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "20D/6F/7F/24F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "22/24/1",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "22D/20F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "28D/12F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "30D/10F/12F/24F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "33D/24F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "40D/12F/24F/36F/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/12/1",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/12/2",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/34/1",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44/34/2",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "44D/24F/36F/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "50D/24F/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "55D/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/24/1",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/24/2",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/24/3",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70/24/4",
-          "lustre": [
+          "luster": [
             "SD"
           ],
           "colors": [
-            "ECRU",
-            "BLACK",
-            "COLORED"
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
           ],
           "features": [
             "featured"
           ],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "70D/23F/24F/48F/54F/68F/72F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "78D/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "80D/24F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "100D/36F/48F/68F/96F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "110D/96F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "140D/48F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "145D/72F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "200D/48F/72F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "210D/96F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         },
         {
           "spec": "280D/96F",
-          "lustre": [
+          "luster": [
             "SD"
           ],
-          "colors": [],
+          "colors": [
+            "Ekru",
+            "Siyah",
+            "Dope Dyed"
+          ],
           "features": [],
-          "finalDty": "",
-          "finalAty": ""
+          "kesit": "—"
         }
       ]
     }

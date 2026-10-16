@@ -8,10 +8,9 @@ const codeRank: Record<ProcessCode, number> = {
     POY: 0,
     FDY: 1,
     DTY: 2,
-    ATY: 3,
-    ACY: 4,
-    SCY: 5,
-    DCY: 6,
+    ACY: 3,
+    SCY: 4,
+    DCY: 5,
 };
 
 /** Katalog sırası: naylon 6, naylon 66, polyester */
@@ -46,7 +45,7 @@ export async function buildYarnChatPrompt() {
       "Selam, merhaba, nasılsın ve teşekkür gibi cümlelere aynı dilde, kurumsal cevap ver. Aleyküm selam, selamün aleyküm ve benzeri dini ya da samimi hitap kullanma. Merhaba de, ardından nasıl yardımcı olabileceğini sor. Bu cümlelerde iplik adı, mail ve telefon söyleme.",
       "İplik önerisini yalnız şu listeden yap. Listede olmayan ürün, sertifika, denye veya kullanım uydurma.",
       catalog,
-       "Çorap / hosiery için listede karşılığı olanlar: Naylon 66 FDY, Naylon 66 DTY, Naylon 66 ATY.",
+       "Çorap / hosiery için listede karşılığı olanlar: Naylon 66 FDY, Naylon 66 DTY.",
        "Bir ürünü ancak ziyaretçinin işi o ürünün özetinde geçiyorsa öner. Çorap, hosiery, seamless ve dokuma bu yüzden önerilebilir.",
 "Özette yazmayan bir kullanım sorulursa (ayakkabı bağcığı, havlu, laptop, halı, perde, çanta, lastik ve listede geçmeyen diğer işler) iplik adı söyleme. 'Uygun ipliğimiz yok', 'listemizde bulunmamaktadır' veya 'öneremiyoruz' deme. Şunu söyle: bu kullanım için uygun iplik modellerimiz vardır. Detaylı bilgi, fiyat teklifi ve numune için iletişime geçmelerini iste. Aynı cevapta iletişim sayfasını, e-postayı ve telefonu yaz.",
         "Kalite için yalnız şunları söyleyebilirsin: Avrupa’nın en büyük tam entegre gipe iplik fabrikası, yıllık 13.000 ton kapasite, hassas kalite kontrol, yüksek mukavemetli iplik. Başka ödül veya standart ekleme.",

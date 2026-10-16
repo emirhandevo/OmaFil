@@ -35,11 +35,10 @@ function mapFilamentSkus(slug: string, entry: LineEntry): FilamentSku[] {
   return entry.details.value.skus.map((sku) => ({
     line: slug,
     spec: sku.spec,
-    lustre: sku.lustre.length ? [...sku.lustre] : undefined,
+    luster: sku.luster.length ? [...sku.luster] : undefined,
     colors: sku.colors.length ? [...sku.colors] : undefined,
     features: sku.features.length ? [...sku.features] : undefined,
-    finalDty: sku.finalDty || undefined,
-    finalAty: sku.finalAty || undefined,
+    kesit: sku.kesit || "—",
   }));
 }
 
@@ -53,21 +52,36 @@ function mapCoveredSkus(slug: string, entry: LineEntry): CoveredSku[] {
     filament: sku.filament ?? undefined,
     floor: sku.floor === "2" ? 2 : 1,
     yarnType: sku.yarnType,
+    kesit: sku.kesit || "—",
   }));
 }
 
 /** Tüm ürün hatları (grid + sitemap) */
 export async function getProductLines(): Promise<ProductLine[]> {
-  const all = await reader.collections.productLines.all();
-  return all.map((item) => mapLine(item.slug, item.entry));
+  const slugs = await reader.collections.productLines.list();
+  const lines: ProductLine[] = [];
+  for (const slug of slugs) {
+    try {
+      const entry = await reader.collections.productLines.read(slug);
+      if (entry) lines.push(mapLine(slug, entry));
+    } catch (error) {
+      console.error("ürün hattı okunamadı", slug, error);
+    }
+  }
+  return lines;
 }
 
 export async function getProductLine(
   slug: string,
 ): Promise<ProductLine | null> {
-  const entry = await reader.collections.productLines.read(slug);
-  if (!entry) return null;
-  return mapLine(slug, entry);
+  try {
+    const entry = await reader.collections.productLines.read(slug);
+    if (!entry) return null;
+    return mapLine(slug, entry);
+  } catch (error) {
+    console.error("ürün hattı okunamadı", slug, error);
+    return null;
+  }
 }
 
 export async function getFilamentSkus(lineSlug: string): Promise<FilamentSku[]> {

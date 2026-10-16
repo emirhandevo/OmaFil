@@ -20,7 +20,7 @@ const allProducts: MarqueeItem[] = [
   {
     slug: "n6-poy",
     label: "Naylon 6 POY",
-    summary: "Kısmi oryante PA6. SD / BR / FD ve net weight seçenekleri.",
+    summary: "PA6. SD / BR / FD seçenekleri.",
     href: "/urunlerimiz/n6-poy",
     src: "/images/hero/iplik/poy-n6.webp",
     code: "POY",
@@ -28,7 +28,7 @@ const allProducts: MarqueeItem[] = [
   {
     slug: "n6-fdy",
     label: "Naylon 6 FDY",
-    summary: "Tam çekimli PA6. Geniş denier / filament aralığı.",
+    summary: "Tam çekimli PA6. Round ve trilobal kesit.",
     href: "/urunlerimiz/n6-fdy",
     src: "/images/hero/iplik/fdy-n6.webp",
     code: "FDY",
@@ -68,7 +68,7 @@ const allProducts: MarqueeItem[] = [
   {
     slug: "n66-poy",
     label: "Naylon 66 POY",
-    summary: "PA66 POY; final DTY / ATY dönüşümü. Softel / Nicolite.",
+    summary: "PA66 POY; final DTY dönüşümü. Softel / Nicolite.",
     href: "/urunlerimiz/n66-poy",
     src: "/images/hero/iplik/poy-n66.webp",
     code: "POY",
@@ -88,14 +88,6 @@ const allProducts: MarqueeItem[] = [
     href: "/urunlerimiz/n66-dty",
     src: "/images/hero/iplik/dty-n66.webp",
     code: "DTY",
-  },
-  {
-    slug: "n66-aty",
-    label: "Naylon 66 ATY",
-    summary: "PA66 air textured. Hosiery / socks ve dokuma.",
-    href: "/urunlerimiz/n66-aty",
-    src: "/images/hero/iplik/aty-n66.webp",
-    code: "ATY",
   },
   {
     slug: "n66-acy",
@@ -147,7 +139,7 @@ const allProducts: MarqueeItem[] = [
   },
 ];
 
-/** 16 ürün; üst ve alt şerit 8’er kart. */
+/** Üst ve alt şerit eşit kart. */
 const half = Math.ceil(allProducts.length / 2);
 
 export const yarnImages = allProducts.slice(0, half);

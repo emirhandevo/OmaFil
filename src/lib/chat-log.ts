@@ -56,10 +56,11 @@ export type ChatSheetRow = {
 
 /** Panel listesi. Neon’daki chat_sheet: numaralı soru-cevap, yıldız satırı. */
 export async function listChatLogs(): Promise<ChatSheetRow[]> {
-    return db()`
+    const rows = await db()`
     select no, n, session_id, id, ip, question, answer
     from chat_sheet
     order by n
     limit 2000
-    ` as Promise<ChatSheetRow[]>;
+    `;
+    return rows as ChatSheetRow[];
 }
