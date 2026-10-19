@@ -21,7 +21,6 @@
           "spandexDtex": 13,
           "yarnDtex": 22,
           "filament": 20,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -30,7 +29,6 @@
           "spandexDtex": 17,
           "yarnDtex": 22,
           "filament": 20,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -39,7 +37,6 @@
           "spandexDtex": 22,
           "yarnDtex": 22,
           "filament": 20,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -48,7 +45,6 @@
           "spandexDtex": 22,
           "yarnDtex": 44,
           "filament": 34,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -57,7 +53,6 @@
           "spandexDtex": 44,
           "yarnDtex": 44,
           "filament": 34,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         }

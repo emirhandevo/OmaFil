@@ -23,7 +23,10 @@ function mapLine(slug: string, entry: LineEntry): ProductLine {
     code: entry.code,
     kind,
     // Boş string = görsel yok (başka üründen kopya kullanma)
-    src: entry.imageSrc?.trim() ? entry.imageSrc.trim() : undefined,
+    // ?v=3: aynı dosya adı tarayıcıda eski görseli tutmasın.
+    src: entry.imageSrc?.trim()
+      ? `${entry.imageSrc.trim()}?v=4`
+      : undefined,
     colors: entry.colors.length ? [...entry.colors] : undefined,
     recycled: entry.recycled || undefined,
     featured: entry.featured || undefined,
@@ -50,7 +53,6 @@ function mapCoveredSkus(slug: string, entry: LineEntry): CoveredSku[] {
     spandexDtex: sku.spandexDtex,
     yarnDtex: sku.yarnDtex,
     filament: sku.filament ?? undefined,
-    floor: sku.floor === "2" ? 2 : 1,
     yarnType: sku.yarnType,
     kesit: sku.kesit || "—",
   }));

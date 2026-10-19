@@ -21,7 +21,6 @@
           "spandexDtex": 22,
           "yarnDtex": 55,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -30,7 +29,6 @@
           "spandexDtex": 17,
           "yarnDtex": 83,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -39,7 +37,6 @@
           "spandexDtex": 22,
           "yarnDtex": 83,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -48,7 +45,6 @@
           "spandexDtex": 44,
           "yarnDtex": 83,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -57,7 +53,6 @@
           "spandexDtex": 22,
           "yarnDtex": 110,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -66,7 +61,6 @@
           "spandexDtex": 44,
           "yarnDtex": 110,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -75,7 +69,6 @@
           "spandexDtex": 22,
           "yarnDtex": 167,
           "filament": 48,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -84,7 +77,6 @@
           "spandexDtex": 44,
           "yarnDtex": 167,
           "filament": 48,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -93,7 +85,6 @@
           "spandexDtex": 78,
           "yarnDtex": 167,
           "filament": 48,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -102,7 +93,6 @@
           "spandexDtex": 44,
           "yarnDtex": 335,
           "filament": 96,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -111,7 +101,6 @@
           "spandexDtex": 78,
           "yarnDtex": 335,
           "filament": 96,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         }

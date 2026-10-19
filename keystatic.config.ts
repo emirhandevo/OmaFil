@@ -60,14 +60,6 @@ const coveredSkuFields = fields.object({
     validation: { isRequired: true },
   }),
   filament: fields.integer({ label: "Filament (opsiyonel)" }),
-  floor: fields.select({
-    label: "Floor",
-    options: [
-      { label: "1", value: "1" },
-      { label: "2", value: "2" },
-    ],
-    defaultValue: "1",
-  }),
   yarnType: fields.text({
     label: "İplik tipi",
     description: "PA6, PA66, PES…",

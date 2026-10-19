@@ -15,7 +15,32 @@
   "details": {
     "discriminant": "covered",
     "value": {
-      "skus": []
+      "skus": [
+        {
+          "productionType": "DC",
+          "spandexDtex": 44,
+          "yarnDtex": 83,
+          "filament": 36,
+          "yarnType": "PES",
+          "kesit": "—"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 44,
+          "yarnDtex": 167,
+          "filament": 96,
+          "yarnType": "PES",
+          "kesit": "—"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 78,
+          "yarnDtex": 167,
+          "filament": 96,
+          "yarnType": "PES",
+          "kesit": "—"
+        }
+      ]
     }
   }
 }

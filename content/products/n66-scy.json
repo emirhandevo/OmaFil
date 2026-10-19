@@ -21,7 +21,6 @@
           "spandexDtex": 22,
           "yarnDtex": 11,
           "filament": 5,
-          "floor": "1",
           "yarnType": "PA66FLAT",
           "kesit": "—"
         },
@@ -30,7 +29,6 @@
           "spandexDtex": 22,
           "yarnDtex": 22,
           "filament": 7,
-          "floor": "1",
           "yarnType": "PA66FLAT",
           "kesit": "—"
         },
@@ -39,7 +37,6 @@
           "spandexDtex": 22,
           "yarnDtex": 22,
           "filament": 7,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -48,7 +45,6 @@
           "spandexDtex": 22,
           "yarnDtex": 22,
           "filament": 20,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -57,7 +53,6 @@
           "spandexDtex": 44,
           "yarnDtex": 22,
           "filament": 20,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -66,7 +61,6 @@
           "spandexDtex": 22,
           "yarnDtex": 44,
           "filament": 34,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -75,7 +69,6 @@
           "spandexDtex": 44,
           "yarnDtex": 44,
           "filament": 34,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -84,7 +77,6 @@
           "spandexDtex": 78,
           "yarnDtex": 44,
           "filament": 34,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -93,7 +85,6 @@
           "spandexDtex": 22,
           "yarnDtex": 78,
           "filament": 68,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -102,7 +93,6 @@
           "spandexDtex": 44,
           "yarnDtex": 78,
           "filament": 68,
-          "floor": "1",
           "yarnType": "PA66",
           "kesit": "—"
         },
@@ -111,7 +101,6 @@
           "spandexDtex": 44,
           "yarnDtex": 78,
           "filament": 68,
-          "floor": "2",
           "yarnType": "PA66",
           "kesit": "—"
         }

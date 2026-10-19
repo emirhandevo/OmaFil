@@ -57,7 +57,6 @@ export type CoveredSku = {
   spandexDtex: number;
   yarnDtex: number;
   filament?: number;
-  floor: 1 | 2;
   yarnType: string;
   kesit?: string;
 };

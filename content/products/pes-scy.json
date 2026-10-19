@@ -21,7 +21,6 @@
           "spandexDtex": 44,
           "yarnDtex": 83,
           "filament": 36,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -30,7 +29,6 @@
           "spandexDtex": 44,
           "yarnDtex": 167,
           "filament": 96,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         },
@@ -39,7 +37,6 @@
           "spandexDtex": 78,
           "yarnDtex": 167,
           "filament": 96,
-          "floor": "1",
           "yarnType": "PES",
           "kesit": "—"
         }

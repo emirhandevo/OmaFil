@@ -50,6 +50,15 @@ export default async function ProductLinePage({ params }: PageProps) {
   ]);
   const summary = getInner(locale)?.products[line.slug] ?? line.summary;
   const hasSkus = filament.length > 0 || covered.length > 0;
+  // İplik dtex sütunu: SCY naylon PA6/PA66, tüm PES ürünleri PES DTEX.
+  const yarnDtexHeader =
+    line.polymer === "pes"
+      ? "PES DTEX"
+      : line.code === "SCY" && line.polymer === "pa6"
+        ? "PA6 DTEX"
+        : line.code === "SCY" && line.polymer === "pa66"
+          ? "PA66 DTEX"
+          : "İplik dtex";
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
@@ -69,6 +78,7 @@ export default async function ProductLinePage({ params }: PageProps) {
               alt={line.label}
               fill
               priority
+              unoptimized
               sizes="(min-width: 1024px) 40vw, 100vw"
               className="object-cover"
             />
@@ -192,17 +202,16 @@ export default async function ProductLinePage({ params }: PageProps) {
                 <tr>
                   <th className="px-4 py-3 font-semibold">Tip</th>
                   <th className="px-4 py-3 font-semibold">Spandex dtex</th>
-                  <th className="px-4 py-3 font-semibold">İplik dtex</th>
+                  <th className="px-4 py-3 font-semibold">{yarnDtexHeader}</th>
                   <th className="px-4 py-3 font-semibold">Filament</th>
-                  <th className="px-4 py-3 font-semibold">Floor</th>
                   <th className="px-4 py-3 font-semibold">Yarn type</th>
                   <th className="px-4 py-3 font-semibold">Kesit</th>
                 </tr>
               </thead>
               <tbody>
-                {covered.map((sku) => (
+                {covered.map((sku, index) => (
                   <tr
-                    key={`${sku.line}-${sku.spandexDtex}-${sku.yarnDtex}-${sku.filament ?? 0}-${sku.floor}-${sku.yarnType}`}
+                    key={`${sku.line}-${index}`}
                     className="border-t border-border"
                   >
                     <td className="px-4 py-3 font-medium">
@@ -216,9 +225,6 @@ export default async function ProductLinePage({ params }: PageProps) {
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.filament ?? "—"}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {sku.floor}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.yarnType}
