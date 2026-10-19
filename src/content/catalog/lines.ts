@@ -5,9 +5,6 @@ import type {
   ProductLine,
 } from "./types";
 
-export type { ProductFamily, ProductLine } from "./types";
-export { productFamilies } from "./families";
-
 type LineEntry = NonNullable<
   Awaited<ReturnType<typeof reader.collections.productLines.read>>
 >;

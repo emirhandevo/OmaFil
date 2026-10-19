@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
-import { useLocale } from "@/components/i18n/locale-provider";
+import { useCopy, useLocale } from "@/components/i18n/locale-provider";
+import { WhatsAppIcon } from "@/components/ui/icons/social-icons";
+import { contact } from "@/config/site";
 import type { Locale } from "@/i18n/locales";
 
 type Role = "user" | "assistant";
@@ -183,6 +185,7 @@ const chatUi: Record<
 
 export function YarnChat() {
   const locale = useLocale();
+  const copy = useCopy();
   const ui = chatUi[locale];
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -335,15 +338,39 @@ export function YarnChat() {
         </section>
       ) : null}
 
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        aria-expanded={open}
-        className="pointer-events-auto flex items-center gap-2 self-end rounded-full bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-brand-orange/90 active:bg-brand-orange/90"
-      >
-        <MessageCircle className="size-5" aria-hidden="true" />
-        {open ? ui.close : ui.open}
-      </button>
+      <div className="pointer-events-auto flex flex-col items-end gap-3 self-end">
+        {/* Sohbet açıkken WhatsApp gizlensin; kapanınca geri gelsin. */}
+        {!open ? (
+          <a
+            href={contact.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={copy.chrome.whatsapp}
+            className="group relative flex size-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-[#32E070] hover:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)] active:scale-[1.03] active:bg-[#32E070] active:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)]"
+          >
+            {/* Hover’da yeşil neon hale — düşük opaklık */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 rounded-full bg-[#7CFFB2] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-35 group-active:opacity-35"
+            />
+            <WhatsAppIcon className="relative size-6" />
+          </a>
+        ) : null}
+        <button
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          className="group relative flex items-center gap-2 rounded-full bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-[#FF9A1F] hover:shadow-[0_0_8px_rgba(255,176,80,0.5),0_0_18px_rgba(241,144,0,0.45)] active:scale-[1.03] active:bg-[#FF9A1F] active:shadow-[0_0_8px_rgba(255,176,80,0.5),0_0_18px_rgba(241,144,0,0.45)]"
+        >
+          {/* Aynı neon, marka turuncusu */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-full bg-[#FFB347] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-35 group-active:opacity-35"
+          />
+          <MessageCircle className="relative size-5" aria-hidden="true" />
+          <span className="relative">{open ? ui.close : ui.open}</span>
+        </button>
+      </div>
     </div>
   );
 }

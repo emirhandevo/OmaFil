@@ -86,9 +86,6 @@ const TREES_PER_TON =
 export const gesLiveCounter = {
   measuredAt: MEASURED_AT,
   energyKwhAtMeasure: TOTAL_KWH,
-  /** Elazığ app kanıtlı kısım (referans) */
-  elazigKwhAtMeasure: ELAZIG_KWH,
-  erbaaKwhAtMeasure: ERBAA_KWH,
   kwhPerSecond: gesAverageDailyKwh() / 86_400,
   tonsCo2PerKwh: CO2_PER_KWH,
   treesPerTonCo2: TREES_PER_TON,

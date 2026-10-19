@@ -3,6 +3,7 @@ import { Header } from "@/components/ui/layout/header";
 import { Footer } from "@/components/ui/layout/footer";
 import { SmoothNav } from "@/components/ui/layout/smooth-nav";
 import { YarnChat } from "@/components/sections/yarn-chat";
+import { BackToTop } from "@/components/ui/layout/back-to-top";
 import type { ContactData } from "@/content/cms";
 
 type SiteShellProps = {
@@ -25,6 +26,7 @@ export function SiteShell({ children, contact, footerTagline }: SiteShellProps) 
         {children}
       </main>
       <Footer contact={contact} footerTagline={footerTagline} />
+      <BackToTop />
       <YarnChat />
     </>
   );

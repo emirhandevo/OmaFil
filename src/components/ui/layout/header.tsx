@@ -68,7 +68,7 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className="site-header sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+      className="site-header sticky top-0 z-50 border-b border-border bg-background/60 backdrop-blur-lg"
     >
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-3 px-4">
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>

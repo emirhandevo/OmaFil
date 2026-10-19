@@ -71,11 +71,6 @@ export function calculateAutoTheme(now = new Date()): ResolvedTheme {
   return themeFromSun(lat, lon, now);
 }
 
-export function isThemeCacheFresh(now = Date.now()): boolean {
-  const at = Number(safeGet(THEME_AT_KEY) || 0);
-  return at > 0 && now - at < THEME_CACHE_MS;
-}
-
 /**
  * Tercihi yazar ve çözülmüş temayı döner.
  * light/dark: otomatik hesap kapanır.
