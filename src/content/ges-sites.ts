@@ -95,8 +95,8 @@ export const gesSites: GesSite[] = [
   },
   {
     id: "erbaa-cati-1",
-    name: "Erbaa Çatı GES 1",
-    shortName: "Çatı GES 1",
+    name: "Erbaa Çatı Üstü GES 1",
+    shortName: "Çatı Üstü GES 1",
     location: "Tokat / Erbaa OSB — Oma Polimer üretim tesisi",
     kind: "cati",
     capacityMwp: 0.96,
@@ -108,12 +108,12 @@ export const gesSites: GesSite[] = [
     annualKwhMax: 1_728_000,
     sharePercent: 14,
     productionStart: "2023-06-22",
-    images: ["/images/ges/erbaa-cati-1/01.webp"],
+    images: ["/images/ges/erbaa-cati-1/aerial.webp"],
   },
   {
     id: "erbaa-cati-2",
-    name: "Erbaa Çatı GES 2",
-    shortName: "Çatı GES 2",
+    name: "Erbaa Çatı Üstü GES 2",
+    shortName: "Çatı Üstü GES 2",
     location: "Tokat / Erbaa OSB — Oma Polimer üretim tesisi",
     kind: "cati",
     capacityMwp: 0.6,
@@ -124,7 +124,7 @@ export const gesSites: GesSite[] = [
     annualKwhMax: 1_080_000,
     sharePercent: 9,
     productionStart: "2024-12-27",
-    images: ["/images/ges/erbaa-cati-1/02.webp"],
+    images: ["/images/ges/erbaa-cati-2/01.webp"],
   },
 ];
 

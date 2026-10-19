@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import type { LucideIcon } from "lucide-react";
 import {
   Building2,
+  Cog,
   Factory,
   Globe2,
-  Leaf,
+  Layers,
   MapPin,
   TrendingUp,
   Warehouse,
@@ -59,22 +60,28 @@ const milestones: {
     icon: Factory,
   },
   {
-    year: "2018",
-    title: "Kapasite Artışı",
-    text: "Makine parkımızı genişlettik.",
-    icon: TrendingUp,
-  },
-  {
     year: "2021",
     title: "Gipe Tesisi",
     text: "Tokat–Erbaa’da gipe iplik tesisini hayata geçirdik.",
     icon: Warehouse,
   },
   {
-    year: "2023",
-    title: "GRS Sertifikası",
-    text: "Geri dönüştürülmüş iplik üretimini GRS ile belgeledik.",
-    icon: Leaf,
+    year: "2025",
+    title: "Tekstüre Tesisi",
+    text: "Tekstüre üretim tesisini devreye aldık.",
+    icon: Layers,
+  },
+  {
+    year: "2026",
+    title: "POY - FDY Tesisi",
+    text: "POY ve FDY üretim tesisini kurduk.",
+    icon: Cog,
+  },
+  {
+    year: "2026",
+    title: "Gipe Tesisi Kapasite Artışı",
+    text: "Gipe tesisinde kapasiteyi artırdık.",
+    icon: TrendingUp,
   },
 ];
 
@@ -140,7 +147,10 @@ export default async function HakkimizdaPage() {
             {story.map((item) => {
               const Icon = item.icon;
               return (
-                <li key={item.year} className="relative pt-8">
+                <li
+                  key={`${item.year}-${item.title}`}
+                  className="relative pt-8 sm:last:col-span-2 sm:last:w-1/2 sm:last:justify-self-center lg:last:col-span-1 lg:last:col-start-2 lg:last:w-auto"
+                >
                   <article className="relative flex h-full flex-col items-center rounded-2xl border border-border/80 bg-card px-5 pb-7 pt-12 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
                     <span className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-md ring-4 ring-muted/50 dark:ring-background">
                       <Icon

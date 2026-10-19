@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /** Türkçe kart gövdesi. Markdoc ağacı yerine düz string: dil değişince de kaybolmasın. */
 const factoryIntroTr = [
-  "Tokat Erbaa Organize Sanayi Bölgesi'nde faaliyet gösteren tesisimiz, yıllık 13.000 ton üretim kapasitesiyle Avrupa'nın en büyük gipe iplik üretim tesisi unvanını taşıyor. Naylon 6, Naylon 66 ve polyester gipe iplik hatlarında ürettiğimiz yüksek katma değerli ürünlerle global tekstil endüstrisine hizmet veriyoruz.",
+  "Tokat Erbaa Organize Sanayi Bölgesi'nde faaliyet gösteren tesisimiz, yıllık 13.000 ton üretim kapasitesiyle Avrupa'nın en büyük gipe iplik üretim tesisi unvanını taşıyor. Naylon 6, Naylon 6,6 ve polyester gipe iplik hatlarında ürettiğimiz yüksek katma değerli ürünlerle global tekstil endüstrisine hizmet veriyoruz.",
   "Bünyesinde barındırdığı Ar-Ge merkeziyle sadece üretmekle kalmıyor, geleceğin iplik teknolojilerini de geliştiriyoruz. Tesisimiz bölgeye önemli bir istihdam kaynağı oluştururken, çatımıza kurduğumuz güneş enerjisi sistemiyle üretimimizin enerji ihtiyacının bir kısmını temiz kaynaklardan karşılıyoruz.",
 ];
 
@@ -93,8 +93,7 @@ const factoryGallery = [
  * 21 salon, 24 renkli bobin, 14 turkuaz hat, 25 mor UV.
  */
 const bandOrder = [
-  "21", "24", "14", "25",
-  "05", "06", "07", "08", "09", "10", "11", "12", "13",
+  "06", "07", "08", "09", "10", "11", "12", "13",
   "03",
   "15", "16", "17", "18", "19", "20",
   "01",
@@ -127,7 +126,7 @@ export default async function FabrikamizPage() {
     getProductLines(),
     getCopy(),
   ]);
-  // Ürünler sayfasıyla aynı aile sırası: Naylon 6, Naylon 66, polyester.
+  // Ürünler sayfasıyla aynı aile sırası: Naylon 6, Naylon 6,6, polyester.
   const productLines = [...lines].sort(
     (a, b) =>
       familyRank[a.family] - familyRank[b.family] ||
@@ -265,7 +264,7 @@ export default async function FabrikamizPage() {
           </h2>
           <p className="text-body mt-4 max-w-3xl text-base leading-8">
             {t?.factory.bandBody ??
-              "Naylon 6 ve 66 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz."}
+              "Naylon 6 ve 6,6 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz."}
           </p>
           <ProductionBandGallery
             photos={band}

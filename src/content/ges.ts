@@ -12,17 +12,17 @@ import {
 export const gesIntro = {
   title: "Güneş Enerji Sistemimiz",
   subtitle:
-    "Elazığ saha GES ve Erbaa çatı GES ile üretimi güneşten besliyoruz",
+    "Elazığ arazi GES ve Erbaa çatı üstü GES ile üretimi güneşten besliyoruz",
   paragraphs: [
-    "OmaFil olarak yalnızca kaliteli iplik üretmiyoruz; enerjiyi de yenilenebilir kaynaklardan sağlıyoruz. Portföyümüzde Elazığ Kovancılar’da iki saha GES (OMA 1 Hacısam, OMA 2 Kavak) ve Tokat Erbaa üretim tesisimizde iki çatı GES bulunuyor.",
-    "Toplam kurulu gücümüz 6,76 MWp. Günlük üretimimiz sahalar ve çatı sistemleriyle birlikte onlarca megawatt-saat bandında; karbon ayak izimizi azaltarak yeşil sanayiye katkı sunuyoruz.",
+    "OmaFil olarak yalnızca kaliteli iplik üretmiyoruz; enerjiyi de yenilenebilir kaynaklardan sağlıyoruz. Portföyümüzde Elazığ Kovancılar’da iki arazi GES (OMA 1 Hacısam, OMA 2 Kavak) ve Tokat Erbaa üretim tesisimizde iki çatı üstü GES bulunuyor.",
+    "Toplam kurulu gücümüz 6,76 MWp. Günlük üretimimiz arazi ve çatı üstü sistemleriyle birlikte onlarca megawatt-saat bandında; karbon ayak izimizi azaltarak yeşil sanayiye katkı sunuyoruz.",
   ],
 } as const;
 
 export const gesPillars = [
   {
-    title: "Saha + çatı GES",
-    text: "Elazığ’da 5,2 MWp saha santrali; Erbaa fabrika çatısında 1,56 MWp. İki coğrafyada, aynı sürdürülebilirlik hedefi.",
+    title: "Arazi + çatı üstü GES",
+    text: "Elazığ’da 5,2 MWp arazi santrali; Erbaa fabrika çatısında 1,56 MWp. İki coğrafyada, aynı sürdürülebilirlik hedefi.",
   },
   {
     title: "Daha az karbon ayak izi",
@@ -36,12 +36,12 @@ export const gesPillars = [
 
 export const gesRespectBlock = {
   title: "Doğaya saygılı, sürdürülebilir üretim",
-  text: "Teknolojiyi ve yenilikçi yatırımları işimizin merkezine koyarken çevre sorumluluğumuzu unutmuyoruz. Saha ve çatı GES yatırımlarımızla karbon salınımını azaltıyor, ekolojik dengeye katkı sağlıyoruz.",
+  text: "Teknolojiyi ve yenilikçi yatırımları işimizin merkezine koyarken çevre sorumluluğumuzu unutmuyoruz. Arazi ve çatı üstü GES yatırımlarımızla karbon salınımını azaltıyor, ekolojik dengeye katkı sağlıyoruz.",
 } as const;
 
 export const gesCapacity = {
   title: "Yeşil enerjimizle üretiyoruz",
-  text: `Toplam ${gesPortfolioTotals.all.capacityMwp.toLocaleString("tr-TR")} MWp kurulu gücümüzle (Elazığ ${gesPortfolioTotals.elazig.capacityMwp} MWp saha + Erbaa ${gesPortfolioTotals.erbaa.capacityMwp} MWp çatı) yıllık yaklaşık ${(gesPortfolioTotals.all.annualKwhMin / 1_000_000).toLocaleString("tr-TR")}–${(gesPortfolioTotals.all.annualKwhMax / 1_000_000).toLocaleString("tr-TR")} GWh üretim kapasitesine sahibiz.`,
+  text: `Toplam ${gesPortfolioTotals.all.capacityMwp.toLocaleString("tr-TR")} MWp kurulu gücümüzle (Elazığ ${gesPortfolioTotals.elazig.capacityMwp} MWp arazi + Erbaa ${gesPortfolioTotals.erbaa.capacityMwp} MWp çatı üstü) yıllık yaklaşık ${(gesPortfolioTotals.all.annualKwhMin / 1_000_000).toLocaleString("tr-TR")}–${(gesPortfolioTotals.all.annualKwhMax / 1_000_000).toLocaleString("tr-TR")} GWh üretim kapasitesine sahibiz.`,
 } as const;
 
 /**
@@ -116,8 +116,8 @@ export const gesMetrics = [
     label: "Denk ağaç sayısı (ad)",
     decimals: 0,
     suffix: "",
-    image: "/images/ges/erbaa-cati-1/01.webp",
-    imageAlt: "Erbaa çatı GES — Oma Polimer tesisi",
+    image: "/images/ges/erbaa-cati-1/aerial.webp",
+    imageAlt: "Erbaa çatı üstü GES — Oma Polimer tesisi",
   },
 ] as const;
 

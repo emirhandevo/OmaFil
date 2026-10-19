@@ -23,8 +23,8 @@ const highlightStats: {
     icon: Factory,
   },
   {
-    title: "13.000 Ton/Yıl Üretim",
-    subtitle: "Naylon + Polyester Gipe",
+    title: "13.000 Ton",
+    subtitle: "Yıllık üretim",
     icon: Award,
   },
   {

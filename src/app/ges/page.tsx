@@ -79,8 +79,8 @@ export default async function GesPage() {
         </div>
         <div className="relative min-h-[280px] overflow-hidden rounded-3xl border border-border shadow-sm sm:min-h-[380px]">
           <Image
-            src="/images/ges/erbaa-cati-1/01.webp"
-            alt={t?.ges.imageAlt ?? "OmaFil Erbaa çatı GES — Oma Polimer tesisi"}
+            src="/images/ges/erbaa-cati-1/aerial.webp"
+            alt={t?.ges.imageAlt ?? "OmaFil Erbaa çatı üstü GES — Oma Polimer tesisi"}
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             quality={82}

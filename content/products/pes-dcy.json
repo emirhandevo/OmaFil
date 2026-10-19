@@ -39,6 +39,30 @@
           "filament": 96,
           "yarnType": "PES",
           "kesit": "—"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 156,
+          "yarnDtex": 83,
+          "filament": 36,
+          "yarnType": "PES",
+          "kesit": "—"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 620,
+          "yarnDtex": 83,
+          "filament": 36,
+          "yarnType": "PES",
+          "kesit": "—"
+        },
+        {
+          "productionType": "DC",
+          "spandexDtex": 940,
+          "yarnDtex": 83,
+          "filament": 36,
+          "yarnType": "PES",
+          "kesit": "—"
         }
       ]
     }

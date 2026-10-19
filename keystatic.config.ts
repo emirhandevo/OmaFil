@@ -3,7 +3,7 @@ import { collection, config, fields, singleton } from "@keystatic/core";
 /** Ortak select seçenekleri — ürün kataloğu */
 const familyOptions = [
   { label: "Naylon 6", value: "nylon6" },
-  { label: "Naylon 66", value: "nylon66" },
+  { label: "Naylon 6,6", value: "nylon66" },
   { label: "Polyester", value: "polyester" },
 ] as const;
 

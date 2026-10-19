@@ -13,17 +13,14 @@ import { getCopy } from "@/i18n/get-copy";
 
 const solutionIcons = [
   {
-    title: "Recycle İplikler",
     icon: Recycle,
     iconClass: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
   },
   {
-    title: "Eco-Biopa",
     icon: Sprout,
     iconClass: "bg-lime-500/15 text-lime-800 dark:text-lime-400",
   },
   {
-    title: "Free-Dyed",
     icon: Droplets,
     iconClass: "bg-sky-500/15 text-sky-800 dark:text-sky-400",
   },
@@ -31,24 +28,24 @@ const solutionIcons = [
 
 /**
  * OmaFil’in çevre, enerji ve sürdürülebilir iplik yaklaşımını anlatır.
- * Ürün adları (Recycle İplikler, Eco-Biopa, Free-Dyed) değişmez.
+ * Kart başlıkları turuncu; alt kicker yok (UNIFI / susuz boyama satırı silindi).
  */
 export async function SustainabilitySection() {
   const { copy } = await getCopy();
   const cards = [
     {
       ...solutionIcons[0],
-      subtitle: copy.sustain.unifi,
+      title: copy.sustain.recycleTitle,
       description: copy.sustain.recycleText,
     },
     {
       ...solutionIcons[1],
-      subtitle: copy.sustain.biobased,
+      title: copy.sustain.biobased,
       description: copy.sustain.biobasedText,
     },
     {
       ...solutionIcons[2],
-      subtitle: copy.sustain.waterless,
+      title: copy.sustain.dopeDyed,
       description: copy.sustain.waterlessText,
     },
   ];
@@ -121,7 +118,7 @@ export async function SustainabilitySection() {
 
           <div className="relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 lg:min-h-[540px]">
             <Image
-              src="/images/sustainability/factory-solar.webp"
+              src="/images/ges/erbaa-cati-1/aerial.webp"
               alt={copy.chrome.sustainAlt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
@@ -173,11 +170,8 @@ export async function SustainabilitySection() {
                     <Icon aria-hidden="true" className="size-5" />
                   </div>
 
-                  <p className="mt-5 text-xs font-bold tracking-[0.18em] text-brand-orange uppercase">
-                    {solution.subtitle}
-                  </p>
-
-                  <h4 className="mt-2 text-xl font-semibold text-foreground">
+                  {/* Turuncu başlık: eski kicker rengi, kicker satırı yok */}
+                  <h4 className="mt-5 text-xl font-semibold text-brand-orange">
                     {solution.title}
                   </h4>
 

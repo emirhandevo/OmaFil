@@ -8,8 +8,8 @@ import { gesErbaaRoof, gesSites, type GesSite } from "@/content/ges-sites";
 import { htmlLang } from "@/i18n/locales";
 
 /**
- * Dört GES tesisi — Elazığ Saha + Erbaa Çatı.
- * Saha: alt thumb’lar + lightbox okları. Çatı: tek hero, thumb yok.
+ * Dört GES tesisi — Elazığ Arazi + Erbaa Çatı.
+ * Arazi: alt thumb’lar + lightbox okları. Çatı: tek hero, thumb yok.
  */
 export function GesSitesSection() {
   const locale = useLocale();
@@ -31,11 +31,11 @@ export function GesSitesSection() {
       </h2>
       <p className="text-body mt-3 max-w-2xl text-base leading-8">
         {t?.ges.sitesLead ??
-          "Elazığ Kovancılar’da iki Saha GES; Tokat Erbaa fabrika çatısında iki ayrı Çatı GES. Toplam kurulu güç 6,76 MWp."}
+          "Elazığ Kovancılar’da iki Arazi GES; Tokat Erbaa fabrika çatısında iki ayrı Çatı Üstü GES. Toplam kurulu güç 6,76 MWp."}
       </p>
 
       <h3 className="mt-12 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        {t?.ges.fieldHeading ?? "Elazığ — Saha GES"}
+        {t?.ges.fieldHeading ?? "Elazığ — Arazi GES"}
       </h3>
       <ul className="mt-6 grid gap-8 lg:grid-cols-2">
         {saha.map((site) => (
@@ -44,7 +44,7 @@ export function GesSitesSection() {
       </ul>
 
       <h3 className="mt-14 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        {t?.ges.roofHeading ?? "Erbaa — Çatı GES"}
+        {t?.ges.roofHeading ?? "Erbaa — Çatı Üstü GES"}
       </h3>
       <p className="text-body mt-2 max-w-2xl text-sm leading-7">
         {t
@@ -54,7 +54,7 @@ export function GesSitesSection() {
               min: gesErbaaRoof.dailyKwhMin.toLocaleString(num),
               max: gesErbaaRoof.dailyKwhMax.toLocaleString(num),
             })
-          : `Oma Polimer Çatı GES toplam ${gesErbaaRoof.capacityMwp} MWp (${gesErbaaRoof.capacityKw.toLocaleString("tr-TR")} kW). Günlük ortalama ${gesErbaaRoof.dailyKwhMin.toLocaleString("tr-TR")}–${gesErbaaRoof.dailyKwhMax.toLocaleString("tr-TR")} kWh. Aynı çatıda iki ayrı sistem: GES 1 ve GES 2.`}
+          : `Oma Polimer Çatı Üstü GES toplam ${gesErbaaRoof.capacityMwp} MWp (${gesErbaaRoof.capacityKw.toLocaleString("tr-TR")} kW). Günlük ortalama ${gesErbaaRoof.dailyKwhMin.toLocaleString("tr-TR")}–${gesErbaaRoof.dailyKwhMax.toLocaleString("tr-TR")} kWh. Aynı çatıda iki ayrı sistem: GES 1 ve GES 2.`}
       </p>
       <ul className="mt-6 grid gap-8 lg:grid-cols-2">
         {cati.map((site) => (
@@ -71,7 +71,7 @@ function SiteCard({ site }: { site: GesSite }) {
   const num = htmlLang(locale);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const hero = site.images[0];
-  // Çatı kartlarında alt satır yok; Saha’da 2–4. foto thumb
+  // Çatı kartlarında alt satır yok; arazide 2–4. foto thumb
   const thumbs = site.kind === "saha" ? site.images.slice(1) : [];
 
   return (
@@ -89,6 +89,7 @@ function SiteCard({ site }: { site: GesSite }) {
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             quality={90}
+            unoptimized
             className="object-cover"
           />
         </button>

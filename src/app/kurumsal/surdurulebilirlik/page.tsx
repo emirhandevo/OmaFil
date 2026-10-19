@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description:
       t?.sustain.description ??
       page?.description ??
-      "OmaFil sürdürülebilirlik: GES, GRS belgeli recycle iplik, Eco-Biopa ve Free-Dyed susuz boyama.",
+      "OmaFil sürdürülebilirlik: GES, GRS belgeli recycle iplik, bio-bazlı polyamid ve Dope Dyed.",
     alternates: pageAlternates("/kurumsal/surdurulebilirlik", locale),
   };
 }
@@ -50,21 +50,18 @@ const principles = [
 const yarnSolutions = [
   {
     title: "Recycle İplikler",
-    subtitle: "UNIFI iş birliği",
     text: "Geri dönüştürülmüş kaynaklardan geliştirilen çevre dostu iplik çözümleri. 2023’te GRS belgesi ile üretim süreçlerimiz belgelendi.",
     icon: Recycle,
     tone: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
   },
   {
-    title: "Eco-Biopa",
-    subtitle: "Bio-bazlı polyamid iplik",
+    title: "Bio-bazlı Polyamid İplik",
     text: "Fosil kaynak kullanımını azaltmayı hedefleyen bio-bazlı polyamid iplik. Performanstan ödün vermeden daha düşük çevresel etki.",
     icon: Sprout,
     tone: "bg-lime-500/15 text-lime-700 dark:text-lime-400",
   },
   {
-    title: "Free-Dyed",
-    subtitle: "Susuz boyama teknolojisi",
+    title: "Dope Dyed",
     text: "Su tüketimini azaltmaya odaklanan yenilikçi susuz boyama teknolojisi. Kaynak tasarrufu üretim hattının içinde başlar.",
     icon: Droplets,
     tone: "bg-sky-500/15 text-sky-700 dark:text-sky-400",
@@ -104,7 +101,7 @@ export default async function SurdurulebilirlikPage() {
   }));
   const yarnItems = yarnSolutions.map((item, i) => ({
     ...item,
-    subtitle: t?.sustain.yarns[i]?.subtitle ?? item.subtitle,
+    title: t?.sustain.yarns[i]?.title ?? item.title,
     text: t?.sustain.yarns[i]?.text ?? item.text,
   }));
   const gesItems = gesHighlights.map((item, i) => ({
@@ -226,10 +223,7 @@ export default async function SurdurulebilirlikPage() {
                 >
                   <Icon aria-hidden="true" className="size-5" />
                 </span>
-                <p className="mt-5 text-xs font-bold tracking-[0.16em] text-brand-orange uppercase">
-                  {item.subtitle}
-                </p>
-                <h3 className="mt-2 text-xl font-semibold text-foreground">
+                <h3 className="mt-5 text-xl font-semibold text-brand-orange">
                   {item.title}
                 </h3>
                 <p className="text-body mt-3 text-sm leading-7">{item.text}</p>
@@ -308,7 +302,7 @@ export default async function SurdurulebilirlikPage() {
 
           <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10 sm:min-h-[420px]">
             <Image
-              src="/images/sustainability/factory-solar.webp"
+              src="/images/ges/erbaa-cati-1/aerial.webp"
               alt={t?.sustain.plantAlt ?? "Güneş panelleriyle kaplı OmaFil üretim tesisi"}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
