@@ -46,7 +46,7 @@ function ImageGroup({
     // ekranda görünen kartlar kopya olur — tıklama/hover ölürdü.
     <div
       className="flex shrink-0 items-start gap-3 pr-4 sm:gap-4 sm:pr-5"
-      aria-hidden={duplicate || undefined}
+      aria-hidden={duplicate ? true : undefined}
     >
       {items.map((item, index) => {
         // Test görseli varsa onu bas; yoksa kartın kendi dosyası. İkisi de yoksa yer tutucu.

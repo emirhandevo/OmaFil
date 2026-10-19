@@ -27,7 +27,6 @@ export async function Hero() {
           alt=""
           fill
           preload
-          fetchPriority="high"
           unoptimized
           sizes="100vw"
           className="pointer-events-none object-cover"

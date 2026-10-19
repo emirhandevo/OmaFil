@@ -33,16 +33,34 @@ function mapLine(slug: string, entry: LineEntry): ProductLine {
   };
 }
 
+/**
+ * 22/24/1 gibi üçüncü sayı (ply) gösterilmesin → 22/24.
+ * 18D/6F/7F filament seçeneklerine dokunma.
+ */
+function displayFilamentSpec(spec: string): string {
+  const match = spec.match(/^(\d+)\/(\d+)\/\d+$/);
+  return match ? `${match[1]}/${match[2]}` : spec;
+}
+
 function mapFilamentSkus(slug: string, entry: LineEntry): FilamentSku[] {
   if (entry.details.discriminant !== "filament") return [];
-  return entry.details.value.skus.map((sku) => ({
-    line: slug,
-    spec: sku.spec,
-    luster: sku.luster.length ? [...sku.luster] : undefined,
-    colors: sku.colors.length ? [...sku.colors] : undefined,
-    features: sku.features.length ? [...sku.features] : undefined,
-    kesit: sku.kesit || "—",
-  }));
+  const rows: FilamentSku[] = [];
+  const seen = new Set<string>();
+  for (const sku of entry.details.value.skus) {
+    const mapped: FilamentSku = {
+      line: slug,
+      spec: displayFilamentSpec(sku.spec),
+      luster: sku.luster.length ? [...sku.luster] : undefined,
+      colors: sku.colors.length ? [...sku.colors] : undefined,
+      features: sku.features.length ? [...sku.features] : undefined,
+      kesit: sku.kesit || "—",
+    };
+    const key = JSON.stringify(mapped);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rows.push(mapped);
+  }
+  return rows;
 }
 
 function mapCoveredSkus(slug: string, entry: LineEntry): CoveredSku[] {

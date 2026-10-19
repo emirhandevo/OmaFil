@@ -56,7 +56,7 @@
           "kesit": "—"
         },
         {
-          "spec": "22/24/1",
+          "spec": "22/24",
           "luster": [
             "SD"
           ],
@@ -136,7 +136,7 @@
           "kesit": "—"
         },
         {
-          "spec": "44/12/1",
+          "spec": "44/12",
           "luster": [
             "SD"
           ],
@@ -151,37 +151,7 @@
           "kesit": "—"
         },
         {
-          "spec": "44/12/2",
-          "luster": [
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "44/34/1",
-          "luster": [
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "44/34/2",
+          "spec": "44/34",
           "luster": [
             "SD"
           ],
@@ -235,52 +205,7 @@
           "kesit": "—"
         },
         {
-          "spec": "70/24/1",
-          "luster": [
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "70/24/2",
-          "luster": [
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "70/24/3",
-          "luster": [
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "70/24/4",
+          "spec": "70/24",
           "luster": [
             "SD"
           ],

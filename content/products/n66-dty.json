@@ -71,7 +71,7 @@
           "kesit": "—"
         },
         {
-          "spec": "22/24/1",
+          "spec": "22/24",
           "luster": [
             "FD",
             "SD"
@@ -160,23 +160,7 @@
           "kesit": "—"
         },
         {
-          "spec": "44/34/1",
-          "luster": [
-            "FD",
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "44/34/2",
+          "spec": "44/34",
           "luster": [
             "FD",
             "SD"
@@ -304,23 +288,7 @@
           "kesit": "—"
         },
         {
-          "spec": "78/68/1",
-          "luster": [
-            "FD",
-            "SD"
-          ],
-          "colors": [
-            "Ekru",
-            "Siyah",
-            "Dope Dyed"
-          ],
-          "features": [
-            "featured"
-          ],
-          "kesit": "—"
-        },
-        {
-          "spec": "78/68/2",
+          "spec": "78/68",
           "luster": [
             "FD",
             "SD"

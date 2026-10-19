@@ -94,7 +94,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground">
+      <body
+        suppressHydrationWarning
+        className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground"
+      >
         {/* Dil, proxy’nin x-locale başlığından gelir. tr kök URL’de kalır. */}
         <LocaleProvider locale={locale}>
           <ConditionalShell
