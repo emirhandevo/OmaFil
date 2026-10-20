@@ -1,4 +1,6 @@
 import { collection, config, fields, singleton } from "@keystatic/core";
+import { localeGroups } from "./keystatic.fields";
+import { sectionSingletons } from "./keystatic.sections";
 
 /** Ortak select seçenekleri — ürün kataloğu */
 const familyOptions = [
@@ -45,33 +47,6 @@ const filamentSkuFields = fields.object({
   }),
 });
 
-/** Hero metni — her dil aynı 5 alan. Medya ortak, çeviri dil dil. */
-function heroCopy(label: string) {
-  return fields.object(
-    {
-      eyebrow: fields.text({
-        label: "Üst kicker",
-        description: "Başlığın üstündeki kısa turuncu satır.",
-      }),
-      title: fields.text({
-        label: "Başlık",
-        multiline: true,
-      }),
-      body: fields.text({
-        label: "Açıklama",
-        multiline: true,
-      }),
-      productsCta: fields.text({
-        label: "Ürünler butonu",
-      }),
-      aboutCta: fields.text({
-        label: "Kurumsal butonu",
-      }),
-    },
-    { label },
-  );
-}
-
 const coveredSkuFields = fields.object({
   productionType: fields.text({
     label: "Üretim tipi",
@@ -112,51 +87,56 @@ export default config({
       label: "Blog yazıları",
       slugField: "title",
       path: "content/blog/*",
-      format: { contentField: "content" },
+      format: { data: "yaml" },
       schema: {
         title: fields.slug({
           name: {
-            label: "Başlık",
+            label: "Kayıt adı / slug",
             validation: { isRequired: true },
           },
-        }),
-        excerpt: fields.text({
-          label: "Özet",
-          description: "Liste ve SEO açıklaması (kısa).",
-          multiline: true,
-          validation: { isRequired: true },
         }),
         date: fields.date({
           label: "Yayın tarihi",
           validation: { isRequired: true },
         }),
-        content: fields.markdoc({
-          label: "İçerik",
-        }),
+        copy: localeGroups(() => ({
+          title: fields.text({ label: "Başlık" }),
+          excerpt: fields.text({
+            label: "Özet",
+            description: "Liste ve SEO.",
+            multiline: true,
+          }),
+          body: fields.text({
+            label: "İçerik",
+            multiline: true,
+          }),
+        })),
       },
     }),
     pages: collection({
       label: "Kurumsal sayfalar",
       slugField: "title",
       path: "content/pages/*",
-      format: { contentField: "content" },
+      format: { data: "yaml" },
       schema: {
         title: fields.slug({
           name: {
-            label: "Başlık",
+            label: "Kayıt adı / slug",
             validation: { isRequired: true },
           },
         }),
-        description: fields.text({
-          label: "Üst açıklama",
-          description: "Sayfa çerçevesindeki kısa metin + SEO.",
-          multiline: true,
-          validation: { isRequired: true },
-        }),
-        content: fields.markdoc({
-          label: "İçerik",
-          description: "Sayfanın düzenlenebilir metin gövdesi.",
-        }),
+        copy: localeGroups(() => ({
+          title: fields.text({ label: "Başlık" }),
+          description: fields.text({
+            label: "Üst açıklama / SEO",
+            multiline: true,
+          }),
+          body: fields.text({
+            label: "İçerik",
+            description: "Paragraflar. Boş satır yeni paragraf.",
+            multiline: true,
+          }),
+        })),
       },
     }),
     productLines: collection({
@@ -167,15 +147,23 @@ export default config({
       schema: {
         label: fields.slug({
           name: {
-            label: "Ürün adı",
+            label: "Ürün adı (slug / panel)",
+            description: "Dosya adı. Çeviriler aşağıdaki Metinler’de.",
             validation: { isRequired: true },
           },
         }),
         summary: fields.text({
-          label: "Kısa özet",
+          label: "Kısa özet (Türkçe yedek)",
           multiline: true,
           validation: { isRequired: true },
         }),
+        copy: localeGroups(() => ({
+          label: fields.text({ label: "Ürün adı" }),
+          summary: fields.text({
+            label: "Kısa özet",
+            multiline: true,
+          }),
+        })),
         family: fields.select({
           label: "Aile",
           options: [...familyOptions],
@@ -278,37 +266,54 @@ export default config({
             }),
           },
         ),
-        copy: fields.object(
-          {
-          tr: heroCopy("Türkçe"),
-          en: heroCopy("English"),
-          de: heroCopy("Deutsch"),
-          fr: heroCopy("Français"),
-          es: heroCopy("Español"),
-          it: heroCopy("Italiano"),
-          pt: heroCopy("Português"),
-          nl: heroCopy("Nederlands"),
-          ru: heroCopy("Русский"),
-          ar: heroCopy("العربية"),
-          zh: heroCopy("中文"),
-        }),
+        copy: localeGroups(() => ({
+          eyebrow: fields.text({
+            label: "Üst kicker",
+            description: "Başlığın üstündeki kısa turuncu satır.",
+          }),
+          title: fields.text({
+            label: "Başlık",
+            multiline: true,
+          }),
+          body: fields.text({
+            label: "Açıklama",
+            multiline: true,
+          }),
+          productsCta: fields.text({
+            label: "Ürünler butonu",
+          }),
+          aboutCta: fields.text({
+            label: "Kurumsal butonu",
+          }),
+        })),
       },
     }),
     siteSettings: singleton({
       label: "Site ayarları",
       path: "content/settings/site",
       schema: {
-        description: fields.text({
-          label: "SEO açıklaması",
-          description: "Ana sayfa / paylaşım meta description.",
-          multiline: true,
-          validation: { isRequired: true },
+        logo: fields.text({
+          label: "Logo (açık tema)",
+          description: "Örn. /images/omafil_logo.svg",
         }),
-        footerTagline: fields.text({
-          label: "Footer sloganı",
-          description: "Logo altındaki kısa cümle.",
-          validation: { isRequired: true },
+        logoDark: fields.text({
+          label: "Logo (koyu tema)",
+          description: "Örn. /images/omafil_logo_dark.svg",
         }),
+        ogImage: fields.text({
+          label: "Paylaşım görseli (OG)",
+          description: "WhatsApp / LinkedIn kartı. Örn. /images/og.webp — 1200×630 önerilir.",
+        }),
+        copy: localeGroups(() => ({
+          description: fields.text({
+            label: "SEO açıklaması",
+            description: "Ana sayfa / paylaşım meta.",
+            multiline: true,
+          }),
+          footerTagline: fields.text({
+            label: "Footer sloganı",
+          }),
+        })),
       },
     }),
     contact: singleton({
@@ -326,9 +331,13 @@ export default config({
         locations: fields.array(
           fields.object({
             label: fields.text({
-              label: "Başlık",
+              label: "Başlık (Türkçe / panel)",
+              description: "Liste adı. Çeviriler Metinler’de.",
               validation: { isRequired: true },
             }),
+            labels: localeGroups(() => ({
+              name: fields.text({ label: "Başlık" }),
+            })),
             address: fields.text({
               label: "Adres",
               multiline: true,
@@ -347,7 +356,24 @@ export default config({
         instagram: fields.url({ label: "Instagram" }),
         linkedin: fields.url({ label: "LinkedIn" }),
         youtube: fields.url({ label: "YouTube" }),
+        pageCopy: localeGroups(() => ({
+          kicker: fields.text({ label: "Üst kicker" }),
+          title: fields.text({ label: "Başlık" }),
+          lead: fields.text({ label: "Giriş", multiline: true }),
+          formTitle: fields.text({ label: "Form başlığı" }),
+          formLead: fields.text({ label: "Form açıklaması", multiline: true }),
+          quick: fields.text({ label: "Hızlı iletişim başlığı" }),
+          quickLead: fields.text({ label: "Hızlı iletişim açıklaması" }),
+          phone: fields.text({ label: "Telefon etiketi" }),
+          email: fields.text({ label: "E-posta etiketi" }),
+          social: fields.text({ label: "Sosyal başlık" }),
+          socialLead: fields.text({ label: "Sosyal açıklama" }),
+          addresses: fields.text({ label: "Adresler başlığı" }),
+          mapsNote: fields.text({ label: "Harita notu" }),
+          openMap: fields.text({ label: "Haritada aç" }),
+        })),
       },
     }),
+    ...sectionSingletons,
   },
 });

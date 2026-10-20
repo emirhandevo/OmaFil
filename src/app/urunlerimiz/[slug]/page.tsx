@@ -10,7 +10,6 @@ import {
   getProductLines,
 } from "@/content/catalog";
 import { getCopy } from "@/i18n/get-copy";
-import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
 
 type PageProps = {
@@ -26,29 +25,27 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const [line, { locale }] = await Promise.all([
-    getProductLine(slug),
-    getCopy(),
-  ]);
+  const { locale } = await getCopy();
+  const line = await getProductLine(slug, locale);
   if (!line) return { title: "Ürün bulunamadı" };
   return {
     title: line.label,
-    description: getInner(locale)?.products[line.slug] ?? line.summary,
+    description: line.summary,
     alternates: pageAlternates(`/urunlerimiz/${slug}`, locale),
   };
 }
 
 export default async function ProductLinePage({ params }: PageProps) {
   const { slug } = await params;
-  const line = await getProductLine(slug);
+  const { copy, locale } = await getCopy();
+  const line = await getProductLine(slug, locale);
   if (!line) notFound();
 
-  const [{ copy, locale }, filament, covered] = await Promise.all([
-    getCopy(),
+  const [filament, covered] = await Promise.all([
     getFilamentSkus(slug),
     getCoveredSkus(slug),
   ]);
-  const summary = getInner(locale)?.products[line.slug] ?? line.summary;
+  const summary = line.summary;
   const hasSkus = filament.length > 0 || covered.length > 0;
   // İplik dtex sütunu: SCY naylon PA6/PA66, tüm PES ürünleri PES DTEX.
   const yarnDtexHeader =

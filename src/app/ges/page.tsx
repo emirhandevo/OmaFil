@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { GesImpactStats } from "@/components/sections/ges-impact-stats";
 import { GesSitesSection } from "@/components/sections/ges-sites-section";
 import { gesIntro, gesPillars, gesRespectBlock } from "@/content/ges";
+import { getGesBlocks } from "@/content/sections";
 import { gesPortfolioTotals } from "@/content/ges-sites";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
@@ -28,19 +29,24 @@ const pillarIcons = [Sun, TreePine, Leaf] as const;
 export default async function GesPage() {
   const { locale } = await getCopy();
   const t = getInner(locale);
+  const cms = await getGesBlocks(locale);
+  const f = cms.filled;
   const num = htmlLang(locale);
   const fmt = (value: number) => value.toLocaleString(num);
-  const paragraphs = t?.ges.paragraphs ?? gesIntro.paragraphs;
+  const paragraphs =
+    cms.paragraphs.length > 0
+      ? cms.paragraphs
+      : (t?.ges.paragraphs ?? gesIntro.paragraphs);
   const pillars = gesPillars.map((item, i) => ({
-    title: t?.ges.pillars[i]?.title ?? item.title,
-    text: t?.ges.pillars[i]?.text ?? item.text,
+    title: cms.pillars[i]?.title || t?.ges.pillars[i]?.title || item.title,
+    text: cms.pillars[i]?.text || t?.ges.pillars[i]?.text || item.text,
   }));
 
   return (
     <>
       <section className="relative isolate min-h-[52vh] overflow-hidden sm:min-h-[60vh]">
         <Image
-          src="/images/ges/ges-hero.webp"
+          src={cms.heroImage}
           alt=""
           fill
           priority
@@ -52,18 +58,18 @@ export default async function GesPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/92 via-brand-navy/75 to-brand-navy/40" />
         <div className="relative mx-auto flex min-h-[52vh] max-w-6xl flex-col justify-end px-4 py-16 sm:min-h-[60vh] sm:py-20">
           <p className="text-xs font-bold tracking-[0.22em] text-[#f19000] uppercase">
-            {t?.ges.kicker ?? "Güneş enerji sistemi"}
+            {f.kicker || t?.ges.kicker || "Güneş enerji sistemi"}
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            {t?.ges.title ?? gesIntro.title}
+            {f.title || t?.ges.title || gesIntro.title}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">
-            {t?.ges.subtitle ?? gesIntro.subtitle}
+            {f.subtitle || t?.ges.subtitle || gesIntro.subtitle}
           </p>
           <p className="mt-4 text-sm font-medium text-white/75">
-            {t?.ges.total ?? "Toplam"} {fmt(gesPortfolioTotals.all.capacityMwp)}{" "}
+            {f.total || t?.ges.total || "Toplam"} {fmt(gesPortfolioTotals.all.capacityMwp)}{" "}
             MWp · {fmt(gesPortfolioTotals.all.panels)}{" "}
-            {t?.ges.panels ?? "panel"}
+            {f.panels || t?.ges.panels || "panel"}
           </p>
         </div>
       </section>
@@ -79,8 +85,12 @@ export default async function GesPage() {
         </div>
         <div className="relative min-h-[280px] overflow-hidden rounded-3xl border border-border shadow-sm sm:min-h-[380px]">
           <Image
-            src="/images/ges/erbaa-cati-1/aerial.webp"
-            alt={t?.ges.imageAlt ?? "OmaFil Erbaa çatı üstü GES — Oma Polimer tesisi"}
+            src={cms.bodyImage}
+            alt={
+              f.imageAlt ||
+              t?.ges.imageAlt ||
+              "OmaFil Erbaa çatı üstü GES — Oma Polimer tesisi"
+            }
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             quality={82}
@@ -92,10 +102,10 @@ export default async function GesPage() {
       <section className="border-y border-border bg-muted py-14 sm:py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            {t?.ges.respectTitle ?? gesRespectBlock.title}
+            {f.respectTitle || t?.ges.respectTitle || gesRespectBlock.title}
           </h2>
           <p className="text-body mt-5 max-w-3xl text-base leading-8">
-            {t?.ges.respectText ?? gesRespectBlock.text}
+            {f.respectText || t?.ges.respectText || gesRespectBlock.text}
           </p>
 
           <ul className="mt-10 grid gap-4 md:grid-cols-3">
@@ -122,16 +132,22 @@ export default async function GesPage() {
 
       <GesImpactStats />
 
-      <GesSitesSection />
+      <GesSitesSection
+        sitesTitle={f.sitesTitle}
+        sitesLead={f.sitesLead}
+        fieldHeading={f.fieldHeading}
+        roofHeading={f.roofHeading}
+      />
 
       <section className="border-t border-border bg-brand-navy py-14 text-white sm:py-16">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              {t?.ges.ctaTitle ?? "Sürdürülebilir üretim yaklaşımımız"}
+              {f.ctaTitle || t?.ges.ctaTitle || "Sürdürülebilir üretim yaklaşımımız"}
             </h2>
             <p className="mt-3 max-w-xl text-base leading-8 text-white/85">
-              {t?.ges.ctaText ??
+                {f.ctaText ||
+                t?.ges.ctaText ||
                 "GES yatırımlarımız; recycle iplik ve sorumlu üretim anlayışımızın parçasıdır."}
             </p>
           </div>
@@ -144,7 +160,7 @@ export default async function GesPage() {
                 className: "bg-brand-orange hover:bg-brand-orange/90 active:bg-brand-orange/90",
               })}
             >
-              {t?.ges.sustainCta ?? "Sürdürülebilirlik"}
+              {f.sustainCta || t?.ges.sustainCta || "Sürdürülebilirlik"}
               <ArrowRight aria-hidden="true" />
             </LocaleLink>
             <LocaleLink
@@ -156,7 +172,7 @@ export default async function GesPage() {
                   "border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white active:bg-white/10 active:text-white",
               })}
             >
-              {t?.ges.contactCta ?? "İletişim"}
+              {f.contactCta || t?.ges.contactCta || "İletişim"}
             </LocaleLink>
           </div>
         </div>

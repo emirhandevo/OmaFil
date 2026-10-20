@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
+import { getHomeMedia } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 
 const solutionIcons = [
@@ -32,6 +33,7 @@ const solutionIcons = [
  */
 export async function SustainabilitySection() {
   const { copy } = await getCopy();
+  const media = await getHomeMedia();
   const cards = [
     {
       ...solutionIcons[0],
@@ -118,7 +120,7 @@ export async function SustainabilitySection() {
 
           <div className="relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 lg:min-h-[540px]">
             <Image
-              src="/images/ges/erbaa-cati-1/aerial.webp"
+              src={media.sustainImage}
               alt={copy.chrome.sustainAlt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"

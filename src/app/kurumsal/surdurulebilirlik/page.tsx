@@ -11,16 +11,15 @@ import {
 } from "lucide-react";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
 import { getCmsPage } from "@/content/pages";
+import { getSustainBlocks } from "@/content/sections";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [page, { locale }] = await Promise.all([
-    getCmsPage("surdurulebilirlik"),
-    getCopy(),
-  ]);
+  const { locale } = await getCopy();
+  const page = await getCmsPage("surdurulebilirlik", locale);
   const t = getInner(locale);
   return {
     title: t?.sustain.title ?? page?.title ?? "Sürdürülebilirlik",
@@ -89,25 +88,27 @@ const gesHighlights = [
 const certificates = ["GRS", "ISO 9001", "OEKO-TEX"] as const;
 
 export default async function SurdurulebilirlikPage() {
-  const [page, { locale }] = await Promise.all([
-    getCmsPage("surdurulebilirlik"),
-    getCopy(),
+  const { locale } = await getCopy();
+  const [page, cms] = await Promise.all([
+    getCmsPage("surdurulebilirlik", locale),
+    getSustainBlocks(locale),
   ]);
   const t = getInner(locale);
+  const f = cms.filled;
   const principleItems = principles.map((item, i) => ({
     ...item,
-    title: t?.sustain.principles[i]?.title ?? item.title,
-    text: t?.sustain.principles[i]?.text ?? item.text,
+    title: cms.principles[i]?.title || t?.sustain.principles[i]?.title || item.title,
+    text: cms.principles[i]?.text || t?.sustain.principles[i]?.text || item.text,
   }));
   const yarnItems = yarnSolutions.map((item, i) => ({
     ...item,
-    title: t?.sustain.yarns[i]?.title ?? item.title,
-    text: t?.sustain.yarns[i]?.text ?? item.text,
+    title: cms.yarns[i]?.title || t?.sustain.yarns[i]?.title || item.title,
+    text: cms.yarns[i]?.text || t?.sustain.yarns[i]?.text || item.text,
   }));
   const gesItems = gesHighlights.map((item, i) => ({
     ...item,
-    title: t?.sustain.gesItems[i]?.title ?? item.title,
-    text: t?.sustain.gesItems[i]?.text ?? item.text,
+    title: cms.gesItems[i]?.title || t?.sustain.gesItems[i]?.title || item.title,
+    text: cms.gesItems[i]?.text || t?.sustain.gesItems[i]?.text || item.text,
   }));
 
   return (
@@ -137,8 +138,8 @@ export default async function SurdurulebilirlikPage() {
         )}
         <div className="relative mx-auto aspect-square w-full max-w-md">
           <Image
-            src="/images/sustainability/dunya.webp"
-            alt={t?.sustain.worldAlt ?? "Ormanla kaplı dünya görseli"}
+            src={cms.worldImage}
+            alt={f.worldAlt || t?.sustain.worldAlt || "Ormanla kaplı dünya görseli"}
             fill
             sizes="(min-width: 1024px) 40vw, 80vw"
             className="object-contain"
@@ -156,18 +157,20 @@ export default async function SurdurulebilirlikPage() {
             id="why-title"
             className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
           >
-            {t ? t.sustain.whyBefore : "Sürdürülebilirlik"}{" "}
+            {f.whyBefore || t?.sustain.whyBefore || "Sürdürülebilirlik"}{" "}
             <span className="text-brand-orange">
-              {t ? t.sustain.whyAccent : "neden önemlidir?"}
+              {f.whyAccent || t?.sustain.whyAccent || "neden önemlidir?"}
             </span>
           </h2>
           <div className="text-body mt-6 max-w-3xl space-y-4 text-base leading-8">
             <p>
-              {t?.sustain.why[0] ??
+              {cms.why[0] ||
+                t?.sustain.why[0] ||
                 "Sanayi devrimiyle artan enerji ihtiyacı, petrol ve kömür gibi yenilenemeyen kaynakların yoğun kullanımına yol açtı. Hızlı sanayileşme ve şehirleşme; hava, su ve toprak kirliliğini büyüttü; biyoçeşitlilikte azalma, toprak kaybı ve çölleşme gibi sorunları derinleştirdi."}
             </p>
             <p>
-              {t?.sustain.why[1] ??
+              {cms.why[1] ||
+                t?.sustain.why[1] ||
                 "Bütün canlılar birbirleriyle ve cansız varlıklarla etkileşim içinde oldukları bir ekosistemin parçasıdır. Ekosistemin bir parçası zarar görürse diğer bölümlerde de sonuçları görülür. Bu nedenle doğal çevrenin kendini iyileştirme hızını aşmadan, dengeyi bozmadan hareket etmek zorunludur."}
             </p>
           </div>
@@ -196,17 +199,18 @@ export default async function SurdurulebilirlikPage() {
         aria-labelledby="yarns-title"
       >
         <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-          {t?.sustain.yarnKicker ?? "Çevreci teknolojiler"}
+          {f.yarnKicker || t?.sustain.yarnKicker || "Çevreci teknolojiler"}
         </p>
         <h2
           id="yarns-title"
           className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
         >
-          {t?.sustain.yarnTitle ?? "Sürdürülebilir iplikler"}
+          {f.yarnTitle || t?.sustain.yarnTitle || "Sürdürülebilir iplikler"}
         </h2>
         <p className="text-body mt-4 max-w-3xl text-base leading-8">
           {site.legalName}{" "}
-          {t?.sustain.yarnLead ??
+          {f.yarnLead ||
+            t?.sustain.yarnLead ||
             "daha iyi bir dünya için tüm üretim süreçlerine sosyal ve çevresel sürdürülebilirliği dahil eder."}
         </p>
 
@@ -234,7 +238,7 @@ export default async function SurdurulebilirlikPage() {
 
         <div className="mt-8 flex flex-wrap items-center gap-3 rounded-2xl border border-border bg-muted px-5 py-4 shadow-sm">
           <span className="text-sm font-semibold text-foreground">
-            {t?.sustain.certs ?? "Sertifikalar"}
+            {f.certs || t?.sustain.certs || "Sertifikalar"}
           </span>
           {certificates.map((cert) => (
             <span
@@ -255,21 +259,24 @@ export default async function SurdurulebilirlikPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 lg:grid-cols-2 lg:gap-14">
           <div>
             <p className="text-xs font-bold tracking-[0.22em] text-[#f19000] uppercase">
-              {t?.sustain.gesKicker ?? "Güneş enerji sistemi"}
+              {f.gesKicker || t?.sustain.gesKicker || "Güneş enerji sistemi"}
             </p>
             <h2
               id="ges-title"
               className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl"
             >
-              {t?.sustain.gesTitle ??
+              {f.gesTitle ||
+                t?.sustain.gesTitle ||
                 "Geleceğe değer katıyoruz, üretimi güneşten alıyoruz"}
             </h2>
             <p className="mt-5 text-base leading-8 text-white/90">
-              {t?.sustain.gesP[0] ??
+              {cms.gesP[0] ||
+                t?.sustain.gesP[0] ||
                 "Sadece bugünün ihtiyaçlarını karşılayan kaliteli üretim değil; yarınlara daha temiz bir dünya bırakmayı da sorumluluğumuz olarak görüyoruz. Bu vizyonla üretim tesislerimizin çatılarını Güneş Enerji Sistemi (GES) ile donattık."}
             </p>
             <p className="mt-3 text-base leading-8 text-white/90">
-              {t?.sustain.gesP[1] ??
+              {cms.gesP[1] ||
+                t?.sustain.gesP[1] ||
                 "Artık fabrikamızda gerçekleştirdiğimiz her üretimin arkasında doğanın saf gücü, güneşin temiz enerjisi var."}
             </p>
 
@@ -296,14 +303,18 @@ export default async function SurdurulebilirlikPage() {
               href="/ges"
               className="mt-8 inline-flex text-sm font-medium text-[#f19000] hover:underline active:underline"
             >
-              {t?.sustain.gesLink ?? "GES sayfasını incele"} →
+              {f.gesLink || t?.sustain.gesLink || "GES sayfasını incele"} →
             </LocaleLink>
           </div>
 
           <div className="relative min-h-[320px] overflow-hidden rounded-3xl border border-white/10 sm:min-h-[420px]">
             <Image
-              src="/images/ges/erbaa-cati-1/aerial.webp"
-              alt={t?.sustain.plantAlt ?? "Güneş panelleriyle kaplı OmaFil üretim tesisi"}
+              src={cms.plantImage}
+              alt={
+                f.plantAlt ||
+                t?.sustain.plantAlt ||
+                "Güneş panelleriyle kaplı OmaFil üretim tesisi"
+              }
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               quality={82}
@@ -312,10 +323,11 @@ export default async function SurdurulebilirlikPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/85 via-transparent to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
               <p className="text-xs font-semibold tracking-[0.2em] text-brand-orange uppercase">
-                {t?.sustain.plantKicker ?? "OmaFil üretim tesisi"}
+                {f.plantKicker || t?.sustain.plantKicker || "OmaFil üretim tesisi"}
               </p>
               <p className="mt-2 max-w-sm text-lg font-medium text-white">
-                {t?.sustain.plantText ??
+                {f.plantText ||
+                  t?.sustain.plantText ||
                   "Üretimde kaliteyi yenilenebilir enerji yatırımlarıyla destekliyoruz."}
               </p>
             </div>

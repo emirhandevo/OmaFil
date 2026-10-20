@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
+import { getHomeMedia } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 
 /**
@@ -10,6 +11,7 @@ import { getCopy } from "@/i18n/get-copy";
  */
 export async function CorporateIntro() {
   const { copy } = await getCopy();
+  const media = await getHomeMedia();
 
   return (
     <section className="py-20 sm:py-18">
@@ -28,7 +30,7 @@ export async function CorporateIntro() {
   }}
 >
   <Image
-    src="/images/corporate/factory.webp"
+    src={media.introImage}
     alt={copy.chrome.introAlt}
     fill
     sizes="(min-width: 1024px) 50vw, 100vw"

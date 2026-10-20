@@ -3,11 +3,97 @@ media:
   value:
     videoSrc: /videos/hero-web.mp4
     posterSrc: /images/hero-lcp-black.webp
-eyebrow: Türkiye’den Dünyaya Endüstriyel İplik
-title: AVRUPA'NIN EN BÜYÜK TAM ENTEGRE GİPE İPLİK FABRİKASI
-body: >-
-  Naylon 6 ve Naylon 6,6 POY, FDY, DTY, ACY, SCY, DCY ile özel tip iplik
-  çözümlerini yüksek kalite standartlarında üretiyor ve dünya pazarlarına
-  sunuyoruz.
-productsCta: İplik Ürünlerimizi İnceleyin
-aboutCta: OmaFil’i Tanıyın
+copy:
+  tr:
+    eyebrow: Türkiye’den Dünyaya Endüstriyel İplik
+    title: AVRUPA'NIN EN BÜYÜK TAM ENTEGRE GİPE İPLİK FABRİKASI
+    body: >-
+      Naylon 6 ve Naylon 6,6 POY, FDY, DTY, ACY, SCY, DCY ile özel tip iplik
+      çözümlerini yüksek kalite standartlarında üretiyor ve dünya pazarlarına
+      sunuyoruz.
+    productsCta: İplik Ürünlerimizi İnceleyin
+    aboutCta: OmaFil’i Tanıyın
+  en:
+    eyebrow: Industrial yarn from Türkiye to the world
+    title: EUROPE’S LARGEST FULLY INTEGRATED GIPE YARN FACTORY
+    body: >-
+      We produce Naylon 6 and Naylon 6,6 POY, FDY, DTY, ACY, SCY, DCY and
+      specialty yarn solutions to high quality standards and supply them to
+      world markets.
+    productsCta: View our yarn products
+    aboutCta: Discover OmaFil
+  de:
+    eyebrow: Industriegarne aus der Türkei in die Welt
+    title: EUROPAS GRÖSSTE VOLLINTEGRIERTE GIPE-GARNFABRIK
+    body: >-
+      Wir produzieren Naylon 6 und Naylon 6,6 als POY, FDY, DTY, ACY, SCY, DCY
+      sowie Spezialgarne nach hohen Qualitätsstandards und liefern sie an die
+      Weltmärkte.
+    productsCta: Unsere Garne ansehen
+    aboutCta: OmaFil kennenlernen
+  fr:
+    eyebrow: Fil industriel de la Turquie vers le monde
+    title: LA PLUS GRANDE USINE DE FIL GIPE ENTIÈREMENT INTÉGRÉE D’EUROPE
+    body: >-
+      Nous produisons le Naylon 6 et le Naylon 6,6 en POY, FDY, DTY, ACY, SCY,
+      DCY ainsi que des fils spéciaux, selon des standards de qualité élevés,
+      pour les marchés mondiaux.
+    productsCta: Voir nos fils
+    aboutCta: Découvrir OmaFil
+  es:
+    eyebrow: Hilo industrial de Turquía al mundo
+    title: LA MAYOR FÁBRICA DE HILO GIPE TOTALMENTE INTEGRADA DE EUROPA
+    body: >-
+      Producimos Naylon 6 y Naylon 6,6 en POY, FDY, DTY, ACY, SCY, DCY y
+      soluciones de hilo especial con altos estándares de calidad para los
+      mercados mundiales.
+    productsCta: Ver nuestros hilos
+    aboutCta: Conocer OmaFil
+  it:
+    eyebrow: Filo industriale dalla Turchia al mondo
+    title: IL PIÙ GRANDE STABILIMENTO DI FILATO GIPE COMPLETAMENTE INTEGRATO D’EUROPA
+    body: >-
+      Produciamo Naylon 6 e Naylon 6,6 in POY, FDY, DTY, ACY, SCY, DCY e
+      filati speciali con elevati standard qualitativi per i mercati mondiali.
+    productsCta: Vedi i nostri filati
+    aboutCta: Scopri OmaFil
+  pt:
+    eyebrow: Fio industrial da Turquia para o mundo
+    title: A MAIOR FÁBRICA DE FIO GIPE TOTALMENTE INTEGRADA DA EUROPA
+    body: >-
+      Produzimos Naylon 6 e Naylon 6,6 em POY, FDY, DTY, ACY, SCY, DCY e fios
+      especiais com elevados padrões de qualidade para os mercados mundiais.
+    productsCta: Ver os nossos fios
+    aboutCta: Conhecer a OmaFil
+  nl:
+    eyebrow: Industrieel garen van Turkije naar de wereld
+    title: EUROPA’S GROOTSTE VOLLEDIG GEÏNTEGREERDE GIPE-GARENFABRIEK
+    body: >-
+      Wij produceren Naylon 6 en Naylon 6,6 als POY, FDY, DTY, ACY, SCY, DCY en
+      speciale garens volgens hoge kwaliteitsnormen voor de wereldmarkt.
+    productsCta: Bekijk onze garens
+    aboutCta: Ontdek OmaFil
+  ru:
+    eyebrow: Промышленная пряжа из Турции в мир
+    title: КРУПНЕЙШАЯ В ЕВРОПЕ ПОЛНОСТЬЮ ИНТЕГРИРОВАННАЯ ФАБРИКА ПРЯЖИ GIPE
+    body: >-
+      Мы производим Naylon 6 и Naylon 6,6 в формах POY, FDY, DTY, ACY, SCY, DCY
+      и специальные пряжи по высоким стандартам качества для мировых рынков.
+    productsCta: Смотреть пряжу
+    aboutCta: Узнать OmaFil
+  ar:
+    eyebrow: خيوط صناعية من تركيا إلى العالم
+    title: أكبر مصنع خيوط gipe متكامل بالكامل في أوروبا
+    body: >-
+      ننتج Naylon 6 وNaylon 6,6 بصيغ POY وFDY وDTY وACY وSCY وDCY وحلولاً خاصة
+      بمعايير جودة عالية للأسواق العالمية.
+    productsCta: اطلع على خيوطنا
+    aboutCta: تعرّف على OmaFil
+  zh:
+    eyebrow: 从土耳其走向世界的工业纱线
+    title: 欧洲最大的全整合 gipe 纱线工厂
+    body: >-
+      我们按高标准生产 Naylon 6 与 Naylon 6,6 的 POY、FDY、DTY、ACY、SCY、DCY
+      及特种纱线，供应全球市场。
+    productsCta: 查看纱线产品
+    aboutCta: 了解 OmaFil

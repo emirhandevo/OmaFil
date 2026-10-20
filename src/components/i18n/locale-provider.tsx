@@ -11,14 +11,16 @@ const CopyContext = createContext<Copy | null>(null);
 /** Sunucu layout dili buradan client bileşenlere iner. */
 export function LocaleProvider({
   locale,
+  copy,
   children,
 }: {
   locale: Locale;
+  copy?: Copy;
   children: ReactNode;
 }) {
   return (
     <LocaleContext.Provider value={locale}>
-      <CopyContext.Provider value={buildCopy(locale)}>
+      <CopyContext.Provider value={copy ?? buildCopy(locale)}>
         {children}
       </CopyContext.Provider>
     </LocaleContext.Provider>

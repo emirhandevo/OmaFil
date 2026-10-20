@@ -4,6 +4,7 @@ import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { ConditionalShell } from "@/components/ui/layout/conditional-shell";
 import { getContact, getSiteSettings } from "@/content/cms";
 import { site } from "@/config/site";
+import { getCopy } from "@/i18n/get-copy";
 import { getLocale } from "@/i18n/get-locale";
 import { htmlLang, ogLocale } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
@@ -34,13 +35,12 @@ function getMetadataBase() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [settings, locale] = await Promise.all([
-    getSiteSettings(),
-    getLocale(),
+  const locale = await getLocale();
+  const [settings, ui] = await Promise.all([
+    getSiteSettings(locale),
+    Promise.resolve(getUi(locale)),
   ]);
-  const ui = getUi(locale);
-  const description =
-    locale === "tr" ? settings.description : ui.homeDescription;
+  const description = settings.description;
 
   return {
     metadataBase: getMetadataBase(),
@@ -57,11 +57,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: [
         {
-          url: "/images/og.webp",
+          url: settings.ogImage,
           width: 1200,
           height: 630,
           alt: ui.ogAlt,
-          type: "image/webp",
         },
       ],
     },
@@ -69,7 +68,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: site.name,
       description,
-      images: ["/images/og.webp"],
+      images: [settings.ogImage],
     },
   };
 }
@@ -78,10 +77,11 @@ export async function generateMetadata(): Promise<Metadata> {
 const themeScript = buildThemeBootScript();
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [contact, settings, locale] = await Promise.all([
-    getContact(),
-    getSiteSettings(),
-    getLocale(),
+  const locale = await getLocale();
+  const [{ copy }, contact, settings] = await Promise.all([
+    getCopy(),
+    getContact(locale),
+    getSiteSettings(locale),
   ]);
 
   return (
@@ -99,10 +99,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground"
       >
         {/* Dil, proxy’nin x-locale başlığından gelir. tr kök URL’de kalır. */}
-        <LocaleProvider locale={locale}>
+        <LocaleProvider locale={locale} copy={copy}>
           <ConditionalShell
             contact={contact}
             footerTagline={settings.footerTagline}
+            logo={settings.logo}
+            logoDark={settings.logoDark}
           >
             {children}
           </ConditionalShell>

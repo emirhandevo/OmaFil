@@ -376,5 +376,51 @@
         }
       ]
     }
+  },
+  "copy": {
+    "tr": {
+      "label": "Naylon 6,6 DTY",
+      "summary": "PA66 tekstüre. Seamless, hosiery ve dokuma uygulamaları."
+    },
+    "en": {
+      "label": "",
+      "summary": ""
+    },
+    "de": {
+      "label": "",
+      "summary": ""
+    },
+    "fr": {
+      "label": "",
+      "summary": ""
+    },
+    "es": {
+      "label": "",
+      "summary": ""
+    },
+    "it": {
+      "label": "",
+      "summary": ""
+    },
+    "pt": {
+      "label": "",
+      "summary": ""
+    },
+    "nl": {
+      "label": "",
+      "summary": ""
+    },
+    "ru": {
+      "label": "",
+      "summary": ""
+    },
+    "ar": {
+      "label": "",
+      "summary": ""
+    },
+    "zh": {
+      "label": "",
+      "summary": ""
+    }
   }
 }

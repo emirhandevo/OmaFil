@@ -167,5 +167,51 @@
         }
       ]
     }
+  },
+  "copy": {
+    "tr": {
+      "label": "Naylon 6,6 POY",
+      "summary": "PA66 POY; final DTY dönüşümü. Softel / Nicolite."
+    },
+    "en": {
+      "label": "",
+      "summary": ""
+    },
+    "de": {
+      "label": "",
+      "summary": ""
+    },
+    "fr": {
+      "label": "",
+      "summary": ""
+    },
+    "es": {
+      "label": "",
+      "summary": ""
+    },
+    "it": {
+      "label": "",
+      "summary": ""
+    },
+    "pt": {
+      "label": "",
+      "summary": ""
+    },
+    "nl": {
+      "label": "",
+      "summary": ""
+    },
+    "ru": {
+      "label": "",
+      "summary": ""
+    },
+    "ar": {
+      "label": "",
+      "summary": ""
+    },
+    "zh": {
+      "label": "",
+      "summary": ""
+    }
   }
 }

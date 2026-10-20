@@ -1,3 +1,37 @@
-description: >-
-  Endüstriyel iplik üretimi. Kurumsal katalog ve ürün portföyü.
-footerTagline: Endüstriyel iplik üretiminde güvenilir çözüm ortağınız.
+logo: /images/omafil_logo.svg
+logoDark: /images/omafil_logo_dark.svg
+ogImage: /images/og.webp
+copy:
+  tr:
+    description: "Endüstriyel iplik üretimi. Kurumsal katalog ve ürün portföyü."
+    footerTagline: "Endüstriyel iplik üretiminde güvenilir çözüm ortağınız."
+  en:
+    description: "Industrial yarn production. Company profile and yarn portfolio."
+    footerTagline: "A reliable partner in industrial yarn production."
+  de:
+    description: "Industrielle Garnproduktion. Unternehmensprofil und Garnportfolio."
+    footerTagline: "Ein verlässlicher Partner in der industriellen Garnproduktion."
+  fr:
+    description: "Production de fil industriel. Présentation de l’entreprise et portefeuille de fils."
+    footerTagline: "Un partenaire fiable dans la production de fil industriel."
+  es:
+    description: "Producción de hilo industrial. Perfil de la empresa y portafolio de hilos."
+    footerTagline: "Un socio fiable en la producción de hilo industrial."
+  it:
+    description: "Produzione di filato industriale. Profilo aziendale e portafoglio filati."
+    footerTagline: "Un partner affidabile nella produzione di filato industriale."
+  pt:
+    description: "Produção de fio industrial. Perfil da empresa e portefólio de fios."
+    footerTagline: "Um parceiro fiável na produção de fio industrial."
+  nl:
+    description: "Industriële garenproductie. Bedrijfsprofiel en garenportfolio."
+    footerTagline: "Een betrouwbare partner in industriële garenproductie."
+  ru:
+    description: "Промышленное производство пряжи. Профиль компании и портфель пряжи."
+    footerTagline: "Надежный партнер в промышленном производстве пряжи."
+  ar:
+    description: "إنتاج خيط صناعي. ملف الشركة ومحفظة الخيوط."
+    footerTagline: "شريك موثوق في إنتاج الخيط الصناعي."
+  zh:
+    description: "工业纱线生产。公司介绍与纱线组合。"
+    footerTagline: "工业纱线生产中的可靠伙伴。"

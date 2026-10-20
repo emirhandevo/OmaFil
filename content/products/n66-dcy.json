@@ -17,5 +17,51 @@
     "value": {
       "skus": []
     }
+  },
+  "copy": {
+    "tr": {
+      "label": "Naylon 6,6 DCY",
+      "summary": "Çift kaplama PA66 + elastan. Custom üretim."
+    },
+    "en": {
+      "label": "",
+      "summary": ""
+    },
+    "de": {
+      "label": "",
+      "summary": ""
+    },
+    "fr": {
+      "label": "",
+      "summary": ""
+    },
+    "es": {
+      "label": "",
+      "summary": ""
+    },
+    "it": {
+      "label": "",
+      "summary": ""
+    },
+    "pt": {
+      "label": "",
+      "summary": ""
+    },
+    "nl": {
+      "label": "",
+      "summary": ""
+    },
+    "ru": {
+      "label": "",
+      "summary": ""
+    },
+    "ar": {
+      "label": "",
+      "summary": ""
+    },
+    "zh": {
+      "label": "",
+      "summary": ""
+    }
   }
 }

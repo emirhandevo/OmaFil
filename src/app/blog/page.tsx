@@ -16,10 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  const [posts, { copy, locale }] = await Promise.all([
-    getBlogPosts(),
-    getCopy(),
-  ]);
+  const { copy, locale } = await getCopy();
+  const posts = await getBlogPosts(locale);
 
   return (
     <section className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20">

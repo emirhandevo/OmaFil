@@ -66,5 +66,51 @@
         }
       ]
     }
+  },
+  "copy": {
+    "tr": {
+      "label": "PES DCY Gipe",
+      "summary": "Polyester çift kaplama + elastan."
+    },
+    "en": {
+      "label": "",
+      "summary": ""
+    },
+    "de": {
+      "label": "",
+      "summary": ""
+    },
+    "fr": {
+      "label": "",
+      "summary": ""
+    },
+    "es": {
+      "label": "",
+      "summary": ""
+    },
+    "it": {
+      "label": "",
+      "summary": ""
+    },
+    "pt": {
+      "label": "",
+      "summary": ""
+    },
+    "nl": {
+      "label": "",
+      "summary": ""
+    },
+    "ru": {
+      "label": "",
+      "summary": ""
+    },
+    "ar": {
+      "label": "",
+      "summary": ""
+    },
+    "zh": {
+      "label": "",
+      "summary": ""
+    }
   }
 }

@@ -1,0 +1,50 @@
+copy:
+  tr:
+    applyTitle: Başvuru
+    applyLead: >-
+      Formu doldurun, CV’nizi PDF yükleyin. Başvurunuz doğrudan İK ekibine iletilir; size kısa bir onay e-postası gider.
+    principles:
+      - Adil ve şeffaf işe alım
+      - İş sağlığı ve güvenliği
+      - Eğitim ve kariyer gelişimi
+      - Eşitlik ve etik çalışma
+  en:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  de:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  fr:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  es:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  it:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  pt:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  nl:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  ru:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  ar:
+    applyTitle: ""
+    applyLead: ""
+    principles: []
+  zh:
+    applyTitle: ""
+    applyLead: ""
+    principles: []

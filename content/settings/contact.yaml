@@ -4,18 +4,253 @@ phones:
   - +90 549 177 50 10
 locations:
   - label: Genel Merkez
+    labels:
+      tr:
+        name: "Genel Merkez"
+      en:
+        name: "Head office"
+      de:
+        name: "Hauptsitz"
+      fr:
+        name: "Siège"
+      es:
+        name: "Sede"
+      it:
+        name: "Sede"
+      pt:
+        name: "Sede"
+      nl:
+        name: "Hoofdkantoor"
+      ru:
+        name: "Головной офис"
+      ar:
+        name: "المقر"
+      zh:
+        name: "总部"
     address: >-
       Oruçreis Mh. Tekstilkent Cd. Koza Plaza B-Blok 36.Kat Esenler - İSTANBUL -
       TÜRKİYE
     mapsUrl: https://maps.app.goo.gl/noytgx1FN82zjusr7
   - label: Fabrika / Üretim Tesisi
+    labels:
+      tr:
+        name: "Fabrika / Üretim Tesisi"
+      en:
+        name: "Factory / production plant"
+      de:
+        name: "Fabrik / Produktionswerk"
+      fr:
+        name: "Usine / site de production"
+      es:
+        name: "Fábrica / planta de producción"
+      it:
+        name: "Fabbrica / stabilimento"
+      pt:
+        name: "Fábrica / unidade de produção"
+      nl:
+        name: "Fabriek / productielocatie"
+      ru:
+        name: "Фабрика / производство"
+      ar:
+        name: "المصنع / منشأة الإنتاج"
+      zh:
+        name: "工厂 / 生产厂"
     address: >-
       Kelkit Osb Mah. Beylikbükü Caddesi No:32/B Erbaa / TOKAT - TÜRKİYE
     mapsUrl: https://maps.app.goo.gl/BKCaFoiqjJ1MrKA57
   - label: Fabrika Satış Noktası
+    labels:
+      tr:
+        name: "Fabrika Satış Noktası"
+      en:
+        name: "Factory sales point"
+      de:
+        name: "Fabrik-Verkaufsstelle"
+      fr:
+        name: "Point de vente usine"
+      es:
+        name: "Punto de venta de fábrica"
+      it:
+        name: "Punto vendita di fabbrica"
+      pt:
+        name: "Ponto de venda da fábrica"
+      nl:
+        name: "Fabrieksverkooppunt"
+      ru:
+        name: "Точка продаж фабрики"
+      ar:
+        name: "نقطة بيع المصنع"
+      zh:
+        name: "工厂销售点"
     address: >-
       Terazidere Mah. Güneş Caddesi No:47 Bayrampaşa / İSTANBUL - TÜRKİYE
     mapsUrl: https://maps.app.goo.gl/Td8FrTfHGKjXswuZ8
 instagram: https://www.instagram.com/omapolimer/
 linkedin: https://www.linkedin.com/company/oma-iplik-a-s/posts/
 youtube: https://www.youtube.com/@omaiplikanonimsirketiomafi8939
+pageCopy:
+  tr:
+    kicker: İletişim
+    title: Bize ulaşın
+    lead: Numune, teklif veya genel sorularınız için mail atabilir ya da bizi arayabilirsiniz.
+    formTitle: Mesaj gönderin
+    formLead: Formu doldurun; mesajınız doğrudan bize ulaşır.
+    quick: Hızlı iletişim
+    quickLead: Doğrudan arayın veya e-posta atın.
+    phone: Telefon
+    email: E-posta
+    social: Sosyal
+    socialLead: Güncel üretim ve marka paylaşımları.
+    addresses: Adreslerimiz
+    mapsNote: Her konum Google Maps’te açılır.
+    openMap: Haritada aç
+  en:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  de:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  fr:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  es:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  it:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  pt:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  nl:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  ru:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  ar:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""
+  zh:
+    kicker: ""
+    title: ""
+    lead: ""
+    formTitle: ""
+    formLead: ""
+    quick: ""
+    quickLead: ""
+    phone: ""
+    email: ""
+    social: ""
+    socialLead: ""
+    addresses: ""
+    mapsNote: ""
+    openMap: ""

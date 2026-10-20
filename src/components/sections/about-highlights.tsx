@@ -1,4 +1,5 @@
 import { LocaleLink } from "@/components/i18n/locale-link";
+import { getAboutBlocks } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
 import {
@@ -54,22 +55,25 @@ const certificates = ["GRS", "ISO 9001", "OEKO-TEX"] as const;
 export async function AboutHighlights() {
   const { locale } = await getCopy();
   const t = getInner(locale);
+  const cms = await getAboutBlocks(locale);
   const stats = highlightStats.map((stat, i) => ({
     ...stat,
-    title: t?.about.stats[i]?.title ?? stat.title,
-    subtitle: t?.about.stats[i]?.subtitle ?? stat.subtitle,
+    title: cms.stats[i]?.title || t?.about.stats[i]?.title || stat.title,
+    subtitle:
+      cms.stats[i]?.subtitle || t?.about.stats[i]?.subtitle || stat.subtitle,
   }));
   const focus = focusItems.map((item, i) => ({
     ...item,
-    label: t?.about.focus[i] ?? item.label,
+    label: cms.focus[i] || t?.about.focus[i] || item.label,
   }));
+  const f = cms.filled;
 
   return (
     <>
       {/* Navy istatistik şeridi */}
       <section
         className="bg-brand-navy py-12 sm:py-16"
-        aria-label={t?.about.statsAria ?? "OmaFil rakamları"}
+        aria-label={f.statsAria || t?.about.statsAria || "OmaFil rakamları"}
       >
         <div className="mx-auto grid max-w-6xl gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => {
@@ -101,7 +105,7 @@ export async function AboutHighlights() {
           <div className="flex flex-col justify-center">
             <p className="flex items-center gap-3 text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
               <span aria-hidden="true" className="h-px max-w-10 flex-1 bg-border" />
-              {t?.about.sustainKicker ?? "Sürdürülebilirlik"}
+              {f.sustainKicker || t?.about.sustainKicker || "Sürdürülebilirlik"}
               <span aria-hidden="true" className="h-px max-w-10 flex-1 bg-border" />
             </p>
 
@@ -109,11 +113,13 @@ export async function AboutHighlights() {
               id="about-sustainability-title"
               className="mt-5 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
             >
-              {t ? (
+              {f.sustainBefore || t?.about.sustainBefore ? (
                 <>
-                  {t.about.sustainBefore}{" "}
-                  <span className="text-brand-orange">{t.about.sustainAccent}</span>{" "}
-                  {t.about.sustainAfter}
+                  {f.sustainBefore || t?.about.sustainBefore}{" "}
+                  <span className="text-brand-orange">
+                    {f.sustainAccent || t?.about.sustainAccent}
+                  </span>{" "}
+                  {f.sustainAfter || t?.about.sustainAfter}
                 </>
               ) : (
                 <>
@@ -124,11 +130,13 @@ export async function AboutHighlights() {
             </h2>
 
             <p className="text-body mt-5 max-w-xl text-base leading-8">
-              {t?.about.sustainP1 ??
+              {f.sustainP1 ||
+                t?.about.sustainP1 ||
                 "Üretim süreçlerimizin merkezine sürdürülebilirliği koyuyoruz. Çatı üstü güneş enerjisi yatırımlarımız ve GRS sertifikalı geri dönüştürülmüş iplik çözümlerimizle çevresel etkimizi azaltmayı hedefliyoruz."}
             </p>
             <p className="text-body mt-3 max-w-xl text-base leading-8">
-              {t?.about.sustainP2 ??
+              {f.sustainP2 ||
+                t?.about.sustainP2 ||
                 "Kaynak verimliliği, sorumlu üretim ve döngüsel ekonomi ilkeleri; OmaFil’in kurumsal kimliğinin ayrılmaz parçasıdır."}
             </p>
 
@@ -152,13 +160,13 @@ export async function AboutHighlights() {
               href="/kurumsal/surdurulebilirlik"
               className="mt-6 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
             >
-              {t?.about.sustainLink ?? "Sürdürülebilirlik sayfasına git"} →
+              {f.sustainLink || t?.about.sustainLink || "Sürdürülebilirlik sayfasına git"} →
             </LocaleLink>
             <LocaleLink
               href="/ges"
               className="mt-3 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
             >
-              {t?.about.gesLink ?? "GES — güneş enerji sistemi"} →
+              {f.gesLink || t?.about.gesLink || "GES — güneş enerji sistemi"} →
             </LocaleLink>
           </div>
 
@@ -168,21 +176,22 @@ export async function AboutHighlights() {
                 <Recycle aria-hidden="true" className="size-8" strokeWidth={1.5} />
               </span>
               <h3 className="mt-6 text-2xl font-bold tracking-tight sm:text-3xl">
-                {t?.about.recycledTitle ?? "Recycled İplik"}
+                {f.recycledTitle || t?.about.recycledTitle || "Recycled İplik"}
               </h3>
               <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-muted-foreground">
-                {t?.about.recycledText ??
+                {f.recycledText ||
+                  t?.about.recycledText ||
                   "Geri dönüştürülmüş kaynaklardan geliştirilen iplik çözümlerimizle döngüsel ekonomiyi üretimimize taşıyoruz. Kalite standartlarımızdan ödün vermeden çevre dostu alternatifler sunuyoruz."}
               </p>
               <div className="mt-6 flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                 <Leaf aria-hidden="true" className="size-4" />
-                {t?.about.grs ?? "GRS uyumlu üretim"}
+                {f.grs || t?.about.grs || "GRS uyumlu üretim"}
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-3 bg-zinc-700 px-6 py-4 text-white dark:bg-zinc-800">
               <span className="text-sm font-medium">
-                {t?.about.certs ?? "Sertifikalar"}
+                {f.certs || t?.about.certs || "Sertifikalar"}
               </span>
               <div className="flex flex-wrap gap-2">
                 {certificates.map((cert) => (

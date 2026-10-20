@@ -1,0 +1,340 @@
+listCardImage: /images/factory/band/14.webp
+labVideo: /videos/fab-lab.mp4
+labPoster: /images/factory/fab-lab-poster.webp
+labDuration: "00:28"
+gallery:
+  -
+    src: /images/factory/gallery/01-solar.webp
+    alt: "OmaFil tesisi — güneş panelli havadan görünüm"
+  -
+    src: /images/factory/gallery/02.webp
+    alt: "OmaFil fabrika girişi"
+  -
+    src: /images/factory/gallery/03.webp
+    alt: "OmaFil üretim tesisi"
+  -
+    src: /images/factory/gallery/04.webp
+    alt: "OmaFil fabrika cephesi"
+band:
+  -
+    src: /images/factory/band/06.webp
+    alt: "OmaFil üretim bandı 01"
+  -
+    src: /images/factory/band/07.webp
+    alt: "OmaFil üretim bandı 02"
+  -
+    src: /images/factory/band/08.webp
+    alt: "OmaFil üretim bandı 03"
+  -
+    src: /images/factory/band/09.webp
+    alt: "OmaFil üretim bandı 04"
+  -
+    src: /images/factory/band/10.webp
+    alt: "OmaFil üretim bandı 05"
+  -
+    src: /images/factory/band/11.webp
+    alt: "OmaFil üretim bandı 06"
+  -
+    src: /images/factory/band/12.webp
+    alt: "OmaFil üretim bandı 07"
+  -
+    src: /images/factory/band/13.webp
+    alt: "OmaFil üretim bandı 08"
+  -
+    src: /images/factory/band/03.webp
+    alt: "OmaFil üretim bandı 09"
+  -
+    src: /images/factory/band/15.webp
+    alt: "OmaFil üretim bandı 10"
+  -
+    src: /images/factory/band/16.webp
+    alt: "OmaFil üretim bandı 11"
+  -
+    src: /images/factory/band/17.webp
+    alt: "OmaFil üretim bandı 12"
+  -
+    src: /images/factory/band/18.webp
+    alt: "OmaFil üretim bandı 13"
+  -
+    src: /images/factory/band/19.webp
+    alt: "OmaFil üretim bandı 14"
+  -
+    src: /images/factory/band/20.webp
+    alt: "OmaFil üretim bandı 15"
+  -
+    src: /images/factory/band/01.webp
+    alt: "OmaFil üretim bandı 16"
+  -
+    src: /images/factory/band/22.webp
+    alt: "OmaFil üretim bandı 17"
+  -
+    src: /images/factory/band/23.webp
+    alt: "OmaFil üretim bandı 18"
+  -
+    src: /images/factory/band/02.webp
+    alt: "OmaFil üretim bandı 19"
+  -
+    src: /images/factory/band/04.webp
+    alt: "OmaFil üretim bandı 20"
+  -
+    src: /images/factory/band/26.webp
+    alt: "OmaFil üretim bandı 21"
+  -
+    src: /images/factory/band/27.webp
+    alt: "OmaFil üretim bandı 22"
+  -
+    src: /images/factory/band/28.webp
+    alt: "OmaFil üretim bandı 23"
+copy:
+  tr:
+    headline: "Yıllık 13.000 Ton Kapasiteyle Avrupa'nın Zirvesinde"
+    intro: >-
+      Tokat Erbaa Organize Sanayi Bölgesi'nde faaliyet gösteren tesisimiz, yıllık 13.000 ton üretim kapasitesiyle Avrupa'nın en büyük gipe iplik üretim tesisi unvanını taşıyor. Naylon 6, Naylon 6,6 ve polyester gipe iplik hatlarında ürettiğimiz yüksek katma değerli ürünlerle global tekstil endüstrisine hizmet veriyoruz.
+
+      Bünyesinde barındırdığı Ar-Ge merkeziyle sadece üretmekle kalmıyor, geleceğin iplik teknolojilerini de geliştiriyoruz. Tesisimiz bölgeye önemli bir istihdam kaynağı oluştururken, çatımıza kurduğumuz güneş enerjisi sistemiyle üretimimizin enerji ihtiyacının bir kısmını temiz kaynaklardan karşılıyoruz.
+    sinceYear: 1999
+    since: Yılından beri sektörde öncülük ediyoruz
+    sinceBody: >-
+      Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına alan OmaFil, polimer üretiminde yenilikçi ve sürdürülebilir çözümler sunarak sektörün geleceğini inşa ediyor. Modern tesislerimizde, küresel standartlarda kalite ve süreklilik sağlıyoruz.
+    tabsAria: Kurumsal yön
+    tabs:
+      -
+        title: Misyon
+        text: >-
+          Polimer endüstrisinin ihtiyaç duyduğu yüksek kaliteli ve teknik iplikleri, çevre dostu üretim yöntemleriyle sunmak. Müşterilerimizin üretim süreçlerine değer katan, sürdürülebilir ve inovatif çözümler geliştirmek.
+      -
+        title: Tarihçe
+        text: >-
+          1999 yılında tekstil dünyasına adım atan grubumuz, geçen yıllar içinde teknolojiye ve insana yatırım yaparak istikrarlı bir şekilde büyüdü. OMA Tekstil bünyesinde edinilen derin bilgi birikimi, bugün OmaFil’in üretim gücüne dönüşüyor.
+      -
+        title: Vizyon
+        text: >-
+          Sentetik iplik üretiminde teknolojiyi ve sürdürülebilirliği odağına alan, dünya çapında tercih edilen lider bir marka olmak. İnovatif Ar-Ge çalışmalarımızla tekstilin geleceğine yön veren çözümler üretmek.
+    galleryTitle: Fabrikamız
+    galleryBody: >-
+      Modern teknoloji ve global standartlarla inşa edilen tesisimiz, yüksek üretim kapasitesiyle tekstil sektörünün güvenilir tedarik noktasıdır. Geniş altyapımız ve çevre dostu enerji politikalarımızla, sürdürülebilir büyümeyi destekliyoruz.
+    bandTitle: Üretim Bandı
+    bandBody: >-
+      Naylon 6 ve 6,6 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz.
+    bandMore: Daha fazlasını göster
+    bandLess: Daha az göster
+    map: Tesisi haritada aç
+    labKicker: Kalite Kontrol
+    labTitleBefore: "Kalitenin Ölçüldüğü Yer:"
+    labTitleAccent: Laboratuvarımız
+    labBody: >-
+      Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş ipliğe kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm, mukavemet ve uzama değerlerini kontrol ediyor, filament düzgünlüğünü analiz ediyoruz.
+
+      Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik üzerindeki finish oranını takip ediyoruz. Numuneleri boyama testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki performansları açısından sınıyoruz.
+
+      Sonuç: her partide aynı kalite, her bobinde aynı performans.
+    labMarks:
+      -
+        title: Hassas
+        text: Analiz
+      -
+        title: Modern
+        text: Laboratuvar
+      -
+        title: Sürekli
+        text: Kalite
+  en:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  de:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  fr:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  es:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  it:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  pt:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  nl:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  ru:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  ar:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []
+  zh:
+    headline: ""
+    intro: ""
+    sinceYear: ""
+    since: ""
+    sinceBody: ""
+    tabsAria: ""
+    tabs: []
+    galleryTitle: ""
+    galleryBody: ""
+    bandTitle: ""
+    bandBody: ""
+    bandMore: ""
+    bandLess: ""
+    map: ""
+    labKicker: ""
+    labTitleBefore: ""
+    labTitleAccent: ""
+    labBody: ""
+    labMarks: []

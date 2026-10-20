@@ -18,6 +18,8 @@ import {
 type FooterProps = {
   contact: ContactData;
   footerTagline: string;
+  logo: string;
+  logoDark: string;
 };
 
 const socialIcons: Record<
@@ -29,7 +31,7 @@ const socialIcons: Record<
   youtube: YoutubeIcon,
 };
 
-export function Footer({ contact, footerTagline }: FooterProps) {
+export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) {
   const copy = useCopy();
   const locale = useLocale();
   const ui = getUi(locale);
@@ -41,10 +43,10 @@ export function Footer({ contact, footerTagline }: FooterProps) {
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
           {/* Header ile aynı: logo ana sayfaya gider. Dil öneki LocaleLink'te eklenir. */}
           <LocaleLink href="/" className="inline-flex">
-            <SiteLogo className="h-auto w-36" />
+            <SiteLogo className="h-auto w-36" src={logo} srcDark={logoDark} />
           </LocaleLink>
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
-            {locale === "tr" ? footerTagline : ui.tagline}
+            {footerTagline}
           </p>
 
           {/* Sosyal linkler — sadece ikon, isim ekran okuyucu için aria-label'da */}

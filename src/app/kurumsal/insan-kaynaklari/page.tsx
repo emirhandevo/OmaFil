@@ -7,10 +7,8 @@ import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [page, { locale }] = await Promise.all([
-    getCmsPage("insan-kaynaklari"),
-    getCopy(),
-  ]);
+  const { locale } = await getCopy();
+  const page = await getCmsPage("insan-kaynaklari", locale);
   const t = getInner(locale);
   return {
     title: t?.careers.title ?? page?.title ?? "İnsan Kaynakları",
@@ -23,10 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function InsanKaynaklariPage() {
-  const [page, { copy, locale }] = await Promise.all([
-    getCmsPage("insan-kaynaklari"),
-    getCopy(),
-  ]);
+  const { copy, locale } = await getCopy();
+  const page = await getCmsPage("insan-kaynaklari", locale);
   const t = getInner(locale);
 
   return (

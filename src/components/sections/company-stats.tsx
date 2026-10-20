@@ -1,17 +1,21 @@
+import { getHomeStats } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 
 /**
  * OmaFil’in üretim gücünü ve küresel erişimini gösterir.
- * Sayılar sabit. Birim ve etiket dile göre değişir.
+ * Kartlar Keystatic → Ana sayfa bölümleri. Boş dil sözlüğe düşer.
  */
 export async function CompanyStats() {
-  const { copy } = await getCopy();
-  const companyStats = [
-    { value: "13.000", unit: copy.stats.perYear, label: copy.stats.production },
-    { value: "40.000+", unit: "m²", label: copy.stats.area },
-    { value: "1.000+", unit: copy.stats.happy, label: copy.stats.customers },
-    { value: "61+", unit: copy.stats.toCountries, label: copy.stats.exportLabel },
-  ];
+  const { copy, locale } = await getCopy();
+  const fromCms = await getHomeStats(locale);
+  const companyStats = fromCms.length
+    ? fromCms
+    : [
+        { value: "13.000", unit: copy.stats.perYear, label: copy.stats.production },
+        { value: "40.000+", unit: "m²", label: copy.stats.area },
+        { value: "1.000+", unit: copy.stats.happy, label: copy.stats.customers },
+        { value: "61+", unit: copy.stats.toCountries, label: copy.stats.exportLabel },
+      ];
 
   return (
     <section

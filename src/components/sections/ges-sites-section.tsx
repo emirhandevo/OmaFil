@@ -11,7 +11,17 @@ import { htmlLang } from "@/i18n/locales";
  * Dört GES tesisi — Elazığ Arazi + Erbaa Çatı.
  * Arazi: alt thumb’lar + lightbox okları. Çatı: tek hero, thumb yok.
  */
-export function GesSitesSection() {
+export function GesSitesSection({
+  sitesTitle,
+  sitesLead,
+  fieldHeading,
+  roofHeading,
+}: {
+  sitesTitle?: string;
+  sitesLead?: string;
+  fieldHeading?: string;
+  roofHeading?: string;
+}) {
   const locale = useLocale();
   const t = useInner();
   const num = htmlLang(locale);
@@ -27,15 +37,16 @@ export function GesSitesSection() {
         id="ges-sites-title"
         className="text-2xl font-semibold tracking-tight sm:text-3xl"
       >
-        {t?.ges.sitesTitle ?? "Tesislerimiz"}
+        {sitesTitle || t?.ges.sitesTitle || "Tesislerimiz"}
       </h2>
       <p className="text-body mt-3 max-w-2xl text-base leading-8">
-        {t?.ges.sitesLead ??
+        {sitesLead ||
+          t?.ges.sitesLead ||
           "Elazığ Kovancılar’da iki Arazi GES; Tokat Erbaa fabrika çatısında iki ayrı Çatı Üstü GES. Toplam kurulu güç 6,76 MWp."}
       </p>
 
       <h3 className="mt-12 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        {t?.ges.fieldHeading ?? "Elazığ — Arazi GES"}
+        {fieldHeading || t?.ges.fieldHeading || "Elazığ — Arazi GES"}
       </h3>
       <ul className="mt-6 grid gap-8 lg:grid-cols-2">
         {saha.map((site) => (
@@ -44,7 +55,7 @@ export function GesSitesSection() {
       </ul>
 
       <h3 className="mt-14 text-lg font-semibold tracking-tight text-brand-navy dark:text-foreground">
-        {t?.ges.roofHeading ?? "Erbaa — Çatı Üstü GES"}
+        {roofHeading || t?.ges.roofHeading || "Erbaa — Çatı Üstü GES"}
       </h3>
       <p className="text-body mt-2 max-w-2xl text-sm leading-7">
         {t

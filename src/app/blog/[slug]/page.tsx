@@ -21,7 +21,8 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const [post, { locale }] = await Promise.all([getBlogPost(slug), getCopy()]);
+  const { locale } = await getCopy();
+  const post = await getBlogPost(slug, locale);
   if (!post) return { title: getUi(locale).seo.postMissing };
 
   return {
@@ -33,17 +34,17 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
-  if (!post) notFound();
   const { copy, locale } = await getCopy();
+  const post = await getBlogPost(slug, locale);
+  if (!post) notFound();
 
-  const { node } = await post.content();
-  const errors = Markdoc.validate(node);
+  const ast = Markdoc.parse(post.body);
+  const errors = Markdoc.validate(ast);
   if (errors.length) {
     console.error(errors);
     throw new Error("Blog içeriği geçersiz (Markdoc)");
   }
-  const renderable = Markdoc.transform(node);
+  const renderable = Markdoc.transform(ast);
 
   return (
     <article className="mx-auto max-w-3xl px-4 pt-16 pb-20 sm:pt-20">

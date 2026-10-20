@@ -5,6 +5,8 @@ import {
   socialLinks as socialFallback,
 } from "@/config/site";
 import { dictionaries } from "@/i18n/dictionary";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+import { pickLocale } from "@/content/localized";
 
 export type ContactLocation = {
   label: string;
@@ -31,6 +33,9 @@ export type ContactData = {
 export type SiteSettingsData = {
   description: string;
   footerTagline: string;
+  logo: string;
+  logoDark: string;
+  ogImage: string;
 };
 
 /** Ana sayfa hero. Video veya tek görsel. */
@@ -72,7 +77,9 @@ function networkFromLabel(label: string): SocialNetwork | null {
  * İletişim singleton — yoksa site.ts fallback.
  * Footer / iletişim / kurumsal adresler buradan okur.
  */
-export async function getContact(): Promise<ContactData> {
+export async function getContact(
+  locale: Locale = defaultLocale,
+): Promise<ContactData> {
   const data = await reader.singletons.contact.read();
   if (!data) {
     return {
@@ -116,11 +123,17 @@ export async function getContact(): Promise<ContactData> {
       ? [...data.phones]
       : [...contactFallback.phone],
     locations: data.locations.length
-      ? data.locations.map((l) => ({
-          label: l.label,
-          address: l.address,
-          mapsUrl: l.mapsUrl,
-        }))
+      ? data.locations.map((l) => {
+          const names = pickLocale(
+            l.labels as Parameters<typeof pickLocale>[0],
+            locale,
+          );
+          return {
+            label: names?.name?.trim() || l.label,
+            address: l.address,
+            mapsUrl: l.mapsUrl,
+          };
+        })
       : contactFallback.locations.map((l) => ({ ...l })),
     socialLinks: socialLinks.length
       ? socialLinks
@@ -132,22 +145,24 @@ export async function getContact(): Promise<ContactData> {
   };
 }
 
-/** Ana sayfa hero — yoksa mevcut TR sözlük + varsayılan video. */
-export async function getHero(): Promise<HeroData> {
+/** Ana sayfa hero. Metin dil bloğundan; boş alan TR’ye düşer. */
+export async function getHero(locale: Locale = defaultLocale): Promise<HeroData> {
   const data = await reader.singletons.hero.read();
   if (!data) return heroFallback;
 
-  const text = {
-    eyebrow: data.eyebrow.trim() || heroFallback.eyebrow,
-    title: data.title.trim() || heroFallback.title,
-    body: data.body.trim() || heroFallback.body,
-    productsCta: data.productsCta.trim() || heroFallback.productsCta,
-    aboutCta: data.aboutCta.trim() || heroFallback.aboutCta,
+  const text = pickLocale(data.copy, locale);
+
+  const copy = {
+    eyebrow: text?.eyebrow?.trim() || heroFallback.eyebrow,
+    title: text?.title?.trim() || heroFallback.title,
+    body: text?.body?.trim() || heroFallback.body,
+    productsCta: text?.productsCta?.trim() || heroFallback.productsCta,
+    aboutCta: text?.aboutCta?.trim() || heroFallback.aboutCta,
   };
 
   if (data.media.discriminant === "video") {
     return {
-      ...text,
+      ...copy,
       media: {
         kind: "video",
         videoSrc: data.media.value.videoSrc.trim() || "/videos/hero-web.mp4",
@@ -157,7 +172,7 @@ export async function getHero(): Promise<HeroData> {
   }
 
   return {
-    ...text,
+    ...copy,
     media: {
       kind: "image",
       imageSrc: data.media.value.imageSrc.trim() || "/images/hero-lcp-black.webp",
@@ -165,13 +180,19 @@ export async function getHero(): Promise<HeroData> {
   };
 }
 
-/** Site ayarları singleton — SEO + footer sloganı */
-export async function getSiteSettings(): Promise<SiteSettingsData> {
+/** Site ayarları singleton — SEO + footer sloganı, dil dil. */
+export async function getSiteSettings(
+  locale: Locale = defaultLocale,
+): Promise<SiteSettingsData> {
   const data = await reader.singletons.siteSettings.read();
+  const text = pickLocale(data?.copy, locale);
   return {
-    description: data?.description ?? site.description,
+    description: text?.description?.trim() || site.description,
     footerTagline:
-      data?.footerTagline ??
+      text?.footerTagline?.trim() ||
       "Endüstriyel iplik üretiminde güvenilir çözüm ortağınız.",
+    logo: data?.logo?.trim() || site.logo,
+    logoDark: data?.logoDark?.trim() || site.logoDark,
+    ogImage: data?.ogImage?.trim() || "/images/og.webp",
   };
 }

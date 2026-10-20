@@ -1,11 +1,13 @@
+import { getBrandKicker } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 
 /**
  * Hero ile kurumsal alan arasındaki marka mesajı.
- * Görsel tasarım tek component üzerinden yönetilir.
+ * Metin Keystatic → Ana sayfa bölümleri.
  */
 export async function BrandStatement() {
-  const { copy } = await getCopy();
+  const { copy, locale } = await getCopy();
+  const kicker = await getBrandKicker(locale);
 
   return (
     <section
@@ -25,7 +27,7 @@ export async function BrandStatement() {
 
         <div className="relative">
           <p className="text-xs font-semibold tracking-[0.3em] text-brand-orange uppercase">
-            OmaFil
+            {kicker}
           </p>
 
           <h2

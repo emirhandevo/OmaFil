@@ -25,10 +25,8 @@ const socialIcons: Record<SocialNetwork, typeof InstagramIcon> = {
  * Telefon, mail, adresler Keystatic → İletişim singleton.
  */
 export async function ContactPage() {
-  const [contact, { copy, locale }] = await Promise.all([
-    getContact(),
-    getCopy(),
-  ]);
+  const { copy, locale } = await getCopy();
+  const contact = await getContact(locale);
 
   const jsonLd = {
     "@context": "https://schema.org",

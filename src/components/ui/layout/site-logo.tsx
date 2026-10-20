@@ -5,6 +5,9 @@ type SiteLogoProps = {
   className: string;
   /** Header'da ilk boyamada logo gecikmesin. Footer'da gerekmez. */
   priority?: boolean;
+  /** Keystatic Site ayarları. Yoksa site.ts. */
+  src?: string;
+  srcDark?: string;
 };
 
 /**
@@ -12,11 +15,16 @@ type SiteLogoProps = {
  * İkisi de DOM'da durur. html.dark sınıfı hangisinin görüneceğini seçer.
  * Böylece tema ilk boyamada doğru logo ile gelir.
  */
-export function SiteLogo({ className, priority = false }: SiteLogoProps) {
+export function SiteLogo({
+  className,
+  priority = false,
+  src,
+  srcDark,
+}: SiteLogoProps) {
   return (
     <>
       <Image
-        src={site.logo}
+        src={src || site.logo}
         alt={site.name}
         width={270}
         height={50}
@@ -24,7 +32,7 @@ export function SiteLogo({ className, priority = false }: SiteLogoProps) {
         className={`${className} dark:hidden`}
       />
       <Image
-        src={site.logoDark}
+        src={srcDark || site.logoDark}
         alt={site.name}
         width={1874}
         height={462}

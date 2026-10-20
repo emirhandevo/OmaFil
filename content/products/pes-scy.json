@@ -42,5 +42,51 @@
         }
       ]
     }
+  },
+  "copy": {
+    "tr": {
+      "label": "PES SCY Gipe",
+      "summary": "Polyester tek kaplama + elastan. Custom seçenekler."
+    },
+    "en": {
+      "label": "",
+      "summary": ""
+    },
+    "de": {
+      "label": "",
+      "summary": ""
+    },
+    "fr": {
+      "label": "",
+      "summary": ""
+    },
+    "es": {
+      "label": "",
+      "summary": ""
+    },
+    "it": {
+      "label": "",
+      "summary": ""
+    },
+    "pt": {
+      "label": "",
+      "summary": ""
+    },
+    "nl": {
+      "label": "",
+      "summary": ""
+    },
+    "ru": {
+      "label": "",
+      "summary": ""
+    },
+    "ar": {
+      "label": "",
+      "summary": ""
+    },
+    "zh": {
+      "label": "",
+      "summary": ""
+    }
   }
 }

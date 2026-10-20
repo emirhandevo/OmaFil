@@ -9,6 +9,7 @@ import { getContact } from "@/content/cms";
 import { getProductLines } from "@/content/catalog";
 import type { ProcessCode, ProductLine } from "@/content/catalog";
 import { getCmsPage } from "@/content/pages";
+import { getFactoryBlocks } from "@/content/sections";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
@@ -16,10 +17,8 @@ import { pageAlternates } from "@/i18n/locales";
 import { placeLabel } from "@/i18n/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [page, { locale }] = await Promise.all([
-    getCmsPage("fabrikamiz"),
-    getCopy(),
-  ]);
+  const { locale } = await getCopy();
+  const page = await getCmsPage("fabrikamiz", locale);
   const t = getInner(locale);
   return {
     title: t?.factory.title ?? page?.title ?? "Fabrikamız",
@@ -64,54 +63,6 @@ function factoryProductLabel(line: ProductLine) {
   return `${polymer} ${processName[line.code]}`;
 }
 
-/**
- * Fabrika galerisi — 01 güneş panelli havadan çekim;
- * 02–04 canlı siteden giriş / tesis fotoları.
- */
-const factoryGallery = [
-  {
-    src: "/images/factory/gallery/01-solar.webp",
-    alt: "OmaFil tesisi — güneş panelli havadan görünüm",
-  },
-  {
-    src: "/images/factory/gallery/02.webp",
-    alt: "OmaFil fabrika girişi",
-  },
-  {
-    src: "/images/factory/gallery/03.webp",
-    alt: "OmaFil üretim tesisi",
-  },
-  {
-    src: "/images/factory/gallery/04.webp",
-    alt: "OmaFil fabrika cephesi",
-  },
-] as const;
-
-/**
- * Üretim bandı dosya sırası. İlk 4 kart seçilen kareler.
- * Eski ilk 4 (01–04), bu karelerin eski yerine gider. Aynı dosya iki kez yok.
- * 21 salon, 24 renkli bobin, 14 turkuaz hat, 25 mor UV.
- */
-const bandOrder = [
-  "06", "07", "08", "09", "10", "11", "12", "13",
-  "03",
-  "15", "16", "17", "18", "19", "20",
-  "01",
-  "22", "23",
-  "02",
-  "04",
-  "26", "27", "28",
-] as const;
-
-const productionBandGallery = bandOrder.map((file, index) => {
-  // Alt metindeki numara ekrandaki sıra. Dosya adı değil.
-  const label = String(index + 1).padStart(2, "0");
-  return {
-    src: `/images/factory/band/${file}.webp`,
-    alt: `OmaFil üretim bandı ${label}`,
-  };
-});
-
 /** Laboratuvar kartının altındaki üç işaret. Metin sonra çevrilecek. */
 const labMarks = [
   { icon: Shield, title: "Hassas", text: "Analiz" },
@@ -120,12 +71,14 @@ const labMarks = [
 ] as const;
 
 export default async function FabrikamizPage() {
-  const [page, contact, lines, { locale }] = await Promise.all([
-    getCmsPage("fabrikamiz"),
-    getContact(),
-    getProductLines(),
-    getCopy(),
+  const { locale } = await getCopy();
+  const [page, contact, lines, cms] = await Promise.all([
+    getCmsPage("fabrikamiz", locale),
+    getContact(locale),
+    getProductLines(locale),
+    getFactoryBlocks(locale),
   ]);
+  const f = cms.filled;
   // Ürünler sayfasıyla aynı aile sırası: Naylon 6, Naylon 6,6, polyester.
   const productLines = [...lines].sort(
     (a, b) =>
@@ -134,13 +87,14 @@ export default async function FabrikamizPage() {
   );
   const t = getInner(locale);
   const plant = contact.locations.find((place) =>
-    place.label.startsWith("Fabrika /"),
+    /Erbaa|Fabrika \/|Factory \//i.test(`${place.label} ${place.address}`),
   );
-  const gallery = factoryGallery.map((photo, i) => ({
+  // Keystatic galeri / bant. Diğer dilde inner alt varsa onu kullan.
+  const gallery = cms.gallery.map((photo, i) => ({
     ...photo,
     alt: t?.factory.alts[i] ?? photo.alt,
   }));
-  const band = productionBandGallery.map((photo) => ({
+  const band = cms.band.map((photo) => ({
     ...photo,
     alt: t ? `${t.factory.bandAlt} ${photo.alt.slice(-2)}` : photo.alt,
   }));
@@ -158,14 +112,18 @@ export default async function FabrikamizPage() {
       {/* Giriş: metin + ürün listesi kartı */}
       <section className="mx-auto max-w-6xl px-4 pb-12">
         <h2 className="max-w-3xl text-2xl font-semibold tracking-tight text-brand-navy dark:text-foreground sm:text-3xl">
-          {t?.factory.headline ??
+          {f.headline ||
+            t?.factory.headline ||
             "Yıllık 13.000 Ton Kapasiteyle Avrupa'nın Zirvesinde"}
         </h2>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
           <article className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
             <div className="text-body space-y-4 text-base leading-8">
-              {(t?.factory.paragraphs ?? factoryIntroTr).map((paragraph) => (
+              {(cms.intro.length
+                ? cms.intro
+                : (t?.factory.paragraphs ?? factoryIntroTr)
+              ).map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -176,7 +134,7 @@ export default async function FabrikamizPage() {
 
           <article className="relative overflow-hidden rounded-2xl border border-border shadow-sm min-h-[320px]">
             <Image
-              src="/images/factory/band/14.webp"
+              src={cms.listCardImage}
               alt=""
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
@@ -204,17 +162,23 @@ export default async function FabrikamizPage() {
         <div className="mx-auto grid max-w-6xl items-start gap-10 px-4 lg:grid-cols-2 lg:gap-14">
           <div>
             <p className="text-6xl font-bold tracking-tight text-brand-blue/45 sm:text-7xl dark:text-brand-blue/50">
-              1999
+              {f.sinceYear || "1999"}
             </p>
             <h2 className="mt-2 text-xl font-bold tracking-tight text-brand-navy uppercase dark:text-foreground sm:text-2xl">
-              {t?.factory.since ?? "Yılından beri sektörde öncülük ediyoruz"}
+              {f.since ||
+                t?.factory.since ||
+                "Yılından beri sektörde öncülük ediyoruz"}
             </h2>
             <p className="text-body mt-5 text-base leading-8">
-              {t?.factory.sinceBody ??
+              {f.sinceBody ||
+                t?.factory.sinceBody ||
                 "Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına alan OmaFil, polimer üretiminde yenilikçi ve sürdürülebilir çözümler sunarak sektörün geleceğini inşa ediyor. Modern tesislerimizde, küresel standartlarda kalite ve süreklilik sağlıyoruz."}
             </p>
           </div>
-          <FactoryMissionTabs labels={t?.factory.tabs} aria={t?.factory.tabsAria} />
+          <FactoryMissionTabs
+            labels={cms.tabs.length ? cms.tabs : t?.factory.tabs}
+            aria={f.tabsAria || t?.factory.tabsAria}
+          />
         </div>
       </section>
 
@@ -224,10 +188,11 @@ export default async function FabrikamizPage() {
           id="factory-gallery-title"
           className="text-2xl font-semibold tracking-tight sm:text-3xl"
         >
-          {t?.factory.galleryTitle ?? "Fabrikamız"}
+          {f.galleryTitle || t?.factory.galleryTitle || "Fabrikamız"}
         </h2>
         <p className="text-body mt-4 max-w-3xl text-base leading-8">
-          {t?.factory.galleryBody ??
+          {f.galleryBody ||
+            t?.factory.galleryBody ||
             "Modern teknoloji ve global standartlarla inşa edilen tesisimiz, yüksek üretim kapasitesiyle tekstil sektörünün güvenilir tedarik noktasıdır. Geniş altyapımız ve çevre dostu enerji politikalarımızla, sürdürülebilir büyümeyi destekliyoruz."}
         </p>
         {/* 16/9. 4/3 kartlar sayfayı fazla uzatıyordu. */}
@@ -260,16 +225,17 @@ export default async function FabrikamizPage() {
             id="production-band-title"
             className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
           >
-            {t?.factory.bandTitle ?? "Üretim Bandı"}
+            {f.bandTitle || t?.factory.bandTitle || "Üretim Bandı"}
           </h2>
           <p className="text-body mt-4 max-w-3xl text-base leading-8">
-            {t?.factory.bandBody ??
+            {f.bandBody ||
+              t?.factory.bandBody ||
               "Naylon 6 ve 6,6 iplik üretiminde son teknoloji makine parkurumuzla hata payını minimize ediyoruz. Her aşamada uyguladığımız hassas kalite kontrol süreçleri sayesinde, yüksek mukavemetli ve uzun ömürlü iplikler üretiyoruz."}
           </p>
           <ProductionBandGallery
             photos={band}
-            moreLabel={t?.factory.bandMore ?? "Daha fazlasını göster"}
-            lessLabel={t?.factory.bandLess ?? "Daha az göster"}
+            moreLabel={f.bandMore || t?.factory.bandMore || "Daha fazlasını göster"}
+            lessLabel={f.bandLess || t?.factory.bandLess || "Daha az göster"}
           />
         </div>
       </section>
@@ -292,14 +258,16 @@ export default async function FabrikamizPage() {
           {/* Başlık kartın solundan (videonun üstü) sağa (paragrafın üstü) uzanır. Video alt satırda kalır. */}
           <div className="relative z-10">
             <p className="inline-flex rounded-full border border-brand-orange/70 px-3 py-1 text-xs font-medium tracking-wide text-brand-orange">
-              Kalite Kontrol
+              {f.labKicker || "Kalite Kontrol"}
             </p>
             <h2
               id="lab-tests-title"
               className="mt-3 whitespace-nowrap text-sm font-semibold tracking-tight text-foreground min-[420px]:text-base sm:text-2xl lg:text-3xl xl:text-4xl"
             >
-              Kalitenin Ölçüldüğü Yer:{" "}
-              <span className="text-brand-orange">Laboratuvarımız</span>
+              {f.labTitleBefore || "Kalitenin Ölçüldüğü Yer:"}{" "}
+              <span className="text-brand-orange">
+                {f.labTitleAccent || "Laboratuvarımız"}
+              </span>
             </h2>
           </div>
           <div className="relative mt-6 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
@@ -314,28 +282,31 @@ export default async function FabrikamizPage() {
                 className="pointer-events-none absolute -bottom-3 -start-3 size-28 rounded-full bg-brand-orange/40 blur-2xl"
               />
               <div className="relative z-10">
-                <LabVideo />
+                <LabVideo
+                  src={cms.labVideo}
+                  poster={cms.labPoster}
+                  duration={cms.labDuration}
+                />
               </div>
             </div>
             <div className="text-body space-y-4 text-sm leading-7 sm:text-base">
-              <p>
-                Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş
-                ipliğe kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm,
-                mukavemet ve uzama değerlerini kontrol ediyor, filament
-                düzgünlüğünü analiz ediyoruz.
-              </p>
-              <p>
-                Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik
-                üzerindeki finish oranını takip ediyoruz. Numuneleri boyama
-                testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki
-                performansları açısından sınıyoruz.
-              </p>
-              <p>Sonuç: her partide aynı kalite, her bobinde aynı performans.</p>
+              {(cms.labBody.length
+                ? cms.labBody
+                : [
+                    "Fabrikamızdaki laboratuvarda, gelen POY filamentten bitmiş ipliğe kadar her aşamayı ölçümle doğruluyoruz. Denye, büküm, mukavemet ve uzama değerlerini kontrol ediyor, filament düzgünlüğünü analiz ediyoruz.",
+                    "Viskozite ölçümüyle polimer kalitesini, yağ testiyle iplik üzerindeki finish oranını takip ediyoruz. Numuneleri boyama testlerine alıyor, UV ışık kabinimizde bobinleri ışık altındaki performansları açısından sınıyoruz.",
+                    "Sonuç: her partide aynı kalite, her bobinde aynı performans.",
+                  ]
+              ).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
           {/* Üç işaret kartın ortasında. Daire mavi, içindeki ikon turuncu. Hover’da yer değiştirir. */}
           <ul className="relative mt-10 flex justify-center">
-            {labMarks.map((mark, index) => (
+            {labMarks.map((mark, index) => {
+              const cmsMark = cms.labMarks[index];
+              return (
               <li
                 key={mark.title}
                 className={
@@ -351,12 +322,13 @@ export default async function FabrikamizPage() {
                   />
                 </span>
                 <span className="text-xs leading-4 text-muted-foreground">
-                  {mark.title}
+                  {cmsMark?.title || mark.title}
                   <br />
-                  {mark.text}
+                  {cmsMark?.text || mark.text}
                 </span>
               </li>
-            ))}
+            );
+            })}
           </ul>
         </div>
       </section>
@@ -381,7 +353,7 @@ export default async function FabrikamizPage() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
                 >
-                  {t?.factory.map ?? "Tesisi haritada aç"} →
+                  {f.map || t?.factory.map || "Tesisi haritada aç"} →
                 </a>
               </div>
             </div>

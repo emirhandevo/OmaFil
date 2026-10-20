@@ -17,10 +17,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function UrunlerimizPage() {
-  const [lines, contact, { copy }] = await Promise.all([
-    getProductLines(),
-    getContact(),
-    getCopy(),
+  const { copy, locale } = await getCopy();
+  const [lines, contact] = await Promise.all([
+    getProductLines(locale),
+    getContact(locale),
   ]);
 
   return (

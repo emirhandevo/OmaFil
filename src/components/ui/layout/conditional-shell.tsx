@@ -9,6 +9,8 @@ type ConditionalShellProps = {
   children: ReactNode;
   contact: ContactData;
   footerTagline: string;
+  logo: string;
+  logoDark: string;
 };
 
 /**
@@ -19,6 +21,8 @@ export function ConditionalShell({
   children,
   contact,
   footerTagline,
+  logo,
+  logoDark,
 }: ConditionalShellProps) {
   const pathname = usePathname();
   // Panel ve sohbet kayıtları site kabuğunun dışında. Dil öneki de aynı.
@@ -31,7 +35,12 @@ export function ConditionalShell({
     return <>{children}</>;
   }
   return (
-    <SiteShell contact={contact} footerTagline={footerTagline}>
+    <SiteShell
+      contact={contact}
+      footerTagline={footerTagline}
+      logo={logo}
+      logoDark={logoDark}
+    >
       {children}
     </SiteShell>
   );

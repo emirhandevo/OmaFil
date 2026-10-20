@@ -1,0 +1,386 @@
+introImage: /images/corporate/factory.webp
+sustainImage: /images/ges/erbaa-cati-1/aerial.webp
+copy:
+  tr:
+    brandKicker: OmaFil
+    brandTitleBefore: Yüksek Kalite ve Yenilikçilikte
+    brandTitleAccent: Dünyaya Dokunuyoruz
+    introKicker: Kurumsal
+    introTitle: Global Tekstile Poliamid İplik
+    introP1: >-
+      Poliamid (Naylon 6 ve Naylon 6,6), yüksek mukavemeti, esnekliği ve aşınma dayanımıyla tekstilin en kritik hammaddelerinden biridir. 1999’dan bu yana biriken deneyimimizi ileri teknolojiyle birleştirerek POY, FDY, DTY, ACY, SCY ve DCY formlarında poliamid iplik üretiyor; çorap, iç giyim, spor giyim, halı ve teknik tekstil sektörlerine yüksek performanslı çözümler sunuyoruz.
+    introP2: >-
+      Avrupa’nın en büyük gipe iplik tesisiyle, global tekstil endüstrisinin ihtiyaçlarına kalite ve güvenilirlikle cevap veriyoruz.
+    introCta: Kurumsal Yapımız
+    introAlt: OmaFil üretim tesisi
+    statsKicker: Üretim Gücümüz
+    statsTitle: Rakamlarla OmaFil
+    statsLead: >-
+      Yıllık üretimimiz, modern tesislerimiz ve küresel ticaret ağımızla tekstil sektörüne değer katıyoruz.
+    statsItems:
+      -
+        value: 13.000
+        unit: Ton/Yıl
+        label: Üretim
+      -
+        value: 40.000+
+        unit: m²
+        label: Üretim Alanı
+      -
+        value: 1.000+
+        unit: Mutlu
+        label: Müşteri
+      -
+        value: 61+
+        unit: Ülkeye
+        label: İhracat
+    sustainKicker: Geleceğe Karşı Sorumluluğumuz
+    sustainTitle: Sürdürülebilir Endüstriyel İplik Üretimi
+    sustainLead: >-
+      Üretimimizin merkezinde sürdürülebilirlik var: çatı üstü güneş enerjisi, geri dönüştürülmüş iplik ve kaynak verimli süreçlerle çevresel etkimizi azaltıyoruz.
+    energyTitle: Yenilenebilir Enerji
+    energyText: Çatı üstü GES ile temiz enerji.
+    productionTitle: Sorumlu Üretim
+    productionText: Kaynak verimli, çevreye duyarlı süreçler.
+    sustainCta: Sürdürülebilirlik Yaklaşımımız
+    plant: OmaFil Üretim Tesisi
+    plantText: Üretimde kaliteyi yenilenebilir enerji yatırımlarıyla destekliyoruz.
+    techKicker: Çevreci Teknolojiler
+    techTitle: Sürdürülebilir İplik Çözümlerimiz
+    recycleTitle: Recycle İplikler
+    recycleText: Geri dönüştürülmüş kaynaklardan geliştirilen çevre dostu iplik çözümleri.
+    biobased: Bio-bazlı Polyamid İplik
+    biobasedText: Fosil kaynak kullanımını azaltmayı hedefleyen bio-bazlı polyamid iplik.
+    dopeDyed: Dope Dyed
+    waterlessText: Su tüketimini azaltmaya odaklanan yenilikçi susuz boyama teknolojisi.
+    sustainAlt: Güneş panelleriyle kaplı OmaFil üretim tesisi
+  en:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  de:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  fr:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  es:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  it:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  pt:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  nl:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  ru:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  ar:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""
+  zh:
+    brandKicker: ""
+    brandTitleBefore: ""
+    brandTitleAccent: ""
+    introKicker: ""
+    introTitle: ""
+    introP1: ""
+    introP2: ""
+    introCta: ""
+    introAlt: ""
+    statsKicker: ""
+    statsTitle: ""
+    statsLead: ""
+    statsItems: []
+    sustainKicker: ""
+    sustainTitle: ""
+    sustainLead: ""
+    energyTitle: ""
+    energyText: ""
+    productionTitle: ""
+    productionText: ""
+    sustainCta: ""
+    plant: ""
+    plantText: ""
+    techKicker: ""
+    techTitle: ""
+    recycleTitle: ""
+    recycleText: ""
+    biobased: ""
+    biobasedText: ""
+    dopeDyed: ""
+    waterlessText: ""
+    sustainAlt: ""

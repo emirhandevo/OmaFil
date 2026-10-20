@@ -14,16 +14,15 @@ import { AboutHighlights } from "@/components/sections/about-highlights";
 import { CorporateFrame } from "@/components/sections/corporate/corporate-frame";
 import { getContact } from "@/content/cms";
 import { getCmsPage } from "@/content/pages";
+import { getAboutBlocks } from "@/content/sections";
 import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
 import { placeLabel } from "@/i18n/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [page, { locale }] = await Promise.all([
-    getCmsPage("hakkimizda"),
-    getCopy(),
-  ]);
+  const { locale } = await getCopy();
+  const page = await getCmsPage("hakkimizda", locale);
   const t = getInner(locale);
   return {
     title: t?.about.title ?? page?.title ?? "Hakkımızda",
@@ -86,17 +85,20 @@ const milestones: {
 ];
 
 export default async function HakkimizdaPage() {
-  const [page, contact, { locale }] = await Promise.all([
-    getCmsPage("hakkimizda"),
-    getContact(),
-    getCopy(),
+  const { locale } = await getCopy();
+  const [page, contact, cms] = await Promise.all([
+    getCmsPage("hakkimizda", locale),
+    getContact(locale),
+    getAboutBlocks(locale),
   ]);
-  // tr: Keystatic metni. Diğer diller: inner sözlük.
+  // tr: Keystatic. Diğer diller: CMS doluysa o, değilse inner.
   const t = getInner(locale);
+  const f = cms.filled;
   const story = milestones.map((item, i) => ({
     ...item,
-    title: t?.about.milestones[i]?.title ?? item.title,
-    text: t?.about.milestones[i]?.text ?? item.text,
+    year: cms.milestones[i]?.year || item.year,
+    title: cms.milestones[i]?.title || t?.about.milestones[i]?.title || item.title,
+    text: cms.milestones[i]?.text || t?.about.milestones[i]?.text || item.text,
   }));
 
   return (
@@ -137,9 +139,9 @@ export default async function HakkimizdaPage() {
           />
 
           <h2 className="relative text-center text-3xl font-semibold tracking-tight sm:text-4xl">
-            {t ? t.about.growthBefore : "Büyüme"}{" "}
+            {f.growthBefore || t?.about.growthBefore || "Büyüme"}{" "}
             <span className="text-brand-orange">
-              {t ? t.about.growthAccent : "Hikayemiz"}
+              {f.growthAccent || t?.about.growthAccent || "Hikayemiz"}
             </span>
           </h2>
 
@@ -188,7 +190,7 @@ export default async function HakkimizdaPage() {
           id="offices-title"
           className="text-2xl font-semibold tracking-tight"
         >
-          {t?.about.offices ?? "İletişim noktalarımız"}
+          {f.offices || t?.about.offices || "İletişim noktalarımız"}
         </h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {contact.locations.map((place) => (
@@ -209,7 +211,7 @@ export default async function HakkimizdaPage() {
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex text-sm font-medium text-brand-orange hover:underline active:underline"
               >
-                {t?.about.map ?? "Haritada aç"}
+                {f.map || t?.about.map || "Haritada aç"}
               </a>
             </article>
           ))}

@@ -1,0 +1,278 @@
+copy:
+  tr:
+    growthBefore: Büyüme
+    growthAccent: hikâyemiz
+    offices: İletişim noktalarımız
+    map: Haritada aç
+    statsAria: OmaFil rakamları
+    stats:
+      -
+        title: 40.000 m² Üretim Alanı
+        subtitle: Tokat–Erbaa üretim tesisi
+      -
+        title: 13.000 Ton
+        subtitle: Yıllık üretim
+      -
+        title: "#1 Avrupa’da En Büyük"
+        subtitle: Gipe iplik üretim tesisi
+      -
+        title: "%100 Yenilenebilir Enerji"
+        subtitle: Sürdürülebilir üretim hedefi
+    focus:
+      - GRS Sertifikalı
+      - Yenilenebilir Enerji
+      - Sıfır Atık Hedefi
+    sustainKicker: Sürdürülebilirlik
+    sustainBefore: Geleceğe
+    sustainAccent: Sorumlu
+    sustainAfter: Yaklaşım
+    sustainP1: >-
+      Üretim süreçlerimizin merkezine sürdürülebilirliği koyuyoruz. Çatı üstü güneş enerjisi yatırımlarımız ve GRS sertifikalı geri dönüştürülmüş iplik çözümlerimizle çevresel etkimizi azaltmayı hedefliyoruz.
+    sustainP2: >-
+      Kaynak verimliliği, sorumlu üretim ve döngüsel ekonomi ilkeleri; OmaFil’in kurumsal kimliğinin ayrılmaz parçasıdır.
+    sustainLink: Sürdürülebilirlik sayfasına git
+    gesLink: GES — güneş enerji sistemi
+    recycledTitle: Recycled İplik
+    recycledText: >-
+      Geri dönüştürülmüş kaynaklardan geliştirilen iplik çözümlerimizle döngüsel ekonomiyi üretimimize taşıyoruz. Kalite standartlarımızdan ödün vermeden çevre dostu alternatifler sunuyoruz.
+    grs: GRS uyumlu üretim
+    certs: Sertifikalar
+    milestones:
+      -
+        year: 1999
+        title: Kuruluş
+        text: İstanbul Sultanhamam’da iplik ticaretiyle başladık.
+      -
+        year: 2000
+        title: İhracat Başlangıcı
+        text: Yurtdışı bağlantılarımızı kurduk.
+      -
+        year: 2013
+        title: İlk Tesis
+        text: İlk üretim tesisimizi kurduk.
+      -
+        year: 2021
+        title: Gipe Tesisi
+        text: Tokat–Erbaa’da gipe iplik tesisini hayata geçirdik.
+      -
+        year: 2025
+        title: Tekstüre Tesisi
+        text: Tekstüre üretim tesisini devreye aldık.
+      -
+        year: 2026
+        title: POY - FDY Tesisi
+        text: POY ve FDY üretim tesisini kurduk.
+      -
+        year: 2026
+        title: Gipe Tesisi Kapasite Artışı
+        text: Gipe tesisinde kapasiteyi artırdık.
+  en:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  de:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  fr:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  es:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  it:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  pt:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  nl:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  ru:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  ar:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []
+  zh:
+    growthBefore: ""
+    growthAccent: ""
+    offices: ""
+    map: ""
+    statsAria: ""
+    stats: []
+    focus: []
+    sustainKicker: ""
+    sustainBefore: ""
+    sustainAccent: ""
+    sustainAfter: ""
+    sustainP1: ""
+    sustainP2: ""
+    sustainLink: ""
+    gesLink: ""
+    recycledTitle: ""
+    recycledText: ""
+    grs: ""
+    certs: ""
+    milestones: []

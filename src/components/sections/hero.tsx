@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { getHero } from "@/content/cms";
-import { getCopy } from "@/i18n/get-copy";
+import { getLocale } from "@/i18n/get-locale";
 import { HeroMarquee } from "@/components/sections/hero-marquee";
 import { HeroVideo } from "@/components/sections/hero-video";
 
 /**
  * Anasayfanın ilk ekranı.
- * Medya + TR metin Keystatic hero singleton. Diğer diller sözlükten.
+ * Medya ortak; yazı Keystatic’te dil dil. Marquee hâlâ sözlük.
  */
 export async function Hero() {
-  const [{ copy, locale }, hero] = await Promise.all([getCopy(), getHero()]);
-  // TR panelden; en/de/… hâlâ dictionary
-  const text = locale === "tr" ? hero : copy.hero;
+  const locale = await getLocale();
+  const hero = await getHero(locale);
+  const text = hero;
   const poster =
     hero.media.kind === "video" ? hero.media.posterSrc : hero.media.imageSrc;
 

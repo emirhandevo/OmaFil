@@ -1,4 +1,7 @@
 import { reader } from "@/content/keystatic";
+import { pickLocale } from "@/content/localized";
+import { getInner } from "@/i18n/inner";
+import { defaultLocale, type Locale } from "@/i18n/locales";
 import type {
   CoveredSku,
   FilamentSku,
@@ -9,12 +12,19 @@ type LineEntry = NonNullable<
   Awaited<ReturnType<typeof reader.collections.productLines.read>>
 >;
 
-function mapLine(slug: string, entry: LineEntry): ProductLine {
+function mapLine(
+  slug: string,
+  entry: LineEntry,
+  locale: Locale = defaultLocale,
+): ProductLine {
   const kind = entry.details.discriminant;
+  // copy[dil] boşsa TR copy, o da yoksa inner / kök alan
+  const text = pickLocale(entry.copy, locale);
+  const innerSummary = getInner(locale)?.products[slug];
   return {
     slug,
-    label: entry.label,
-    summary: entry.summary,
+    label: text?.label?.trim() || entry.label,
+    summary: text?.summary?.trim() || innerSummary || entry.summary,
     family: entry.family,
     polymer: entry.polymer,
     code: entry.code,
@@ -74,13 +84,15 @@ function mapCoveredSkus(slug: string, entry: LineEntry): CoveredSku[] {
 }
 
 /** Tüm ürün hatları (grid + sitemap) */
-export async function getProductLines(): Promise<ProductLine[]> {
+export async function getProductLines(
+  locale: Locale = defaultLocale,
+): Promise<ProductLine[]> {
   const slugs = await reader.collections.productLines.list();
   const lines: ProductLine[] = [];
   for (const slug of slugs) {
     try {
       const entry = await reader.collections.productLines.read(slug);
-      if (entry) lines.push(mapLine(slug, entry));
+      if (entry) lines.push(mapLine(slug, entry, locale));
     } catch (error) {
       console.error("ürün hattı okunamadı", slug, error);
     }
@@ -90,11 +102,12 @@ export async function getProductLines(): Promise<ProductLine[]> {
 
 export async function getProductLine(
   slug: string,
+  locale: Locale = defaultLocale,
 ): Promise<ProductLine | null> {
   try {
     const entry = await reader.collections.productLines.read(slug);
     if (!entry) return null;
-    return mapLine(slug, entry);
+    return mapLine(slug, entry, locale);
   } catch (error) {
     console.error("ürün hattı okunamadı", slug, error);
     return null;

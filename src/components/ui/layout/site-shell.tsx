@@ -10,6 +10,8 @@ type SiteShellProps = {
   children: ReactNode;
   contact: ContactData;
   footerTagline: string;
+  logo: string;
+  logoDark: string;
 };
 
 /**
@@ -17,15 +19,26 @@ type SiteShellProps = {
  * Sayfa geçişlerinde remount olmaz → VT ile sabit kalırlar.
  * Sohbet de burada: sayfa değişince kapanmaz, panel sayfasında yok.
  */
-export function SiteShell({ children, contact, footerTagline }: SiteShellProps) {
+export function SiteShell({
+  children,
+  contact,
+  footerTagline,
+  logo,
+  logoDark,
+}: SiteShellProps) {
   return (
     <>
       <SmoothNav />
-      <Header />
+      <Header logo={logo} logoDark={logoDark} />
       <main id="main-content" className="flex-1">
         {children}
       </main>
-      <Footer contact={contact} footerTagline={footerTagline} />
+      <Footer
+        contact={contact}
+        footerTagline={footerTagline}
+        logo={logo}
+        logoDark={logoDark}
+      />
       <BackToTop />
       <YarnChat />
     </>

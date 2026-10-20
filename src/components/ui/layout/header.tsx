@@ -19,7 +19,13 @@ function blurActive() {
   }
 }
 
-export function Header() {
+export function Header({
+  logo,
+  logoDark,
+}: {
+  logo: string;
+  logoDark: string;
+}) {
   // Mobil menü açık/kapalı durumu
   const [isOpen, setIsOpen] = useState(false);
   // Masaüstü Kurumsal dropdown: tıklanınca hover/focus yüzünden açık kalmasın
@@ -74,6 +80,8 @@ export function Header() {
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
           <SiteLogo
             priority
+            src={logo}
+            srcDark={logoDark}
             className="h-auto w-36 lg:w-44 xl:w-56"
           />
         </LocaleLink>

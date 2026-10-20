@@ -1,0 +1,229 @@
+heroImage: /images/ges/ges-hero.webp
+bodyImage: /images/ges/erbaa-cati-1/aerial.webp
+copy:
+  tr:
+    kicker: Güneş enerji sistemi
+    title: Güneş Enerji Sistemimiz
+    subtitle: Elazığ arazi GES ve Erbaa çatı üstü GES ile üretimi güneşten besliyoruz
+    paragraphs: >-
+      OmaFil olarak yalnızca kaliteli iplik üretmiyoruz; enerjiyi de yenilenebilir kaynaklardan sağlıyoruz. Portföyümüzde Elazığ Kovancılar’da iki arazi GES (OMA 1 Hacısam, OMA 2 Kavak) ve Tokat Erbaa üretim tesisimizde iki çatı üstü GES bulunuyor.
+
+      Toplam kurulu gücümüz 6,76 MWp. Günlük üretimimiz arazi ve çatı üstü sistemleriyle birlikte onlarca megawatt-saat bandında; karbon ayak izimizi azaltarak yeşil sanayiye katkı sunuyoruz.
+    total: Toplam
+    panels: panel
+    imageAlt: OmaFil Erbaa çatı üstü GES — Oma Polimer tesisi
+    respectTitle: Doğaya saygılı, sürdürülebilir üretim
+    respectText: >-
+      Teknolojiyi ve yenilikçi yatırımları işimizin merkezine koyarken çevre sorumluluğumuzu unutmuyoruz. Arazi ve çatı üstü GES yatırımlarımızla karbon salınımını azaltıyor, ekolojik dengeye katkı sağlıyoruz.
+    pillars:
+      -
+        title: Arazi + çatı üstü GES
+        text: >-
+          Elazığ’da 5,2 MWp arazi santrali; Erbaa fabrika çatısında 1,56 MWp. İki coğrafyada, aynı sürdürülebilirlik hedefi.
+      -
+        title: Daha az karbon ayak izi
+        text: >-
+          Ürettiğimiz her kilowatt-saat, fosil kaynaklı emisyonu azaltır. Sayaçlarımız uygulama ve tesis verilerine dayanır.
+      -
+        title: Yeşil sanayi öncülüğü
+        text: >-
+          Kendi enerjimizi üreterek tekstil üretiminde temiz enerji dönüşümüne örnek olmayı hedefliyoruz.
+    ctaTitle: Sürdürülebilir üretim yaklaşımımız
+    ctaText: GES yatırımlarımız; recycle iplik ve sorumlu üretim anlayışımızın parçasıdır.
+    sustainCta: Sürdürülebilirlik
+    contactCta: İletişim
+    sitesTitle: Tesislerimiz
+    sitesLead: >-
+      Elazığ Kovancılar’da iki arazi GES ve Tokat Erbaa fabrika çatısında iki çatı üstü GES. Toplam kurulu güç 6,76 MWp.
+    fieldHeading: Elazığ — arazi GES
+    roofHeading: Erbaa — çatı üstü GES
+  en:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  de:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  fr:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  es:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  it:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  pt:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  nl:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  ru:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  ar:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""
+  zh:
+    kicker: ""
+    title: ""
+    subtitle: ""
+    paragraphs: ""
+    total: ""
+    panels: ""
+    imageAlt: ""
+    respectTitle: ""
+    respectText: ""
+    pillars: []
+    ctaTitle: ""
+    ctaText: ""
+    sustainCta: ""
+    contactCta: ""
+    sitesTitle: ""
+    sitesLead: ""
+    fieldHeading: ""
+    roofHeading: ""

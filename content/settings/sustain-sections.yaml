@@ -1,0 +1,256 @@
+worldImage: /images/sustainability/dunya.webp
+plantImage: /images/ges/erbaa-cati-1/aerial.webp
+copy:
+  tr:
+    worldAlt: Orman kaplı dünya görseli
+    whyBefore: Neden
+    whyAccent: sürdürülebilirlik önemli
+    why:
+      - >-
+          Sanayi devrimiyle büyüyen enerji talebi, petrol ve kömür gibi yenilenemeyen kaynakların yoğun kullanımına yol açtı. Hızlı sanayileşme ve kentleşme hava, su ve toprak kirliliğini artırdı; biyoçeşitlilik kaybı, toprak kaybı ve çölleşmeyi derinleştirdi.
+      - >-
+          Her canlı, diğer canlı ve cansızlarla alışveriş içindeki bir ekosistemin parçasıdır. Bir parça zarar görürse etki başka yerde görünür. Doğanın yenilenme hızını aşmadan, dengeyi bozmadan hareket etmek zorundayız.
+    principles:
+      -
+        title: Kaynakları akılcı kullanmak
+        text: >-
+          Çevre ve doğadaki kaynakların tükenebilir olduğu bilinciyle üretimde verimliliği esas alırız. Ekosistemlerin bütünlüğü ve esnekliği korunur.
+      -
+        title: Ekonomik büyüme + çevre dengesi
+        text: >-
+          Çevreye zarar vermeden, toplumları refaha kavuşturacak ekonomik büyümeyi hedefleriz. Mal ve hizmet üretimi artarken insan refahı yükselir.
+      -
+        title: Şirket ve toplumsal çıkar birliği
+        text: >-
+          Sadece ekonomik büyüme değil; sosyal ve çevre konuları da yönetim anlayışımızın parçasıdır. Şirket çıkarları toplumsal çıkarlarla çatışmaz.
+    yarnKicker: Çevreci teknolojiler
+    yarnTitle: Sürdürülebilir iplikler
+    yarnLead: >-
+      Daha iyi bir dünya için sosyal ve çevresel sürdürülebilirliği tüm üretim süreçlerine dahil eder.
+    yarns:
+      -
+        title: Recycle İplikler
+        text: >-
+          Geri dönüştürülmüş kaynaklardan geliştirilen çevre dostu iplik çözümleri. 2023’te GRS belgesi ile üretim süreçlerimiz belgelendi.
+      -
+        title: Bio-bazlı Polyamid İplik
+        text: >-
+          Fosil kaynak kullanımını azaltmayı hedefleyen bio-bazlı polyamid iplik. Performanstan ödün vermeden daha düşük çevresel etki.
+      -
+        title: Dope Dyed
+        text: >-
+          Su tüketimini azaltmaya odaklanan yenilikçi susuz boyama teknolojisi. Kaynak tasarrufu üretim hattının içinde başlar.
+    certs: Sertifikalar
+    gesKicker: Güneş enerji sistemi
+    gesTitle: Geleceğe değer katıyor, üretim enerjisini güneşten alıyoruz
+    gesP: >-
+      Bugünün ihtiyaçları için kalite üretmenin yanında daha temiz bir dünya bırakmayı sorumluluk görüyoruz. Bu vizyonla tesis çatılarını güneş enerji sistemi (GES) ile donattık.
+
+      Fabrikada her üretim koşusunun arkasında artık güneşin temiz enerjisi var.
+    gesItems:
+      -
+        title: "%100 temiz enerji hedefi"
+        text: >-
+          Üretim hatlarımızda kullanılan elektriğin büyük bir kısmını, doğrudan çatımızdaki yüksek verimli güneş panellerinden elde ediyoruz.
+      -
+        title: Daha az karbon ayak izi
+        text: >-
+          Fosil yakıtlara bağımlılığı azaltarak her yıl binlerce ağacın doğaya sağladığı oksijene eşdeğer karbon tasarrufu sağlamayı hedefliyoruz.
+      -
+        title: Yeşil sanayi öncülüğü
+        text: >-
+          Sektörümüzde sürdürülebilir enerji dönüşümüne öncülük ederek gelecek nesillere daha yaşanabilir bir dünya bırakmayı amaçlıyoruz.
+    gesLink: GES sayfasına git
+    plantKicker: OmaFil üretim tesisi
+    plantText: Üretim kalitesini yenilenebilir enerji yatırımıyla destekliyoruz.
+    plantAlt: Güneş panelleriyle kaplı OmaFil üretim tesisi
+  en:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  de:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  fr:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  es:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  it:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  pt:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  nl:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  ru:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  ar:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
+  zh:
+    worldAlt: ""
+    whyBefore: ""
+    whyAccent: ""
+    why: []
+    principles: []
+    yarnKicker: ""
+    yarnTitle: ""
+    yarnLead: ""
+    yarns: []
+    certs: ""
+    gesKicker: ""
+    gesTitle: ""
+    gesP: ""
+    gesItems: []
+    gesLink: ""
+    plantKicker: ""
+    plantText: ""
+    plantAlt: ""
