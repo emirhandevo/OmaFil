@@ -19,7 +19,7 @@ copy:
       Yıllık üretimimiz, modern tesislerimiz ve küresel ticaret ağımızla tekstil sektörüne değer katıyoruz.
     statsItems:
       -
-        value: 13.000
+        value: "13.000"
         unit: Ton/Yıl
         label: Üretim
       -

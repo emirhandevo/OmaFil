@@ -80,7 +80,7 @@ function networkFromLabel(label: string): SocialNetwork | null {
 export async function getContact(
   locale: Locale = defaultLocale,
 ): Promise<ContactData> {
-  const data = await reader.singletons.contact.read();
+  const data = await reader.singletons.contact.read().catch(() => null);
   if (!data) {
     return {
       email: contactFallback.email,
@@ -147,7 +147,7 @@ export async function getContact(
 
 /** Ana sayfa hero. Metin dil bloğundan; boş alan TR’ye düşer. */
 export async function getHero(locale: Locale = defaultLocale): Promise<HeroData> {
-  const data = await reader.singletons.hero.read();
+  const data = await reader.singletons.hero.read().catch(() => null);
   if (!data) return heroFallback;
 
   const text = pickLocale(data.copy, locale);
@@ -184,7 +184,7 @@ export async function getHero(locale: Locale = defaultLocale): Promise<HeroData>
 export async function getSiteSettings(
   locale: Locale = defaultLocale,
 ): Promise<SiteSettingsData> {
-  const data = await reader.singletons.siteSettings.read();
+  const data = await reader.singletons.siteSettings.read().catch(() => null);
   const text = pickLocale(data?.copy, locale);
   return {
     description: text?.description?.trim() || site.description,

@@ -39,7 +39,7 @@ export async function getCmsPage(
   slug: string,
   locale: Locale = defaultLocale,
 ): Promise<CmsPage | null> {
-  const page = await reader.collections.pages.read(slug);
+  const page = await reader.collections.pages.read(slug).catch(() => null);
   if (!page) return null;
 
   const loc = page.copy?.[locale];

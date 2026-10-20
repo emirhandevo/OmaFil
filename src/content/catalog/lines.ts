@@ -87,7 +87,7 @@ function mapCoveredSkus(slug: string, entry: LineEntry): CoveredSku[] {
 export async function getProductLines(
   locale: Locale = defaultLocale,
 ): Promise<ProductLine[]> {
-  const slugs = await reader.collections.productLines.list();
+  const slugs = await reader.collections.productLines.list().catch(() => [] as string[]);
   const lines: ProductLine[] = [];
   for (const slug of slugs) {
     try {

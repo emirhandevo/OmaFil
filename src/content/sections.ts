@@ -46,6 +46,12 @@ const factoryBandFallback: Photo[] = factoryBandOrder.map((file, index) => ({
   alt: `OmaFil üretim bandı ${String(index + 1).padStart(2, "0")}`,
 }));
 
+function asText(value: unknown): string {
+  if (typeof value === "string") return value.trim();
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  return "";
+}
+
 function mapPhotos(
   rows: readonly { src?: string; alt?: string }[] | undefined,
   fallback: Photo[],
@@ -53,8 +59,8 @@ function mapPhotos(
   if (!rows?.length) return fallback;
   const photos = rows
     .map((row, index) => ({
-      src: row.src?.trim() ?? "",
-      alt: row.alt?.trim() || fallback[index]?.alt || "",
+      src: asText(row.src),
+      alt: asText(row.alt) || fallback[index]?.alt || "",
     }))
     .filter((photo) => photo.src);
   return photos.length ? photos : fallback;
@@ -90,10 +96,10 @@ export const overlayCopyFromCms = cache(async function overlayCopyFromCms(
   locale: Locale,
 ): Promise<Copy> {
   const [home, hubs, contact, careers] = await Promise.all([
-    reader.singletons.home.read(),
-    reader.singletons.hubs.read(),
-    reader.singletons.contact.read(),
-    reader.singletons.careersSections.read(),
+    reader.singletons.home.read().catch(() => null),
+    reader.singletons.hubs.read().catch(() => null),
+    reader.singletons.contact.read().catch(() => null),
+    reader.singletons.careersSections.read().catch(() => null),
   ]);
 
   const h = pickFilled(asCopy(home?.copy), locale);
@@ -200,7 +206,7 @@ export const overlayCopyFromCms = cache(async function overlayCopyFromCms(
 });
 
 export const getHomeMedia = cache(async function getHomeMedia() {
-  const data = await reader.singletons.home.read();
+  const data = await reader.singletons.home.read().catch(() => null);
   return {
     introImage:
       data?.introImage?.trim() || "/images/corporate/factory.webp",
@@ -212,20 +218,20 @@ export const getHomeMedia = cache(async function getHomeMedia() {
 export const getBrandKicker = cache(async function getBrandKicker(
   locale: Locale,
 ) {
-  const data = await reader.singletons.home.read();
+  const data = await reader.singletons.home.read().catch(() => null);
   return pickFilled(asCopy(data?.copy), locale).brandKicker?.trim() || "OmaFil";
 });
 
 export const getHomeStats = cache(async function getHomeStats(
   locale: Locale,
 ): Promise<StatItem[]> {
-  const data = await reader.singletons.home.read();
+  const data = await reader.singletons.home.read().catch(() => null);
   const items = (data?.copy?.[locale]?.statsItems ?? []) as StatItem[];
   return items
     .map((item: StatItem) => ({
-      value: item.value?.trim() ?? "",
-      unit: item.unit?.trim() ?? "",
-      label: item.label?.trim() ?? "",
+      value: asText(item.value),
+      unit: asText(item.unit),
+      label: asText(item.label),
     }))
     .filter((item) => item.value || item.label);
 });
@@ -233,7 +239,7 @@ export const getHomeStats = cache(async function getHomeStats(
 export const getAboutBlocks = cache(async function getAboutBlocks(
   locale: Locale,
 ) {
-  const data = await reader.singletons.aboutSections.read();
+  const data = await reader.singletons.aboutSections.read().catch(() => null);
   const row = data?.copy?.[locale];
   const filled = pickFilled(asCopy(data?.copy), locale);
   const stats = ((row?.stats ?? []) as Highlight[])
@@ -256,7 +262,7 @@ export const getAboutBlocks = cache(async function getAboutBlocks(
 export const getFactoryBlocks = cache(async function getFactoryBlocks(
   locale: Locale,
 ) {
-  const data = await reader.singletons.factorySections.read();
+  const data = await reader.singletons.factorySections.read().catch(() => null);
   const row = data?.copy?.[locale];
   const filled = pickFilled(asCopy(data?.copy), locale);
   return {
@@ -286,7 +292,7 @@ export const getFactoryBlocks = cache(async function getFactoryBlocks(
 export const getSustainBlocks = cache(async function getSustainBlocks(
   locale: Locale,
 ) {
-  const data = await reader.singletons.sustainSections.read();
+  const data = await reader.singletons.sustainSections.read().catch(() => null);
   const row = data?.copy?.[locale];
   const filled = pickFilled(asCopy(data?.copy), locale);
   return {
@@ -303,7 +309,7 @@ export const getSustainBlocks = cache(async function getSustainBlocks(
 });
 
 export const getGesBlocks = cache(async function getGesBlocks(locale: Locale) {
-  const data = await reader.singletons.gesPage.read();
+  const data = await reader.singletons.gesPage.read().catch(() => null);
   const row = data?.copy?.[locale];
   const filled = pickFilled(asCopy(data?.copy), locale);
   return {

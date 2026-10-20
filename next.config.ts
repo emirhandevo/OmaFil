@@ -15,9 +15,11 @@ const nextConfig: NextConfig = {
   },
   // Keystatic reader / route handler Node API
   serverExternalPackages: ["@keystatic/core", "@keystatic/next"],
-  // keystatic jsonları vercel fonksiyonuna girsin. yoksa ürün listesi boş kalır
+  // Turbopack bu glob’u yutuyor; webpack build + geniş rota. Vercel’de YAML yoksa 500.
   outputFileTracingIncludes: {
+    "/": ["./content/**/*"],
     "/*": ["./content/**/*"],
+    "/**": ["./content/**/*"],
   },
   // Tarayıcı bu hostu 2 yıl yalnızca HTTPS açar. Alt alan adları da dahil.
   // preload yok: tarayıcı listesine girmek geri alınması zor.
