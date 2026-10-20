@@ -7,7 +7,13 @@ import { useEffect, useRef, useState } from "react";
  * muted / playsInline sunucu HTML’i ile tarayıcı öznitelikleri
  * uyuşmazsa Next “hydration attributes” uyarısı basar.
  */
-export function HeroVideo() {
+export function HeroVideo({
+  src,
+  poster,
+}: {
+  src: string;
+  poster: string;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
   const [start, setStart] = useState(false);
@@ -30,14 +36,14 @@ export function HeroVideo() {
   useEffect(() => {
     const video = videoRef.current;
     if (!start || !video) return;
-    video.src = "/videos/hero-web.mp4";
+    video.src = src;
     const play = () => {
       video.play().catch(() => {});
     };
     video.addEventListener("canplay", play, { once: true });
     video.load();
     return () => video.removeEventListener("canplay", play);
-  }, [start]);
+  }, [start, src]);
 
   if (!mounted) {
     return (
@@ -56,7 +62,7 @@ export function HeroVideo() {
       loop
       playsInline
       preload="none"
-      poster="/images/hero-lcp-black.webp"
+      poster={poster}
     />
   );
 }

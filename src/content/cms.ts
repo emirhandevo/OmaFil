@@ -4,6 +4,7 @@ import {
   site,
   socialLinks as socialFallback,
 } from "@/config/site";
+import { dictionaries } from "@/i18n/dictionary";
 
 export type ContactLocation = {
   label: string;
@@ -30,6 +31,33 @@ export type ContactData = {
 export type SiteSettingsData = {
   description: string;
   footerTagline: string;
+};
+
+/** Ana sayfa hero. Video veya tek görsel. */
+export type HeroMedia =
+  | { kind: "video"; videoSrc: string; posterSrc: string }
+  | { kind: "image"; imageSrc: string };
+
+export type HeroData = {
+  media: HeroMedia;
+  eyebrow: string;
+  title: string;
+  body: string;
+  productsCta: string;
+  aboutCta: string;
+};
+
+const heroFallback: HeroData = {
+  media: {
+    kind: "video",
+    videoSrc: "/videos/hero-web.mp4",
+    posterSrc: "/images/hero-lcp-black.webp",
+  },
+  eyebrow: dictionaries.tr.hero.eyebrow,
+  title: dictionaries.tr.hero.title,
+  body: dictionaries.tr.hero.body,
+  productsCta: dictionaries.tr.hero.productsCta,
+  aboutCta: dictionaries.tr.hero.aboutCta,
 };
 
 function networkFromLabel(label: string): SocialNetwork | null {
@@ -101,6 +129,39 @@ export async function getContact(): Promise<ContactData> {
           if (!network) return [];
           return [{ href: s.href, label: s.label, network }];
         }),
+  };
+}
+
+/** Ana sayfa hero — yoksa mevcut TR sözlük + varsayılan video. */
+export async function getHero(): Promise<HeroData> {
+  const data = await reader.singletons.hero.read();
+  if (!data) return heroFallback;
+
+  const text = {
+    eyebrow: data.eyebrow.trim() || heroFallback.eyebrow,
+    title: data.title.trim() || heroFallback.title,
+    body: data.body.trim() || heroFallback.body,
+    productsCta: data.productsCta.trim() || heroFallback.productsCta,
+    aboutCta: data.aboutCta.trim() || heroFallback.aboutCta,
+  };
+
+  if (data.media.discriminant === "video") {
+    return {
+      ...text,
+      media: {
+        kind: "video",
+        videoSrc: data.media.value.videoSrc.trim() || "/videos/hero-web.mp4",
+        posterSrc: data.media.value.posterSrc.trim() || "/images/hero-lcp-black.webp",
+      },
+    };
+  }
+
+  return {
+    ...text,
+    media: {
+      kind: "image",
+      imageSrc: data.media.value.imageSrc.trim() || "/images/hero-lcp-black.webp",
+    },
   };
 }
 

@@ -45,6 +45,33 @@ const filamentSkuFields = fields.object({
   }),
 });
 
+/** Hero metni — her dil aynı 5 alan. Medya ortak, çeviri dil dil. */
+function heroCopy(label: string) {
+  return fields.object(
+    {
+      eyebrow: fields.text({
+        label: "Üst kicker",
+        description: "Başlığın üstündeki kısa turuncu satır.",
+      }),
+      title: fields.text({
+        label: "Başlık",
+        multiline: true,
+      }),
+      body: fields.text({
+        label: "Açıklama",
+        multiline: true,
+      }),
+      productsCta: fields.text({
+        label: "Ürünler butonu",
+      }),
+      aboutCta: fields.text({
+        label: "Kurumsal butonu",
+      }),
+    },
+    { label },
+  );
+}
+
 const coveredSkuFields = fields.object({
   productionType: fields.text({
     label: "Üretim tipi",
@@ -215,6 +242,58 @@ export default config({
     }),
   },
   singletons: {
+    hero: singleton({
+      label: "Ana sayfa hero",
+      path: "content/settings/hero",
+      schema: {
+        media: fields.conditional(
+          fields.select({
+            label: "Arka plan",
+            options: [
+              { label: "Video", value: "video" },
+              { label: "Görsel", value: "image" },
+            ],
+            defaultValue: "video",
+          }),
+          {
+            video: fields.object({
+              videoSrc: fields.text({
+                label: "Video yolu",
+                description: "public altı yol. Örn. /videos/hero-web.mp4",
+                validation: { isRequired: true },
+              }),
+              posterSrc: fields.text({
+                label: "Poster görsel",
+                description:
+                  "Video gelene kadar duran kare. Örn. /images/hero-lcp-black.webp",
+                validation: { isRequired: true },
+              }),
+            }),
+            image: fields.object({
+              imageSrc: fields.text({
+                label: "Görsel yolu",
+                description: "Örn. /images/hero-lcp-black.webp",
+                validation: { isRequired: true },
+              }),
+            }),
+          },
+        ),
+        copy: fields.object(
+          {
+          tr: heroCopy("Türkçe"),
+          en: heroCopy("English"),
+          de: heroCopy("Deutsch"),
+          fr: heroCopy("Français"),
+          es: heroCopy("Español"),
+          it: heroCopy("Italiano"),
+          pt: heroCopy("Português"),
+          nl: heroCopy("Nederlands"),
+          ru: heroCopy("Русский"),
+          ar: heroCopy("العربية"),
+          zh: heroCopy("中文"),
+        }),
+      },
+    }),
     siteSettings: singleton({
       label: "Site ayarları",
       path: "content/settings/site",
