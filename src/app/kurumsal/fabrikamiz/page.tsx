@@ -286,6 +286,7 @@ export default async function FabrikamizPage() {
                   src={cms.labVideo}
                   poster={cms.labPoster}
                   duration={cms.labDuration}
+                  locale={locale}
                 />
               </div>
             </div>

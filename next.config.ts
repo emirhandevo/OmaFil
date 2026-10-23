@@ -53,6 +53,16 @@ const nextConfig: NextConfig = {
 
     return [
       {
+        // VTT, nosniff açıkken text/vtt olmazsa tarayıcı altyazıyı yüklemez.
+        source: "/videos/:file.vtt",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "text/vtt; charset=utf-8",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           {

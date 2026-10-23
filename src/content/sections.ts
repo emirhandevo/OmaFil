@@ -281,9 +281,9 @@ export const getFactoryBlocks = cache(async function getFactoryBlocks(
       .filter((item) => item.title || item.text),
     listCardImage:
       data?.listCardImage?.trim() || "/images/factory/band/14.webp",
-    labVideo: data?.labVideo?.trim() || "/videos/fab-lab.mp4",
+    labVideo: data?.labVideo?.trim() || "/videos/omafil-tanitim.mp4",
     labPoster: data?.labPoster?.trim() || "/images/factory/fab-lab-poster.webp",
-    labDuration: data?.labDuration?.trim() || "00:28",
+    labDuration: data?.labDuration?.trim() || "00:31",
     gallery: mapPhotos(data?.gallery, factoryGalleryFallback),
     band: mapPhotos(data?.band, factoryBandFallback),
   };

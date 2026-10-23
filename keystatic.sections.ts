@@ -140,7 +140,7 @@ export const sectionSingletons = {
       listCardImage: t("Ürün listesi kart görseli"),
       labVideo: fields.text({
         label: "Laboratuvar videosu",
-        description: "Örn. /videos/fab-lab.mp4",
+        description: "Örn. /videos/omafil-tanitim.mp4",
       }),
       labPoster: fields.text({
         label: "Laboratuvar poster görseli",
