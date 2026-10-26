@@ -28,19 +28,26 @@ export function Header({
 }) {
   // Mobil menü açık/kapalı durumu
   const [isOpen, setIsOpen] = useState(false);
-  // Masaüstü Kurumsal dropdown: tıklanınca hover/focus yüzünden açık kalmasın
-  const [corpForcedClosed, setCorpForcedClosed] = useState(false);
+  // Hamburger: Kurumsal alt linkleri kapalı başlar
+  const [corpMobileOpen, setCorpMobileOpen] = useState(false);
+  // Masaüstü: hover/odakla açık mı (aria-expanded için)
+  const [corpDesktopOpen, setCorpDesktopOpen] = useState(false);
   // Headerın tamamını saran ref - dışına tıklamayı tespit etmek için
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const copy = useCopy();
 
-  // Route değişince mobilde menüyü kapat + masaüstü dropdown odağını temizle
+  // Route değişince hamburger ve Kurumsal akordeon kapansın
   useEffect(() => {
     setIsOpen(false);
-    setCorpForcedClosed(true);
+    setCorpMobileOpen(false);
+    setCorpDesktopOpen(false);
     blurActive();
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isOpen) setCorpMobileOpen(false);
+  }, [isOpen]);
 
   useEffect(() => {
     // Menü açıkken sayfa kaymasın; kaydırma nav kutusunda kalsın.
@@ -66,11 +73,6 @@ export function Header({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  function closeCorpDropdown() {
-    setCorpForcedClosed(true);
-    blurActive();
-  }
-
   return (
     <header
       ref={headerRef}
@@ -93,12 +95,20 @@ export function Header({
               <div
                 key={item.href}
                 className="group relative"
-                onMouseEnter={() => setCorpForcedClosed(false)}
-                onMouseLeave={() => setCorpForcedClosed(false)}
+                onMouseEnter={() => setCorpDesktopOpen(true)}
+                onMouseLeave={() => setCorpDesktopOpen(false)}
               >
-                <LocaleLink
-                  href={item.href}
-                  onClick={closeCorpDropdown}
+                {/* Sayfaya gitmez. Hover / klavye odağında alt menü. */}
+                <button
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded={corpDesktopOpen}
+                  onFocus={() => setCorpDesktopOpen(true)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
+                      setCorpDesktopOpen(false);
+                    }
+                  }}
                   className={buttonVariants({
                     variant: "ghost",
                     size: "sm",
@@ -106,22 +116,17 @@ export function Header({
                   })}
                 >
                   {navLabel(item.href, copy)}
-                  <ChevronDown aria-hidden="true" className="size-4" />
-                </LocaleLink>
-                {/* Hover ve klavye odağında açılır. Tıklanınca force-close. */}
-                <div
-                  className={
-                    corpForcedClosed
-                      ? "absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2"
-                      : "absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-focus-within:block group-hover:block"
-                  }
-                >
+                  <ChevronDown
+                    aria-hidden="true"
+                    className="size-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                  />
+                </button>
+                <div className="absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-focus-within:block group-hover:block">
                   <ul className="min-w-52 rounded-xl border border-border bg-background p-2 shadow-lg">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <LocaleLink
                           href={child.href}
-                          onClick={closeCorpDropdown}
                           className="block rounded-md px-3 py-2 text-center text-sm text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
                         >
                           {navLabel(child.href, copy)}
@@ -187,32 +192,53 @@ export function Header({
           className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-y-contain border-t border-border bg-background px-4 py-4 lg:hidden"
         >
           <ul className="flex flex-col gap-1">
-            {navLinks.map((item) => (
-              <li key={item.href}>
-                <LocaleLink
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
-                >
-                  {navLabel(item.href, copy)}
-                </LocaleLink>
-                {"children" in item && (
-                  <ul className="pb-2">
-                    {item.children.map((child) => (
-                      <li key={child.href}>
-                        <LocaleLink
-                          href={child.href}
-                          onClick={() => setIsOpen(false)}
-                          className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
-                        >
-                          {navLabel(child.href, copy)}
-                        </LocaleLink>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+            {navLinks.map((item) =>
+              "children" in item ? (
+                <li key={item.href}>
+                  {/* Hub sayfasına gitmez. Tık = alt linkleri aç/kapa. */}
+                  <button
+                    type="button"
+                    aria-expanded={corpMobileOpen}
+                    aria-controls="header-corp-submenu"
+                    onClick={() => setCorpMobileOpen((prev) => !prev)}
+                    className="flex w-full items-center justify-between rounded-md px-3 py-3 text-left text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
+                  >
+                    {navLabel(item.href, copy)}
+                    <ChevronDown
+                      aria-hidden="true"
+                      className={`size-4 shrink-0 transition-transform duration-200 ${
+                        corpMobileOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {corpMobileOpen ? (
+                    <ul id="header-corp-submenu" className="pb-2">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <LocaleLink
+                            href={child.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block rounded-md px-6 py-2 text-sm text-muted-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
+                          >
+                            {navLabel(child.href, copy)}
+                          </LocaleLink>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ) : (
+                <li key={item.href}>
+                  <LocaleLink
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="block rounded-md px-3 py-3 text-sm font-medium text-foreground transition-colors hover:bg-brand-orange/10 hover:text-brand-orange active:bg-brand-orange/10 active:text-brand-orange"
+                  >
+                    {navLabel(item.href, copy)}
+                  </LocaleLink>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
       )}

@@ -125,36 +125,56 @@ export default async function HakkimizdaPage() {
           </div>
         ) : null}
 
-        {/* Büyüme hikâyesi — canlı sitedeki yüzen ikonlu kartlar */}
+        {/* Büyüme hikâyesi — lab videosundaki gibi kesilen halkalar + cam kartlar */}
         <div className="relative mt-16 overflow-hidden rounded-3xl border border-border bg-muted px-4 py-14 shadow-sm sm:px-8 sm:py-16">
+          {/* overflow-hidden kenarı yayı keser; köşede kavis kalır. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-16 -right-10 size-56 rotate-12 bg-brand-navy/10"
-            style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+            className="pointer-events-none absolute -top-24 -start-20 aspect-square w-80 rounded-full border border-brand-orange/45 shadow-[0_0_28px_rgba(241,144,0,0.2)]"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-20 right-1/4 size-64 bg-brand-navy/8"
-            style={{ clipPath: "polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)" }}
+            className="pointer-events-none absolute -top-8 -start-4 size-36 rounded-full bg-brand-orange/20 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-16 -end-14 aspect-square w-72 rounded-full border border-brand-orange/45 shadow-[0_0_28px_rgba(241,144,0,0.2)]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-6 -end-4 size-32 rounded-full bg-brand-orange/20 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-[38%] left-[6%] aspect-square w-64 rounded-full border border-brand-orange/40 shadow-[0_0_28px_rgba(241,144,0,0.16)]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-1/2 right-[8%] aspect-square w-56 -translate-y-1/2 rounded-full border border-brand-orange/35 shadow-[0_0_28px_rgba(241,144,0,0.15)]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-1/4 left-1/3 size-44 rounded-full bg-brand-navy/14 blur-3xl dark:bg-brand-orange/14"
           />
 
-          <h2 className="relative text-center text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="relative z-10 text-center text-3xl font-semibold tracking-tight sm:text-4xl">
             {f.growthBefore || t?.about.growthBefore || "Büyüme"}{" "}
             <span className="text-brand-orange">
               {f.growthAccent || t?.about.growthAccent || "Hikayemiz"}
             </span>
           </h2>
 
-          <ol className="relative mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="relative z-10 mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             {story.map((item) => {
               const Icon = item.icon;
               return (
                 <li
                   key={`${item.year}-${item.title}`}
-                  className="relative pt-8 sm:last:col-span-2 sm:last:w-1/2 sm:last:justify-self-center lg:last:col-span-1 lg:last:col-start-2 lg:last:w-auto"
+                  className="relative pt-8 lg:last:col-start-2"
                 >
-                  <article className="relative flex h-full flex-col items-center rounded-2xl border border-border/80 bg-card px-5 pb-7 pt-12 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <span className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-md ring-4 ring-muted/50 dark:ring-background">
+                  {/* Cam sadece kartta. Daha opak = muted zeminle kontrast. */}
+                  <article className="relative flex h-full min-h-[13.5rem] flex-col items-center rounded-2xl border border-white/80 bg-background/85 px-5 pb-7 pt-12 text-center shadow-sm backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:border-brand-orange/45 hover:shadow-md dark:border-white/15 dark:bg-card/75">
+                    <span className="absolute top-0 left-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-navy text-white shadow-md ring-4 ring-background/90 dark:ring-card/80">
                       <Icon
                         aria-hidden="true"
                         className="size-7"
