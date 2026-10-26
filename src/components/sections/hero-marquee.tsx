@@ -117,7 +117,6 @@ function ImageGroup({
                   alt={alt}
                   fill
                   sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
-                  unoptimized
                   draggable={false}
                   className="object-cover"
                 />

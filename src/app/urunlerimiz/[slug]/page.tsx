@@ -75,7 +75,6 @@ export default async function ProductLinePage({ params }: PageProps) {
               alt={line.label}
               fill
               priority
-              unoptimized
               sizes="(min-width: 1024px) 40vw, 100vw"
               className="object-cover"
             />

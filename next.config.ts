@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   // Image quality={80|82} uyarılarını keser; 75 varsayılan kalsın
   images: {
     qualities: [75, 80, 82, 90, 92, 95],
+    // Next 16: ?v=2 gibi cache-bust query optimizer’da yasak, localPatterns şart.
+    // search yok = /images altındaki query serbest (marquee ?v=2 / ?v=4).
+    localPatterns: [{ pathname: "/images/**" }],
   },
   // Keystatic reader / route handler Node API
   serverExternalPackages: ["@keystatic/core", "@keystatic/next"],

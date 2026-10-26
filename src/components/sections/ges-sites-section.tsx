@@ -100,7 +100,6 @@ function SiteCard({ site }: { site: GesSite }) {
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             quality={90}
-            unoptimized
             className="object-cover"
           />
         </button>
