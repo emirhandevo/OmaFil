@@ -172,7 +172,7 @@ export default async function FabrikamizPage() {
             <p className="text-body mt-5 text-base leading-8">
               {f.sinceBody ||
                 t?.factory.sinceBody ||
-                "Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına alan OmaFil, polimer üretiminde yenilikçi ve sürdürülebilir çözümler sunarak sektörün geleceğini inşa ediyor. Modern tesislerimizde, küresel standartlarda kalite ve süreklilik sağlıyoruz."}
+                "Oma Polimer A.Ş.’nin çeyrek asra yaklaşan tecrübesini arkasına alan OmaFil, iplik üretiminde yenilikçi ve sürdürülebilir çözümler sunarak sektörün geleceğini inşa ediyor. Modern tesislerimizde, küresel standartlarda kalite ve süreklilik sağlıyoruz."}
             </p>
           </div>
           <FactoryMissionTabs

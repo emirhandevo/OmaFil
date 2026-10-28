@@ -22,7 +22,7 @@
           "yarnDtex": 44,
           "filament": 13,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -30,7 +30,7 @@
           "yarnDtex": 44,
           "filament": 13,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -38,7 +38,7 @@
           "yarnDtex": 78,
           "filament": 24,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -46,7 +46,7 @@
           "yarnDtex": 78,
           "filament": 24,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -54,7 +54,7 @@
           "yarnDtex": 78,
           "filament": 24,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -62,7 +62,7 @@
           "yarnDtex": 78,
           "filament": 24,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "DC",
@@ -70,7 +70,7 @@
           "yarnDtex": 83,
           "filament": 36,
           "yarnType": "PA6",
-          "kesit": "—"
+          "kesit": "Round"
         }
       ]
     }

@@ -22,7 +22,7 @@
           "yarnDtex": 22,
           "filament": 20,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "ACY",
@@ -30,7 +30,7 @@
           "yarnDtex": 22,
           "filament": 20,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "ACY",
@@ -38,7 +38,7 @@
           "yarnDtex": 22,
           "filament": 20,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "ACY",
@@ -46,7 +46,7 @@
           "yarnDtex": 44,
           "filament": 34,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "ACY",
@@ -54,7 +54,7 @@
           "yarnDtex": 44,
           "filament": 34,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         }
       ]
     }

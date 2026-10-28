@@ -3,8 +3,8 @@ plantImage: /images/ges/erbaa-cati-1/aerial.webp
 copy:
   tr:
     worldAlt: Orman kaplı dünya görseli
-    whyBefore: Neden
-    whyAccent: sürdürülebilirlik önemli
+    whyBefore: Sürdürülebilirlik
+    whyAccent: neden önemli?
     why:
       - >-
           Sanayi devrimiyle büyüyen enerji talebi, petrol ve kömür gibi yenilenemeyen kaynakların yoğun kullanımına yol açtı. Hızlı sanayileşme ve kentleşme hava, su ve toprak kirliliğini artırdı; biyoçeşitlilik kaybı, toprak kaybı ve çölleşmeyi derinleştirdi.

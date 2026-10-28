@@ -13,7 +13,7 @@ export async function CompanyStats() {
     : [
         { value: "13.000", unit: copy.stats.perYear, label: copy.stats.production },
         { value: "40.000+", unit: "m²", label: copy.stats.area },
-        { value: "1.000+", unit: copy.stats.happy, label: copy.stats.customers },
+        { value: "300+", unit: copy.stats.happy, label: copy.stats.customers },
         { value: "61+", unit: copy.stats.toCountries, label: copy.stats.exportLabel },
       ];
 

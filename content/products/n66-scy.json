@@ -22,7 +22,7 @@
           "yarnDtex": 11,
           "filament": 5,
           "yarnType": "PA66FLAT",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -30,7 +30,7 @@
           "yarnDtex": 22,
           "filament": 7,
           "yarnType": "PA66FLAT",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -38,7 +38,7 @@
           "yarnDtex": 22,
           "filament": 7,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -46,7 +46,7 @@
           "yarnDtex": 22,
           "filament": 20,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -54,7 +54,7 @@
           "yarnDtex": 22,
           "filament": 20,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -62,7 +62,7 @@
           "yarnDtex": 44,
           "filament": 34,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -70,7 +70,7 @@
           "yarnDtex": 44,
           "filament": 34,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -78,7 +78,7 @@
           "yarnDtex": 44,
           "filament": 34,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -86,7 +86,7 @@
           "yarnDtex": 78,
           "filament": 68,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -94,7 +94,7 @@
           "yarnDtex": 78,
           "filament": 68,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "productionType": "SC",
@@ -102,7 +102,7 @@
           "yarnDtex": 78,
           "filament": 68,
           "yarnType": "PA66",
-          "kesit": "—"
+          "kesit": "Round"
         }
       ]
     }

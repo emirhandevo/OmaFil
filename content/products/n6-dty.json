@@ -27,7 +27,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "15D/5F/6F/7F",
@@ -40,7 +40,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "20D/6F/7F/24F",
@@ -53,7 +53,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "22/24",
@@ -68,7 +68,7 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "22D/20F",
@@ -81,7 +81,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "28D/12F",
@@ -94,7 +94,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "30D/10F/12F/24F",
@@ -107,7 +107,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "33D/24F",
@@ -120,7 +120,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "40D/12F/24F/36F/48F",
@@ -133,12 +133,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "44/12",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -148,12 +149,13 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "44/34",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -163,12 +165,13 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "44D/24F/36F/48F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -176,12 +179,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "50D/24F/48F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -189,12 +193,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "55D/48F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -202,12 +207,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "70/24",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -217,12 +223,13 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "70D/23F/24F/48F/54F/68F/72F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -230,12 +237,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "78D/48F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -243,12 +251,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "80D/24F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -256,12 +265,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "100D/36F/48F/68F/96F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -269,12 +279,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "110D/96F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -282,12 +293,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "140D/48F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -295,12 +307,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "145D/72F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -308,12 +321,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "200D/48F/72F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -321,12 +335,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "210D/96F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -334,12 +349,13 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "280D/96F",
           "luster": [
-            "SD"
+            "SD",
+            "FD"
           ],
           "colors": [
             "Ekru",
@@ -347,7 +363,7 @@
             "Dope Dyed"
           ],
           "features": [],
-          "kesit": "—"
+          "kesit": "Round"
         }
       ]
     }

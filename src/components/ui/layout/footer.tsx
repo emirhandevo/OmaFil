@@ -97,38 +97,42 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
           </ul>
         </div>
 
-        {/* İletişim, telefon ve mail — her genişlikte sütunun ortasında */}
-        <div className="flex flex-col items-center text-center">
-          <p className="text-sm font-semibold text-foreground">{copy.footer.contact}</p>
-          <ul className="mt-4 flex flex-col items-center space-y-3 text-sm text-muted-foreground">
-            {contact.phone.map((phone) => (
-              <li key={phone} className="flex items-center justify-center gap-2">
-                <Phone
-                  aria-hidden="true"
-                  className="size-4 shrink-0 text-brand-orange"
-                />
-                <a
-                  href={`tel:${phone}`}
-                  className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
+        {/* Başlık sütunun sol kenarında kalır. Telefon ve mail, başlık yazısının ortasına hizalanır. */}
+        <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+          <div className="relative w-fit">
+            <p className="text-sm font-semibold text-foreground">{copy.footer.contact}</p>
+            <ul className="mt-4 flex w-max flex-col items-center space-y-3 text-sm text-muted-foreground lg:absolute lg:left-1/2 lg:top-full lg:-translate-x-1/2">
+              {contact.phone.map((phone) => (
+                <li key={phone} className="flex items-center justify-center gap-2">
+                  <Phone
+                    aria-hidden="true"
+                    className="size-4 shrink-0 text-brand-orange"
+                  />
+                  <a
+                    href={`tel:${phone}`}
+                    className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
+                  >
+                    {phone}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <MailLink
+                  email={contact.email}
+                  subject={copy.footer.contact}
+                  className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
                 >
-                  {phone}
-                </a>
+                  <Mail
+                    aria-hidden="true"
+                    className="size-4 shrink-0 text-brand-orange"
+                  />
+                  {contact.email}
+                </MailLink>
               </li>
-            ))}
-            <li>
-              <MailLink
-                email={contact.email}
-                subject={copy.footer.contact}
-                className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
-              >
-                <Mail
-                  aria-hidden="true"
-                  className="size-4 shrink-0 text-brand-orange"
-                />
-                {contact.email}
-              </MailLink>
-            </li>
-          </ul>
+            </ul>
+          </div>
+          {/* lg’de liste akışın dışında. Alttaki bloğun üstüne binmesin diye üç satırlık yer ayrılır. */}
+          <div className="hidden h-[calc(1rem+3*1.25rem+2*0.75rem)] lg:block" aria-hidden="true" />
         </div>
 
         {/* Adresler — ayrı kolon, her biri Maps'e link */}

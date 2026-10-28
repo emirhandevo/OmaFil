@@ -27,7 +27,7 @@ copy:
         unit: m²
         label: Üretim Alanı
       -
-        value: 1.000+
+        value: 300+
         unit: Mutlu
         label: Müşteri
       -

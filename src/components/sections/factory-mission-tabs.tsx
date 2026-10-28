@@ -6,7 +6,7 @@ const tabs = [
   {
     id: "misyon",
     label: "Misyon",
-    body: "Polimer endüstrisinin ihtiyaç duyduğu yüksek kaliteli ve teknik iplikleri, çevre dostu üretim yöntemleriyle sunmak. Müşterilerimizin üretim süreçlerine değer katan, sürdürülebilir ve inovatif çözümler geliştirmek.",
+    body: "Tekstil endüstrisinin ihtiyaç duyduğu yüksek kaliteli ve teknik iplikleri, çevre dostu üretim yöntemleriyle sunmak. Müşterilerimizin üretim süreçlerine değer katan, sürdürülebilir ve inovatif çözümler geliştirmek.",
   },
   {
     id: "tarihce",

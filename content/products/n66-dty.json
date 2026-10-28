@@ -32,7 +32,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "20/10",
@@ -49,7 +49,7 @@
             "Seamless",
             "CK"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "20/20",
@@ -68,7 +68,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "22/24",
@@ -84,7 +84,7 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "30/10",
@@ -100,7 +100,7 @@
           "features": [
             "CK"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "30/34",
@@ -119,7 +119,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "40/13",
@@ -138,7 +138,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "40/34",
@@ -157,7 +157,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "44/34",
@@ -173,7 +173,7 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "50/24",
@@ -191,7 +191,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "50/34",
@@ -210,7 +210,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "60/68",
@@ -228,7 +228,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "70/24",
@@ -247,7 +247,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "70/34",
@@ -266,7 +266,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "70/68",
@@ -285,7 +285,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "78/68",
@@ -301,7 +301,7 @@
           "features": [
             "featured"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "78/92",
@@ -318,7 +318,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "100/34",
@@ -337,7 +337,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "100/68",
@@ -356,7 +356,7 @@
             "WK",
             "Weaving"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         },
         {
           "spec": "100/92",
@@ -372,7 +372,7 @@
           "features": [
             "CK"
           ],
-          "kesit": "—"
+          "kesit": "Round"
         }
       ]
     }
