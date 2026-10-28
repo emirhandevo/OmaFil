@@ -6,6 +6,7 @@ import { useCopy, useLocale } from "@/components/i18n/locale-provider";
 import { getUi, placeLabel } from "@/i18n/ui";
 import { navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
+import { MailLink } from "@/components/ui/mail-link";
 import type { ContactData, SocialNetwork } from "@/content/cms";
 import { localizePath } from "@/i18n/locales";
 import { navLabel } from "@/i18n/labels";
@@ -96,12 +97,12 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
           </ul>
         </div>
 
-        {/* İletişim, telefon ve mail - mobilde ortalı  */}
-        <div className="flex flex-col items-center sm:items-start sm:text-left">
+        {/* İletişim, telefon ve mail — her genişlikte sütunun ortasında */}
+        <div className="flex flex-col items-center text-center">
           <p className="text-sm font-semibold text-foreground">{copy.footer.contact}</p>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <ul className="mt-4 flex flex-col items-center space-y-3 text-sm text-muted-foreground">
             {contact.phone.map((phone) => (
-              <li key={phone} className="flex items-center gap-2">
+              <li key={phone} className="flex items-center justify-center gap-2">
                 <Phone
                   aria-hidden="true"
                   className="size-4 shrink-0 text-brand-orange"
@@ -114,17 +115,18 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
                 </a>
               </li>
             ))}
-            <li className="flex items-center gap-2">
-              <Mail
-                aria-hidden="true"
-                className="size-4 shrink-0 text-brand-orange"
-              />
-              <a
-                href={`mailto:${contact.email}`}
-                className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
+            <li>
+              <MailLink
+                email={contact.email}
+                subject={copy.footer.contact}
+                className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
               >
+                <Mail
+                  aria-hidden="true"
+                  className="size-4 shrink-0 text-brand-orange"
+                />
                 {contact.email}
-              </a>
+              </MailLink>
             </li>
           </ul>
         </div>

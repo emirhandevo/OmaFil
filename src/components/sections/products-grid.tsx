@@ -7,6 +7,8 @@ import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useInner } from "@/components/i18n/locale-provider";
 import { productFamilies } from "@/content/catalog/families";
 import type { ProductFamily, ProductLine } from "@/content/catalog/types";
+import { useProductsBrowse } from "@/components/sections/products-browse";
+import { MailLink } from "@/components/ui/mail-link";
 
 type Phase = "idle" | "out" | "in";
 
@@ -22,7 +24,8 @@ type ProductsGridProps = {
 export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
   const copy = useCopy();
   const inner = useInner();
-  const [family, setFamily] = useState<ProductFamily>("all");
+  // Filtre layout provider’da: detay sayfasına gidince sıfırlanmaz.
+  const { family, setFamily } = useProductsBrowse();
   const [phase, setPhase] = useState<Phase>("idle");
   const lockRef = useRef(false);
 
@@ -99,21 +102,35 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
         className={`mt-10 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 ${listClass}`}
       >
         {visible.map((item) => (
-          <li key={item.slug} className="group min-w-0">
+          <li key={item.slug} className="group relative min-w-0 lg:hover:z-10">
+            {/* overflow-hidden kart gölgeyi keser; ışıma li’de, üst kenara yakın */}
+            <span
+              aria-hidden
+              className="
+                pointer-events-none absolute -inset-x-2 top-0 -bottom-2 z-0
+                rounded-[1.85rem] bg-[#f19000]/50 blur-sm
+                opacity-0 transition-opacity duration-[400ms]
+                ease-[cubic-bezier(0.37,0,0.63,1)]
+                motion-safe:lg:group-hover:opacity-100
+              "
+            />
             {/* Görsel, başlık, özet ve link satırı sabit yükseklik: her kart aynı boy */}
+            {/* Süzülme: 16px, 1.8s, iki uçta yavaş. Süre köşeli parantezle yazılır: duration-[1800ms]. */}
             <article
               className="
-                relative flex w-full flex-col overflow-hidden rounded-3xl
+                relative z-10 flex w-full flex-col overflow-hidden rounded-3xl
                 border border-white/15 bg-[#1e355d]
                 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.35),0_20px_48px_-12px_rgba(0,0,0,0.55)]
                 ring-1 ring-white/10
-                transition-[border-color,box-shadow,background-color] duration-300 ease-out
-                hover:border-[#f19000]/55
+                transition-[border-color,box-shadow,background-color,translate] duration-[500ms]
+                ease-[cubic-bezier(0.37,0,0.63,1)]
+                hover:border-[#f19000]/70
                 hover:bg-[#243f6e]
-                hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.4),0_32px_64px_-16px_rgba(0,0,0,0.65)]
-                active:border-[#f19000]/55
+                hover:shadow-[0_28px_44px_-12px_rgba(0,0,0,0.45),0_46px_72px_-18px_rgba(0,0,0,0.62)]
+                motion-safe:lg:hover:-translate-y-4
+                active:border-[#f19000]/70
                 active:bg-[#243f6e]
-                active:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.4),0_32px_64px_-16px_rgba(0,0,0,0.65)]
+                active:shadow-[0_28px_44px_-12px_rgba(0,0,0,0.45),0_46px_72px_-18px_rgba(0,0,0,0.62)]
               "
             >
               <div
@@ -132,7 +149,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                       alt={item.label}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] group-active:scale-[1.04]"
+                      className="object-cover transition-[scale] duration-[1800ms] ease-[cubic-bezier(0.37,0,0.63,1)] group-hover:scale-[1.04] group-active:scale-[1.04]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#12243c]/70 via-transparent to-transparent opacity-90" />
                   </>
@@ -188,12 +205,13 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
 
       <p className="text-body mt-12 text-sm">
         {copy.products.quoteLine}{" "}
-        <a
-          href={`mailto:${contactEmail}`}
+        <MailLink
+          email={contactEmail}
+          subject={copy.products.quoteLine}
           className="font-semibold text-brand-orange hover:underline active:underline"
         >
           {contactEmail}
-        </a>
+        </MailLink>
         .
       </p>
     </div>

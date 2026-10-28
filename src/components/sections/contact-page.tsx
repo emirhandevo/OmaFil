@@ -4,6 +4,7 @@ import { getCopy } from "@/i18n/get-copy";
 import { placeLabel } from "@/i18n/ui";
 import { getContact, type SocialNetwork } from "@/content/cms";
 import { ContactForm } from "@/components/sections/contact-form";
+import { MailLink } from "@/components/ui/mail-link";
 import {
   InstagramIcon,
   LinkedinIcon,
@@ -120,8 +121,9 @@ export async function ContactPage() {
             ))}
 
             <li>
-              <a
-                href={`mailto:${contact.email}`}
+              <MailLink
+                email={contact.email}
+                subject={copy.contact.title}
                 className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-colors hover:border-brand-orange hover:bg-brand-orange/[0.04] active:border-brand-orange active:bg-brand-orange/[0.04]"
               >
                 <span className="flex size-11 items-center justify-center rounded-xl bg-brand-blue/15 text-brand-blue transition-transform group-hover:scale-105 group-active:scale-105">
@@ -135,7 +137,7 @@ export async function ContactPage() {
                     {contact.email}
                   </span>
                 </span>
-              </a>
+              </MailLink>
             </li>
           </ul>
 

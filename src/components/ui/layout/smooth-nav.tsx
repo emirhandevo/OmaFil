@@ -2,6 +2,10 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {
+  isProductDetailPath,
+  isProductListPath,
+} from "@/components/sections/products-browse";
 
 /**
  * İç link tıklamalarını yakalar; destekleyen tarayıcıda
@@ -33,10 +37,12 @@ export function SmoothNav() {
       if (anchor.getAttribute("target") === "_blank") return;
       if (anchor.dataset.noTransition !== undefined) return;
 
+      // mailto ve tel sayfa değil. Mail / arama uygulamasına bırak.
+      const protocol = anchor.protocol;
+      if (protocol === "mailto:" || protocol === "tel:") return;
+
       const hrefAttr = anchor.getAttribute("href");
-      if (!hrefAttr || hrefAttr.startsWith("#") || hrefAttr.startsWith("mailto:") || hrefAttr.startsWith("tel:")) {
-        return;
-      }
+      if (!hrefAttr || hrefAttr.startsWith("#")) return;
 
       let url: URL;
       try {
@@ -57,8 +63,12 @@ export function SmoothNav() {
       event.preventDefault();
       event.stopPropagation();
 
-      // Geçiş başlayamazsa tıklama boşa gitmesin.
-      const go = () => router.push(next);
+      // Detaydan listeye dönüşte Next tepeye kaydırmasın. Konumu provider yazar.
+      const backToList =
+        isProductDetailPath(window.location.pathname) &&
+        isProductListPath(url.pathname);
+      const go = () =>
+        router.push(next, backToList ? { scroll: false } : undefined);
       try {
         document.startViewTransition(() => go());
       } catch {
