@@ -1,6 +1,22 @@
 {
   "label": "Naylon 6,6 SCY",
   "summary": "Tek kaplama PA66 + elastan. Flat seçenekler dahil.",
+  "copy": {
+    "tr": {
+      "label": "Naylon 6,6 SCY",
+      "summary": "Tek kaplama PA66 + elastan. Flat seçenekler dahil."
+    },
+    "en": {},
+    "de": {},
+    "fr": {},
+    "es": {},
+    "it": {},
+    "pt": {},
+    "nl": {},
+    "ru": {},
+    "ar": {},
+    "zh": {}
+  },
   "family": "nylon66",
   "polymer": "pa66",
   "code": "SCY",
@@ -102,54 +118,16 @@
           "filament": 68,
           "yarnType": "PA66",
           "kesit": "Round"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 156,
+          "filament": 136,
+          "yarnType": "PA66",
+          "kesit": "Round"
         }
       ]
-    }
-  },
-  "copy": {
-    "tr": {
-      "label": "Naylon 6,6 SCY",
-      "summary": "Tek kaplama PA66 + elastan. Flat seçenekler dahil."
-    },
-    "en": {
-      "label": "",
-      "summary": ""
-    },
-    "de": {
-      "label": "",
-      "summary": ""
-    },
-    "fr": {
-      "label": "",
-      "summary": ""
-    },
-    "es": {
-      "label": "",
-      "summary": ""
-    },
-    "it": {
-      "label": "",
-      "summary": ""
-    },
-    "pt": {
-      "label": "",
-      "summary": ""
-    },
-    "nl": {
-      "label": "",
-      "summary": ""
-    },
-    "ru": {
-      "label": "",
-      "summary": ""
-    },
-    "ar": {
-      "label": "",
-      "summary": ""
-    },
-    "zh": {
-      "label": "",
-      "summary": ""
     }
   }
 }
