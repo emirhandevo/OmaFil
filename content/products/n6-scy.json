@@ -1,6 +1,22 @@
 {
   "label": "Naylon 6 SCY",
   "summary": "Tek kaplama (single covered) PA6 + elastan.",
+  "copy": {
+    "tr": {
+      "label": "Naylon 6 SCY",
+      "summary": "Tek kaplama (single covered) PA6 + elastan."
+    },
+    "en": {},
+    "de": {},
+    "fr": {},
+    "es": {},
+    "it": {},
+    "pt": {},
+    "nl": {},
+    "ru": {},
+    "ar": {},
+    "zh": {}
+  },
   "family": "nylon6",
   "polymer": "pa6",
   "code": "SCY",
@@ -71,54 +87,24 @@
           "filament": 24,
           "yarnType": "PA6",
           "kesit": "Round"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 78,
+          "yarnDtex": 156,
+          "filament": 136,
+          "yarnType": "PA6",
+          "kesit": "Round"
+        },
+        {
+          "productionType": "SC",
+          "spandexDtex": 44,
+          "yarnDtex": 156,
+          "filament": 136,
+          "yarnType": "PA6",
+          "kesit": "Round"
         }
       ]
-    }
-  },
-  "copy": {
-    "tr": {
-      "label": "Naylon 6 SCY",
-      "summary": "Tek kaplama (single covered) PA6 + elastan."
-    },
-    "en": {
-      "label": "",
-      "summary": ""
-    },
-    "de": {
-      "label": "",
-      "summary": ""
-    },
-    "fr": {
-      "label": "",
-      "summary": ""
-    },
-    "es": {
-      "label": "",
-      "summary": ""
-    },
-    "it": {
-      "label": "",
-      "summary": ""
-    },
-    "pt": {
-      "label": "",
-      "summary": ""
-    },
-    "nl": {
-      "label": "",
-      "summary": ""
-    },
-    "ru": {
-      "label": "",
-      "summary": ""
-    },
-    "ar": {
-      "label": "",
-      "summary": ""
-    },
-    "zh": {
-      "label": "",
-      "summary": ""
     }
   }
 }
