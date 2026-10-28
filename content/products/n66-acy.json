@@ -1,6 +1,22 @@
 {
   "label": "Naylon 6,6 ACY",
   "summary": "Hava jetli kaplama PA66 + elastan. Custom üretim.",
+  "copy": {
+    "tr": {
+      "label": "Naylon 6,6 ACY",
+      "summary": "Hava jetli kaplama PA66 + elastan. Custom üretim."
+    },
+    "en": {},
+    "de": {},
+    "fr": {},
+    "es": {},
+    "it": {},
+    "pt": {},
+    "nl": {},
+    "ru": {},
+    "ar": {},
+    "zh": {}
+  },
   "family": "nylon66",
   "polymer": "pa66",
   "code": "ACY",
@@ -55,54 +71,40 @@
           "filament": 34,
           "yarnType": "PA66",
           "kesit": "Round"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 78,
+          "filament": 68,
+          "yarnType": "PA66",
+          "kesit": "Round"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 22,
+          "yarnDtex": 78,
+          "filament": 24,
+          "yarnType": "PA66",
+          "kesit": "Round"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 78,
+          "filament": 68,
+          "yarnType": "PA66",
+          "kesit": "Round"
+        },
+        {
+          "productionType": "ACY",
+          "spandexDtex": 44,
+          "yarnDtex": 156,
+          "filament": 136,
+          "yarnType": "PA66",
+          "kesit": "Round"
         }
       ]
-    }
-  },
-  "copy": {
-    "tr": {
-      "label": "Naylon 6,6 ACY",
-      "summary": "Hava jetli kaplama PA66 + elastan. Custom üretim."
-    },
-    "en": {
-      "label": "",
-      "summary": ""
-    },
-    "de": {
-      "label": "",
-      "summary": ""
-    },
-    "fr": {
-      "label": "",
-      "summary": ""
-    },
-    "es": {
-      "label": "",
-      "summary": ""
-    },
-    "it": {
-      "label": "",
-      "summary": ""
-    },
-    "pt": {
-      "label": "",
-      "summary": ""
-    },
-    "nl": {
-      "label": "",
-      "summary": ""
-    },
-    "ru": {
-      "label": "",
-      "summary": ""
-    },
-    "ar": {
-      "label": "",
-      "summary": ""
-    },
-    "zh": {
-      "label": "",
-      "summary": ""
     }
   }
 }
