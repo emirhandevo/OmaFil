@@ -205,13 +205,13 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
 
       <p className="text-body mt-12 text-sm">
         {copy.products.quoteLine}{" "}
-        <MailLink
-          email={contactEmail}
-          subject={copy.products.quoteLine}
+        {/* mailto + konu: tıklanınca mail uygulamasında bu adrese yeni ileti açılır */}
+        <a
+          href={`mailto:${contactEmail}?subject=${encodeURIComponent(copy.products.quoteLine)}`}
           className="font-semibold text-brand-orange hover:underline active:underline"
         >
           {contactEmail}
-        </MailLink>
+        </a>
         .
       </p>
     </div>

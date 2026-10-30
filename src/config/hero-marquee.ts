@@ -54,7 +54,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 6 SCY",
     summary: "Tek kaplama (single covered) PA6 + elastan.",
     href: "/urunlerimiz/n6-scy",
-    src: "/images/hero/iplik/scy-n6.webp?v=2",
+    src: "/images/hero/iplik/scy-n6.webp?v=5",
     code: "SCY",
   },
   {
@@ -62,7 +62,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 6 DCY",
     summary: "Çift kaplama (double covered) PA6 + elastan.",
     href: "/urunlerimiz/n6-dcy",
-    src: "/images/hero/iplik/dcy-n6.webp?v=2",
+    src: "/images/hero/iplik/dcy-n6.webp?v=5",
     code: "DCY",
   },
   {
@@ -102,7 +102,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 6,6 SCY",
     summary: "Tek kaplama PA66 + elastan. Flat seçenekler dahil.",
     href: "/urunlerimiz/n66-scy",
-    src: "/images/hero/iplik/scy-n66.webp?v=2",
+    src: "/images/hero/iplik/scy-n66.webp?v=5",
     code: "SCY",
   },
   {
@@ -110,7 +110,7 @@ const allProducts: MarqueeItem[] = [
     label: "Naylon 6,6 DCY",
     summary: "Çift kaplama PA66 + elastan. Custom üretim.",
     href: "/urunlerimiz/n66-dcy",
-    src: "/images/hero/iplik/dcy-n66.webp?v=3",
+    src: "/images/hero/iplik/dcy-n66.webp?v=5",
     code: "DCY",
   },
   {

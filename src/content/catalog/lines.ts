@@ -30,9 +30,9 @@ function mapLine(
     code: entry.code,
     kind,
     // Boş string = görsel yok (başka üründen kopya kullanma)
-    // ?v=3: aynı dosya adı tarayıcıda eski görseli tutmasın.
+    // ?v=5: aynı dosya adı tarayıcıda eski görseli tutmasın.
     src: entry.imageSrc?.trim()
-      ? `${entry.imageSrc.trim()}?v=4`
+      ? `${entry.imageSrc.trim()}?v=5`
       : undefined,
     colors: entry.colors.length ? [...entry.colors] : undefined,
     recycled: entry.recycled || undefined,
