@@ -1,15 +1,73 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useInner, useLocale } from "@/components/i18n/locale-provider";
 import {
   yarnImages,
+  yarnImagesAll,
   yarnImagesBottom,
   type MarqueeItem,
 } from "@/config/hero-marquee";
+
+/** İlk ekranda görünen kartlar. Geri kalan ve kopya grup lazy. */
+const EAGER_COUNT = 4;
+/** lg altı tek şerit. Bu dosyadaki dokunmatik eşik ile aynı (1023px). */
+const COMPACT_QUERY = "(max-width: 1023px)";
+
+function subscribeCompact(onChange: () => void) {
+  const mq = window.matchMedia(COMPACT_QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+function readCompact() {
+  return window.matchMedia(COMPACT_QUERY).matches;
+}
+
+/** Alt şerit kapanırken yükseklik + opaklık. Kısa tut: ağır animasyon değil. */
+const BOTTOM_MS = 280;
+
+/**
+ * İlk karede ekran genişliğine oturur, animasyon yok.
+ * Sonraki daralma/genişlemede alt şerit 280ms süzülür, bitince DOM'dan çıkar.
+ */
+function useBottomStrip(compact: boolean) {
+  const [present, setPresent] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const first = useRef(true);
+
+  useLayoutEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wait = reduce ? 0 : BOTTOM_MS;
+
+    if (first.current) {
+      first.current = false;
+      setPresent(!compact);
+      setVisible(!compact);
+      return;
+    }
+
+    if (!compact) {
+      setPresent(true);
+      if (wait === 0) {
+        setVisible(true);
+        return;
+      }
+      // Kapalı kare bir kez boyansın. Aynı karede açılırsa geçiş hiç görünmez.
+      const id = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(id);
+    }
+
+    setVisible(false);
+    const id = window.setTimeout(() => setPresent(false), wait);
+    return () => window.clearTimeout(id);
+  }, [compact]);
+
+  return { present, visible };
+}
 
 const STEP_PX = 320;
 
@@ -119,6 +177,10 @@ function ImageGroup({
                   sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
                   draggable={false}
                   className="object-cover"
+                  // İlk 4 kart hemen gelsin. 5+ ve kopya şerit viewport'a yaklaşınca yüklensin.
+                  loading={!duplicate && index < EAGER_COUNT ? "eager" : "lazy"}
+                  // Kopya grup aynı dosyayı ikinci kez çözer; ana kareyi bekletmesin.
+                  decoding={duplicate ? "async" : undefined}
                 />
               ) : (
                 <div className="flex size-full flex-col items-center justify-center gap-1 px-3 text-center">
@@ -346,21 +408,41 @@ function MarqueeRow({
 }
 
 export function HeroMarquee() {
+  // Sunucu HTML'i tek şerit: telefonda bütün kartlar bir arada.
+  // lg ve üstü hidrasyondan hemen sonra üst / alt diye ayrılır.
+  const compact = useSyncExternalStore(subscribeCompact, readCompact, () => true);
+  const bottom = useBottomStrip(compact);
+
   return (
-    <div className="mt-10 w-full space-y-5">
+    <div className="mt-10 w-full">
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
+        {/* key yok: üst şerit remount olmasın, görünen kartlar yerinde kalsın. */}
         <MarqueeRow
-          items={yarnImages}
+          items={compact ? yarnImagesAll : yarnImages}
           altPrefix="İplik"
           direction="right"
         />
       </div>
-      <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
-        <MarqueeRow
-          items={yarnImagesBottom}
-          altPrefix="İplik"
-          direction="left"
-        />
+      <div
+        data-bottom-strip=""
+        aria-hidden={bottom.visible ? undefined : true}
+        className={`grid ease-out motion-reduce:transition-none ${
+          bottom.visible
+            ? "mt-5 grid-rows-[1fr] opacity-100"
+            : "pointer-events-none mt-0 grid-rows-[0fr] opacity-0"
+        } transition-[grid-template-rows,opacity,margin-top] duration-[280ms]`}
+      >
+        <div className="overflow-hidden">
+          {bottom.present ? (
+            <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
+              <MarqueeRow
+                items={yarnImagesBottom}
+                altPrefix="İplik"
+                direction="left"
+              />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

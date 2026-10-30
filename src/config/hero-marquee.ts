@@ -1,6 +1,7 @@
 /**
  * Hero şeritleri — tek kaynak.
- * 16 ürün hattı ikiye bölünür: üst 8, alt 8.
+ * Geniş ekran: liste ikiye bölünür, üst yarnImages ve alt yarnImagesBottom.
+ * Dar ekran (lg altı): listenin tamamı tek şeritte, yarnImagesAll.
  * Kart yazısı katalogdaki label. Hover metni ürün özetinden gelir (çeviriler inner.products).
  * src yoksa başka ürünün görseli konmaz; kartta yer tutucu kalır.
  */
@@ -138,6 +139,9 @@ const allProducts: MarqueeItem[] = [
     code: "DCY",
   },
 ];
+
+/** Mobil tek şerit: 16 kart yan yana. */
+export const yarnImagesAll = allProducts;
 
 /** Üst ve alt şerit eşit kart. */
 const half = Math.ceil(allProducts.length / 2);

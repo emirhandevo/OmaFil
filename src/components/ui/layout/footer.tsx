@@ -1,10 +1,10 @@
 "use client";
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Printer } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useLocale } from "@/components/i18n/locale-provider";
 import { getUi, placeLabel } from "@/i18n/ui";
-import { navLinks, site } from "@/config/site";
+import { contact as siteContact, navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
 import { MailLink } from "@/components/ui/mail-link";
 import type { ContactData, SocialNetwork } from "@/content/cms";
@@ -116,6 +116,20 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
                   </a>
                 </li>
               ))}
+              {/* İki telefonun altı, e-postanın üstü. */}
+              <li className="flex items-center justify-center gap-2">
+                <Printer
+                  aria-hidden="true"
+                  className="size-4 shrink-0 text-brand-orange"
+                />
+                <a
+                  href={`tel:${siteContact.fax}`}
+                  aria-label={`Faks ${siteContact.fax}`}
+                  className="text-foreground/80 transition-colors hover:text-brand-orange hover:underline hover:underline-offset-2 active:text-brand-orange active:underline active:underline-offset-2"
+                >
+                  {siteContact.fax}
+                </a>
+              </li>
               <li>
                 <MailLink
                   email={contact.email}
@@ -131,8 +145,8 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
               </li>
             </ul>
           </div>
-          {/* lg’de liste akışın dışında. Alttaki bloğun üstüne binmesin diye üç satırlık yer ayrılır. */}
-          <div className="hidden h-[calc(1rem+3*1.25rem+2*0.75rem)] lg:block" aria-hidden="true" />
+          {/* lg’de liste akışın dışında. Alttaki bloğun üstüne binmesin diye dört satırlık yer ayrılır. */}
+          <div className="hidden h-[calc(1rem+4*1.25rem+3*0.75rem)] lg:block" aria-hidden="true" />
         </div>
 
         {/* Adresler — ayrı kolon, her biri Maps'e link */}

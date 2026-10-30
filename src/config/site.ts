@@ -58,6 +58,8 @@ export const navLinks = [
 // birden telefon numarası footer hepsini alt alta listeler
 export const contact = {
   phone: ["+90 212 438 72 20", "+90 549 177 50 10"],
+  // Sabit hat ile aynı numara, sonu 21. Sadece footer basar.
+  fax: "+90 212 438 72 21",
   email: "info@omafil.com",
   // Cep hattı → wa.me (ülke kodu, boşluksuz).
   whatsapp: "https://wa.me/905491775010",
