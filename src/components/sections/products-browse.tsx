@@ -10,7 +10,10 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
-import { stripLocale } from "@/i18n/locales";
+import {
+  isProductDetailPath,
+  isProductListPath,
+} from "@/lib/product-paths";
 import type { ProductFamily } from "@/content/catalog/types";
 
 type BrowseState = {
@@ -21,14 +24,6 @@ type BrowseState = {
 const BrowseContext = createContext<BrowseState | null>(null);
 
 const STORAGE_KEY = "omafil:urunlerimiz-browse";
-
-export function isProductListPath(pathname: string) {
-  return stripLocale(pathname) === "/urunlerimiz";
-}
-
-export function isProductDetailPath(pathname: string) {
-  return /^\/urunlerimiz\/[^/]+$/.test(stripLocale(pathname));
-}
 
 type StoredBrowse = {
   family: ProductFamily;

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   isProductDetailPath,
   isProductListPath,
-} from "@/components/sections/products-browse";
+} from "@/lib/product-paths";
 
 /**
  * İç link tıklamalarını yakalar; destekleyen tarayıcıda
