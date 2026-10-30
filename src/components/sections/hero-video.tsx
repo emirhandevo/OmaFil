@@ -24,13 +24,58 @@ export function HeroVideo({
 
   useEffect(() => {
     if (!mounted) return;
-    const arm = () => window.setTimeout(() => setStart(true), 400);
-    if (document.readyState === "complete") {
-      const id = arm();
-      return () => window.clearTimeout(id);
+    let dead = false;
+    let timer = 0;
+    let poll = 0;
+    let obs: PerformanceObserver | null = null;
+
+    function startNow() {
+      if (!dead) setStart(true);
     }
-    window.addEventListener("load", arm, { once: true });
-    return () => window.removeEventListener("load", arm);
+
+    // Masaüstü: load'dan 400ms sonra. Telefon: görseller susunca.
+    function arm() {
+      const phone = window.matchMedia("(max-width: 1023px)").matches;
+      if (!phone) {
+        timer = window.setTimeout(startNow, 400);
+        return;
+      }
+
+      // Yeni img bitene kadar video src'si yazılmaz. 4 sn'de yine başlar.
+      let lastImageAt = performance.now();
+      const begun = lastImageAt;
+      try {
+        obs = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (entry.initiatorType === "img") lastImageAt = performance.now();
+          }
+        });
+        obs.observe({ type: "resource" });
+      } catch {
+        obs = null;
+      }
+
+      poll = window.setInterval(() => {
+        const now = performance.now();
+        const quiet = now - lastImageAt >= 700;
+        const capped = now - begun >= 4000;
+        if (!quiet && !capped) return;
+        window.clearInterval(poll);
+        obs?.disconnect();
+        startNow();
+      }, 200);
+    }
+
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
+
+    return () => {
+      dead = true;
+      window.removeEventListener("load", arm);
+      window.clearTimeout(timer);
+      window.clearInterval(poll);
+      obs?.disconnect();
+    };
   }, [mounted]);
 
   useEffect(() => {

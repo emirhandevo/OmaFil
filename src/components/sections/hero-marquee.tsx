@@ -12,8 +12,12 @@ import {
   type MarqueeItem,
 } from "@/config/hero-marquee";
 
-/** İlk 4 kart lazy değil. Öncelik veya preload yok. Gerisi lazy. */
-const LEAD_COUNT = 4;
+/**
+ * Yalnız ilk kart eager. Hepsi fetchPriority low.
+ * React, eager + auto görünce head'e preload basar. low bunu keser.
+ * Poster ile aynı anda kuyruğa girmesinler.
+ */
+const LEAD_COUNT = 1;
 /** lg altı tek şerit. Bu dosyadaki dokunmatik eşik ile aynı (1023px). */
 const COMPACT_QUERY = "(max-width: 1023px)";
 
@@ -177,10 +181,10 @@ function ImageGroup({
                   sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
                   draggable={false}
                   className="object-cover"
-                  // İlk 4: lazy yok, preload yok, öncelik auto (posterin önüne geçmez).
-                  // 5+ ve kopya grup: viewport'a yaklaşınca, düşük öncelikle.
+                  // low: React bu img için head preload üretmesin.
+                  // İlk kart yine eager: parser ona gelince iner, ama posterin önüne geçmez.
                   loading={!duplicate && index < LEAD_COUNT ? "eager" : "lazy"}
-                  fetchPriority={!duplicate && index < LEAD_COUNT ? "auto" : "low"}
+                  fetchPriority="low"
                   // Kopya grup aynı dosyayı ikinci kez çözer; ana kareyi bekletmesin.
                   decoding={duplicate ? "async" : undefined}
                 />
