@@ -12,12 +12,6 @@ import {
   type MarqueeItem,
 } from "@/config/hero-marquee";
 
-/**
- * Yalnız ilk kart eager. Hepsi fetchPriority low.
- * React, eager + auto görünce head'e preload basar. low bunu keser.
- * Poster ile aynı anda kuyruğa girmesinler.
- */
-const LEAD_COUNT = 1;
 /** lg altı tek şerit. Bu dosyadaki dokunmatik eşik ile aynı (1023px). */
 const COMPACT_QUERY = "(max-width: 1023px)";
 
@@ -79,6 +73,8 @@ type GroupProps = {
   items: MarqueeItem[];
   altPrefix: string;
   duplicate?: boolean;
+  /** Üst şeridin ilk kartı mobil LCP. Kopya grup ve alt şerit bunu almaz. */
+  lead?: boolean;
   skipClickRef: React.RefObject<boolean>;
   openSrc: string | null;
   hoveredSrc: string | null;
@@ -90,6 +86,7 @@ function ImageGroup({
   items,
   altPrefix,
   duplicate = false,
+  lead = false,
   skipClickRef,
   openSrc,
   hoveredSrc,
@@ -114,6 +111,8 @@ function ImageGroup({
         // Test görseli varsa onu bas; yoksa kartın kendi dosyası. İkisi de yoksa yer tutucu.
         const src = item.src;
         const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${item.label}`;
+        // Yalnız üst şeridin ilk gerçek kartı. Telefonda ilk ekrandaki en büyük boya bu.
+        const isLcp = lead && !duplicate && index === 0;
         // İki kopyada da aynı slug açık kalsın (ekranda görünen hangisiyse)
         const open = openSrc === item.slug || hoveredSrc === item.slug;
 
@@ -181,12 +180,12 @@ function ImageGroup({
                   sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
                   draggable={false}
                   className="object-cover"
-                  // low: React bu img için head preload üretmesin.
-                  // İlk kart yine eager: parser ona gelince iner, ama posterin önüne geçmez.
-                  loading={!duplicate && index < LEAD_COUNT ? "eager" : "lazy"}
-                  fetchPriority="low"
-                  // Kopya grup aynı dosyayı ikinci kez çözer; ana kareyi bekletmesin.
-                  decoding={duplicate ? "async" : undefined}
+                  // LCP kartı yüksek öncelik + sync decode: boya gecikmesin.
+                  // Diğerleri low. React, low görünce head preload basmaz.
+                  loading={isLcp ? "eager" : "lazy"}
+                  fetchPriority={isLcp ? "high" : "low"}
+                  decoding={isLcp ? "sync" : "async"}
+                  data-hero-lcp={isLcp ? "" : undefined}
                 />
               ) : (
                 <div className="flex size-full flex-col items-center justify-center gap-1 px-3 text-center">
@@ -208,10 +207,12 @@ function MarqueeRow({
   items,
   altPrefix,
   direction,
+  lead = false,
 }: {
   items: MarqueeItem[];
   altPrefix: string;
   direction: "left" | "right";
+  lead?: boolean;
 }) {
   const copy = useCopy();
   const innerRef = useRef<HTMLDivElement>(null);
@@ -357,6 +358,7 @@ function MarqueeRow({
   const groupProps = {
     items,
     altPrefix,
+    lead,
     skipClickRef,
     openSrc,
     hoveredSrc,
@@ -424,6 +426,7 @@ export function HeroMarquee() {
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
         {/* key yok: üst şerit remount olmasın, görünen kartlar yerinde kalsın. */}
         <MarqueeRow
+          lead
           items={compact ? yarnImagesAll : yarnImages}
           altPrefix="İplik"
           direction="right"

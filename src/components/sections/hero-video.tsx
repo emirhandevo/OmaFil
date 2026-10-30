@@ -26,57 +26,56 @@ export function HeroVideo({
     if (!mounted) return;
     let dead = false;
     let timer = 0;
-    let poll = 0;
-    let obs: PerformanceObserver | null = null;
+    let lcpImg: HTMLImageElement | null = null;
+    const begun = performance.now();
 
     function startNow() {
-      if (!dead) setStart(true);
+      if (dead) return;
+      dead = true;
+      setStart(true);
     }
 
-    // Masaüstü: load'dan 400ms sonra. Telefon: görseller susunca.
+    // Masaüstü: sayfa yüklenince 400ms. Telefon: LCP kartının load'u.
+    function onDesktopLoad() {
+      timer = window.setTimeout(startNow, 400);
+    }
+
     function arm() {
       const phone = window.matchMedia("(max-width: 1023px)").matches;
       if (!phone) {
-        timer = window.setTimeout(startNow, 400);
+        if (document.readyState === "complete") onDesktopLoad();
+        else window.addEventListener("load", onDesktopLoad, { once: true });
         return;
       }
 
-      // Yeni img bitene kadar video src'si yazılmaz. 4 sn'de yine başlar.
-      let lastImageAt = performance.now();
-      const begun = lastImageAt;
-      try {
-        obs = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries()) {
-            // resource gözlemi PerformanceResourceTiming döner. Düz PerformanceEntry'de bu alan yok.
-            if (!(entry instanceof PerformanceResourceTiming)) continue;
-            if (entry.initiatorType === "img") lastImageAt = performance.now();
-          }
-        });
-        obs.observe({ type: "resource" });
-      } catch {
-        obs = null;
+      const found = document.querySelector("img[data-hero-lcp]");
+      if (!(found instanceof HTMLImageElement)) {
+        // Kart henüz DOM'da yoksa kısa aralıkla tekrar bak. 8 sn'de video yine başlar.
+        if (performance.now() - begun >= 8000) {
+          startNow();
+          return;
+        }
+        timer = window.setTimeout(arm, 100);
+        return;
       }
-
-      poll = window.setInterval(() => {
-        const now = performance.now();
-        const quiet = now - lastImageAt >= 700;
-        const capped = now - begun >= 4000;
-        if (!quiet && !capped) return;
-        window.clearInterval(poll);
-        obs?.disconnect();
+      lcpImg = found;
+      if (found.complete && found.naturalWidth > 0) {
         startNow();
-      }, 200);
+        return;
+      }
+      found.addEventListener("load", startNow, { once: true });
+      found.addEventListener("error", startNow, { once: true });
+      timer = window.setTimeout(startNow, 8000);
     }
 
-    if (document.readyState === "complete") arm();
-    else window.addEventListener("load", arm, { once: true });
+    arm();
 
     return () => {
       dead = true;
-      window.removeEventListener("load", arm);
+      window.removeEventListener("load", onDesktopLoad);
       window.clearTimeout(timer);
-      window.clearInterval(poll);
-      obs?.disconnect();
+      lcpImg?.removeEventListener("load", startNow);
+      lcpImg?.removeEventListener("error", startNow);
     };
   }, [mounted]);
 
