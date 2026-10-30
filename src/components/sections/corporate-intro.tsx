@@ -19,8 +19,8 @@ export async function CorporateIntro() {
        <div
   className="relative aspect-4/3 w-full"
   style={{
-    maskImage: 'url("/masks/brush-mask.png")',
-    WebkitMaskImage: 'url("/masks/brush-mask.png")',
+    maskImage: 'url("/masks/brush-mask.webp")',
+    WebkitMaskImage: 'url("/masks/brush-mask.webp")',
     maskSize: "120% 150%",
     WebkitMaskSize: "100% 100%",
     maskPosition: "center",
