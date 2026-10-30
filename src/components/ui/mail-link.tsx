@@ -23,12 +23,9 @@ export function MailLink({ email, subject, className, children }: MailLinkProps)
     <a
       href={href}
       className={className}
-      onClick={(event) => {
-        // Varsayılan tıklama bazı önizleme tarayıcılarında yutuluyor.
-        // Adresi elle vermek yeni ileti penceresini açar.
-        event.preventDefault();
-        window.location.href = href;
-      }}
+      // preventDefault yok. Tarayıcı mailto’yu kendi mail uygulamasına bırakır.
+      // Elle location yazmak o tıklamayı yutuyor, pencere açılmıyor.
+      data-no-transition=""
     >
       {children}
     </a>
