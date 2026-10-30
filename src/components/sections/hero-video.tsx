@@ -47,6 +47,8 @@ export function HeroVideo({
       try {
         obs = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
+            // resource gözlemi PerformanceResourceTiming döner. Düz PerformanceEntry'de bu alan yok.
+            if (!(entry instanceof PerformanceResourceTiming)) continue;
             if (entry.initiatorType === "img") lastImageAt = performance.now();
           }
         });
