@@ -1,55 +1,37 @@
-import { Phone } from "lucide-react";
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/icons/social-icons";
-/** 
- * Site genel sabitleri - isim, URL, nav, tek yerde
- * Header/Footer/metadata buradan okur; 10 dosyada arama yok
-*/
+/**
+ * Site genel sabitleri. İsim, URL, menü adresleri tek yerde.
+ * Görünen menü yazısı burada değil. Header sözlükten navLabel ile basar.
+ */
 export const site = {
     name: "OmaFil - İplik Üretim Sanayi",
     // SEO başlığında marka kalsın. Yasal unvan footer ve kurumsal metinde.
     legalName: "OMA POLİMER A.Ş.",
-    // canlı domain; metadata ve canonical bunun üstünden üretilir.
+    // Canlı domain. Sitemap ve robots bunu kullanır. Sekme başlığı layout’ta üretilir.
     url: "https://omafil.com",
     description:
     "Endüstriyel iplik üretimi. Kurumsal katalog ve ürün portföyü.",
-    locale: "tr_TR",
     // public/ klasörüne göre yol. Header ve footer buradan okur.
     logo: "/images/omafil_logo.svg",
     // Dark temada aynı yerler bu dosyayı basar. Açık tema logo'da kalır.
     logoDark: "/images/omafil_logo_dark.svg",
 } as const;
 
-// Kurumsal menüsündeki linkler. Header, footer ve alt sayfalar buradan okur.
+// Yalnız adres. Yazı sözlükte: navLabel ve chrome özetleri.
 export const corporateLinks = [
-    {
-        href: "/kurumsal/hakkimizda",
-        label: "Hakkımızda",
-        summary: "Kuruluş hikâyesi ve şirket yapısı.",
-    },
-    {
-        href: "/kurumsal/fabrikamiz",
-        label: "Fabrikamız",
-        summary: "Tokat–Erbaa gipe iplik üretim tesisi.",
-    },
-    {
-        href: "/kurumsal/surdurulebilirlik",
-        label: "Sürdürülebilirlik",
-        summary: "Enerji, geri dönüşüm ve sorumlu üretim.",
-    },
-    {
-        href: "/kurumsal/insan-kaynaklari",
-        label: "İnsan Kaynakları",
-        summary: "Çalışma anlayışı ve başvuru.",
-    },
+    { href: "/kurumsal/hakkimizda" },
+    { href: "/kurumsal/fabrikamiz" },
+    { href: "/kurumsal/surdurulebilirlik" },
+    { href: "/kurumsal/insan-kaynaklari" },
 ] as const;
 
 export const navLinks = [
-    {href: "/", label: "Ana Sayfa"},
-    {href: "/kurumsal", label: "Kurumsal", children: corporateLinks},
-    {href: "/urunlerimiz", label: "Ürünlerimiz"},
-    {href: "/ges", label: "GES"},
-    {href: "/blog", label: "Blog"},
-    {href: "/iletisim", label: "İletişim"},
+    { href: "/" },
+    { href: "/kurumsal", children: corporateLinks },
+    { href: "/urunlerimiz" },
+    { href: "/ges" },
+    { href: "/blog" },
+    { href: "/iletisim" },
 ] as const;
 
 

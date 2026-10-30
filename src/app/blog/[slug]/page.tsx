@@ -12,6 +12,8 @@ type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+// Slug listesi build anında. Yazı silinirse sayfa 404 olur.
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({ slug: post.slug }));

@@ -26,6 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const pillarIcons = [Sun, TreePine, Leaf] as const;
 
+// Metin sırası: panelde dolu alan, yoksa inner, o da yoksa ges.ts Türkçe yedeği.
+
 export default async function GesPage() {
   const { locale } = await getCopy();
   const t = getInner(locale);

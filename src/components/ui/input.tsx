@@ -1,6 +1,8 @@
 import { Input as InputPrimitive } from "@base-ui/react/input"
 import { cn } from "cn"
 
+// shadcn input. Formlar className ile boyar.
+
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <InputPrimitive

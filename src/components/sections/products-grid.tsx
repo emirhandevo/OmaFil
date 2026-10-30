@@ -183,6 +183,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                     href={`/urunlerimiz/${item.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white active:text-white"
                   >
+                    {/* Specs her dilde aynı kelime. Sözlükteki ürün giriş cümlesi de böyle. */}
                     Specs
                     <ArrowUpRight
                       aria-hidden="true"

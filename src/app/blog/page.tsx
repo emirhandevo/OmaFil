@@ -5,6 +5,8 @@ import { getCopy } from "@/i18n/get-copy";
 import { htmlLang, pageAlternates } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
 
+// Yazı yoksa boş durum. Liste Keystatic posts koleksiyonundan gelir.
+
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getCopy();
   const seo = getUi(locale).seo;

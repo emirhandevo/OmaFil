@@ -4,6 +4,8 @@ import { getCopy } from "@/i18n/get-copy";
 import { pageAlternates } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
 
+// Form ve adresler ContactPage içinde. Bu dosya yalnız SEO.
+
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getCopy();
   const seo = getUi(locale).seo;

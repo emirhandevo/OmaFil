@@ -291,6 +291,7 @@ export default async function FabrikamizPage() {
               </div>
             </div>
             <div className="text-body space-y-4 text-sm leading-7 sm:text-base">
+              {/* Panelde bu dilin labBody’si boşsa Türkçe yedek. inner.ts’te laboratuvar paragrafı yok. */}
               {(cms.labBody.length
                 ? cms.labBody
                 : [

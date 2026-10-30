@@ -6,6 +6,8 @@ import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
 
+// Başlık sırası: inner çevirisi, panel, en sonda Türkçe yedek.
+
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getCopy();
   const page = await getCmsPage("insan-kaynaklari", locale);

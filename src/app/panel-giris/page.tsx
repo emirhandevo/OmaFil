@@ -1,5 +1,7 @@
 import {signInKeystatic, signOutKeystatic} from "@/app/actions/keystatic-auth";
-import { PasswordField } from "@/components/ui/password-field"; 
+import { PasswordField } from "@/components/ui/password-field";
+
+// Panel kapısı. Ziyaretçi görmez. Metin Türkçe kalsın, 11 dile bölünmez.
 
 type Props = {
     searchParams: Promise<{hata?: string}>;

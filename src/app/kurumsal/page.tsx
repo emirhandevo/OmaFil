@@ -14,6 +14,8 @@ import { navLabel } from "@/i18n/labels";
 import { pageAlternates } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
 
+// Dört kart. Yazı sözlükten, ikon bu eşlemeden. Adres listesi site.ts.
+
 export async function generateMetadata(): Promise<Metadata> {
   const { locale } = await getCopy();
   const seo = getUi(locale).seo;

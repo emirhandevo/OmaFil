@@ -95,6 +95,7 @@ export default async function SurdurulebilirlikPage() {
   ]);
   const t = getInner(locale);
   const f = cms.filled;
+  // Sıra: panel, inner çevirisi, dosyanın üstündeki Türkçe yedek.
   const principleItems = principles.map((item, i) => ({
     ...item,
     title: cms.principles[i]?.title || t?.sustain.principles[i]?.title || item.title,

@@ -2,6 +2,8 @@ import { reader } from "@/content/keystatic";
 import { pickLocale } from "@/content/localized";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
+// Dil alanı boşsa pickLocale Türkçe başlığa düşer. Gövde Markdoc.
+
 export type BlogPostListItem = {
   slug: string;
   title: string;

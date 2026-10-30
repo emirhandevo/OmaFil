@@ -18,13 +18,16 @@ function mapLine(
   locale: Locale = defaultLocale,
 ): ProductLine {
   const kind = entry.details.discriminant;
-  // copy[dil] boşsa TR copy, o da yoksa inner / kök alan
+  // pickLocale boş alanı Türkçe ile doldurur. Özeti oradan alırsak inner.ts hiç görünmez.
+  // Sıra: bu dilin panel özeti, yoksa inner çevirisi, o da yoksa Türkçe kök.
   const text = pickLocale(entry.copy, locale);
+  const ownSummary = entry.copy?.[locale]?.summary?.trim() || "";
   const innerSummary = getInner(locale)?.products[slug];
   return {
     slug,
+    // Ürün adı panelde boşsa kök etiket kalır. Şu an hepsi "Naylon …".
     label: text?.label?.trim() || entry.label,
-    summary: text?.summary?.trim() || innerSummary || entry.summary,
+    summary: ownSummary || innerSummary || text?.summary?.trim() || entry.summary,
     family: entry.family,
     polymer: entry.polymer,
     code: entry.code,

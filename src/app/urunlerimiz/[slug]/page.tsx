@@ -153,6 +153,7 @@ export default async function ProductLinePage({ params }: PageProps) {
           <div className="mt-6 overflow-x-auto rounded-2xl border border-border">
             <table className="min-w-full text-left text-sm">
               <thead className="bg-muted/50 text-xs tracking-wide uppercase">
+                {/* Başlıklar sözlükte yok. Spec ve Luster İngilizce, Renk / Kesit / Özellik Türkçe. */}
                 <tr>
                   <th className="px-4 py-3 font-semibold">Spec</th>
                   <th className="px-4 py-3 font-semibold">Luster</th>
