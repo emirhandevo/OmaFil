@@ -101,7 +101,8 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
         <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
           <div className="relative w-fit">
             <p className="text-sm font-semibold text-foreground">{copy.footer.contact}</p>
-            <ul className="mt-4 flex w-max flex-col items-center space-y-3 text-sm text-muted-foreground lg:absolute lg:left-1/2 lg:top-full lg:-translate-x-1/2">
+            {/* lg’de liste sütundan taşıyor. z-10: alttaki kolon tıklamayı yutmasın. */}
+            <ul className="relative z-10 mt-4 flex w-max flex-col items-center space-y-3 text-sm text-muted-foreground lg:absolute lg:left-1/2 lg:top-full lg:-translate-x-1/2">
               {contact.phone.map((phone) => (
                 <li key={phone} className="flex items-center justify-center gap-2">
                   <Phone

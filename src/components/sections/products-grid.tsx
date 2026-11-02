@@ -8,7 +8,6 @@ import { useCopy, useInner } from "@/components/i18n/locale-provider";
 import { productFamilies } from "@/content/catalog/families";
 import type { ProductFamily, ProductLine } from "@/content/catalog/types";
 import { useProductsBrowse } from "@/components/sections/products-browse";
-import { MailLink } from "@/components/ui/mail-link";
 
 type Phase = "idle" | "out" | "in";
 

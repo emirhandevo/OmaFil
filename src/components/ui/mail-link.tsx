@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 
 type MailLinkProps = {
@@ -20,13 +18,7 @@ export function MailLink({ email, subject, className, children }: MailLinkProps)
     : `mailto:${email}`;
 
   return (
-    <a
-      href={href}
-      className={className}
-      // preventDefault yok. Tarayıcı mailto’yu kendi mail uygulamasına bırakır.
-      // Elle location yazmak o tıklamayı yutuyor, pencere açılmıyor.
-      data-no-transition=""
-    >
+    <a href={href} className={className}>
       {children}
     </a>
   );
