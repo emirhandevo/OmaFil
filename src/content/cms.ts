@@ -7,6 +7,7 @@ import {
 import { dictionaries } from "@/i18n/dictionary";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 import { pickLocale } from "@/content/localized";
+import { resolveAsset } from "@/lib/resolve-asset";
 
 export type ContactLocation = {
   label: string;
@@ -55,8 +56,8 @@ export type HeroData = {
 const heroFallback: HeroData = {
   media: {
     kind: "video",
-    videoSrc: "/videos/hero-web.mp4",
-    posterSrc: "/images/hero-lcp-black.webp",
+    videoSrc: resolveAsset("/videos/hero-web.mp4"),
+    posterSrc: resolveAsset("/images/hero-lcp-black.webp"),
   },
   eyebrow: dictionaries.tr.hero.eyebrow,
   title: dictionaries.tr.hero.title,
@@ -165,8 +166,12 @@ export async function getHero(locale: Locale = defaultLocale): Promise<HeroData>
       ...copy,
       media: {
         kind: "video",
-        videoSrc: data.media.value.videoSrc.trim() || "/videos/hero-web.mp4",
-        posterSrc: data.media.value.posterSrc.trim() || "/images/hero-lcp-black.webp",
+        videoSrc: resolveAsset(
+          data.media.value.videoSrc.trim() || "/videos/hero-web.mp4",
+        ),
+        posterSrc: resolveAsset(
+          data.media.value.posterSrc.trim() || "/images/hero-lcp-black.webp",
+        ),
       },
     };
   }
@@ -175,7 +180,9 @@ export async function getHero(locale: Locale = defaultLocale): Promise<HeroData>
     ...copy,
     media: {
       kind: "image",
-      imageSrc: data.media.value.imageSrc.trim() || "/images/hero-lcp-black.webp",
+      imageSrc: resolveAsset(
+        data.media.value.imageSrc.trim() || "/images/hero-lcp-black.webp",
+      ),
     },
   };
 }
@@ -191,8 +198,8 @@ export async function getSiteSettings(
     footerTagline:
       text?.footerTagline?.trim() ||
       "Endüstriyel iplik üretiminde güvenilir çözüm ortağınız.",
-    logo: data?.logo?.trim() || site.logo,
-    logoDark: data?.logoDark?.trim() || site.logoDark,
-    ogImage: data?.ogImage?.trim() || "/images/og.webp",
+    logo: resolveAsset(data?.logo?.trim() || site.logo),
+    logoDark: resolveAsset(data?.logoDark?.trim() || site.logoDark),
+    ogImage: resolveAsset(data?.ogImage?.trim() || "/images/og.webp"),
   };
 }

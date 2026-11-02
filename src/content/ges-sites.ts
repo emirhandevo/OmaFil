@@ -1,3 +1,5 @@
+import { resolveAsset } from "@/lib/resolve-asset";
+
 /**
  * GES tesisleri — gerçek veriler (Excel + müdür + OSB yazısı + uygulama).
  * Excel / app screenshot siteye konmaz — sadece rakamlar.
@@ -32,7 +34,7 @@ export type GesSite = {
   images: string[];
 };
 
-export const gesSites: GesSite[] = [
+const gesSiteRows: GesSite[] = [
   {
     id: "elazig-hacisam",
     name: "Elazığ GES 1 — Hacısam",
@@ -127,6 +129,11 @@ export const gesSites: GesSite[] = [
     images: ["/images/ges/erbaa-cati-2/01.webp"],
   },
 ];
+
+export const gesSites: GesSite[] = gesSiteRows.map((site) => ({
+  ...site,
+  images: site.images.map((src) => resolveAsset(src)),
+}));
 
 /** Erbaa çatı birleşik (müdür notu) */
 export const gesErbaaRoof = {

@@ -12,9 +12,8 @@ const nextConfig: NextConfig = {
   // Image quality={80|82} uyarılarını keser; 75 varsayılan kalsın
   images: {
     qualities: [75, 80, 82, 90, 92, 95],
-    // Next 16: ?v=2 gibi cache-bust query optimizer’da yasak, localPatterns şart.
-    // search yok = /images altındaki query serbest (marquee ?v=2 / ?v=4).
-    localPatterns: [{ pathname: "/images/**" }],
+    // /a hash’li kopya. /images panel yolunun yedeği.
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/a/**" }],
   },
   // Keystatic reader / route handler Node API
   serverExternalPackages: ["@keystatic/core", "@keystatic/next"],
@@ -54,7 +53,36 @@ const nextConfig: NextConfig = {
       "frame-ancestors 'none'",
     ].join("; ");
 
+    // /_next/static Next’in kendi işi: 1 yıl, immutable.
+    // /a hash’li kopya. İçerik değişince adres değişir, o yüzden 1 yıl saklanır.
+    // Yerelde kapalı: geliştirirken tarayıcı eski dosyayı kilitlemesin.
+    const longCache =
+      process.env.NODE_ENV === "production"
+        ? [
+            {
+              source: "/a/:path*",
+              headers: [
+                {
+                  key: "Cache-Control",
+                  value: "public, max-age=31536000, immutable",
+                },
+              ],
+            },
+            {
+              // nosniff açık. Hash’li altyazının türü de text/vtt olmalı.
+              source: "/a/:hash/:file.vtt",
+              headers: [
+                {
+                  key: "Content-Type",
+                  value: "text/vtt; charset=utf-8",
+                },
+              ],
+            },
+          ]
+        : [];
+
     return [
+      ...longCache,
       {
         // VTT, nosniff açıkken text/vtt olmazsa tarayıcı altyazıyı yüklemez.
         source: "/videos/:file.vtt",

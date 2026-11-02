@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/bundle-keystatic-content.mjs",
+    "predev": "node scripts/fingerprint-assets.mjs",
+    "prebuild": "node scripts/fingerprint-assets.mjs && node scripts/bundle-keystatic-content.mjs",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"

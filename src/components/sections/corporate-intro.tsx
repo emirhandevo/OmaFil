@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { buttonVariants } from "@/components/ui/button";
 import { getHomeMedia } from "@/content/sections";
+import { resolveAsset } from "@/lib/resolve-asset";
 import { getCopy } from "@/i18n/get-copy";
 
 /**
@@ -12,6 +13,7 @@ import { getCopy } from "@/i18n/get-copy";
 export async function CorporateIntro() {
   const { copy } = await getCopy();
   const media = await getHomeMedia();
+  const mask = resolveAsset("/masks/brush-mask.webp");
 
   return (
     <section className="py-20 sm:py-18">
@@ -19,8 +21,8 @@ export async function CorporateIntro() {
        <div
   className="relative aspect-4/3 w-full"
   style={{
-    maskImage: 'url("/masks/brush-mask.webp")',
-    WebkitMaskImage: 'url("/masks/brush-mask.webp")',
+    maskImage: `url("${mask}")`,
+    WebkitMaskImage: `url("${mask}")`,
     maskSize: "120% 150%",
     WebkitMaskSize: "100% 100%",
     maskPosition: "center",

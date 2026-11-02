@@ -1,4 +1,5 @@
 import { reader } from "@/content/keystatic";
+import { resolveAsset } from "@/lib/resolve-asset";
 import { pickLocale } from "@/content/localized";
 import { getInner } from "@/i18n/inner";
 import { defaultLocale, type Locale } from "@/i18n/locales";
@@ -33,9 +34,8 @@ function mapLine(
     code: entry.code,
     kind,
     // Boş string = görsel yok (başka üründen kopya kullanma)
-    // ?v=5: aynı dosya adı tarayıcıda eski görseli tutmasın.
     src: entry.imageSrc?.trim()
-      ? `${entry.imageSrc.trim()}?v=5`
+      ? resolveAsset(entry.imageSrc.trim())
       : undefined,
     colors: entry.colors.length ? [...entry.colors] : undefined,
     recycled: entry.recycled || undefined,

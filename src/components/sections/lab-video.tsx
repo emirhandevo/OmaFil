@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Play } from "lucide-react";
+import { resolveAsset } from "@/lib/resolve-asset";
 
 type SubtitleChoice = "tr" | "en" | "off";
 
@@ -132,13 +133,13 @@ export function LabVideo({
       >
         <track
           kind="subtitles"
-          src="/videos/omafil-tr.vtt"
+          src={resolveAsset("/videos/omafil-tr.vtt")}
           srcLang="tr"
           label="Türkçe"
         />
         <track
           kind="subtitles"
-          src="/videos/omafil-en.vtt"
+          src={resolveAsset("/videos/omafil-en.vtt")}
           srcLang="en"
           label="English"
         />

@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# İçerik hash'li kopya. scripts/fingerprint-assets.mjs her dev ve build'de yazar.
+/public/a
+
 # production
 /build
 

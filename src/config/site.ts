@@ -1,4 +1,5 @@
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from "@/components/ui/icons/social-icons";
+import { resolveAsset } from "@/lib/resolve-asset";
 /**
  * Site genel sabitleri. İsim, URL, menü adresleri tek yerde.
  * Görünen menü yazısı burada değil. Header sözlükten navLabel ile basar.
@@ -11,10 +12,10 @@ export const site = {
     url: "https://omafil.com",
     description:
     "Endüstriyel iplik üretimi. Kurumsal katalog ve ürün portföyü.",
-    // public/ klasörüne göre yol. Header ve footer buradan okur.
-    logo: "/images/omafil_logo.svg",
+    // Header ve footer buradan okur. Adres içerik hash'ine gider.
+    logo: resolveAsset("/images/omafil_logo.svg"),
     // Dark temada aynı yerler bu dosyayı basar. Açık tema logo'da kalır.
-    logoDark: "/images/omafil_logo_dark.svg",
+    logoDark: resolveAsset("/images/omafil_logo_dark.svg"),
 } as const;
 
 // Yalnız adres. Yazı sözlükte: navLabel ve chrome özetleri.

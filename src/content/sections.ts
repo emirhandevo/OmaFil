@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { reader } from "@/content/keystatic";
+import { resolveAsset } from "@/lib/resolve-asset";
 import { overlayStrings, pickFilled } from "@/content/localized";
 import type { Copy } from "@/i18n/build-copy";
 import type { Locale } from "@/i18n/locales";
@@ -56,14 +57,16 @@ function mapPhotos(
   rows: readonly { src?: string; alt?: string }[] | undefined,
   fallback: Photo[],
 ): Photo[] {
-  if (!rows?.length) return fallback;
-  const photos = rows
-    .map((row, index) => ({
-      src: asText(row.src),
-      alt: asText(row.alt) || fallback[index]?.alt || "",
-    }))
-    .filter((photo) => photo.src);
-  return photos.length ? photos : fallback;
+  const list = !rows?.length
+    ? fallback
+    : rows
+        .map((row, index) => ({
+          src: asText(row.src),
+          alt: asText(row.alt) || fallback[index]?.alt || "",
+        }))
+        .filter((photo) => photo.src);
+  const photos = list.length ? list : fallback;
+  return photos.map((photo) => ({ ...photo, src: resolveAsset(photo.src) }));
 }
 
 function asCopy(
@@ -208,10 +211,12 @@ export const overlayCopyFromCms = cache(async function overlayCopyFromCms(
 export const getHomeMedia = cache(async function getHomeMedia() {
   const data = await reader.singletons.home.read().catch(() => null);
   return {
-    introImage:
+    introImage: resolveAsset(
       data?.introImage?.trim() || "/images/corporate/factory.webp",
-    sustainImage:
+    ),
+    sustainImage: resolveAsset(
       data?.sustainImage?.trim() || "/images/ges/erbaa-cati-1/aerial.webp",
+    ),
   };
 });
 
@@ -279,10 +284,13 @@ export const getFactoryBlocks = cache(async function getFactoryBlocks(
         text: item.text?.trim() ?? "",
       }))
       .filter((item) => item.title || item.text),
-    listCardImage:
+    listCardImage: resolveAsset(
       data?.listCardImage?.trim() || "/images/factory/band/14.webp",
-    labVideo: data?.labVideo?.trim() || "/videos/omafil-tanitim.mp4",
-    labPoster: data?.labPoster?.trim() || "/images/factory/fab-lab-poster.webp",
+    ),
+    labVideo: resolveAsset(data?.labVideo?.trim() || "/videos/omafil-tanitim.mp4"),
+    labPoster: resolveAsset(
+      data?.labPoster?.trim() || "/images/factory/fab-lab-poster.webp",
+    ),
     labDuration: data?.labDuration?.trim() || "00:31",
     gallery: mapPhotos(data?.gallery, factoryGalleryFallback),
     band: mapPhotos(data?.band, factoryBandFallback),
@@ -297,9 +305,12 @@ export const getSustainBlocks = cache(async function getSustainBlocks(
   const filled = pickFilled(asCopy(data?.copy), locale);
   return {
     filled,
-    worldImage: data?.worldImage?.trim() || "/images/sustainability/dunya.webp",
-    plantImage:
+    worldImage: resolveAsset(
+      data?.worldImage?.trim() || "/images/sustainability/dunya.webp",
+    ),
+    plantImage: resolveAsset(
       data?.plantImage?.trim() || "/images/ges/erbaa-cati-1/aerial.webp",
+    ),
     why: (row?.why ?? []).map((item: string) => item.trim()).filter(Boolean),
     principles: filledPairs(row?.principles as Pair[] | undefined),
     yarns: filledPairs(row?.yarns as Pair[] | undefined),
@@ -314,9 +325,10 @@ export const getGesBlocks = cache(async function getGesBlocks(locale: Locale) {
   const filled = pickFilled(asCopy(data?.copy), locale);
   return {
     filled,
-    heroImage: data?.heroImage?.trim() || "/images/ges/ges-hero.webp",
-    bodyImage:
+    heroImage: resolveAsset(data?.heroImage?.trim() || "/images/ges/ges-hero.webp"),
+    bodyImage: resolveAsset(
       data?.bodyImage?.trim() || "/images/ges/erbaa-cati-1/aerial.webp",
+    ),
     paragraphs: splitParagraphs(row?.paragraphs),
     pillars: filledPairs(row?.pillars as Pair[] | undefined),
   };
