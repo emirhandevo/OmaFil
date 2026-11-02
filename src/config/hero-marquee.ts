@@ -2,8 +2,9 @@ import { resolveAsset } from "@/lib/resolve-asset";
 
 /**
  * Hero şeritleri — tek kaynak.
- * Geniş ekran: liste ikiye bölünür, üst yarnImages ve alt yarnImagesBottom.
- * Dar ekran (lg altı): listenin tamamı tek şeritte, yarnImagesAll.
+ * Geniş ekran: üst N6 + PES DCY, alt N6,6 + PES SCY + PES ACY.
+ * Dar ekran (lg altı): önce üst sıra, sonra alt sıra, tek şeritte.
+ * İlk kart N6 POY. Yalnız o eager + yüksek öncelik (LCP). Geri kalan lazy.
  * Kart yazısı katalogdaki label. Hover metni ürün özetinden gelir (çeviriler inner.products).
  * src yoksa başka ürünün görseli konmaz; kartta yer tutucu kalır.
  */
@@ -18,8 +19,7 @@ export type MarqueeItem = {
   code: string;
 };
 
-/** Katalog sırası: Naylon 6, Naylon 6,6, polyester. */
-const allProducts: MarqueeItem[] = [
+const products: MarqueeItem[] = [
   {
     slug: "n6-poy",
     label: "Naylon 6 POY",
@@ -145,11 +145,21 @@ const allProducts: MarqueeItem[] = [
   src: item.src ? resolveAsset(item.src) : undefined,
 }));
 
-/** Mobil tek şerit: 16 kart yan yana. */
-export const yarnImagesAll = allProducts;
+/** Üst şerit: Naylon 6, sonda PES DCY Gipe. İlk kart LCP. */
+export const yarnImages = products.filter(
+  (item) => item.slug.startsWith("n6-") || item.slug === "pes-dcy",
+);
 
-/** Üst ve alt şerit eşit kart. */
-const half = Math.ceil(allProducts.length / 2);
+/** Alt şerit: Naylon 6,6, sonra PES SCY Gipe, en sonda PES ACY. */
+const bottomPesOrder = ["pes-scy", "pes-acy"] as const;
+export const yarnImagesBottom = [
+  ...products.filter((item) => item.slug.startsWith("n66-")),
+  ...bottomPesOrder.map((slug) => {
+    const item = products.find((entry) => entry.slug === slug);
+    if (!item) throw new Error(`marquee kartı yok: ${slug}`);
+    return item;
+  }),
+];
 
-export const yarnImages = allProducts.slice(0, half);
-export const yarnImagesBottom = allProducts.slice(half);
+/** Mobil tek şerit: üst sıra, ardından alt sıra. */
+export const yarnImagesAll = [...yarnImages, ...yarnImagesBottom];
