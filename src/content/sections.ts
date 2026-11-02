@@ -14,12 +14,12 @@ type Photo = { src: string; alt: string };
 
 const factoryGalleryFallback: Photo[] = [
   {
-    src: "/images/factory/gallery/01-solar.webp",
-    alt: "OmaFil tesisi — güneş panelli havadan görünüm",
+    src: "/images/ges/erbaa-cati-1/aerial.webp",
+    alt: "OmaFil Erbaa çatı GES — paneller tamam, havadan görünüm",
   },
   {
-    src: "/images/factory/gallery/02.webp",
-    alt: "OmaFil fabrika girişi",
+    src: "/images/factory/gallery/omafil-gece.webp",
+    alt: "OmaFil fabrika cephesi — gece tabela",
   },
   {
     src: "/images/factory/gallery/03.webp",

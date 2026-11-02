@@ -126,7 +126,7 @@ const gesSiteRows: GesSite[] = [
     annualKwhMax: 1_080_000,
     sharePercent: 9,
     productionStart: "2024-12-27",
-    images: ["/images/ges/erbaa-cati-2/01.webp"],
+    images: ["/images/factory/gallery/omafil-gece.webp"],
   },
 ];
 

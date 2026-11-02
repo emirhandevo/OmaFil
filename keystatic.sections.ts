@@ -154,7 +154,7 @@ export const sectionSingletons = {
         fields.object({
           src: fields.text({
             label: "Görsel yolu",
-            description: "Örn. /images/factory/gallery/01-solar.webp",
+            description: "Örn. /images/ges/erbaa-cati-1/aerial.webp",
             validation: { isRequired: true },
           }),
           alt: t("Alt metin (Türkçe yedek)"),

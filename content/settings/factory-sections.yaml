@@ -4,11 +4,11 @@ labPoster: /images/factory/fab-lab-poster.webp
 labDuration: "00:31"
 gallery:
   -
-    src: /images/factory/gallery/01-solar.webp
-    alt: "OmaFil tesisi — güneş panelli havadan görünüm"
+    src: /images/ges/erbaa-cati-1/aerial.webp
+    alt: "OmaFil Erbaa çatı GES — paneller tamam, havadan görünüm"
   -
-    src: /images/factory/gallery/02.webp
-    alt: "OmaFil fabrika girişi"
+    src: /images/factory/gallery/omafil-gece.webp
+    alt: "OmaFil fabrika cephesi — gece tabela"
   -
     src: /images/factory/gallery/03.webp
     alt: "OmaFil üretim tesisi"
