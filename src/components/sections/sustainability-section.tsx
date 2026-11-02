@@ -118,14 +118,15 @@ export async function SustainabilitySection() {
             </LocaleLink>
           </div>
 
-          <div className="relative min-h-[420px] overflow-hidden rounded-3xl border border-white/10 lg:min-h-[540px]">
+          {/* Fotoğraf 1024×682. Kart aynı oranda; stretch boyu uzatıp kırpmasın. */}
+          <div className="relative aspect-[1024/682] self-center overflow-hidden rounded-3xl border border-white/10">
             <Image
               src={media.sustainImage}
               alt={copy.chrome.sustainAlt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               quality={82}
-              className="origin-bottom scale-[1] object-cover object-center"
+              className="object-contain object-center"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-transparent" />
