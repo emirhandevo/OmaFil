@@ -41,7 +41,7 @@ export const assetMap: Record<string, string> = {
   "/images/ges/ges-hero.webp": "/a/08b944edde/ges-hero.webp",
   "/images/hero-lcp-black.webp": "/a/49059f10f3/hero-lcp-black.webp",
   "/images/hero/iplik/acc-pes.webp": "/a/9af950a78f/acc-pes.webp",
-  "/images/hero/iplik/acy-n6.webp": "/a/117e2a2836/acy-n6.webp",
+  "/images/hero/iplik/acy-n6.webp": "/a/fff8245fb3/acy-n6.webp",
   "/images/hero/iplik/acy-n66.webp": "/a/036aa515de/acy-n66.webp",
   "/images/hero/iplik/dcy-n6.webp": "/a/85da7eaeb8/dcy-n6.webp",
   "/images/hero/iplik/dcy-n66.webp": "/a/eaf683bc87/dcy-n66.webp",

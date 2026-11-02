@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/components/i18n/locale-provider";
 import {
@@ -26,8 +26,11 @@ const flags: Record<Locale, string> = {
   zh: "🇨🇳",
 };
 
-/** Yuvarlak küre. Meridyenler kenarda kalır; dil kodu ortadaki dolguda durur. */
+/** Yuvarlak küre. Orta boş: bayrağın arkası header'ın kendisi. */
 function GlobeFrame() {
+  // useId ":" içerir; mask url()'de kaçışsız kırılır.
+  const maskId = `globe-hole-${useId().replace(/:/g, "")}`;
+
   return (
     <svg
       viewBox="0 0 48 48"
@@ -37,11 +40,20 @@ function GlobeFrame() {
       className="pointer-events-none absolute inset-0 size-full"
       aria-hidden="true"
     >
-      <circle cx="24" cy="24" r="22" />
-      <ellipse cx="24" cy="24" rx="9" ry="22" />
-      <path d="M2 24h44" />
-      <path d="M5 15.5h38" />
-      <path d="M5 32.5h38" />
+      <defs>
+        <mask id={maskId}>
+          <rect width="48" height="48" fill="white" />
+          {/* size-7 dairenin karşılığı. Çizgiler bayrak ve kodun üstüne binmesin. */}
+          <circle cx="24" cy="24" r="14" fill="black" />
+        </mask>
+      </defs>
+      <g mask={`url(#${maskId})`}>
+        <circle cx="24" cy="24" r="22" />
+        <ellipse cx="24" cy="24" rx="9" ry="22" />
+        <path d="M2 24h44" />
+        <path d="M5 15.5h38" />
+        <path d="M5 32.5h38" />
+      </g>
     </svg>
   );
 }
@@ -85,8 +97,7 @@ export function LanguageSwitcher() {
         }
       >
         <GlobeFrame />
-        {/* Ortadaki dolgu meridyenlerin yazının üstünden geçmesini keser */}
-        <span className="relative flex size-7 flex-col items-center justify-center rounded-full bg-background leading-none">
+        <span className="relative flex size-7 flex-col items-center justify-center leading-none">
           <span aria-hidden="true" className="text-sm leading-none">
             {flags[locale]}
           </span>

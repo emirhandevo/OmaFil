@@ -100,7 +100,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
         key={family}
         className={`mt-10 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 ${listClass}`}
       >
-        {visible.map((item) => (
+        {visible.map((item, index) => (
           <li key={item.slug} className="group relative min-w-0 lg:hover:z-10">
             {/* overflow-hidden kart gölgeyi keser; ışıma li’de, üst kenara yakın */}
             <span
@@ -148,6 +148,9 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                       alt={item.label}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                      // fill görseli absolute yapar. lazy, ilk ekrandakini uzakta sanıp tıklayana kadar bekletir.
+                      // İlk 6 kart (iki sıra) hemen gelsin. Altta kalanlar kaydırınca.
+                      loading={index < 6 ? "eager" : "lazy"}
                       className="object-cover transition-[scale] duration-[1800ms] ease-[cubic-bezier(0.37,0,0.63,1)] group-hover:scale-[1.04] group-active:scale-[1.04]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#12243c]/70 via-transparent to-transparent opacity-90" />
