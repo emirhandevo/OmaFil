@@ -209,6 +209,37 @@
   }
 }
 
+/* Color Pro filtre geçişi. Kartlar birlikte solar, birlikte gelir. */
+@keyframes omafil-color-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes omafil-color-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.omafil-color-out {
+  animation: omafil-color-out 0.28s ease-in forwards;
+}
+
+.omafil-color-in {
+  animation: omafil-color-in 0.42s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .omafil-color-out,
+  .omafil-color-in {
+    animation: none;
+  }
+}
+
 /* ——— Site geneli sayfa geçişleri (View Transitions API) ——— */
 .site-header {
   view-transition-name: site-header;

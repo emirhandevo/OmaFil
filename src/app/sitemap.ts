@@ -34,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     "/kurumsal",
     "/urunlerimiz",
+    "/omafil-color-pro",
     ...productLines.map((line) => `/urunlerimiz/${line.slug}`),
     "/ges",
     "/iletisim",

@@ -1,3 +1,5 @@
+import { colorProCopy } from "@/i18n/color-pro-copy";
+import type { ColorProCopy } from "@/i18n/color-pro-copy";
 import { chrome } from "@/i18n/chrome";
 import type { Chrome } from "@/i18n/chrome";
 import { dictionaries } from "@/i18n/dictionary";
@@ -5,8 +7,12 @@ import type { Dictionary } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/locales";
 
 /** Sözlük + kısa arayüz. next/headers yok; client de kullanabilir. */
-export type Copy = Dictionary & { chrome: Chrome };
+export type Copy = Dictionary & { chrome: Chrome; colorPro: ColorProCopy };
 
 export function buildCopy(locale: Locale): Copy {
-  return { ...dictionaries[locale], chrome: chrome[locale] };
+  return {
+    ...dictionaries[locale],
+    chrome: chrome[locale],
+    colorPro: colorProCopy[locale],
+  };
 }

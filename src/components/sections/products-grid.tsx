@@ -5,8 +5,8 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useProductSummaries } from "@/components/i18n/locale-provider";
-import { productFamilies } from "@/content/catalog/families";
 import type { ProductFamily, ProductLine } from "@/content/catalog/types";
+import { ProductFilterBar } from "@/components/sections/product-filter-bar";
 import { useProductsBrowse } from "@/components/sections/products-browse";
 
 type Phase = "idle" | "out" | "in";
@@ -67,59 +67,13 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
         ? "omafil-products-in"
         : "";
 
-  // Seçili olmayan filtreyle aynı hap. Color Pro filtre değil.
-  const chipIdle =
-    "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] active:border-[#f19000]/50 active:bg-[#1e355d] disabled:opacity-60";
-
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2">
-        <div
-          className="flex flex-wrap gap-2"
-          role="tablist"
-          aria-label={copy.chrome.familyAria}
-        >
-          {productFamilies.map((f) => {
-            const active = family === f.id;
-            return (
-              <button
-                key={f.id}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                disabled={phase !== "idle"}
-                onClick={() => selectFamily(f.id)}
-                className={
-                  active
-                    ? "rounded-full bg-[#f19000] px-4 py-2 text-sm font-semibold text-white shadow-md shadow-[#f19000]/30 transition-all duration-300"
-                    : chipIdle
-                }
-              >
-                {f.id === "all" ? copy.products.all : f.label}
-              </button>
-            );
-          })}
-        </div>
-        {/* Çizimdeki ayraç. Filtre grubundan Color Pro'yu ayırır. */}
-        <svg
-          viewBox="0 0 16 36"
-          aria-hidden="true"
-          className="mx-1 h-8 w-3 shrink-0 text-[#1e355d] dark:text-white/85"
-        >
-          <line
-            x1="13"
-            y1="2"
-            x2="3"
-            y2="34"
-            stroke="currentColor"
-            strokeWidth="2.25"
-            strokeLinecap="round"
-          />
-        </svg>
-        <button type="button" className={chipIdle}>
-          OmaFil Color Pro
-        </button>
-      </div>
+      <ProductFilterBar
+        activeFamily={family}
+        disabled={phase !== "idle"}
+        onFamily={selectFamily}
+      />
 
       <ul
         key={family}

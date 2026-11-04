@@ -62,6 +62,11 @@ function writeStored(next: StoredBrowse) {
   }
 }
 
+/** Color Pro’dan Naylon / Polyester’e dönünce liste o filtreyle açılsın. */
+export function storeProductFamily(family: ProductFamily) {
+  writeStored({ family, scrollY: 0 });
+}
+
 /**
  * Liste ve detay aynı layout’ta kalır: filtre React state’te durur.
  * Detaydan listeye dönünce Next tepeye kaydırır; biz son Y’yi geri yazarız.
