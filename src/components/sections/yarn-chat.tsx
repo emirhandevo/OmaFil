@@ -21,6 +21,42 @@ const YarnChatPanel = dynamic(
   { ssr: false, loading: () => null },
 );
 
+const whatsappClass =
+  "group relative flex size-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-[#32E070] hover:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)] active:scale-[1.03] active:bg-[#32E070] active:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)]";
+
+/** Yeşil daire. Link doluysa WhatsApp açılır, boşsa sadece ikon durur. */
+function WhatsAppMark({ href, label }: { href: string; label: string }) {
+  const icon = (
+    <>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-full bg-[#7CFFB2] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-35 group-active:opacity-35"
+      />
+      <WhatsAppIcon className="relative size-6" />
+    </>
+  );
+
+  if (!href) {
+    return (
+      <span aria-label={label} className={whatsappClass}>
+        {icon}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className={whatsappClass}
+    >
+      {icon}
+    </a>
+  );
+}
+
 /** Buton yazısı. Açık etiket her dilde aynı. Kapatma kısa kalsın diye burada. */
 const closeLabel: Record<Locale, string> = {
   tr: "Sohbeti kapat",
@@ -58,23 +94,8 @@ export function YarnChat() {
       {panelReady ? <YarnChatPanel open={open} onClose={close} /> : null}
 
       <div className="pointer-events-auto flex flex-col items-end gap-3 self-end">
-        {/* Numara boşsa buton yok. Sohbet açıkken de gizlenir. */}
-        {!open && contact.whatsapp ? (
-          <a
-            href={contact.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={copy.chrome.whatsapp}
-            className="group relative flex size-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:bg-[#32E070] hover:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)] active:scale-[1.03] active:bg-[#32E070] active:shadow-[0_0_8px_rgba(124,255,178,0.5),0_0_18px_rgba(37,211,102,0.4)]"
-          >
-            {/* Hover’da yeşil neon hale — düşük opaklık */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-full bg-[#7CFFB2] opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-35 group-active:opacity-35"
-            />
-            <WhatsAppIcon className="relative size-6" />
-          </a>
-        ) : null}
+        {/* İkon her zaman durur. Numara boşken eski hatta gitmez. Sohbet açıkken gizlenir. */}
+        {!open ? <WhatsAppMark href={contact.whatsapp} label={copy.chrome.whatsapp} /> : null}
         <button
           type="button"
           onClick={toggle}
