@@ -126,7 +126,7 @@ const products: MarqueeItem[] = [
   },
   {
     slug: "pes-scy",
-    label: "PES SCY Gipe",
+    label: "PES SCY",
     summary: "Polyester tek kaplama + elastan. Custom seçenekler.",
     href: "/urunlerimiz/pes-scy",
     src: "/images/hero/iplik/scy-pes.webp",
@@ -134,7 +134,7 @@ const products: MarqueeItem[] = [
   },
   {
     slug: "pes-dcy",
-    label: "PES DCY Gipe",
+    label: "PES DCY",
     summary: "Polyester çift kaplama + elastan.",
     href: "/urunlerimiz/pes-dcy",
     src: "/images/hero/iplik/dcy-pes.webp",
@@ -145,12 +145,12 @@ const products: MarqueeItem[] = [
   src: item.src ? resolveAsset(item.src) : undefined,
 }));
 
-/** Üst şerit: Naylon 6, sonda PES DCY Gipe. İlk kart LCP. */
+/** Üst şerit: Naylon 6, sonda PES DCY. İlk kart LCP. */
 export const yarnImages = products.filter(
   (item) => item.slug.startsWith("n6-") || item.slug === "pes-dcy",
 );
 
-/** Alt şerit: Naylon 6,6, sonra PES SCY Gipe, en sonda PES ACY. */
+/** Alt şerit: Naylon 6,6, sonra PES SCY, en sonda PES ACY. */
 const bottomPesOrder = ["pes-scy", "pes-acy"] as const;
 export const yarnImagesBottom = [
   ...products.filter((item) => item.slug.startsWith("n66-")),

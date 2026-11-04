@@ -273,7 +273,7 @@ const en: Dictionary = {
   },
   hero: {
     eyebrow: "Industrial yarn from Türkiye to the world",
-    title: "EUROPE’S LARGEST FULLY INTEGRATED GIPE YARN FACTORY",
+    title: "EUROPE’S LARGEST FULLY INTEGRATED COVERED YARN FACTORY",
     body: "We produce Naylon 6 and Naylon 6,6 POY, FDY, DTY, ACY, SCY, DCY and specialty yarn solutions to high quality standards and supply them to world markets.",
     productsCta: "View our yarn products",
     aboutCta: "Discover OmaFil",
@@ -287,7 +287,7 @@ const en: Dictionary = {
     kicker: "Company",
     title: "Polyamide Yarn for Global Textile",
     p1: "Polyamide (Naylon 6 and Naylon 6,6) is one of textile’s most critical raw materials, thanks to its strength, elasticity and abrasion resistance. Combining experience since 1999 with advanced technology, we produce polyamide yarn as POY, FDY, DTY, ACY, SCY and DCY, and supply high-performance solutions for hosiery, underwear, sportswear, carpet and technical textile.",
-    p2: "With Europe’s largest gipe yarn plant, we meet the global textile industry’s needs with quality and reliability.",
+    p2: "With Europe’s largest covered yarn plant, we meet the global textile industry’s needs with quality and reliability.",
     cta: "Our company",
   },
   stats: {
@@ -325,7 +325,7 @@ const en: Dictionary = {
   products: {
     kicker: "Products",
     title: "Our yarn portfolio",
-    lead: "Naylon 6, Naylon 6,6 and polyester filament + gipe lines. Open a product for specs; contact us for a quote or sample.",
+    lead: "Naylon 6, Naylon 6,6 and polyester filament + covered yarn lines. Open a product for specs; contact us for a quote or sample.",
     all: "All",
     soon: "Image coming soon",
     quote: "Request a quote",

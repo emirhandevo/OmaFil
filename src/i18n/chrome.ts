@@ -140,7 +140,7 @@ const en: Chrome = {
   themeDark: "Dark theme (click: sunrise)",
   themeAuto: "Sunrise to sunset (sky optimized for the browser time zone)",
   aboutSummary: "Founding story and company structure.",
-  factorySummary: "Gipe yarn plant in Tokat–Erbaa.",
+  factorySummary: "Covered yarn plant in Tokat–Erbaa.",
   sustainSummary: "Energy, recycling and responsible production.",
   careersSummary: "How we work, and how to apply.",
   position: "Position",

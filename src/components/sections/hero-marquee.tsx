@@ -110,7 +110,10 @@ function ImageGroup({
       {items.map((item, index) => {
         // Test görseli varsa onu bas; yoksa kartın kendi dosyası. İkisi de yoksa yer tutucu.
         const src = item.src;
-        const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${item.label}`;
+        // İngilizce sitede "Gipe" görünmez. Diğer diller kart adını olduğu gibi basar.
+        const label =
+          locale === "en" ? item.label.replaceAll("Gipe", "Covered Yarn") : item.label;
+        const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${label}`;
         // Yalnız üst şeridin ilk gerçek kartı. Telefonda ilk ekrandaki en büyük boya bu.
         const isLcp = lead && !duplicate && index === 0;
         // İki kopyada da aynı slug açık kalsın (ekranda görünen hangisiyse)
@@ -146,7 +149,7 @@ function ImageGroup({
             >
               <div className="flex items-center justify-between gap-2 pb-2.5 sm:gap-3 sm:pb-3">
                 <p className="text-xs font-semibold text-zinc-900 sm:text-sm">
-                  {item.label}
+                  {label}
                 </p>
                 <ArrowRight
                   aria-hidden="true"

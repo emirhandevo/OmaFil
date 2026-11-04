@@ -179,7 +179,7 @@ const en = pack({
     blogTitle: "Blog",
     blog: "OmaFil notes on yarn production, the plant and sustainability.",
     productsTitle: "Products",
-    products: "OmaFil yarns: Naylon 6, Naylon 6,6 and polyester gipe, POY, FDY, DTY, ACY, SCY.",
+    products: "OmaFil yarns: Naylon 6, Naylon 6,6 and polyester covered yarn, POY, FDY, DTY, ACY, SCY.",
     corporateTitle: "Company",
     corporate: "OmaFil company pages: about, factory, sustainability and careers.",
     gesTitle: "GES — solar power system",

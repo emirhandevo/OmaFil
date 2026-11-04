@@ -139,16 +139,16 @@ const productsEn: Inner["products"] = {
 };
 
 const marqueeEn: Inner["marquee"] = {
-  "PES DCY Gipe": "Double-covered polyester gipe yarn.",
+  "PES DCY Gipe": "Double-covered polyester covered yarn.",
   "Naylon 6 POY": "Naylon 6 POY yarn.",
   "N6 FDY": "Fully drawn Naylon 6 yarn.",
   "DTY N6": "Textured Naylon 6 yarn.",
   "DTY N66": "Textured Naylon 6,6 yarn.",
   "ACY N6": "Air-jet covered Naylon 6 yarn.",
   "ACY N66": "Air-jet covered Naylon 6,6 yarn.",
-  "SCY N6 Gipe": "Single-covered Naylon 6 gipe yarn.",
-  "SCY N66 Gipe": "Single-covered Naylon 6,6 gipe yarn.",
-  "PES SCY Gipe": "Single-covered polyester gipe yarn.",
+  "SCY N6 Gipe": "Single-covered Naylon 6 covered yarn.",
+  "SCY N66 Gipe": "Single-covered Naylon 6,6 covered yarn.",
+  "PES SCY Gipe": "Single-covered polyester covered yarn.",
   "PES ACY": "Air-jet covered polyester yarn.",
 };
 
@@ -181,10 +181,10 @@ const en: Inner = page({
       { title: "Founded", text: "We started with yarn trading in Sultanhamam, Istanbul." },
       { title: "Export begins", text: "We built our links abroad." },
       { title: "First plant", text: "We set up our first production plant." },
-      { title: "Gipe plant", text: "We brought the gipe yarn plant in Tokat–Erbaa into operation." },
+      { title: "Covered yarn plant", text: "We brought the covered yarn plant in Tokat–Erbaa into operation." },
       { title: "Texturing plant", text: "We commissioned the texturing plant." },
       { title: "POY – FDY plant", text: "We set up the POY and FDY plant." },
-      { title: "Gipe capacity increase", text: "We increased capacity at the gipe plant." },
+      { title: "Covered yarn capacity increase", text: "We increased capacity at the covered yarn plant." },
     ],
     offices: "Our contact points",
     map: "Open in Maps",
@@ -192,7 +192,7 @@ const en: Inner = page({
     stats: [
       { title: "40,000 m² production area", subtitle: "Tokat–Erbaa production plant" },
       { title: "13,000 tonnes", subtitle: "Annual production" },
-      { title: "#1 Largest in Europe", subtitle: "Gipe yarn production plant" },
+      { title: "#1 Largest in Europe", subtitle: "Covered yarn production plant" },
       { title: "100% renewable energy", subtitle: "Sustainable production target" },
     ],
     focus: ["GRS certified", "Renewable energy", "Zero-waste target"],
@@ -215,10 +215,10 @@ const en: Inner = page({
   factory: {
     title: "Our factory",
     description:
-      "Europe’s largest polymer / gipe yarn plant is in Tokat–Erbaa.",
+      "Europe’s largest polymer / covered yarn plant is in Tokat–Erbaa.",
     headline: "At Europe’s peak with 13,000 tonnes of annual capacity",
     paragraphs: [
-      "Our plant in the Tokat Erbaa Organised Industrial Zone holds the title of Europe’s largest gipe yarn plant, with an annual production capacity of 13,000 tonnes. We serve the global textile industry with high value-added products from our Naylon 6, Naylon 6,6 and polyester gipe yarn lines.",
+      "Our plant in the Tokat Erbaa Organised Industrial Zone holds the title of Europe’s largest covered yarn plant, with an annual production capacity of 13,000 tonnes. We serve the global textile industry with high value-added products from our Naylon 6, Naylon 6,6 and polyester covered yarn lines.",
       "With the R&D centre it houses, we do more than produce: we also develop the yarn technologies of the future. The plant is an important source of jobs for the region, and the solar power system on our roof covers part of our production’s energy need from clean sources.",
     ],
     since: "Leading the sector since 1999",

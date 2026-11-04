@@ -1,5 +1,5 @@
 {
-  "label": "PES SCY Gipe",
+  "label": "PES SCY",
   "summary": "Polyester tek kaplama + elastan. Custom seçenekler.",
   "family": "polyester",
   "polymer": "pes",
@@ -45,11 +45,11 @@
   },
   "copy": {
     "tr": {
-      "label": "PES SCY Gipe",
+      "label": "PES SCY",
       "summary": "Polyester tek kaplama + elastan. Custom seçenekler."
     },
     "en": {
-      "label": "",
+      "label": "PES SCY",
       "summary": ""
     },
     "de": {

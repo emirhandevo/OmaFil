@@ -1,5 +1,5 @@
 {
-  "label": "PES DCY Gipe",
+  "label": "PES DCY",
   "summary": "Polyester çift kaplama + elastan.",
   "family": "polyester",
   "polymer": "pes",
@@ -69,11 +69,11 @@
   },
   "copy": {
     "tr": {
-      "label": "PES DCY Gipe",
+      "label": "PES DCY",
       "summary": "Polyester çift kaplama + elastan."
     },
     "en": {
-      "label": "",
+      "label": "PES DCY",
       "summary": ""
     },
     "de": {
