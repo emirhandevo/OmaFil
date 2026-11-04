@@ -9,6 +9,7 @@ import {
   getProductLine,
   getProductLines,
 } from "@/content/catalog";
+import { colorLabel } from "@/i18n/color-labels";
 import { getCopy } from "@/i18n/get-copy";
 import { pageAlternates } from "@/i18n/locales";
 
@@ -110,7 +111,7 @@ export default async function ProductLinePage({ params }: PageProps) {
                 key={color}
                 className="rounded-full border border-border bg-card px-3 py-1 text-xs font-medium"
               >
-                {color}
+                {colorLabel(locale, color)}
               </li>
             ))}
             {line.recycled ? (
@@ -175,7 +176,7 @@ export default async function ProductLinePage({ params }: PageProps) {
                       {sku.luster?.join(", ") ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
-                      {sku.colors?.join(" · ") ?? "—"}
+                      {sku.colors?.map((color) => colorLabel(locale, color)).join(" · ") ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {sku.kesit || "—"}
