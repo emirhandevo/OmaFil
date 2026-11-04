@@ -2,9 +2,8 @@ import {site} from "@/config/site";
 import {defaultLocale, isLocale, localizePath, type Locale} from "@/i18n/locales";
 import {getClientIp} from "@/lib/mail";
 import {messageCap} from "@/lib/rate-limit";
-import {buildYarnChatPrompt} from "@/lib/yarn-chat";
+import {buildYarnChatPrompt, priceReply, unknownReply} from "@/lib/yarn-chat";
 import { saveChatLog  } from "@/lib/chat-log";
-import { subscribe } from "diagnostics_channel";
 
 // AQ. anahtar native generateContent'te x-goog-api-key ile gider. Doğrulanan model:
 const MODEL = "gemini-3.5-flash-lite";
@@ -66,11 +65,6 @@ function visitorWantsContact(text: string): boolean {
     );
 }
 
-/** Çorap, hosiery, seamless ve dokuma katalog özetinde var. Bunlarda iplik adı verilir. */
-function listedUse(text: string): boolean {
-    return /(çorap|corap|\bsocks?\b|hosiery|seamless|dikişsiz|dikissiz|dokuma|weaving)/i.test(text);
-}
-
 /** Selam ve teşekkür. Bu cümlelerde iletişim yok. */
 function smallTalk(text: string): boolean {
     return /^(merhaba|selamlar|selam|slm|hello|hi|hey|hallo|bonjour|hola|ciao|ol[aá]|goedendag|привет|مرحبا|您好|nasılsın|nasilsin|teşekkürler|tesekkurler|thanks|thank you|günaydın|gunaydin|selam[uü]n?\s*aleyk[uü]m|aleyk[uü]m\s*selam)[\s!.?,]*$/i.test(
@@ -129,32 +123,7 @@ function greetingReply(text: string, hint: Locale): string {
     return helloReply[locale];
 }
 
-/** “Hangi iplikleriniz var” katalog sorusudur. İletişime atılmaz. */
-function asksCatalog(text: string): boolean {
-    return /(katalog|ürünleriniz|urunleriniz|hangi iplikler|which yarns|product range)/i.test(text);
-}
-
-/**
- * Sitede özeti olmayan kullanım: ayakkabı bağcığı, havlu, halı ve benzeri.
- * Burada iplik adı yok. “Uygun ipliğimiz yok” da yok. İletişim var.
- */
-function offListUse(text: string): boolean {
-    if (smallTalk(text) || asksCatalog(text)) return false;
-    if (
-        /(bağcık|bagcik|shoelace|shoe\s*lace|ayakkab|havlu|towel|laptop|halı|hali|\bcarpet\b|\brug\b|perde|curtain|çanta|canta|handbag|lastik|\btire\b|\btyre\b)/i.test(
-            text,
-        )
-    ) {
-        return true;
-    }
-    if (listedUse(text)) return false;
-    // iplik + -iniz = ipliğiniz. k harfi ğ olur, "iplik" alt dizgi olarak durmaz.
-    return /(için|icin).{0,80}(ipli[kğ]|ipili[kğ]|yarn)|(ipli[kğ]|ipili[kğ]|yarn).{0,40}(için|icin)/i.test(
-        text,
-    );
-}
-
-/** Model yine “listede yok” derse bu cümle silinir, iletişim konur. */
+/** Model “listede yok” derse ya da BILMIYORUM yazarsa adres eklenir. */
 function isRefusal(reply: string): boolean {
     return /(listemizde|bulunmamaktadır|bulunmuyor|öneremiyoruz|öneremiyorum|uygun bir iplik|uygun ipliğimiz yok|uygun ipligimiz yok|no suitable|cannot recommend|can't recommend|not in our)/i.test(
         reply,
@@ -182,20 +151,6 @@ function languageOf(text: string, hint: Locale): Locale {
     return hint;
 }
 
-const redirectLead: Record<Locale, string> = {
-    tr: "Bu kullanım için uygun iplik modellerimiz vardır. Detaylı bilgi, fiyat teklifi ve numune için bizlerle iletişime geçiniz lütfen.",
-    en: "We have suitable yarn models for this use. For detailed information, a quotation and a sample, please contact us.",
-    de: "Für diese Anwendung haben wir passende Garnmodelle. Für ausführliche Information, ein Angebot und ein Muster kontaktieren Sie uns bitte.",
-    fr: "Nous avons des modèles de fil adaptés à cet usage. Pour une information détaillée, un devis et un échantillon, veuillez nous contacter.",
-    es: "Tenemos modelos de hilo adecuados para este uso. Para información detallada, una oferta y una muestra, póngase en contacto con nosotros.",
-    it: "Abbiamo modelli di filato adatti a questo uso. Per informazioni dettagliate, un’offerta e un campione, contattateci.",
-    pt: "Temos modelos de fio adequados para este uso. Para informação detalhada, uma proposta e uma amostra, contacte-nos.",
-    nl: "Voor dit gebruik hebben wij passende garenmodellen. Voor uitgebreide informatie, een offerte en een monster kunt u contact met ons opnemen.",
-    ru: "Для этого применения у нас есть подходящие модели нити. Для подробной информации, предложения и образца свяжитесь с нами.",
-    ar: "لدينا نماذج خيوط مناسبة لهذا الاستخدام. للمعلومات التفصيلية وعرض السعر والعينة يرجى التواصل معنا.",
-    zh: "我们有适用于这一用途的纱线型号。如需详细资料、报价和样品，请与我们联系。",
-};
-
 const redirectLabels: Record<Locale, {page: string; email: string; phone: string}> = {
     tr: {page: "İletişim sayfası", email: "E-posta", phone: "Telefon"},
     en: {page: "Contact page", email: "Email", phone: "Phone"},
@@ -210,29 +165,41 @@ const redirectLabels: Record<Locale, {page: string; email: string; phone: string
     zh: {page: "联系页面", email: "邮箱", phone: "电话"},
 };
 
-/** Link, e-posta ve telefonlar. Numaralar virgülle yan yana değil, alt alta. */
-function contactBlock(locale: Locale, email: string, phones: string[]): string {
+type Place = { label: string; address: string };
+
+/** Link, e-posta, telefon ve adresler. Numaralar alt alta. */
+function contactBlock(
+    locale: Locale,
+    email: string,
+    phones: string[],
+    locations: Place[],
+): string {
     const labels = redirectLabels[locale];
     const page = `${site.url}${localizePath("/iletisim", locale)}`;
+    const places = locations
+        .filter((place) => place.address.trim())
+        .map((place) => `${place.label}: ${place.address}`);
     return [
         `${labels.page}: ${page}`,
         `${labels.email}: ${email}`,
         `${labels.phone}:`,
         ...phones,
+        ...places,
     ].join("\n");
-}
-
-/** Özeti olmayan iş için sabit cevap: uygun modeller var, sonra iletişim. */
-function offListReply(text: string, hint: Locale, email: string, phones: string[]): string {
-    const locale = languageOf(text, hint);
-    return [redirectLead[locale], contactBlock(locale, email, phones)].join("\n");
 }
 
 /**
  * İletişim sorulduysa link ve bütün numaralar cevabın sonunda durur.
  * Model numarayı virgülle yazsa da burada alt alta kurulur.
  */
-function ensureContact(reply: string, text: string, hint: Locale, email: string, phones: string[]): string {
+function ensureContact(
+    reply: string,
+    text: string,
+    hint: Locale,
+    email: string,
+    phones: string[],
+    locations: Place[],
+): string {
     if (!visitorWantsContact(text)) return reply;
     const locale = languageOf(text, hint);
     const page = `${site.url}${localizePath("/iletisim", locale)}`;
@@ -253,7 +220,7 @@ function ensureContact(reply: string, text: string, hint: Locale, email: string,
         })
         .join("\n")
         .trim();
-    return `${next}\n${contactBlock(locale, email, phones)}`.trim();
+    return `${next}\n${contactBlock(locale, email, phones, locations)}`.trim();
 }
 
 /**
@@ -278,20 +245,25 @@ function hideContact(reply: string, asked: boolean, email: string, phones: strin
     return next.length >= 12 ? next : reply;
 }
 
-/** rakam + para birimi varsa cevabı sil, iletişimi koy.  */
-function scrubPrice(reply:string, email: string, phones: string[]) {
-    const hasPrice = 
+/** Rakam + para birimi varsa cevabı sil, ziyaretçinin dilinde iletişimi koy. */
+function scrubPrice(
+    reply: string,
+    locale: Locale,
+    email: string,
+    phones: string[],
+    locations: Place[],
+) {
+    const hasPrice =
     /(\d[\d.,\s]{0,12}\s?(?:tl|try|usd|eur|€|\$|₺))|((?:€|\$|₺|usd|eur|try|tl)\s?\d)/i.test(
       reply,
     );
     if (!hasPrice) return reply;
-    return [
-        "Fiyat ve teklif için bizimle iletişime geçiniz.",
-        `İletişim sayfası: ${site.url}/iletisim`,
-        `E-posta: ${email}`,
-        "Telefon:",
-        ...phones,
-    ].join("\n");
+    return [priceReply[locale], contactBlock(locale, email, phones, locations)].join("\n");
+}
+
+/** İlk satır BILMIYORUM ise ya da model kısa bir red yazdıysa site dışı sayılır. */
+function modelDoesNotKnow(reply: string): boolean {
+    return /^\s*BILMIYORUM\b/i.test(reply) || (isRefusal(reply) && reply.length < 400);
 }
 
 export async function POST(request: Request) {
@@ -333,12 +305,7 @@ export async function POST(request: Request) {
         return logged(greetingReply(last, hint));
 
     }
-    const {system, email, phones} = await buildYarnChatPrompt();
-
-    // Özeti olmayan iş modeli beklemez. “Yok” cümlesi burada hiç kurulmaz.
-    if (offListUse(last)) {
-        return logged(scrubPrice(offListReply(last, hint, email, phones), email, phones));
-    }
+    const {system, email, phones, locations} = await buildYarnChatPrompt(hint);
 
     const apiKey = process.env.GEMINI_API_KEY?.trim();
     if (!apiKey) {
@@ -397,13 +364,16 @@ export async function POST(request: Request) {
         return Response.json({error: "busy"}, {status: 502});
     }
 
-    // Model yine “listede yok” derse o cümle düşer, iletişim kalır.
-    if (!listedUse(last) && !smallTalk(last) && isRefusal(reply)) {
-        return logged(scrubPrice(offListReply(last, hint, email, phones), email, phones));
+    const locale = languageOf(last, hint);
+    // Sitede yoksa modelin cümlesi düşer. Adresler route tarafından eklenir.
+    if (modelDoesNotKnow(reply)) {
+        return logged(
+            [unknownReply[locale], contactBlock(locale, email, phones, locations)].join("\n"),
+        );
     }
 
-   const asked = visitorWantsContact(last);
-const spoken = hideContact(reply, asked, email, phones);
-const priced = scrubPrice(spoken, email, phones);
-return logged(ensureContact(priced, last, hint, email, phones));
+    const asked = visitorWantsContact(last);
+    const spoken = hideContact(reply, asked, email, phones);
+    const priced = scrubPrice(spoken, locale, email, phones, locations);
+    return logged(ensureContact(priced, last, hint, email, phones, locations));
 }
