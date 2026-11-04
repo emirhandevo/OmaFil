@@ -414,8 +414,9 @@ export function HeroMarquee() {
   const compact = useSyncExternalStore(subscribeCompact, readCompact, () => true);
   const bottom = useBottomStrip(compact);
 
+  // Üst boşluk yok. Marka başlığının 72px padding'i yeterli.
   return (
-    <div className="mt-10 w-full">
+    <div className="w-full">
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
         {/* key yok: üst şerit remount olmasın, görünen kartlar yerinde kalsın. */}
         <MarqueeRow
