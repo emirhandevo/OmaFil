@@ -58,8 +58,8 @@ export function YarnChat() {
       {panelReady ? <YarnChatPanel open={open} onClose={close} /> : null}
 
       <div className="pointer-events-auto flex flex-col items-end gap-3 self-end">
-        {/* Sohbet açıkken WhatsApp gizlensin; kapanınca geri gelsin. */}
-        {!open ? (
+        {/* Numara boşsa buton yok. Sohbet açıkken de gizlenir. */}
+        {!open && contact.whatsapp ? (
           <a
             href={contact.whatsapp}
             target="_blank"

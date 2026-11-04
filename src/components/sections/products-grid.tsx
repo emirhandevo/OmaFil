@@ -67,33 +67,58 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
         ? "omafil-products-in"
         : "";
 
+  // Seçili olmayan filtreyle aynı hap. Color Pro filtre değil.
+  const chipIdle =
+    "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] active:border-[#f19000]/50 active:bg-[#1e355d] disabled:opacity-60";
+
   return (
     <div>
-      <div
-        className="flex flex-wrap gap-2"
-        role="tablist"
-        aria-label={copy.chrome.familyAria}
-      >
-        {productFamilies.map((f) => {
-          const active = family === f.id;
-          return (
-            <button
-              key={f.id}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              disabled={phase !== "idle"}
-              onClick={() => selectFamily(f.id)}
-              className={
-                active
-                  ? "rounded-full bg-[#f19000] px-4 py-2 text-sm font-semibold text-white shadow-md shadow-[#f19000]/30 transition-all duration-300"
-                  : "rounded-full border border-white/15 bg-[#1e355d]/80 px-4 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-[#f19000]/50 hover:bg-[#1e355d] active:border-[#f19000]/50 active:bg-[#1e355d] disabled:opacity-60"
-              }
-            >
-              {f.id === "all" ? copy.products.all : f.label}
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap items-center gap-2">
+        <div
+          className="flex flex-wrap gap-2"
+          role="tablist"
+          aria-label={copy.chrome.familyAria}
+        >
+          {productFamilies.map((f) => {
+            const active = family === f.id;
+            return (
+              <button
+                key={f.id}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                disabled={phase !== "idle"}
+                onClick={() => selectFamily(f.id)}
+                className={
+                  active
+                    ? "rounded-full bg-[#f19000] px-4 py-2 text-sm font-semibold text-white shadow-md shadow-[#f19000]/30 transition-all duration-300"
+                    : chipIdle
+                }
+              >
+                {f.id === "all" ? copy.products.all : f.label}
+              </button>
+            );
+          })}
+        </div>
+        {/* Çizimdeki ayraç. Filtre grubundan Color Pro'yu ayırır. */}
+        <svg
+          viewBox="0 0 16 36"
+          aria-hidden="true"
+          className="mx-1 h-8 w-3 shrink-0 text-[#1e355d] dark:text-white/85"
+        >
+          <line
+            x1="13"
+            y1="2"
+            x2="3"
+            y2="34"
+            stroke="currentColor"
+            strokeWidth="2.25"
+            strokeLinecap="round"
+          />
+        </svg>
+        <button type="button" className={chipIdle}>
+          OmaFil Color Pro
+        </button>
       </div>
 
       <ul
@@ -171,30 +196,31 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                 </span>
               </LocaleLink>
 
-              <div className="flex flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
-                <LocaleLink href={`/urunlerimiz/${item.slug}`}>
-                  <h2 className="line-clamp-1 h-7 text-lg leading-7 font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000] group-active:text-[#f19000]">
-                    {item.label}
-                  </h2>
-                </LocaleLink>
-                <p className="mt-2 line-clamp-3 h-[4.5rem] text-sm leading-6 text-white/70">
+              {/* Mavi gövde tek link. Başlık ve özet de detaya gider. Teklif al üstte kalır. */}
+              <div className="relative flex flex-col border-t border-white/10 bg-[#162a4a] p-5 sm:p-6">
+                <LocaleLink
+                  href={`/urunlerimiz/${item.slug}`}
+                  aria-label={item.label}
+                  className="absolute inset-0 z-0 rounded-b-3xl"
+                />
+                <h2 className="pointer-events-none relative z-10 line-clamp-1 h-7 text-lg leading-7 font-semibold tracking-tight text-white transition-colors group-hover:text-[#f19000] group-active:text-[#f19000]">
+                  {item.label}
+                </h2>
+                <p className="pointer-events-none relative z-10 mt-2 line-clamp-3 h-[4.5rem] text-sm leading-6 text-white/70">
                   {summaries?.[item.slug] ?? item.summary}
                 </p>
-                <div className="mt-5 flex h-6 shrink-0 flex-nowrap items-center gap-3">
-                  <LocaleLink
-                    href={`/urunlerimiz/${item.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/90 transition-colors hover:text-white active:text-white"
-                  >
+                <div className="relative z-10 mt-5 flex h-6 shrink-0 flex-nowrap items-center gap-3">
+                  <span className="pointer-events-none inline-flex items-center gap-1.5 text-sm font-semibold text-white/90">
                     {/* Specs her dilde aynı kelime. Sözlükteki ürün giriş cümlesi de böyle. */}
                     Specs
                     <ArrowUpRight
                       aria-hidden="true"
                       className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0.5 group-active:-translate-y-0.5"
                     />
-                  </LocaleLink>
+                  </span>
                   <LocaleLink
                     href="/iletisim"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#f19000] transition-colors hover:text-[#e84e1c] active:text-[#e84e1c]"
+                    className="relative z-10 inline-flex items-center gap-1.5 text-sm font-semibold text-[#f19000] transition-colors hover:text-[#e84e1c] active:text-[#e84e1c]"
                   >
                     {copy.products.quote}
                     <ArrowUpRight aria-hidden="true" className="size-4" />

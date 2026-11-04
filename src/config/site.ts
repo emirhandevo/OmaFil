@@ -37,15 +37,14 @@ export const navLinks = [
 
 
 
-// Footer / iletişim sayfası için tek kaynak
-// birden telefon numarası footer hepsini alt alta listeler
+// Footer / iletişim sayfası için yedek kaynak. Panel doluysa orası basılır.
 export const contact = {
-  phone: ["+90 212 438 72 20", "+90 549 177 50 10"],
+  phone: ["+90 212 438 72 20"],
   // Sabit hat ile aynı numara, sonu 21. Sadece footer basar.
   fax: "+90 212 438 72 21",
   email: "info@omafil.com",
-  // Cep hattı → wa.me (ülke kodu, boşluksuz).
-  whatsapp: "https://wa.me/905491775010",
+  // Numara yokken boş. Dolu olunca https://wa.me/90... yazılır.
+  whatsapp: "",
   // her adres: başlık + görünen metin + google maps linki
   locations: [
     {

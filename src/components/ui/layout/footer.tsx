@@ -135,7 +135,7 @@ export function Footer({
                   </a>
                 </li>
               ))}
-              {/* İki telefonun altı, e-postanın üstü. */}
+              {/* Telefonun altı, e-postanın üstü. */}
               <li className="flex items-center justify-center gap-2">
                 <Printer
                   aria-hidden="true"
@@ -164,8 +164,8 @@ export function Footer({
               </li>
             </ul>
           </div>
-          {/* lg’de liste akışın dışında. Alttaki bloğun üstüne binmesin diye dört satırlık yer ayrılır. */}
-          <div className="hidden h-[calc(1rem+4*1.25rem+3*0.75rem)] lg:block" aria-hidden="true" />
+          {/* lg’de liste akışın dışında. Telefon, faks ve mail için üç satırlık yer. */}
+          <div className="hidden h-[calc(1rem+3*1.25rem+2*0.75rem)] lg:block" aria-hidden="true" />
         </div>
 
         {/* Adresler — ayrı kolon, her biri Maps'e link */}
