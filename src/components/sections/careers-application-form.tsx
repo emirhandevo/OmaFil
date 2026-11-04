@@ -14,8 +14,9 @@ import {
   CV_MAX_BYTES,
   type CareersFormValues,
 } from "@/lib/schemas/careers";
-import { useCopy, useLocale } from "@/components/i18n/locale-provider";
-import { getUi } from "@/i18n/ui";
+import { useCopy } from "@/components/i18n/locale-provider";
+import type { FormMessages } from "@/lib/schemas/contact";
+import type { Ui } from "@/i18n/ui";
 import { sanitizePhoneInput } from "@/lib/phone";
 
 function resolveTurnstileSiteKey(): string {
@@ -34,9 +35,14 @@ const fieldClass =
 /**
  * İK başvuru formu — PDF CV + Resend attachment.
  */
-export function CareersApplicationForm() {
+export function CareersApplicationForm({
+  form,
+  notice,
+}: {
+  form: FormMessages;
+  notice: Ui["kvkkCareers"];
+}) {
   const copy = useCopy();
-  const locale = useLocale();
   const turnstileRef = useRef<TurnstileInstance>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [pending, startTransition] = useTransition();
@@ -55,7 +61,7 @@ export function CareersApplicationForm() {
     reset,
     formState: { errors },
   } = useForm<CareersFormValues>({
-    resolver: zodResolver(createCareersFormSchema(getUi(locale).form)),
+    resolver: zodResolver(createCareersFormSchema(form)),
     defaultValues: {
       name: "",
       email: "",
@@ -296,11 +302,7 @@ export function CareersApplicationForm() {
         </span>
       )}
 
-      <KvkkModal
-        open={kvkkOpen}
-        onClose={() => setKvkkOpen(false)}
-        notice={getUi(locale).kvkkCareers}
-      />
+      <KvkkModal open={kvkkOpen} onClose={() => setKvkkOpen(false)} notice={notice} />
 
       {turnstileEnabled ? (
         <div className="pt-1">

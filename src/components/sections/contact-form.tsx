@@ -13,9 +13,10 @@ import {
   createContactFormSchema,
   productGroups,
   type ContactFormValues,
+  type FormMessages,
 } from "@/lib/schemas/contact";
-import { useCopy, useLocale } from "@/components/i18n/locale-provider";
-import { getUi } from "@/i18n/ui";
+import { useCopy } from "@/components/i18n/locale-provider";
+import type { Ui } from "@/i18n/ui";
 import { sanitizePhoneInput } from "@/lib/phone";
 
 /** Gerçek Cloudflare key’i yoksa (boş / örnek placeholder) widget gösterme */
@@ -36,9 +37,14 @@ const fieldClass =
  * İletişim formu — RHF + Zod → server action (Resend).
  * Turnstile + honeypot spam koruması.
  */
-export function ContactForm() {
+export function ContactForm({
+  form,
+  notice,
+}: {
+  form: FormMessages;
+  notice: Ui["kvkkContact"];
+}) {
   const copy = useCopy();
-  const locale = useLocale();
   const turnstileRef = useRef<TurnstileInstance>(null);
   const [pending, startTransition] = useTransition();
   const [formError, setFormError] = useState<string | null>(null);
@@ -54,7 +60,7 @@ export function ContactForm() {
     reset,
     formState: { errors },
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(createContactFormSchema(getUi(locale).form)),
+    resolver: zodResolver(createContactFormSchema(form)),
     defaultValues: {
       name: "",
       email: "",
@@ -272,7 +278,7 @@ export function ContactForm() {
         <span className="block text-xs text-destructive">{errors.kvkk.message}</span>
       )}
 
-      <KvkkModal open={kvkkOpen} onClose={() => setKvkkOpen(false)} />
+      <KvkkModal open={kvkkOpen} onClose={() => setKvkkOpen(false)} notice={notice} />
 
       {/* Turnstile — gerçek key yoksa (DNS/Cloudflare sonra) atlanır */}
       {turnstileEnabled ? (

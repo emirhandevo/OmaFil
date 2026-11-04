@@ -26,8 +26,6 @@ export function HeroVideo({
     if (!mounted) return;
     let dead = false;
     let timer = 0;
-    let lcpImg: HTMLImageElement | null = null;
-    const begun = performance.now();
 
     function startNow() {
       if (dead) return;
@@ -35,47 +33,19 @@ export function HeroVideo({
       setStart(true);
     }
 
-    // Masaüstü: sayfa yüklenince 400ms. Telefon: LCP kartının load'u.
-    function onDesktopLoad() {
+    // Şerit artık ilk ekranda değil. Telefon da masaüstü gibi
+    // sayfa yüklenince 400ms sonra videoyu başlatır. Dosya aynı kalır.
+    function onLoad() {
       timer = window.setTimeout(startNow, 400);
     }
 
-    function arm() {
-      const phone = window.matchMedia("(max-width: 1023px)").matches;
-      if (!phone) {
-        if (document.readyState === "complete") onDesktopLoad();
-        else window.addEventListener("load", onDesktopLoad, { once: true });
-        return;
-      }
-
-      const found = document.querySelector("img[data-hero-lcp]");
-      if (!(found instanceof HTMLImageElement)) {
-        // Kart henüz DOM'da yoksa kısa aralıkla tekrar bak. 8 sn'de video yine başlar.
-        if (performance.now() - begun >= 8000) {
-          startNow();
-          return;
-        }
-        timer = window.setTimeout(arm, 100);
-        return;
-      }
-      lcpImg = found;
-      if (found.complete && found.naturalWidth > 0) {
-        startNow();
-        return;
-      }
-      found.addEventListener("load", startNow, { once: true });
-      found.addEventListener("error", startNow, { once: true });
-      timer = window.setTimeout(startNow, 8000);
-    }
-
-    arm();
+    if (document.readyState === "complete") onLoad();
+    else window.addEventListener("load", onLoad, { once: true });
 
     return () => {
       dead = true;
-      window.removeEventListener("load", onDesktopLoad);
+      window.removeEventListener("load", onLoad);
       window.clearTimeout(timer);
-      lcpImg?.removeEventListener("load", startNow);
-      lcpImg?.removeEventListener("error", startNow);
     };
   }, [mounted]);
 

@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { useLocale } from "@/components/i18n/locale-provider";
 import { site } from "@/config/site";
-import { getUi } from "@/i18n/ui";
 import type { Locale } from "@/i18n/locales";
 
 type Notice = {
@@ -45,8 +44,7 @@ const okLabel: Record<Locale, string> = {
 type Props = {
   open: boolean;
   onClose: () => void;
-  /** Varsayılan: iletişim formu metni */
-  notice?: Notice;
+  notice: Notice;
 };
 
 /**
@@ -55,7 +53,7 @@ type Props = {
  */
 export function KvkkModal({ open, onClose, notice }: Props) {
   const locale = useLocale();
-  const text = notice ?? getUi(locale).kvkkContact;
+  const text = notice;
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
 

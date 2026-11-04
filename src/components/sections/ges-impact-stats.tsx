@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { BatteryCharging, Leaf, Sun } from "lucide-react";
-import { useInner, useLocale } from "@/components/i18n/locale-provider";
+import { useLocale } from "@/components/i18n/locale-provider";
+import type { GesChrome } from "@/i18n/ges-chrome";
 import {
   computeGesMetrics,
   gesCapacity,
   gesMetrics,
 } from "@/content/ges";
-import { gesPortfolioTotals } from "@/content/ges-sites";
 import { htmlLang } from "@/i18n/locales";
 
 type MetricId = (typeof gesMetrics)[number]["id"];
@@ -18,9 +18,8 @@ type MetricId = (typeof gesMetrics)[number]["id"];
  * Patron örneği: yeşil özet + 3 fotoğraflı canlı sayaç.
  * Sayılar sabit değil — her ~200ms kümülatif üretim artışıyla güncellenir.
  */
-export function GesImpactStats() {
+export function GesImpactStats({ chrome }: { chrome: GesChrome | null }) {
   const locale = useLocale();
-  const t = useInner();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [values, setValues] = useState(() => computeGesMetrics());
@@ -71,24 +70,10 @@ export function GesImpactStats() {
               id="ges-impact-title"
               className="text-2xl font-bold tracking-tight text-emerald-800 dark:text-emerald-300 sm:text-3xl"
             >
-              {t?.ges.capacityTitle ?? gesCapacity.title}
+              {chrome?.capacityTitle ?? gesCapacity.title}
             </h2>
             <p className="text-body mt-5 max-w-xl text-base leading-8">
-              {t
-                ? t.ges.capacity({
-                    total: gesPortfolioTotals.all.capacityMwp.toLocaleString(
-                      htmlLang(locale),
-                    ),
-                    elazig: String(gesPortfolioTotals.elazig.capacityMwp),
-                    erbaa: String(gesPortfolioTotals.erbaa.capacityMwp),
-                    min: (gesPortfolioTotals.all.annualKwhMin / 1_000_000).toLocaleString(
-                      htmlLang(locale),
-                    ),
-                    max: (gesPortfolioTotals.all.annualKwhMax / 1_000_000).toLocaleString(
-                      htmlLang(locale),
-                    ),
-                  })
-                : gesCapacity.text}
+              {chrome?.capacityText ?? gesCapacity.text}
             </p>
           </div>
 
@@ -114,13 +99,13 @@ export function GesImpactStats() {
         {gesMetrics.map((m, i) => (
           <article key={m.id} className="flex flex-col">
             <p className="bg-emerald-50 px-4 py-3 text-center text-[11px] font-bold tracking-[0.12em] text-emerald-800 uppercase dark:bg-emerald-950/40 dark:text-emerald-300 sm:text-xs md:hidden">
-              {t?.ges.metrics[i] ?? m.label}
+              {chrome?.metrics[i] ?? m.label}
             </p>
 
             <div className="relative min-h-[220px] overflow-hidden sm:min-h-[280px]">
               <Image
                 src={m.image}
-                alt={t?.ges.metricAlts[i] ?? m.imageAlt}
+                alt={chrome?.metricAlts[i] ?? m.imageAlt}
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"
                 quality={80}
@@ -129,7 +114,7 @@ export function GesImpactStats() {
               <div className="absolute inset-0 bg-brand-navy/55" />
 
               <p className="absolute top-4 left-1/2 z-10 hidden w-[calc(100%-2rem)] -translate-x-1/2 text-center text-[11px] font-bold tracking-[0.12em] text-white uppercase drop-shadow sm:text-xs md:block">
-                {t?.ges.metrics[i] ?? m.label}
+                {chrome?.metrics[i] ?? m.label}
               </p>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-8 text-center md:pt-6">

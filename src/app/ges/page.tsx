@@ -10,6 +10,7 @@ import { getGesBlocks } from "@/content/sections";
 import { gesPortfolioTotals } from "@/content/ges-sites";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
+import { buildGesChrome } from "@/i18n/ges-chrome";
 import { getInner } from "@/i18n/inner";
 import { htmlLang, pageAlternates } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
@@ -31,6 +32,7 @@ const pillarIcons = [Sun, TreePine, Leaf] as const;
 export default async function GesPage() {
   const { locale } = await getCopy();
   const t = getInner(locale);
+  const chrome = buildGesChrome(locale);
   const cms = await getGesBlocks(locale);
   const f = cms.filled;
   const num = htmlLang(locale);
@@ -132,13 +134,14 @@ export default async function GesPage() {
         </div>
       </section>
 
-      <GesImpactStats />
+      <GesImpactStats chrome={chrome} />
 
       <GesSitesSection
         sitesTitle={f.sitesTitle}
         sitesLead={f.sitesLead}
         fieldHeading={f.fieldHeading}
         roofHeading={f.roofHeading}
+        chrome={chrome}
       />
 
       <section className="border-t border-border bg-brand-navy py-14 text-white sm:py-16">

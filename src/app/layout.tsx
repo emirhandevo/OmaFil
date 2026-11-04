@@ -6,6 +6,7 @@ import { getContact, getSiteSettings } from "@/content/cms";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
 import { getLocale } from "@/i18n/get-locale";
+import { getInner } from "@/i18n/inner";
 import { htmlLang, ogLocale } from "@/i18n/locales";
 import { getUi } from "@/i18n/ui";
 import { buildThemeBootScript } from "@/lib/theme-calculator";
@@ -83,6 +84,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     getContact(locale),
     getSiteSettings(locale),
   ]);
+  // Ürün özeti ve adres etiketleri yalnız bu dil. Client sözlüğü kendisi çekmez.
+  const products = getInner(locale)?.products ?? null;
+  const places = getUi(locale).places;
 
   return (
     <html
@@ -99,12 +103,13 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         className="flex min-h-full flex-col overflow-x-hidden bg-background text-foreground"
       >
         {/* Dil, proxy’nin x-locale başlığından gelir. tr kök URL’de kalır. */}
-        <LocaleProvider locale={locale} copy={copy}>
+        <LocaleProvider locale={locale} copy={copy} products={products}>
           <ConditionalShell
             contact={contact}
             footerTagline={settings.footerTagline}
             logo={settings.logo}
             logoDark={settings.logoDark}
+            places={places}
           >
             {children}
           </ConditionalShell>

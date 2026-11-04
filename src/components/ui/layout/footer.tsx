@@ -3,7 +3,6 @@
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy, useLocale } from "@/components/i18n/locale-provider";
-import { getUi, placeLabel } from "@/i18n/ui";
 import { contact as siteContact, navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
 import { MailLink } from "@/components/ui/mail-link";
@@ -16,11 +15,25 @@ import {
   YoutubeIcon,
 } from "@/components/ui/icons/social-icons";
 
+// CMS etiketleri Türkçe kalır. Sıra ui.ts placeKeys ile aynı olmalı.
+const placeKeys = [
+  "Genel Merkez",
+  "Fabrika / Üretim Tesisi",
+  "Fabrika Satış Noktası",
+] as const;
+
+function placeName(label: string, places: readonly [string, string, string]) {
+  const index = placeKeys.indexOf(label as (typeof placeKeys)[number]);
+  if (index < 0) return label;
+  return places[index];
+}
+
 type FooterProps = {
   contact: ContactData;
   footerTagline: string;
   logo: string;
   logoDark: string;
+  places: readonly [string, string, string];
 };
 
 const socialIcons: Record<
@@ -32,10 +45,15 @@ const socialIcons: Record<
   youtube: YoutubeIcon,
 };
 
-export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) {
+export function Footer({
+  contact,
+  footerTagline,
+  logo,
+  logoDark,
+  places,
+}: FooterProps) {
   const copy = useCopy();
   const locale = useLocale();
-  const ui = getUi(locale);
 
   return (
     <footer className="site-footer mt-auto border-t border-border bg-background">
@@ -169,7 +187,7 @@ export function Footer({ contact, footerTagline, logo, logoDark }: FooterProps) 
                   className="text-foreground/75 transition-colors hover:text-brand-orange active:text-brand-orange"
                 >
                   <span className="block font-medium text-foreground">
-                    {placeLabel(loc.label, locale)}
+                    {placeName(loc.label, places)}
                   </span>
                   {loc.address}
                 </a>

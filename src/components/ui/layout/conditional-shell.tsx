@@ -11,6 +11,7 @@ type ConditionalShellProps = {
   footerTagline: string;
   logo: string;
   logoDark: string;
+  places: readonly [string, string, string];
 };
 
 /**
@@ -23,6 +24,7 @@ export function ConditionalShell({
   footerTagline,
   logo,
   logoDark,
+  places,
 }: ConditionalShellProps) {
   const pathname = usePathname();
   // Panel ve sohbet kayıtları site kabuğunun dışında. Dil öneki de aynı.
@@ -40,6 +42,7 @@ export function ConditionalShell({
       footerTagline={footerTagline}
       logo={logo}
       logoDark={logoDark}
+      places={places}
     >
       {children}
     </SiteShell>

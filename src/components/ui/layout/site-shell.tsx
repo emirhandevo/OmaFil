@@ -12,6 +12,7 @@ type SiteShellProps = {
   footerTagline: string;
   logo: string;
   logoDark: string;
+  places: readonly [string, string, string];
 };
 
 /**
@@ -25,6 +26,7 @@ export function SiteShell({
   footerTagline,
   logo,
   logoDark,
+  places,
 }: SiteShellProps) {
   return (
     <>
@@ -38,6 +40,7 @@ export function SiteShell({
         footerTagline={footerTagline}
         logo={logo}
         logoDark={logoDark}
+        places={places}
       />
       <BackToTop />
       <YarnChat />

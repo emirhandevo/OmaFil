@@ -1,7 +1,8 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { site } from "@/config/site";
 import { getCopy } from "@/i18n/get-copy";
-import { placeLabel } from "@/i18n/ui";
+import { getUi, placeLabel } from "@/i18n/ui";
+import { pickFormMessages } from "@/lib/schemas/contact";
 import { getContact, type SocialNetwork } from "@/content/cms";
 import { ContactForm } from "@/components/sections/contact-form";
 import { MailLink } from "@/components/ui/mail-link";
@@ -28,6 +29,7 @@ const socialIcons: Record<SocialNetwork, typeof InstagramIcon> = {
 export async function ContactPage() {
   const { copy, locale } = await getCopy();
   const contact = await getContact(locale);
+  const ui = getUi(locale);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -86,7 +88,10 @@ export async function ContactPage() {
             {copy.contact.formLead}
           </p>
           <div className="mt-8 rounded-3xl border border-border bg-card/60 p-6 sm:p-8">
-            <ContactForm />
+            <ContactForm
+              form={pickFormMessages(ui.form)}
+              notice={ui.kvkkContact}
+            />
           </div>
         </div>
 

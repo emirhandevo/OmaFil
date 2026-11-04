@@ -4,7 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
-import { useCopy, useInner } from "@/components/i18n/locale-provider";
+import { useCopy, useProductSummaries } from "@/components/i18n/locale-provider";
 import { productFamilies } from "@/content/catalog/families";
 import type { ProductFamily, ProductLine } from "@/content/catalog/types";
 import { useProductsBrowse } from "@/components/sections/products-browse";
@@ -22,7 +22,7 @@ type ProductsGridProps = {
  */
 export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
   const copy = useCopy();
-  const inner = useInner();
+  const summaries = useProductSummaries();
   // Filtre layout provider’da: detay sayfasına gidince sıfırlanmaz.
   const { family, setFamily } = useProductsBrowse();
   const [phase, setPhase] = useState<Phase>("idle");
@@ -178,7 +178,7 @@ export function ProductsGrid({ lines, contactEmail }: ProductsGridProps) {
                   </h2>
                 </LocaleLink>
                 <p className="mt-2 line-clamp-3 h-[4.5rem] text-sm leading-6 text-white/70">
-                  {inner?.products[item.slug] ?? item.summary}
+                  {summaries?.[item.slug] ?? item.summary}
                 </p>
                 <div className="mt-5 flex h-6 shrink-0 flex-nowrap items-center gap-3">
                   <LocaleLink

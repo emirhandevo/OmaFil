@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {Hero} from "@/components/sections/hero";
+import { HeroMarquee } from "@/components/sections/hero-marquee";
 import {CorporateIntro} from "@/components/sections/corporate-intro";
 import { BrandStatement} from "@/components/sections/brand-statement";
 import {CompanyStats} from "@/components/sections/company-stats";
@@ -20,6 +21,8 @@ export default function Home() {
     <>
       <Hero />
       <BrandStatement />
+      {/* Şerit başlığın altında. İlk ekranın dışında kaldığı için görseller lazy iner. */}
+      <HeroMarquee />
       <CorporateIntro />
       <CompanyStats />
       <SustainabilitySection />

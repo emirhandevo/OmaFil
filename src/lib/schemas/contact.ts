@@ -1,7 +1,24 @@
 import { z } from "zod";
 import type { Ui } from "@/i18n/ui";
-import { getUi } from "@/i18n/ui";
 import { phonePattern } from "@/lib/phone";
+
+/** Doğrulama cümleleri. rate() fonksiyon; client'a sadece bu stringler gider. */
+export type FormMessages = Pick<
+  Ui["form"],
+  "name" | "email" | "phone" | "group" | "message" | "kvkk" | "turnstile"
+>;
+
+export function pickFormMessages(form: Ui["form"]): FormMessages {
+  return {
+    name: form.name,
+    email: form.email,
+    phone: form.phone,
+    group: form.group,
+    message: form.message,
+    kvkk: form.kvkk,
+    turnstile: form.turnstile,
+  };
+}
 
 /** Dropdown — talep tipi (OmaFil: nylon / polyester iplik) */
 export const productGroups = [
@@ -18,7 +35,7 @@ export type ProductGroup = (typeof productGroups)[number];
  * website = honeypot (bot doldurursa reddedilir)
  * turnstileToken = Cloudflare Turnstile yanıtı
  */
-export function createContactFormSchema(m: Ui["form"]) {
+export function createContactFormSchema(m: FormMessages) {
   return z.object({
   name: z.string().trim().min(2, m.name).max(80, m.name),
   email: z.string().trim().email(m.email),
@@ -40,9 +57,7 @@ export function createContactFormSchema(m: Ui["form"]) {
 });
 }
 
-export const contactFormSchema = createContactFormSchema(getUi("tr").form);
-
-export type ContactFormValues = z.infer<typeof contactFormSchema>;
+export type ContactFormValues = z.infer<ReturnType<typeof createContactFormSchema>>;
 
 /** Mail / aksiyon için honeypot ve token olmadan temiz veri */
 export type ContactPayload = Omit<

@@ -2,12 +2,12 @@ import Image from "next/image";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { getHero } from "@/content/cms";
 import { getLocale } from "@/i18n/get-locale";
-import { HeroMarquee } from "@/components/sections/hero-marquee";
 import { HeroVideo } from "@/components/sections/hero-video";
 
 /**
  * Anasayfanın ilk ekranı.
- * Medya ortak; yazı Keystatic’te dil dil. Marquee hâlâ sözlük.
+ * Medya ortak; yazı Keystatic’te dil dil.
+ * İplik şeridi burada değil: marka başlığının altında, page.tsx.
  */
 export async function Hero() {
   const locale = await getLocale();
@@ -74,8 +74,6 @@ export async function Hero() {
           </div>
         </div>
       </div>
-
-      <HeroMarquee />
     </section>
   );
 }

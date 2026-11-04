@@ -1,12 +1,11 @@
 import { z } from "zod";
-import type { Ui } from "@/i18n/ui";
-import { getUi } from "@/i18n/ui";
 import { phonePattern } from "@/lib/phone";
+import type { FormMessages } from "@/lib/schemas/contact";
 
 /** CV PDF üst sınırı — Vercel body limiti (~4.5MB) altında kalsın */
 export const CV_MAX_BYTES = 4 * 1024 * 1024;
 
-export function createCareersFormSchema(m: Ui["form"]) {
+export function createCareersFormSchema(m: FormMessages) {
   return z.object({
     name: z.string().trim().min(2, m.name).max(80, m.name),
     email: z.string().trim().email(m.email),
@@ -21,9 +20,7 @@ export function createCareersFormSchema(m: Ui["form"]) {
   });
 }
 
-export const careersFormSchema = createCareersFormSchema(getUi("tr").form);
-
-export type CareersFormValues = z.infer<typeof careersFormSchema>;
+export type CareersFormValues = z.infer<ReturnType<typeof createCareersFormSchema>>;
 
 export type CareersPayload = Omit<
   CareersFormValues,

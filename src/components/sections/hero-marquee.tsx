@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } fr
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { LocaleLink } from "@/components/i18n/locale-link";
-import { useCopy, useInner, useLocale } from "@/components/i18n/locale-provider";
+import { useCopy, useLocale, useProductSummaries } from "@/components/i18n/locale-provider";
 import {
   yarnImages,
   yarnImagesAll,
@@ -73,8 +73,6 @@ type GroupProps = {
   items: MarqueeItem[];
   altPrefix: string;
   duplicate?: boolean;
-  /** Üst şeridin ilk kartı mobil LCP. Kopya grup ve alt şerit bunu almaz. */
-  lead?: boolean;
   skipClickRef: React.RefObject<boolean>;
   openSrc: string | null;
   hoveredSrc: string | null;
@@ -86,7 +84,6 @@ function ImageGroup({
   items,
   altPrefix,
   duplicate = false,
-  lead = false,
   skipClickRef,
   openSrc,
   hoveredSrc,
@@ -94,7 +91,7 @@ function ImageGroup({
   onYarnClick,
 }: GroupProps) {
   const copy = useCopy();
-  const inner = useInner();
+  const summaries = useProductSummaries();
   const locale = useLocale();
   // Şerit LTR kalır. Kart yazısı Arapçada kendi yönünde akar.
   const textDir = locale === "ar" ? "rtl" : "ltr";
@@ -114,8 +111,6 @@ function ImageGroup({
         const label =
           locale === "en" ? item.label.replaceAll("Gipe", "Covered Yarn") : item.label;
         const alt = duplicate ? "" : `${altPrefix} ${index + 1} — ${label}`;
-        // Yalnız üst şeridin ilk gerçek kartı. Telefonda ilk ekrandaki en büyük boya bu.
-        const isLcp = lead && !duplicate && index === 0;
         // İki kopyada da aynı slug açık kalsın (ekranda görünen hangisiyse)
         const open = openSrc === item.slug || hoveredSrc === item.slug;
 
@@ -164,7 +159,7 @@ function ImageGroup({
               >
                 <div className="overflow-hidden">
                   <p className="text-xs leading-5 text-zinc-600">
-                    {inner?.products[item.slug] || item.summary}
+                    {summaries?.[item.slug] || item.summary}
                   </p>
                   <p className="mt-2 flex items-center gap-1 pb-3 text-xs font-medium text-zinc-900">
                     {copy.hero.details}
@@ -183,12 +178,10 @@ function ImageGroup({
                   sizes="(min-width: 768px) 320px, (min-width: 640px) 288px, 240px"
                   draggable={false}
                   className="object-cover"
-                  // LCP kartı yüksek öncelik + sync decode: boya gecikmesin.
-                  // Diğerleri low. React, low görünce head preload basmaz.
-                  loading={isLcp ? "eager" : "lazy"}
-                  fetchPriority={isLcp ? "high" : "low"}
-                  decoding={isLcp ? "sync" : "async"}
-                  data-hero-lcp={isLcp ? "" : undefined}
+                  // Şerit ilk ekranın altında. Hiçbiri ilk boyamayı bekletmesin.
+                  loading="lazy"
+                  fetchPriority="low"
+                  decoding="async"
                 />
               ) : (
                 <div className="flex size-full flex-col items-center justify-center gap-1 px-3 text-center">
@@ -210,12 +203,10 @@ function MarqueeRow({
   items,
   altPrefix,
   direction,
-  lead = false,
 }: {
   items: MarqueeItem[];
   altPrefix: string;
   direction: "left" | "right";
-  lead?: boolean;
 }) {
   const copy = useCopy();
   const innerRef = useRef<HTMLDivElement>(null);
@@ -361,7 +352,6 @@ function MarqueeRow({
   const groupProps = {
     items,
     altPrefix,
-    lead,
     skipClickRef,
     openSrc,
     hoveredSrc,
@@ -429,7 +419,6 @@ export function HeroMarquee() {
       <div className="mx-auto w-full max-w-5xl px-4 lg:max-w-7xl">
         {/* key yok: üst şerit remount olmasın, görünen kartlar yerinde kalsın. */}
         <MarqueeRow
-          lead
           items={compact ? yarnImagesAll : yarnImages}
           altPrefix="İplik"
           direction="right"

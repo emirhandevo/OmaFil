@@ -5,6 +5,8 @@ import { getCmsPage } from "@/content/pages";
 import { getCopy } from "@/i18n/get-copy";
 import { getInner } from "@/i18n/inner";
 import { pageAlternates } from "@/i18n/locales";
+import { getUi } from "@/i18n/ui";
+import { pickFormMessages } from "@/lib/schemas/contact";
 
 // Başlık sırası: inner çevirisi, panel, en sonda Türkçe yedek.
 
@@ -24,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function InsanKaynaklariPage() {
   const { copy, locale } = await getCopy();
+  const ui = getUi(locale);
   const page = await getCmsPage("insan-kaynaklari", locale);
   const t = getInner(locale);
 
@@ -68,7 +71,10 @@ export default async function InsanKaynaklariPage() {
           {copy.chrome.applyLead}
         </p>
         <div className="mt-8 max-w-2xl rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
-          <CareersApplicationForm />
+          <CareersApplicationForm
+            form={pickFormMessages(ui.form)}
+            notice={ui.kvkkCareers}
+          />
         </div>
       </section>
     </CorporateFrame>
