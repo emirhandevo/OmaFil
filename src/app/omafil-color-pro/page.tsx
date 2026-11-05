@@ -28,14 +28,15 @@ export default async function ColorProPage() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
+        {/* Ürün listesinin başlığı burada durmaz. Kartela kendi metnini basar. */}
         <p className="text-xs font-bold tracking-[0.22em] text-brand-orange uppercase">
-          {copy.products.kicker}
+          {copy.colorPro.kicker}
         </p>
         <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          {copy.products.title}
+          {copy.colorPro.title}
         </h1>
         <p className="text-body mt-5 max-w-2xl text-base leading-8">
-          {copy.products.lead}
+          {copy.colorPro.lead}
         </p>
 
         <div className="mt-12">

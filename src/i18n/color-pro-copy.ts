@@ -27,7 +27,7 @@ const note =
 export const colorProCopy: Record<Locale, ColorProCopy> = {
   tr: {
     kicker: "Renkli iplik koleksiyonu",
-    title: "OmaFil Color Pro",
+    title: "Renk çeşitlerimiz",
     lead: "İpliğin dokusunda hayat bulan renkler.",
     catalog: "Renk kartelamız",
     count: "29 renk",
@@ -46,7 +46,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   en: {
     kicker: "Colored yarn collection",
-    title: "OmaFil Color Pro",
+    title: "Our color range",
     lead: "Colors that come alive in the yarn.",
     catalog: "Our color card",
     count: "29 colors",
@@ -65,7 +65,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   de: {
     kicker: "Farbige Garnkollektion",
-    title: "OmaFil Color Pro",
+    title: "Unsere Farbvielfalt",
     lead: "Farben, die im Garn lebendig werden.",
     catalog: "Unsere Farbkarte",
     count: "29 Farben",
@@ -84,7 +84,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   fr: {
     kicker: "Collection de fils colorés",
-    title: "OmaFil Color Pro",
+    title: "Notre gamme de couleurs",
     lead: "Des couleurs qui prennent vie dans le fil.",
     catalog: "Notre carte de couleurs",
     count: "29 couleurs",
@@ -103,7 +103,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   es: {
     kicker: "Colección de hilos de color",
-    title: "OmaFil Color Pro",
+    title: "Nuestra gama de colores",
     lead: "Colores que cobran vida en el hilo.",
     catalog: "Nuestra carta de color",
     count: "29 colores",
@@ -122,7 +122,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   it: {
     kicker: "Collezione di filati colorati",
-    title: "OmaFil Color Pro",
+    title: "La nostra gamma colori",
     lead: "Colori che prendono vita nel filato.",
     catalog: "La nostra cartella colori",
     count: "29 colori",
@@ -141,7 +141,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   pt: {
     kicker: "Coleção de fios coloridos",
-    title: "OmaFil Color Pro",
+    title: "A nossa gama de cores",
     lead: "Cores que ganham vida no fio.",
     catalog: "A nossa carta de cores",
     count: "29 cores",
@@ -160,7 +160,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   nl: {
     kicker: "Gekleurde garencollectie",
-    title: "OmaFil Color Pro",
+    title: "Ons kleurenpalet",
     lead: "Kleuren die tot leven komen in het garen.",
     catalog: "Onze kleurenkaart",
     count: "29 kleuren",
@@ -179,7 +179,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   ru: {
     kicker: "Коллекция цветной пряжи",
-    title: "OmaFil Color Pro",
+    title: "Наше разнообразие цветов",
     lead: "Цвета, которые оживают в пряже.",
     catalog: "Наша карта цветов",
     count: "29 цветов",
@@ -198,7 +198,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   ar: {
     kicker: "مجموعة الخيوط الملونة",
-    title: "OmaFil Color Pro",
+    title: "تنوع ألواننا",
     lead: "ألوان تنبض في الخيط.",
     catalog: "بطاقة الألوان",
     count: "29 لونًا",
@@ -217,7 +217,7 @@ export const colorProCopy: Record<Locale, ColorProCopy> = {
   },
   zh: {
     kicker: "色纱系列",
-    title: "OmaFil Color Pro",
+    title: "我们的色彩",
     lead: "在纱线中呈现的色彩。",
     catalog: "色卡",
     count: "29 色",
