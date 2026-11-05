@@ -7,19 +7,32 @@ import {
   isProductListPath,
 } from "@/lib/product-paths";
 
+/** Dar ekran ve dokunmatik. Blur’lu ekran görüntüsü burada yok. */
+function isLightNav() {
+  return window.matchMedia(
+    "(max-width: 1023px), (hover: none) and (pointer: coarse)",
+  ).matches;
+}
+
 /**
- * İç link tıklamalarını yakalar; destekleyen tarayıcıda
- * document.startViewTransition ile soft sayfa geçişi yapar.
- * Header/footer view-transition-name ile sabit kalır (globals.css).
+ * Masaüstünde View Transition (blur yok, kısa fade).
+ * Telefonda geçiş, sayfa geldikten sonra CSS ile solar. Yüklemeyi beklemez.
  */
 export function SmoothNav() {
   const router = useRouter();
 
   useEffect(() => {
-    // VT destekliyorsa template enter’ı kapat (çift animasyon olmasın)
-    if (typeof document.startViewTransition === "function") {
-      document.documentElement.classList.add("omafil-vt");
-    }
+    const mq = window.matchMedia(
+      "(max-width: 1023px), (hover: none) and (pointer: coarse)",
+    );
+    // Telefonda omafil-vt yok. Template’teki hafif fade çalışsın.
+    const sync = () => {
+      const useSnapshot =
+        !mq.matches && typeof document.startViewTransition === "function";
+      document.documentElement.classList.toggle("omafil-vt", useSnapshot);
+    };
+    sync();
+    mq.addEventListener("change", sync);
 
     function onClick(event: MouseEvent) {
       if (event.defaultPrevented) return;
@@ -57,6 +70,9 @@ export function SmoothNav() {
       const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
       if (next === current) return;
 
+      // Telefonda anında aç. Yumuşaklık, gelen sayfanın kendi fade’i.
+      if (isLightNav()) return;
+
       // VT yoksa Next Link kendi işini yapsın
       if (typeof document.startViewTransition !== "function") return;
 
@@ -77,7 +93,11 @@ export function SmoothNav() {
     }
 
     document.addEventListener("click", onClick, true);
-    return () => document.removeEventListener("click", onClick, true);
+    return () => {
+      mq.removeEventListener("change", sync);
+      document.removeEventListener("click", onClick, true);
+      document.documentElement.classList.remove("omafil-vt");
+    };
   }, [router]);
 
   return null;

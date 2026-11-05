@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Header } from "@/components/ui/layout/header";
 import { Footer } from "@/components/ui/layout/footer";
+import { PrefetchNav } from "@/components/i18n/prefetch-nav";
 import { SmoothNav } from "@/components/ui/layout/smooth-nav";
 import { YarnChat } from "@/components/sections/yarn-chat";
 import { BackToTop } from "@/components/ui/layout/back-to-top";
@@ -31,6 +32,7 @@ export function SiteShell({
   return (
     <>
       <SmoothNav />
+      <PrefetchNav />
       <Header logo={logo} logoDark={logoDark} />
       <main id="main-content" className="flex-1">
         {children}
