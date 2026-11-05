@@ -16,6 +16,10 @@ export const site = {
     logo: resolveAsset("/images/omafil_logo.svg"),
     // Dark temada aynı yerler bu dosyayı basar. Açık tema logo'da kalır.
     logoDark: resolveAsset("/images/omafil_logo_dark.svg"),
+    // Header'da OmaFil'in yanında. Açık temada lacivert alt yazı.
+    nylionLogo: resolveAsset("/images/nylion-logo-polimer.svg"),
+    // Koyu temada alt yazı turuncu. Kelime markası aynı kalır.
+    nylionLogoDark: resolveAsset("/images/nylion-logo-dark-final.svg"),
 } as const;
 
 // Yalnız adres. Yazı sözlükte: navLabel ve chrome özetleri.

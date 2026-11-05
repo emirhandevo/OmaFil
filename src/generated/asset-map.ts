@@ -56,6 +56,8 @@ export const assetMap: Record<string, string> = {
   "/images/hero/iplik/scy-n6.webp": "/a/15a7f77807/scy-n6.webp",
   "/images/hero/iplik/scy-n66.webp": "/a/44fae462b0/scy-n66.webp",
   "/images/hero/iplik/scy-pes.webp": "/a/dc2f8077db/scy-pes.webp",
+  "/images/nylion-logo-dark-final.svg": "/a/70fdd5379f/nylion-logo-dark-final.svg",
+  "/images/nylion-logo-polimer.svg": "/a/3d20dbe5d2/nylion-logo-polimer.svg",
   "/images/og.webp": "/a/84d05acf64/og.webp",
   "/images/omafil_logo.svg": "/a/ad4f07ee46/omafil_logo.svg",
   "/images/omafil_logo_dark.svg": "/a/504467c2be/omafil_logo_dark.svg",

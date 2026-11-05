@@ -1,16 +1,45 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy } from "@/components/i18n/locale-provider";
-import { navLinks } from "@/config/site";
+import { navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
 import { navLabel } from "@/i18n/labels";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+
+/**
+ * NyLion link değil: tıklanınca sayfa değişmez.
+ * Açık tema polimer SVG, koyu tema dark SVG. İkisi birden DOM'da durur.
+ * className kutunun boyu ve hangi ekranda görüneceği. Tema sınıfı içeride.
+ */
+function NyLionLogo({ className, sizes }: { className: string; sizes: string }) {
+  return (
+    <span className={className}>
+      <Image
+        src={site.nylionLogo}
+        alt="NyLion"
+        width={402}
+        height={133}
+        sizes={sizes}
+        className="h-full w-auto dark:hidden"
+      />
+      <Image
+        src={site.nylionLogoDark}
+        alt="NyLion"
+        width={402}
+        height={133}
+        sizes={sizes}
+        className="hidden h-full w-auto dark:block"
+      />
+    </span>
+  );
+}
 
 /** Soft navigate sonrası focus-within dropdown’u açık tutmasın */
 function blurActive() {
@@ -78,18 +107,18 @@ export function Header({
       ref={headerRef}
       className="site-header sticky top-0 z-50 border-b border-border bg-background/60 backdrop-blur-lg"
     >
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-3 px-4">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-3 sm:px-4">
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
           <SiteLogo
             priority
             src={logo}
             srcDark={logoDark}
-            className="h-auto w-36 lg:w-44 xl:w-56"
+            className="h-auto w-28 sm:w-36 lg:w-40 xl:w-52"
           />
         </LocaleLink>
 
-        {/* Masaüstü menü — mobilde gizli */}
-        <nav className="hidden items-center gap-1 lg:flex" aria-label={copy.nav.main}>
+        {/* Masaüstü menü — mobilde gizli. Boşluk iki logonun arasında kalır. */}
+        <nav className="mx-4 hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex" aria-label={copy.nav.main}>
           {navLinks.map((item) =>
             "children" in item ? (
               <div
@@ -152,7 +181,13 @@ export function Header({
           )}
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex shrink-0 items-center gap-1">
+          {/* Telefon: NyLion sağda. justify-between boşluğu OmaFil ile bunun arasına verir. */}
+          <NyLionLogo sizes="120px" className="me-2 inline-flex h-8 items-center sm:me-3 sm:h-9 lg:hidden" />
+          {/* Menü ile dil arasında: çizgi, NyLion, çizgi. */}
+          <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-border lg:block" />
+          <NyLionLogo sizes="140px" className="hidden h-9 items-center lg:inline-flex xl:h-11" />
+          <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-border lg:block" />
           <LanguageSwitcher />
           <ThemeToggle />
         {/* Hamburger buton — sadece mobilde görünür */}
