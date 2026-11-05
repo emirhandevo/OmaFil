@@ -107,10 +107,10 @@ export function Header({
       ref={headerRef}
       className="site-header sticky top-0 z-50 border-b border-border"
     >
-      {/* Blur, logonun atası olursa Chrome logoyu ~2 sn geç boyar ve LCP o olur. */}
+      {/* Blur logonun atası değil. sm = 8px; logo bu katmanın üstünde boyanır. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-background/60 backdrop-blur-lg"
+        className="pointer-events-none absolute inset-0 bg-background/70 backdrop-blur-md"
       />
       <div className="relative z-10 mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-3 sm:px-4">
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
