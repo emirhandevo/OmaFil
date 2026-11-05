@@ -186,7 +186,7 @@ export function Header({
           <NyLionLogo sizes="120px" className="me-2 inline-flex h-8 items-center sm:me-3 sm:h-9 lg:hidden" />
           {/* Menü ile dil arasında: çizgi, NyLion, çizgi. */}
           <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-border lg:block" />
-          <NyLionLogo sizes="140px" className="hidden h-9 items-center lg:inline-flex xl:h-11" />
+          <NyLionLogo sizes="140px" className="hidden h-9 items-center lg:inline-flex xl:h-12 translate-y-0.5" />
           <span aria-hidden="true" className="mx-1 hidden h-8 w-px bg-border lg:block" />
           <LanguageSwitcher />
           <ThemeToggle />
