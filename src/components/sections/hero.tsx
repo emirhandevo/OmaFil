@@ -32,6 +32,9 @@ export async function Hero() {
           alt=""
           fill
           preload
+          // LCP bu kare. Yüksek öncelik + senkron çözme, logodan önce boyansın.
+          fetchPriority="high"
+          decoding="sync"
           unoptimized
           sizes="100vw"
           className="pointer-events-none object-cover"

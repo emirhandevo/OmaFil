@@ -14,7 +14,12 @@ export function PageEnter({ children }: { children: ReactNode }) {
   const [animate] = useState(() => afterFirstPaint);
 
   useEffect(() => {
-    afterFirstPaint = true;
+    // Strict mode efekti kurup hemen söker. Bayrak o ara true olursa
+    // ilk açılış da solar ve LCP yine logoya düşer.
+    const id = window.setTimeout(() => {
+      afterFirstPaint = true;
+    }, 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   return <div className={animate ? "omafil-page-enter" : undefined}>{children}</div>;

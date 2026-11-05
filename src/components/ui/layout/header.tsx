@@ -105,9 +105,14 @@ export function Header({
   return (
     <header
       ref={headerRef}
-      className="site-header sticky top-0 z-50 border-b border-border bg-background/60 backdrop-blur-lg"
+      className="site-header sticky top-0 z-50 border-b border-border"
     >
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-3 sm:px-4">
+      {/* Blur, logonun atası olursa Chrome logoyu ~2 sn geç boyar ve LCP o olur. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-background/60 backdrop-blur-lg"
+      />
+      <div className="relative z-10 mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-3 sm:px-4">
         <LocaleLink href="/" className="flex shrink-0 items-center" onClick={() => setIsOpen(false)}>
           <SiteLogo
             priority
@@ -224,7 +229,7 @@ export function Header({
       {isOpen && (
         <nav
           aria-label={copy.nav.mobile}
-          className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-y-contain border-t border-border bg-background px-4 py-4 lg:hidden"
+          className="relative z-10 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-y-contain border-t border-border bg-background px-4 py-4 lg:hidden"
         >
           <ul className="flex flex-col gap-1">
             {navLinks.map((item) =>
