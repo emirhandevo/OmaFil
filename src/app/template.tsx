@@ -1,11 +1,13 @@
+import { PageEnter } from "@/components/ui/layout/page-enter";
+
 /**
- * Her geçişte yeniden bağlanır. Telefonda kısa fade buradan gelir.
- * Header ve footer SiteShell’de kalır, bu kutu yalnız içeriği solar.
+ * Her geçişte yeniden bağlanır. İlk açılışta fade yok; LCP hero kalsın.
+ * Sonraki geçişte içerik solar. Header ve footer SiteShell'de durur.
  */
 export default function Template({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="omafil-page-enter">{children}</div>;
+  return <PageEnter>{children}</PageEnter>;
 }
