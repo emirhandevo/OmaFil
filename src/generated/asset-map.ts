@@ -63,7 +63,7 @@ export const assetMap: Record<string, string> = {
   "/images/omafil_logo_dark.svg": "/a/504467c2be/omafil_logo_dark.svg",
   "/images/sustainability/dunya.webp": "/a/f7d8cf3bca/dunya.webp",
   "/masks/brush-mask.webp": "/a/564bf7379e/brush-mask.webp",
-  "/videos/hero-web.mp4": "/a/9a4d95353d/hero-web.mp4",
+  "/videos/hero-web.mp4": "/a/6cddb5337c/hero-web.mp4",
   "/videos/omafil-en.vtt": "/a/0b8798b431/omafil-en.vtt",
   "/videos/omafil-tanitim.mp4": "/a/d3746e3c0d/omafil-tanitim.mp4",
   "/videos/omafil-tr.vtt": "/a/87b43e9e08/omafil-tr.vtt",

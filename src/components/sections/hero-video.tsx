@@ -73,7 +73,8 @@ export function HeroVideo({
   return (
     <video
       ref={videoRef}
-      className="pointer-events-none absolute inset-0 size-full bg-black object-cover object-[60%_center] lg:origin-right lg:scale-[1.047] lg:object-center"
+      // Kadraj en baştan sabit. Yazı oturunca iki yeşil çit eşit.
+      className="pointer-events-none absolute inset-0 size-full bg-black object-cover object-center"
       muted
       loop
       playsInline
