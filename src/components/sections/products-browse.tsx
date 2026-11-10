@@ -24,6 +24,8 @@ type BrowseState = {
 const BrowseContext = createContext<BrowseState | null>(null);
 
 const STORAGE_KEY = "omafil:urunlerimiz-browse";
+// NyLion bu olayı atar. Liste açıksa filtre ve kaydırma hemen sıfırlanır.
+const START_EVENT = "omafil:urunlerimiz-start";
 
 type StoredBrowse = {
   family: ProductFamily;
@@ -68,6 +70,15 @@ export function storeProductFamily(family: ProductFamily) {
 }
 
 /**
+ * Anasayfa, GES, kurumsal gibi sayfalardan listeye dönüş: Tümü ve en üst.
+ * Kayıt, ürün layout’u mount olmadan da yazılır. Provider dinliyorsa state’i de çeker.
+ */
+export function openProductsFromStart() {
+  writeStored({ family: "all", scrollY: 0 });
+  window.dispatchEvent(new Event(START_EVENT));
+}
+
+/**
  * Liste ve detay aynı layout’ta kalır: filtre React state’te durur.
  * Detaydan listeye dönünce Next tepeye kaydırır; biz son Y’yi geri yazarız.
  */
@@ -97,6 +108,27 @@ export function ProductsBrowseProvider({ children }: { children: ReactNode }) {
     setFamilyState(next);
     writeStored({ family: next, scrollY: scrollYRef.current });
   }
+
+  // Dış sayfadan dönüş kaydı Tümü / 0 yapar. Liste zaten açıksa şeridi ve tepeyi hemen çek.
+  useEffect(() => {
+    function onStart() {
+      familyRef.current = "all";
+      scrollYRef.current = 0;
+      setFamilyState("all");
+      if (!isProductListPath(window.location.pathname)) return;
+      // Next aynı adrese tekrar basınca kaydırmayı geri alabiliyor. Birkaç kare tepede tut.
+      let frames = 0;
+      const holdTop = () => {
+        if (window.scrollY !== 0) window.scrollTo(0, 0);
+        frames += 1;
+        if (frames < 12) window.requestAnimationFrame(holdTop);
+      };
+      holdTop();
+    }
+
+    window.addEventListener(START_EVENT, onStart);
+    return () => window.removeEventListener(START_EVENT, onStart);
+  }, []);
 
   // Ürün linkine basıldığı anda Y’yi kilitle. Scroll olayı daha sonra 0 gelirse ezmesin.
   useEffect(() => {

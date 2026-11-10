@@ -9,21 +9,32 @@ import { LocaleLink } from "@/components/i18n/locale-link";
 import { useCopy } from "@/components/i18n/locale-provider";
 import { navLinks, site } from "@/config/site";
 import { SiteLogo } from "@/components/ui/layout/site-logo";
+import { openProductsFromStart } from "@/components/sections/products-browse";
 import { navLabel } from "@/i18n/labels";
+import {
+  isProductDetailPath,
+  isProductListPath,
+} from "@/lib/product-paths";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 /**
- * NyLion link değil: tıklanınca sayfa değişmez.
+ * NyLion ürünler sayfasına gider. Dil önekini LocaleLink ekler.
  * Açık tema polimer SVG, koyu tema dark SVG. İkisi birden DOM'da durur.
  * className kutunun boyu ve hangi ekranda görüneceği. Tema sınıfı içeride.
  */
 function NyLionLogo({ className, sizes }: { className: string; sizes: string }) {
+  const copy = useCopy();
+
   return (
-    <span className={className}>
+    <LocaleLink
+      href="/urunlerimiz"
+      aria-label={navLabel("/urunlerimiz", copy)}
+      className={`${className} transition-opacity hover:opacity-80`}
+    >
       <Image
         src={site.nylionLogo}
-        alt="NyLion"
+        alt=""
         width={402}
         height={133}
         sizes={sizes}
@@ -31,13 +42,13 @@ function NyLionLogo({ className, sizes }: { className: string; sizes: string }) 
       />
       <Image
         src={site.nylionLogoDark}
-        alt="NyLion"
+        alt=""
         width={402}
         height={133}
         sizes={sizes}
         className="hidden h-full w-auto dark:block"
       />
-    </span>
+    </LocaleLink>
   );
 }
 
@@ -65,6 +76,36 @@ export function Header({
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const copy = useCopy();
+
+  // Başka sayfadan (anasayfa, GES, kurumsal) ürün listesine gelince Tümü ve tepe.
+  // Liste veya ürün detayındayken kayıt durur; detaydan dönüş kaldığı yeri açar.
+  useEffect(() => {
+    function onClick(event: MouseEvent) {
+      if (event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest("a");
+      const href = anchor?.getAttribute("href");
+      if (!href || href.startsWith("#")) return;
+
+      let url: URL;
+      try {
+        url = new URL(href, window.location.href);
+      } catch {
+        return;
+      }
+      if (url.origin !== window.location.origin) return;
+      if (!isProductListPath(url.pathname)) return;
+
+      const here = window.location.pathname;
+      if (isProductListPath(here) || isProductDetailPath(here)) return;
+      openProductsFromStart();
+    }
+
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
 
   // Route değişince hamburger ve Kurumsal akordeon kapansın
   useEffect(() => {
