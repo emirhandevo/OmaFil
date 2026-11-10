@@ -45,11 +45,13 @@ const nextConfig: NextConfig = {
 "media-src 'self'",
 // Panel, GitHub uygulamasını bu forma POST ederek kurar.
 "connect-src 'self' https://challenges.cloudflare.com https://api.github.com",
-"frame-src https://challenges.cloudflare.com",
+// mailto ve tel listede yoksa masaüstü Safari/Chrome tıklamayı sessizce keser.
+// Telefondaki Safari bu listeyi mail linkine uygulamaz, o yüzden orada açılıyordu.
+"frame-src https://challenges.cloudflare.com mailto: tel:",
 "worker-src 'self' blob:",
 "object-src 'none'",
 "base-uri 'self'",
-"form-action 'self' https://github.com",
+"form-action 'self' https://github.com mailto: tel:",
       "frame-ancestors 'none'",
     ].join("; ");
 
